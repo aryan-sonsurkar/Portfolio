@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARS System | Aryan Sonsurkar</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Boot Screen -->
+    <div id="boot-screen" class="boot-screen">
+        <div class="terminal-boot">
+            <div class="boot-line">> Booting ARS System...</div>
+            <div class="boot-line">> Initializing modules...</div>
+            <div class="boot-line">> Loading AI core...</div>
+            <div class="boot-line">> Establishing secure environment...</div>
+            <div class="boot-line">> Access Granted.</div>
+        </div>
+    </div>
+
+    <!-- Scanline Overlay -->
+    <div class="scanlines"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <span class="btn red"></span>
+                        <span class="btn yellow"></span>
+                        <span class="btn green"></span>
+                    </div>
+                    <div class="terminal-title">ars@system:~$</div>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-content">
+                        <div class="glitch-text" data-text="Aryan Sonsurkar (ARS)">Aryan Sonsurkar (ARS)</div>
+                        <div class="subtitle">Full Stack Developer | Python Developer</div>
+                        <div class="typing-text">
+                            <span class="typed-text"></span><span class="cursor">_</span>
+                        </div>
+                        <div class="hero-buttons">
+                            <button class="terminal-btn" onclick="scrollToSection('projects')">View Projects</button>
+                            <button class="terminal-btn" onclick="scrollToSection('contact')">Contact Me</button>
+                        </div>
+                        <!-- Interactive Terminal -->
+                        <div class="interactive-terminal">
+                            <div class="terminal-output" id="terminal-output"></div>
+                            <div class="terminal-input-line">
+                                <span class="prompt">ars@system:~$</span>
+                                <input type="text" id="terminal-input" class="terminal-input" placeholder="Type 'help' for commands..." autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <span class="btn red"></span>
+                        <span class="btn yellow"></span>
+                        <span class="btn green"></span>
+                    </div>
+                    <div class="terminal-title">about --profile</div>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-content">
+                        <h2 class="section-title">> System Profile</h2>
+                        <div class="about-content">
+                            <p class="terminal-text">First-year student competing with seniors in real-world development.</p>
+                            <p class="terminal-text">Marketing Head at EDP Committee - building systems, not just attending meetings.</p>
+                            <p class="terminal-text">Currently building Draco CLI - an AI-powered developer assistant.</p>
+                            <p class="terminal-text">Future ML Engineer + Entrepreneur focused on solving real problems.</p>
+                            <div class="motto">
+                                <span class="command-prompt">$</span> "I build systems that solve real problems."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="skills-section">
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <span class="btn red"></span>
+                        <span class="btn yellow"></span>
+                        <span class="btn green"></span>
+                    </div>
+                    <div class="terminal-title">skills --list</div>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-content">
+                        <h2 class="section-title">> System Capabilities</h2>
+                        <div class="skills-grid">
+                            <div class="skill-card">
+                                <div class="skill-header">Languages</div>
+                                <ul class="skill-list">
+                                    <li>Python</li>
+                                    <li>C</li>
+                                    <li>Embedded C</li>
+                                </ul>
+                            </div>
+                            <div class="skill-card">
+                                <div class="skill-header">Web Technologies</div>
+                                <ul class="skill-list">
+                                    <li>HTML</li>
+                                    <li>CSS</li>
+                                    <li>Flask</li>
+                                </ul>
+                            </div>
+                            <div class="skill-card">
+                                <div class="skill-header">Core Concepts</div>
+                                <ul class="skill-list">
+                                    <li>System Design</li>
+                                    <li>Automation</li>
+                                    <li>Networking</li>
+                                    <li>AI Integration</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects-section">
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <span class="btn red"></span>
+                        <span class="btn yellow"></span>
+                        <span class="btn green"></span>
+                    </div>
+                    <div class="terminal-title">projects --show</div>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-content">
+                        <h2 class="section-title">> System Deployments</h2>
+                        
+                        <!-- Featured Project - Draco CLI -->
+                        <div class="draco-cli-container">
+                            <div class="project-card flagship">
+                                <div class="project-header">
+                                    <span class="flagship-badge">⚡ FLAGSHIP SYSTEM</span>
+                                    <span class="project-status">[STARTUP IN PROGRESS]</span>
+                                    <h3>Draco CLI</h3>
+                                </div>
+                                <div class="project-description">
+                                    AI-powered developer assistant that scans screen, detects errors, and fixes them automatically.
+                                </div>
+                                <div class="project-features">
+                                    <span class="feature-tag">Screen OCR</span>
+                                    <span class="feature-tag">Auto Debugging</span>
+                                    <span class="feature-tag">Code Injection</span>
+                                    <span class="feature-tag">Voice Assistant</span>
+                                    <span class="feature-tag">Local AI (Ollama)</span>
+                                </div>
+                                <div class="draco-actions">
+                                    <button class="draco-btn" onclick="showDracoConcept()">> View Concept</button>
+                                    <button class="draco-btn" onclick="requestDracoAccess()">> Request Access</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Other Projects Grid -->
+                        <div class="projects-grid">
+                            <div class="project-card">
+                                <h3>Terminal Chat & Chess</h3>
+                                <p>Socket programming based real-time chat and chess application</p>
+                                <div class="tech-stack">Python, Sockets</div>
+                            </div>
+                            <div class="project-card">
+                                <h3>Banking System</h3>
+                                <p>Complete banking solution with JSON data persistence</p>
+                                <div class="tech-stack">Python, JSON</div>
+                            </div>
+                            <div class="project-card">
+                                <h3>File Organizer</h3>
+                                <p>Automation tool for intelligent file categorization</p>
+                                <div class="tech-stack">Python, OS Module</div>
+                            </div>
+                            <div class="project-card">
+                                <h3>Notes App</h3>
+                                <p>CRUD-based note management system</p>
+                                <div class="tech-stack">Python, JSON</div>
+                            </div>
+                            <div class="project-card">
+                                <h3>Habit Tracker</h3>
+                                <p>Daily habit tracking and analytics system</p>
+                                <div class="tech-stack">Python, JSON</div>
+                            </div>
+                            <div class="project-card">
+                                <h3>Pomodoro Timer</h3>
+                                <p>Productivity timer with task management</p>
+                                <div class="tech-stack">Python, Time Module</div>
+                            </div>
+                            <div class="project-card">
+                                <h3>ESP32 Traffic Light</h3>
+                                <p>IoT-based traffic control system</p>
+                                <div class="tech-stack">Embedded C, ESP32</div>
+                            </div>
+                            <div class="project-card">
+                                <h3>ESP32 OLED Display</h3>
+                                <p>Display system with sensor integration</p>
+                                <div class="tech-stack">Embedded C, OLED</div>
+                            </div>
+                            <div class="project-card">
+                                <h3>Weather App</h3>
+                                <p>Real-time weather data application</p>
+                                <div class="tech-stack">Python, API</div>
+                            </div>
+                            <div class="project-card">
+                                <h3>Number Analyzer</h3>
+                                <p>Mathematical analysis tool for number patterns</p>
+                                <div class="tech-stack">Python</div>
+                            </div>
+                            <div class="project-card">
+                                <h3>Marks Analyzer</h3>
+                                <p>Student performance analytics system</p>
+                                <div class="tech-stack">Python</div>
+                            </div>
+                            <div class="project-card">
+                                <h3>Student Toolkit</h3>
+                                <p>Comprehensive tools for students</p>
+                                <div class="tech-stack">C, File I/O</div>
+                            </div>
+                            <div class="project-card">
+                                <h3>Calculator</h3>
+                                <p>Advanced calculator with multiple operations</p>
+                                <div class="tech-stack">C, Math Library</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- System Mindset Section -->
+        <section id="mindset" class="mindset-section">
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <span class="btn red"></span>
+                        <span class="btn yellow"></span>
+                        <span class="btn green"></span>
+                    </div>
+                    <div class="terminal-title">mindset --show</div>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-content">
+                        <h2 class="section-title">> Core Principles</h2>
+                        <div class="mindset-list">
+                            <div class="mindset-item">> I build systems that solve real problems</div>
+                            <div class="mindset-item">> I learn what is required, not just what is taught</div>
+                            <div class="mindset-item">> I execute fast and adapt faster</div>
+                            <div class="mindset-item">> If there is no path, I create one</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- System Status Section -->
+        <section id="system-status" class="system-status-section">
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <span class="btn red"></span>
+                        <span class="btn yellow"></span>
+                        <span class="btn green"></span>
+                    </div>
+                    <div class="terminal-title">system status</div>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-content">
+                        <h2 class="section-title">> System Status Report</h2>
+                        <div class="status-list">
+                            <div class="status-item active">✔ AI Systems Active</div>
+                            <div class="status-item active">✔ Automation Modules Loaded</div>
+                            <div class="status-item active">✔ Projects Deployed</div>
+                            <div class="status-item active">✔ Ready for Opportunities</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Journey Timeline Section -->
+        <section id="journey" class="journey-section">
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <span class="btn red"></span>
+                        <span class="btn yellow"></span>
+                        <span class="btn green"></span>
+                    </div>
+                    <div class="terminal-title">journey --timeline</div>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-content">
+                        <h2 class="section-title">> Development Journey</h2>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <h3>Started Coding</h3>
+                                    <p>Began programming out of curiosity and passion for problem-solving</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <h3>First CLI Tools</h3>
+                                    <p>Built practical command-line tools for everyday automation</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <h3>Created Draco CLI</h3>
+                                    <p>Developed AI-powered developer assistant as flagship project</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <h3>Marketing Head (EDP)</h3>
+                                    <p>Leading marketing efforts while building technical solutions</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <h3>Hackathon Success</h3>
+                                    <p>Competing and winning in various hackathons and competitions</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vision Section -->
+        <section id="vision" class="vision-section">
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <span class="btn red"></span>
+                        <span class="btn yellow"></span>
+                        <span class="btn green"></span>
+                    </div>
+                    <div class="terminal-title">vision --future</div>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-content">
+                        <h2 class="section-title">> Future Execution Plan</h2>
+                        <div class="vision-grid">
+                            <div class="vision-item">
+                                <h3>🧠 ML Engineer</h3>
+                                <p>Mastering machine learning to build intelligent systems</p>
+                            </div>
+                            <div class="vision-item">
+                                <h3>🚀 AI Startup</h3>
+                                <p>Building Draco CLI into a full-fledged AI company</p>
+                            </div>
+                            <div class="vision-item">
+                                <h3>🛠️ Developer Tools</h3>
+                                <p>Creating tools that make developers more productive</p>
+                            </div>
+                            <div class="vision-item">
+                                <h3>🌍 Real-World Impact</h3>
+                                <p>Solving actual problems that matter to people</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <span class="btn red"></span>
+                        <span class="btn yellow"></span>
+                        <span class="btn green"></span>
+                    </div>
+                    <div class="terminal-title">connect --help</div>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-content">
+                        <h2 class="section-title">> Connection Protocols</h2>
+                        <div class="contact-commands">
+                            <div class="command-item">
+                                <span class="command">connect --email</span>
+                                <a href="mailto:aryansonsurkar87@gmail.com" class="command-output">aryansonsurkar87@gmail.com</a>
+                            </div>
+                            <div class="command-item">
+                                <span class="command">connect --github</span>
+                                <a href="https://github.com/aryan-sonsurkar" target="_blank" class="command-output">github.com/aryan-sonsurkar</a>
+                            </div>
+                            <div class="command-item">
+                                <span class="command">connect --linkedin</span>
+                                <a href="https://www.linkedin.com/in/aryan-sonsurkar/" target="_blank" class="command-output">linkedin.com/in/aryan-sonsurkar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Background Effects -->
+    <div class="particles-container" id="particles"></div>
+    <div class="gradient-glow"></div>
+    
+    <!-- Draco CLI Modal -->
+    <div id="draco-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Draco CLI - Deep View</h2>
+                <span class="close-modal" onclick="closeDracoModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="draco-workflow">
+                    <h3>Workflow Process</h3>
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <span class="step-number">1</span>
+                            <div class="step-content">
+                                <h4>Detect</h4>
+                                <p>Screen OCR identifies errors in real-time</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">2</span>
+                            <div class="step-content">
+                                <h4>Analyze</h4>
+                                <p>AI analyzes code patterns and context</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <span class="step-number">3</span>
+                            <div class="step-content">
+                                <h4>Fix</h4>
+                                <p>Automatic code injection and correction</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="demo-terminal">
+                    <h3>Demo Output</h3>
+                    <div class="demo-terminal-content">
+                        <div class="demo-line">$ draco scan</div>
+                        <div class="demo-line">Scanning screen for errors...</div>
+                        <div class="demo-line error">Error found: TypeError in line 42</div>
+                        <div class="demo-line">Analyzing context...</div>
+                        <div class="demo-line success">Fix applied automatically</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
