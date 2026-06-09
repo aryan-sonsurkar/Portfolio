@@ -41,12 +41,12 @@ function initVoiceAssistant() {
 }
 
 const sectionScripts = {
-    hero: "Welcome to ARS System. I am Aryan Sonsurkar, a full stack developer and AI builder.",
-    about: "This is my system profile. I am a first-year student competing with seniors in real-world development.",
-    skills: "These are my system capabilities. I specialize in Python, AI orchestration, and full stack development.",
-    projects: "Welcome to my deployments. Here you can see my flagship AI tool, Fixly, along with other automation projects.",
-    lab: "Entering the experimental node. Here you can see visual intelligence previews from my development lab.",
-    feed: "Accessing live activity stream. This feed displays real-time system logs and development progress.",
+    hero: "Welcome to ARS System. I am Aryan Sonsurkar, a full stack developer and founder of Fixly.",
+    experience: "Here are my professional experience and achievements, including my internship at Kaevron Technologies and client projects.",
+    building: "This is what I am currently building. Fixly, CodeShortsBot v2, and my ongoing learning journey.",
+    projects: "Here are my featured projects. Fixly, Vishwanath Insurance website, and CodeShortsBot.",
+    skills: "These are my technical skills spanning frontend, backend, AI and automation, and tools.",
+    journey: "This is my developer journey from starting to code to shipping real products.",
     contact: "Connection protocols established. Feel free to reach out via email or LinkedIn."
 };
 
@@ -246,16 +246,18 @@ function initSystemLogs() {
 
     const sectionLogs = {
         hero: ["Initializing ARS Environment...", "System Core: Active", "Ready for commands"],
-        about: ["Retrieving user profile...", "Experience modules loaded", "Marketing Head nodes: Synced"],
-        skills: ["Analyzing technical stack...", "Python efficiency: 95%", "LLM orchestration: Optimized"],
-        projects: ["Accessing flagship data: Fixly", "Startup pipelines: Running", "OCR modules: Standby"],
+        experience: ["Loading experience data...", "Internship records: Synced", "Project deliveries: Logged"],
+        building: ["Scanning active builds...", "Fixly core: In progress", "Learning modules: Active"],
+        projects: ["Accessing project repository...", "Fixly core: Active", "Client sites: Deployed"],
+        skills: ["Analyzing technical stack...", "Frontend modules: Loaded", "AI pipelines: Optimized"],
+        journey: ["Retrieving development timeline...", "Milestones: Documented"],
         contact: ["Establishing secure comms...", "Connection protocols: Ready", "Waiting for input..."]
     };
 
     let currentSection = 'hero';
     
     window.addEventListener('scroll', () => {
-        const sections = ['hero', 'about', 'skills', 'projects', 'lab', 'feed', 'contact'];
+        const sections = ['hero', 'experience', 'building', 'projects', 'skills', 'journey', 'contact'];
         sections.forEach(s => {
             const el = document.getElementById(s);
             if (el) {
@@ -344,12 +346,14 @@ function initInteractiveTerminal() {
                         <div class="output-line">Type 'help' to see available commands.</div>`;
 
     const commands = {
-        help: "Available: about, skills, projects, contact, clear, whoami, ls",
-        whoami: "Aryan Sonsurkar | Full Stack Developer | AI Enthusiast",
-        ls: "about.txt, skills.log, projects.exe, contact.url",
-        about: () => scrollToSection('about'),
-        skills: () => scrollToSection('skills'),
+        help: "Available: experience, building, projects, skills, journey, contact, clear, whoami, ls",
+        whoami: "Aryan Sonsurkar | Full Stack Developer | Founder of Fixly",
+        ls: "experience.log, building.exe, projects.txt, skills.log, journey.md, contact.url",
+        experience: () => scrollToSection('experience'),
+        building: () => scrollToSection('building'),
         projects: () => scrollToSection('projects'),
+        skills: () => scrollToSection('skills'),
+        journey: () => scrollToSection('journey'),
         contact: () => scrollToSection('contact'),
         clear: () => { output.innerHTML = ''; return ""; }
     };
@@ -457,7 +461,7 @@ function initBackgroundEffects() {
 }
 
 function initScrollReveal() {
-    const revealElements = document.querySelectorAll('section, .project-card, .skill-card, .timeline-item, .vision-item, .command-item');
+    const revealElements = document.querySelectorAll('section, .project-card, .project-card-body, .skill-card, .timeline-item, .experience-card, .building-card, .command-item, .achievement-premium');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
@@ -738,22 +742,24 @@ window.addEventListener('keydown', (event) => {
     }
 });
 
-window.about = function() {
+window.experience = function() {
     console.log('%cAryan Sonsurkar (ARS)', 'color: #00f0ff; font-weight: bold;');
-    console.log('%cFull Stack Developer | Python Developer | Future ML Engineer', 'color: #00ff41;');
-    console.log('%c"I adapt fast, solve real problems, and find a way to win in any situation."', 'color: #ffaa00;');
+    console.log('%cFull Stack Developer | Founder of Fixly | Best Performing Intern @ Kaevron', 'color: #00ff41;');
+    console.log('%cSecond-year CS student already shipping real products and delivering client work.', 'color: #ffaa00;');
 };
 
 window.projects = function() {
-    console.log('%cFeatured Project: Draco CLI', 'color: #00f0ff; font-weight: bold;');
-    console.log('%cAI-powered developer assistant with screen OCR and auto-debugging', 'color: #00ff41;');
-    console.log('%cStatus: Startup in Progress', 'color: #ffaa00;');
+    console.log('%cFeatured Projects:', 'color: #00f0ff; font-weight: bold;');
+    console.log('%cFixly - AI Student Productivity Platform (Beta)', 'color: #00ff41;');
+    console.log('%cVishwanath Insurance - Client Website (Live)', 'color: #00ff41;');
+    console.log('%cCodeShortsBot v2 - AI Content Pipeline', 'color: #00ff41;');
 };
 
 window.skills = function() {
-    console.log('%cLanguages: Python, C, Embedded C', 'color: #00f0ff;');
-    console.log('%cWeb: HTML, CSS, Flask', 'color: #00ff41;');
-    console.log('%cConcepts: System Design, Automation, Networking, AI Integration', 'color: #00ff41;');
+    console.log('%cFrontend: HTML, CSS, JavaScript, Next.js', 'color: #00f0ff;');
+    console.log('%cBackend: Python, FastAPI, APIs', 'color: #00ff41;');
+    console.log('%cAI & Automation: Ollama, Playwright, Automation Pipelines', 'color: #00ff41;');
+    console.log('%cTools: Git, GitHub, Vercel, SQLite, FFmpeg', 'color: #00ff41;');
 };
 
 window.contact = function() {

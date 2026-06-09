@@ -30,33 +30,37 @@
 
     <!-- Floating Nav HUD -->
     <nav class="side-hud">
-        <div class="hud-item" onclick="scrollToSection('hero')" title="System Home">
+        <div class="hud-item" onclick="scrollToSection('hero')" title="Home">
             <span class="hud-icon">&#9670;</span>
             <span class="hud-label">HOME</span>
         </div>
-        <div class="hud-item" onclick="scrollToSection('about')" title="Profile">
+        <div class="hud-item" onclick="scrollToSection('experience')" title="Experience">
             <span class="hud-icon">&#9671;</span>
-            <span class="hud-label">PROFILE</span>
+            <span class="hud-label">EXPERIENCE</span>
         </div>
-        <div class="hud-item" onclick="scrollToSection('skills')" title="Capabilities">
-            <span class="hud-icon">&#9672;</span>
-            <span class="hud-label">SKILLS</span>
+        <div class="hud-item" onclick="scrollToSection('building')" title="Building">
+            <span class="hud-icon">&#9889;</span>
+            <span class="hud-label">BUILDING</span>
         </div>
-        <div class="hud-item" onclick="scrollToSection('projects')" title="Deployments">
+        <div class="hud-item" onclick="scrollToSection('projects')" title="Projects">
             <span class="hud-icon">&#9673;</span>
             <span class="hud-label">PROJECTS</span>
         </div>
-        <div class="hud-item" onclick="scrollToSection('lab')" title="The Lab">
+        <div class="hud-item" onclick="scrollToSection('skills')" title="Skills">
+            <span class="hud-icon">&#9672;</span>
+            <span class="hud-label">SKILLS</span>
+        </div>
+        <div class="hud-item" onclick="scrollToSection('journey')" title="Journey">
             <span class="hud-icon">&#9883;</span>
-            <span class="hud-label">THE LAB</span>
+            <span class="hud-label">JOURNEY</span>
         </div>
-        <div class="hud-item" onclick="scrollToSection('feed')" title="Neural Feed">
-            <span class="hud-icon">&#9881;</span>
-            <span class="hud-label">NEURAL FEED</span>
-        </div>
-        <div class="hud-item" onclick="scrollToSection('contact')" title="Protocols">
+        <div class="hud-item" onclick="scrollToSection('contact')" title="Contact">
             <span class="hud-icon">&#9674;</span>
             <span class="hud-label">CONTACT</span>
+        </div>
+        <div class="hud-item" onclick="window.open('resume.pdf', '_blank')" title="Resume">
+            <span class="hud-icon">&#128196;</span>
+            <span class="hud-label">RESUME</span>
         </div>
         <div class="hud-item" id="voice-toggle" onclick="toggleVoice()" title="Toggle Voice Assistant">
             <span class="hud-icon">&#128266;</span>
@@ -66,13 +70,12 @@
 
     <!-- Main Container -->
     <div class="container">
+
         <!-- Hero Section -->
         <section id="hero" class="hero-section">
-            <!-- Floating hex grid background -->
             <div class="hero-hex-grid" aria-hidden="true"></div>
 
             <div class="hero-inner">
-                <!-- System status bar -->
                 <div class="hero-status-bar">
                     <div class="status-dot pulse"></div>
                     <span class="status-label">SYSTEM ONLINE</span>
@@ -82,7 +85,11 @@
                     <span class="status-info uptime-counter">UPTIME: <span id="uptime">00:00:00</span></span>
                 </div>
 
-                <!-- Name display -->
+                <div class="freelance-badge">
+                    <span class="freelance-dot"></span>
+                    <span>Available for Freelance Projects</span>
+                </div>
+
                 <div class="hero-name-block">
                     <div class="name-line name-first" data-text="ARYAN">
                         <span class="name-accent">&gt;</span> ARYAN
@@ -92,28 +99,73 @@
                     </div>
                 </div>
 
-                <!-- Role badges -->
                 <div class="hero-roles">
-                    <span class="role-badge"><span class="role-icon">&#9672;</span> Full Stack Developer</span>
-                    <span class="role-badge"><span class="role-icon">&#9672;</span> Python Engineer</span>
-                    <span class="role-badge"><span class="role-icon">&#9672;</span> AI Builder</span>
+                    <span class="role-badge"><span class="role-icon">&#9672;</span> Full-Stack Developer</span>
+                    <span class="role-badge"><span class="role-icon">&#9672;</span> Founder of Fixly</span>
                 </div>
 
+                <p class="hero-description">
+                    Building web applications, AI-powered tools, automation systems, and real-world software products.
+                </p>
 
+                <p class="hero-tagline">
+                    Second-Year Diploma Computer Engineering Student
+                </p>
 
-                <!-- Decorative code snippet -->
-                <div class="hero-code-snippet" aria-hidden="true">
-                    <span class="code-kw">const</span> <span class="code-var">developer</span> = {<br>
-                    &nbsp;&nbsp;<span class="code-key">name</span>: <span class="code-str">"Aryan Sonsurkar"</span>,<br>
-                    &nbsp;&nbsp;<span class="code-key">focus</span>: <span class="code-str">"Build. Ship. Repeat."</span>,<br>
-                    &nbsp;&nbsp;<span class="code-key">status</span>: <span class="code-str">"Always Shipping"</span><br>
-                    };
+                <div class="hero-services">
+                    <span class="service-tag">Portfolio Websites</span>
+                    <span class="service-tag">Business Websites</span>
+                    <span class="service-tag">Python Automation</span>
+                    <span class="service-tag">AI-Powered Apps</span>
+                </div>
+
+                <div class="hero-buttons">
+                    <button class="terminal-btn primary-btn" onclick="scrollToSection('projects')">
+                        <span>&#9654; View Projects</span>
+                    </button>
+                    <button class="terminal-btn ghost-btn" onclick="scrollToSection('contact')">
+                        <span>&#9993; Contact Me</span>
+                    </button>
+                    <button class="terminal-btn ghost-btn" onclick="window.open('resume.pdf', '_blank')">
+                        <span>&#128196; Resume</span>
+                    </button>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="hero-stat-item">
+                        <span class="stat-icon">&#9733;</span>
+                        <div class="stat-content">
+                            <span class="stat-value">Best Performing Intern</span>
+                            <span class="stat-label">@ Kaevron Technologies</span>
+                        </div>
+                    </div>
+                    <div class="hero-stat-item">
+                        <span class="stat-icon">&#10003;</span>
+                        <div class="stat-content">
+                            <span class="stat-value">1 Client Website</span>
+                            <span class="stat-label">Delivered &amp; Deployed</span>
+                        </div>
+                    </div>
+                    <div class="hero-stat-item">
+                        <span class="stat-icon">&#9889;</span>
+                        <div class="stat-content">
+                            <span class="stat-value">Founder of Fixly</span>
+                            <span class="stat-label">AI-Powered Platform</span>
+                        </div>
+                    </div>
+                    <div class="hero-stat-item">
+                        <span class="stat-icon">&#9881;</span>
+                        <div class="stat-content">
+                            <span class="stat-value">CodeShortsBot</span>
+                            <span class="stat-label">AI Content Pipeline</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- About Section -->
-        <section id="about" class="about-section">
+        <!-- Experience & Achievements Section -->
+        <section id="experience" class="experience-section">
             <div class="terminal">
                 <div class="terminal-header">
                     <div class="terminal-buttons">
@@ -121,18 +173,254 @@
                         <span class="btn yellow"></span>
                         <span class="btn green"></span>
                     </div>
-                    <div class="terminal-title">about --profile</div>
+                    <div class="terminal-title">experience --achievements</div>
                 </div>
                 <div class="terminal-body">
                     <div class="terminal-content">
-                        <h2 class="section-title">> System Profile</h2>
-                        <div class="about-content">
-                            <p class="terminal-text">First-year student competing with seniors in real-world development.</p>
-                            <p class="terminal-text">Marketing Head at EDP Committee - building systems, not just attending meetings.</p>
-                            <p class="terminal-text">Currently building Fixly - an AI-powered developer assistant for students.</p>
-                            <p class="terminal-text">Future ML Engineer + Entrepreneur focused on solving real problems.</p>
-                            <div class="motto">
-                                <span class="command-prompt">$</span> "I build systems that solve real problems."
+                        <h2 class="section-title">&gt; Experience &amp; Achievements</h2>
+
+                        <!-- Premium Achievement Card -->
+                        <div class="achievement-premium">
+                            <div class="achievement-premium-icon">&#9733;</div>
+                            <div class="achievement-premium-content">
+                                <div class="achievement-premium-badge">&#9733; TOP RECOGNITION</div>
+                                <h3>Best Performing Intern</h3>
+                                <p class="achievement-premium-meta">Kaevron Technologies</p>
+                                <p class="achievement-premium-desc">
+                                    Selected as Best Performing Intern at Kaevron Technologies for dedication, ownership, and contribution across multiple projects. Recognized for delivering high-quality work, building automation systems, and demonstrating exceptional problem-solving skills.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="experience-grid">
+                            <div class="experience-card">
+                                <div class="exp-badge">CLIENT PROJECT</div>
+                                <h3>Vishwanath Insurance Portfolio</h3>
+                                <div class="exp-role">Full-Stack Developer</div>
+                                <p class="exp-description">Delivered and deployed a production client website with Google Sheets integration, responsive design, and consultation workflow.</p>
+                                <a href="https://vishwanath-malusare.vercel.app" target="_blank" class="terminal-btn exp-link">
+                                    <span>&#8599; View Live Website</span>
+                                </a>
+                            </div>
+                            <div class="experience-card">
+                                <div class="exp-badge">STARTUP</div>
+                                <h3>Fixly</h3>
+                                <div class="exp-role">Founder &amp; Developer</div>
+                                <p class="exp-description">AI-powered student productivity platform currently in Beta. Helps students manage assignments, deadlines, planning, AI assistance, and productivity tracking.</p>
+                                <button class="terminal-btn exp-link" onclick="showDracoConcept()">
+                                    <span>&#9654; Website Coming Soon</span>
+                                </button>
+                            </div>
+                            <div class="experience-card">
+                                <div class="exp-badge">AUTOMATION</div>
+                                <h3>CodeShortsBot</h3>
+                                <div class="exp-role">Creator</div>
+                                <p class="exp-description">Autonomous AI-powered coding content creation pipeline that researches topics, generates scripts, creates assets, assembles videos, and prepares YouTube Shorts.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Currently Building Section -->
+        <section id="building" class="building-section">
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <span class="btn red"></span>
+                        <span class="btn yellow"></span>
+                        <span class="btn green"></span>
+                    </div>
+                    <div class="terminal-title">currently-building --live</div>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-content">
+                        <h2 class="section-title">&gt; Currently Building</h2>
+                        <p class="terminal-text building-subtitle">Live snapshot of what I'm actively working on right now.</p>
+                        <div class="building-grid">
+                            <div class="building-card">
+                                <div class="building-card-header">
+                                    <span class="building-icon">&#9889;</span>
+                                    <div>
+                                        <h3>Fixly</h3>
+                                        <div class="building-status status-beta">Beta Phase</div>
+                                    </div>
+                                </div>
+                                <p class="building-description">
+                                    AI-powered student productivity companion helping students manage assignments, deadlines, planning, AI assistance, voice interaction, and productivity tracking.
+                                </p>
+                                <button class="draco-btn building-btn" onclick="showDracoConcept()">
+                                    <span>&#9654; Website Coming Soon</span>
+                                </button>
+                            </div>
+                            <div class="building-card">
+                                <div class="building-card-header">
+                                    <span class="building-icon">&#129302;</span>
+                                    <div>
+                                        <h3>CodeShortsBot v2</h3>
+                                        <div class="building-status status-dev">Active Development</div>
+                                    </div>
+                                </div>
+                                <p class="building-description">
+                                    Autonomous AI-powered content production pipeline that researches coding topics, generates scripts, creates assets, assembles videos, and prepares content for publishing.
+                                </p>
+                            </div>
+                            <div class="building-card">
+                                <div class="building-card-header">
+                                    <span class="building-icon">&#128218;</span>
+                                    <div>
+                                        <h3>Learning Journey</h3>
+                                        <div class="building-status status-progress">In Progress</div>
+                                    </div>
+                                </div>
+                                <p class="building-description">
+                                    Expanding skills in JavaScript, full-stack development, automation systems, AI tooling, and modern web technologies.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Projects Section -->
+        <section id="projects" class="projects-section">
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <span class="btn red"></span>
+                        <span class="btn yellow"></span>
+                        <span class="btn green"></span>
+                    </div>
+                    <div class="terminal-title">projects --featured</div>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-content">
+                        <h2 class="section-title">&gt; Featured Projects</h2>
+                        <div class="projects-grid">
+                            <div class="project-card flagship">
+                                <div class="project-screenshot">
+                                    <img src="fixly_dashboard_interface_1777739431340.png" alt="Fixly Dashboard">
+                                    <div class="project-screenshot-overlay">
+                                        <span class="status-tag-proj">BETA</span>
+                                    </div>
+                                </div>
+                                <div class="project-card-body">
+                                    <div class="project-header">
+                                        <span class="flagship-badge">&#9889; FLAGSHIP</span>
+                                        <h3>Fixly</h3>
+                                    </div>
+                                    <p class="project-description">
+                                        AI-powered student productivity companion with assignment management, analytics, AI assistant, and voice capabilities.
+                                    </p>
+                                    <div class="project-tech-stack">
+                                        <span class="tech-label">Tech Stack:</span>
+                                        <div class="tech-tags">
+                                            <span class="tech-tag">Python</span>
+                                            <span class="tech-tag">FastAPI</span>
+                                            <span class="tech-tag">SQLite</span>
+                                            <span class="tech-tag">Ollama</span>
+                                            <span class="tech-tag">Speech Recognition</span>
+                                            <span class="tech-tag">Text To Speech</span>
+                                        </div>
+                                    </div>
+                                    <div class="project-meta">
+                                        <div class="project-meta-item">
+                                            <span class="meta-label">Status:</span>
+                                            <span class="meta-value meta-beta">Beta</span>
+                                        </div>
+                                        <div class="project-meta-item">
+                                            <span class="meta-label">Outcome:</span>
+                                            <span class="meta-value">Working productivity platform with AI assistance and voice interaction</span>
+                                        </div>
+                                    </div>
+                                    <div class="project-actions">
+                                        <button class="draco-btn" onclick="showDracoConcept()">
+                                            <span>&#9654; Website Coming Soon</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-card">
+                                <div class="project-screenshot">
+                                    <img src="draco_system_monitor_1777739567635.png" alt="Vishwanath Insurance Portfolio">
+                                    <div class="project-screenshot-overlay">
+                                        <span class="status-tag-proj status-live">LIVE</span>
+                                    </div>
+                                </div>
+                                <div class="project-card-body">
+                                    <div class="project-header">
+                                        <h3>Vishwanath Insurance Portfolio</h3>
+                                    </div>
+                                    <p class="project-description">
+                                        Professional insurance advisor portfolio website built for a real client. Features Google Sheets integration, deployment pipeline, responsive design, and consultation workflow.
+                                    </p>
+                                    <div class="project-tech-stack">
+                                        <span class="tech-label">Tech Stack:</span>
+                                        <div class="tech-tags">
+                                            <span class="tech-tag">Next.js</span>
+                                            <span class="tech-tag">Vercel</span>
+                                            <span class="tech-tag">Google Apps Script</span>
+                                            <span class="tech-tag">Google Sheets</span>
+                                        </div>
+                                    </div>
+                                    <div class="project-meta">
+                                        <div class="project-meta-item">
+                                            <span class="meta-label">Status:</span>
+                                            <span class="meta-value meta-live">Live</span>
+                                        </div>
+                                        <div class="project-meta-item">
+                                            <span class="meta-label">Outcome:</span>
+                                            <span class="meta-value">Successfully delivered and deployed a production client website</span>
+                                        </div>
+                                    </div>
+                                    <div class="project-actions">
+                                        <a href="https://vishwanath-malusare.vercel.app" target="_blank" class="draco-btn">
+                                            <span>&#8599; View Website</span>
+                                        </a>
+                                        <button class="draco-btn ghost-btn" onclick="showToast('Case study coming soon.')">
+                                            <span>&#128214; Case Study</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-card">
+                                <div class="project-screenshot">
+                                    <img src="ai_neural_grid_1777739587939.png" alt="CodeShortsBot v2">
+                                    <div class="project-screenshot-overlay">
+                                        <span class="status-tag-proj status-dev">DEV</span>
+                                    </div>
+                                </div>
+                                <div class="project-card-body">
+                                    <div class="project-header">
+                                        <h3>CodeShortsBot v2</h3>
+                                    </div>
+                                    <p class="project-description">
+                                        Autonomous content production pipeline that researches topics, generates scripts, creates assets, assembles videos, and prepares YouTube Shorts with minimal human involvement.
+                                    </p>
+                                    <div class="project-tech-stack">
+                                        <span class="tech-label">Tech Stack:</span>
+                                        <div class="tech-tags">
+                                            <span class="tech-tag">Python</span>
+                                            <span class="tech-tag">Ollama</span>
+                                            <span class="tech-tag">Playwright</span>
+                                            <span class="tech-tag">FFmpeg</span>
+                                            <span class="tech-tag">MoviePy</span>
+                                            <span class="tech-tag">SQLite</span>
+                                        </div>
+                                    </div>
+                                    <div class="project-meta">
+                                        <div class="project-meta-item">
+                                            <span class="meta-label">Status:</span>
+                                            <span class="meta-value meta-dev">Active Development</span>
+                                        </div>
+                                        <div class="project-meta-item">
+                                            <span class="meta-label">Outcome:</span>
+                                            <span class="meta-value">Autonomous content creation pipeline for coding content</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -149,43 +437,46 @@
                         <span class="btn yellow"></span>
                         <span class="btn green"></span>
                     </div>
-                    <div class="terminal-title">skills --list</div>
+                    <div class="terminal-title">skills --stack</div>
                 </div>
                 <div class="terminal-body">
                     <div class="terminal-content">
-                        <h2 class="section-title">> System Capabilities</h2>
+                        <h2 class="section-title">&gt; Technical Skills</h2>
                         <div class="skills-grid">
                             <div class="skill-card">
-                                <div class="skill-header">Languages</div>
-                                <div class="power-bar-container">
-                                    <div class="power-bar-label"><span>Python</span><span>95%</span></div>
-                                    <div class="power-bar"><div class="power-level" style="width: 95%;"></div></div>
-                                </div>
-                                <div class="power-bar-container">
-                                    <div class="power-bar-label"><span>C / Embedded C</span><span>80%</span></div>
-                                    <div class="power-bar"><div class="power-level" style="width: 80%;"></div></div>
+                                <div class="skill-header">Frontend</div>
+                                <div class="skill-items">
+                                    <span class="skill-tag">HTML</span>
+                                    <span class="skill-tag">CSS</span>
+                                    <span class="skill-tag">JavaScript</span>
+                                    <span class="skill-tag">Next.js</span>
                                 </div>
                             </div>
                             <div class="skill-card">
-                                <div class="skill-header">Web Technologies</div>
-                                <div class="power-bar-container">
-                                    <div class="power-bar-label"><span>HTML/CSS/JS</span><span>90%</span></div>
-                                    <div class="power-bar"><div class="power-level" style="width: 90%;"></div></div>
-                                </div>
-                                <div class="power-bar-container">
-                                    <div class="power-bar-label"><span>Flask / Backend</span><span>85%</span></div>
-                                    <div class="power-bar"><div class="power-level" style="width: 85%;"></div></div>
+                                <div class="skill-header">Backend</div>
+                                <div class="skill-items">
+                                    <span class="skill-tag">Python</span>
+                                    <span class="skill-tag">FastAPI</span>
+                                    <span class="skill-tag">APIs</span>
                                 </div>
                             </div>
                             <div class="skill-card">
-                                <div class="skill-header">AI & Systems</div>
-                                <div class="power-bar-container">
-                                    <div class="power-bar-label"><span>Prompt Eng / LLMs</span><span>92%</span></div>
-                                    <div class="power-bar"><div class="power-level" style="width: 92%;"></div></div>
+                                <div class="skill-header">AI &amp; Automation</div>
+                                <div class="skill-items">
+                                    <span class="skill-tag">Ollama</span>
+                                    <span class="skill-tag">Local LLMs</span>
+                                    <span class="skill-tag">Playwright</span>
+                                    <span class="skill-tag">Automation Pipelines</span>
                                 </div>
-                                <div class="power-bar-container">
-                                    <div class="power-bar-label"><span>System Design</span><span>75%</span></div>
-                                    <div class="power-bar"><div class="power-level" style="width: 75%;"></div></div>
+                            </div>
+                            <div class="skill-card">
+                                <div class="skill-header">Tools</div>
+                                <div class="skill-items">
+                                    <span class="skill-tag">Git</span>
+                                    <span class="skill-tag">GitHub</span>
+                                    <span class="skill-tag">Vercel</span>
+                                    <span class="skill-tag">SQLite</span>
+                                    <span class="skill-tag">FFmpeg</span>
                                 </div>
                             </div>
                         </div>
@@ -194,183 +485,7 @@
             </div>
         </section>
 
-        <!-- Projects Section -->
-        <section id="projects" class="projects-section">
-            <div class="terminal">
-                <div class="terminal-header">
-                    <div class="terminal-buttons">
-                        <span class="btn red"></span>
-                        <span class="btn yellow"></span>
-                        <span class="btn green"></span>
-                    </div>
-                    <div class="terminal-title">projects --show</div>
-                </div>
-                <div class="terminal-body">
-                    <div class="terminal-content">
-                        <h2 class="section-title">> System Deployments</h2>
-                        
-                        <!-- Featured Project - Draco CLI -->
-                        <div class="draco-cli-container">
-                            <div class="project-card flagship">
-                                <div class="project-header">
-                                    <span class="flagship-badge">⚡ FLAGSHIP SYSTEM</span>
-                                    <span class="project-status">[STARTUP IN PROGRESS]</span>
-                                    <h3>Fixly</h3>
-                                </div>
-                                <div class="project-description">
-                                    A student tool built to help them get most of the academics and never ever miss an assignment.
-                                </div>
-                                <div class="project-features">
-                                    <span class="feature-tag">Screen OCR</span>
-                                    <span class="feature-tag">Assignment detection</span>
-                                    <span class="feature-tag">Code Injection</span>
-                                    <span class="feature-tag">Voice Assistant</span>
-                                    <span class="feature-tag">Local AI (Ollama) + Cloud AI (Gemini,OpenAI,etc.)</span>
-                                </div>
-                                <div class="draco-actions">
-                                    <button class="draco-btn" onclick="showDracoConcept()"><span>> View Concept</span></button>
-                                    <button class="draco-btn" onclick="requestDracoAccess()"><span>> Request Access</span></button>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- The Lab Section -->
-        <section id="lab" class="lab-section">
-            <div class="terminal">
-                <div class="terminal-header">
-                    <div class="terminal-buttons">
-                        <span class="btn red"></span>
-                        <span class="btn yellow"></span>
-                        <span class="btn green"></span>
-                    </div>
-                    <div class="terminal-title">the-lab --monitor</div>
-                </div>
-                <div class="terminal-body">
-                    <div class="terminal-content">
-                        <h2 class="section-title">> Experimental Node</h2>
-                        <p class="terminal-text">Visual intelligence and system runtime previews from the core developer lab.</p>
-                        <div class="lab-grid">
-                            <div class="lab-monitor">
-                                <div class="monitor-screen">
-                                    <img src="fixly_dashboard_interface_1777739431340.png" alt="Fixly Dashboard">
-                                    <div class="monitor-overlay">
-                                        <span class="scanline"></span>
-                                        <span class="status-tag">ACTIVE: FIXLY_CORE</span>
-                                    </div>
-                                </div>
-                                <div class="monitor-label">FIXLY_SYSTEM_HUD</div>
-                            </div>
-                            <div class="lab-monitor">
-                                <div class="monitor-screen">
-                                    <img src="draco_system_monitor_1777739567635.png" alt="Draco System Monitor">
-                                    <div class="monitor-overlay">
-                                        <span class="scanline"></span>
-                                        <span class="status-tag">STATUS: OPTIMIZING</span>
-                                    </div>
-                                </div>
-                                <div class="monitor-label">DRACO_RUNTIME_LOGS</div>
-                            </div>
-                            <div class="lab-monitor">
-                                <div class="monitor-screen">
-                                    <img src="ai_neural_grid_1777739587939.png" alt="AI Neural Grid">
-                                    <div class="monitor-overlay">
-                                        <span class="scanline"></span>
-                                        <span class="status-tag">NODE: NEURAL_ORCHESTRA</span>
-                                    </div>
-                                </div>
-                                <div class="monitor-label">AI_PIPELINE_VISUAL</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Neural Feed Section -->
-        <section id="feed" class="feed-section">
-            <div class="terminal">
-                <div class="terminal-header">
-                    <div class="terminal-buttons">
-                        <span class="btn red"></span>
-                        <span class="btn yellow"></span>
-                        <span class="btn green"></span>
-                    </div>
-                    <div class="terminal-title">neural-feed --live</div>
-                </div>
-                <div class="terminal-body">
-                    <div class="terminal-content">
-                        <h2 class="section-title">> Live Activity Stream</h2>
-                        <div class="feed-container">
-                            <div id="neural-activity-stream" class="activity-stream">
-                                <!-- JS populated -->
-                            </div>
-                        </div>
-                        <div class="feed-footer">
-                            <span class="status-dot pulse"></span>
-                            <span class="footer-text">STREAMING_LIVE_DATA...</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- System Mindset Section -->
-        <section id="mindset" class="mindset-section">
-            <div class="terminal">
-                <div class="terminal-header">
-                    <div class="terminal-buttons">
-                        <span class="btn red"></span>
-                        <span class="btn yellow"></span>
-                        <span class="btn green"></span>
-                    </div>
-                    <div class="terminal-title">mindset --show</div>
-                </div>
-                <div class="terminal-body">
-                    <div class="terminal-content">
-                        <h2 class="section-title">> Core Principles</h2>
-                        <div class="mindset-list">
-                            <div class="mindset-item">> I build systems that solve real problems</div>
-                            <div class="mindset-item">> I learn what is required, not just what is taught</div>
-                            <div class="mindset-item">> I execute fast and adapt faster</div>
-                            <div class="mindset-item">> If there is no path, I create one</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- System Status Section -->
-        <section id="system-status" class="system-status-section">
-            <div class="terminal">
-                <div class="terminal-header">
-                    <div class="terminal-buttons">
-                        <span class="btn red"></span>
-                        <span class="btn yellow"></span>
-                        <span class="btn green"></span>
-                    </div>
-                    <div class="terminal-title">system status</div>
-                </div>
-                <div class="terminal-body">
-                    <div class="terminal-content">
-                        <h2 class="section-title">> System Status Report</h2>
-                        <div class="status-list">
-                            <div class="status-item active">✔ AI Systems Active</div>
-                            <div class="status-item active">✔ Automation Modules Loaded</div>
-                            <div class="status-item active">✔ Projects Deployed</div>
-                            <div class="status-item active">✔ Ready for Opportunities</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Journey Timeline Section -->
+        <!-- Developer Journey Section -->
         <section id="journey" class="journey-section">
             <div class="terminal">
                 <div class="terminal-header">
@@ -379,83 +494,51 @@
                         <span class="btn yellow"></span>
                         <span class="btn green"></span>
                     </div>
-                    <div class="terminal-title">journey --timeline</div>
+                    <div class="terminal-title">developer-journey --timeline</div>
                 </div>
                 <div class="terminal-body">
                     <div class="terminal-content">
-                        <h2 class="section-title">> Development Journey</h2>
+                        <h2 class="section-title">&gt; Developer Journey</h2>
                         <div class="timeline">
                             <div class="timeline-item">
                                 <div class="timeline-marker"></div>
                                 <div class="timeline-content">
-                                    <h3>Started Coding</h3>
-                                    <p>Began programming out of curiosity and passion for problem-solving</p>
+                                    <div class="timeline-date">2024</div>
+                                    <h3>Started Full-Stack Development</h3>
+                                    <p>Began building web applications and automation systems, mastering both frontend and backend technologies from scratch.</p>
                                 </div>
                             </div>
                             <div class="timeline-item">
                                 <div class="timeline-marker"></div>
                                 <div class="timeline-content">
-                                    <h3>First CLI Tools</h3>
-                                    <p>Built practical command-line tools for everyday automation</p>
+                                    <div class="timeline-date">2025</div>
+                                    <h3>Delivered First Client Website</h3>
+                                    <p>Completed and deployed Vishwanath Insurance Portfolio &mdash; a production website with Google Sheets integration and consultation workflow.</p>
                                 </div>
                             </div>
                             <div class="timeline-item">
                                 <div class="timeline-marker"></div>
                                 <div class="timeline-content">
-                                    <h3>Created Fixly</h3>
-                                    <p>Developed AI-powered student assistant as flagship project</p>
+                                    <div class="timeline-date">2025</div>
+                                    <h3>Selected as Best Performing Intern</h3>
+                                    <p>Recognized at Kaevron Technologies for outstanding contributions, automation systems, and project delivery.</p>
                                 </div>
                             </div>
                             <div class="timeline-item">
                                 <div class="timeline-marker"></div>
                                 <div class="timeline-content">
-                                    <h3>Marketing Head (EDP)</h3>
-                                    <p>Leading marketing efforts while building technical solutions</p>
+                                    <div class="timeline-date">2025</div>
+                                    <h3>Fixly Entered Beta Phase</h3>
+                                    <p>Launched Fixly, an AI-powered student productivity platform now in active Beta with assignment management and AI features.</p>
                                 </div>
                             </div>
                             <div class="timeline-item">
                                 <div class="timeline-marker"></div>
                                 <div class="timeline-content">
-                                    <h3>Hackathon Success</h3>
-                                    <p>Won special recognition award as a first year team in SIH-2025 by leading the team with no experience to gain experience.</p>
+                                    <div class="timeline-date">2026</div>
+                                    <h3>Built CodeShortsBot v2</h3>
+                                    <p>Developed autonomous AI content pipeline for YouTube Shorts, from research to video assembly with minimal human involvement.</p>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Vision Section -->
-        <section id="vision" class="vision-section">
-            <div class="terminal">
-                <div class="terminal-header">
-                    <div class="terminal-buttons">
-                        <span class="btn red"></span>
-                        <span class="btn yellow"></span>
-                        <span class="btn green"></span>
-                    </div>
-                    <div class="terminal-title">vision --future</div>
-                </div>
-                <div class="terminal-body">
-                    <div class="terminal-content">
-                        <h2 class="section-title">> Future Execution Plan</h2>
-                        <div class="vision-grid">
-                            <div class="vision-item">
-                                <h3>🧠 ML Engineer</h3>
-                                <p>Mastering machine learning to build intelligent systems</p>
-                            </div>
-                            <div class="vision-item">
-                                <h3>🚀 AI Startup</h3>
-                                <p>Building Fixly into a full-fledged AI company</p>
-                            </div>
-                            <div class="vision-item">
-                                <h3>🛠️ Developer Tools</h3>
-                                <p>Creating tools that make developers more productive</p>
-                            </div>
-                            <div class="vision-item">
-                                <h3>🌍 Real-World Impact</h3>
-                                <p>Solving actual problems that matter to people</p>
                             </div>
                         </div>
                     </div>
@@ -472,11 +555,18 @@
                         <span class="btn yellow"></span>
                         <span class="btn green"></span>
                     </div>
-                    <div class="terminal-title">connect --help</div>
+                    <div class="terminal-title">connect --reach-out</div>
                 </div>
                 <div class="terminal-body">
                     <div class="terminal-content">
-                        <h2 class="section-title">> Connection Protocols</h2>
+                        <h2 class="section-title">&gt; Get In Touch</h2>
+                        <div class="contact-intro">
+                            <p class="terminal-text">Available for internship opportunities, freelance projects, and collaborations. Let's build something impactful together.</p>
+                            <div class="contact-response">
+                                <span class="response-dot"></span>
+                                <span>Usually responds within 24 hours</span>
+                            </div>
+                        </div>
                         <div class="contact-commands">
                             <div class="command-item">
                                 <span class="command">connect --email</span>
@@ -491,16 +581,25 @@
                                 <a href="https://www.linkedin.com/in/aryan-sonsurkar/" target="_blank" class="command-output">linkedin.com/in/aryan-sonsurkar</a>
                             </div>
                         </div>
+                        <div class="contact-cta">
+                            <button class="terminal-btn primary-btn" onclick="copyEmail()">
+                                <span>&#9993; Send Email</span>
+                            </button>
+                            <button class="terminal-btn ghost-btn" onclick="window.open('resume.pdf', '_blank')">
+                                <span>&#128196; Download Resume</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+
     </div>
 
     <!-- Background Effects -->
     <div class="particles-container" id="particles"></div>
     <div class="gradient-glow"></div>
-    
+
     <!-- Draco CLI Modal -->
     <div id="draco-modal" class="modal">
         <div class="modal-content">
@@ -512,7 +611,6 @@
                 <span class="close-modal" onclick="closeDracoModal()">&times;</span>
             </div>
             <div class="modal-body dashboard-layout">
-                <!-- Left Pane: Workflow -->
                 <div class="workflow-pane">
                     <div class="pane-header">
                         <span class="wf-arrow">&#9654;</span>
@@ -570,8 +668,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Right Pane: Live Demo -->
                 <div class="demo-pane">
                     <div class="pane-header">
                         <span class="wf-arrow">&#9654;</span>
