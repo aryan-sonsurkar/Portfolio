@@ -775,6 +775,10 @@ function copyEmail() {
     });
 }
 
+function showResumeComingSoon() {
+    showToast("Resume coming soon. Check back shortly.");
+}
+
 function showToast(message) {
     const toast = document.createElement('div');
     toast.className = 'toast-notification';
