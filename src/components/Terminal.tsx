@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react"
 import { Terminal as TerminalIcon } from "lucide-react"
 
-const HISTORY_LIMIT = 50
+const HISTORY_LIMIT = 100
 
 export default function Terminal({ onCommand }: { onCommand: (cmd: string) => void }) {
   const [input, setInput] = useState("")
@@ -14,6 +14,7 @@ export default function Terminal({ onCommand }: { onCommand: (cmd: string) => vo
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "/" && !focus && inputRef.current) {
+        e.preventDefault()
         inputRef.current.focus()
       }
     }
@@ -35,22 +36,24 @@ export default function Terminal({ onCommand }: { onCommand: (cmd: string) => vo
 
   return (
     <div
-      className="flex-shrink-0 border-t border-[#3B82F6]/10 bg-[#0C1118]/80 backdrop-blur-xl"
+      className="flex-shrink-0 border-t border-[#3B82F6]/10 bg-[#0C1118]/90 backdrop-blur-xl cursor-text"
       onClick={() => inputRef.current?.focus()}
     >
-      <div className="flex items-center gap-2 px-4 py-1.5 border-b border-[#3B82F6]/10">
-        <TerminalIcon className="w-3 h-3 text-[#3B82F6]" />
-        <span className="text-[10px] text-[#475569] font-mono">COMMAND TERMINAL — Press / to focus</span>
+      <div className="flex items-center gap-2 px-5 py-1.5 border-b border-[#3B82F6]/8">
+        <TerminalIcon className="w-3.5 h-3.5 text-[#3B82F6]" />
+        <span className="text-[10px] text-[#475569] font-mono tracking-wider uppercase">Terminal — Press / to focus</span>
+        <div className="ml-auto flex items-center gap-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-green-500/60" />
+          <span className="text-[9px] text-[#475569] font-mono">CONNECTED</span>
+        </div>
       </div>
-      <div className="px-4 py-1 max-h-16 overflow-y-auto">
+      <div className="px-5 py-1.5 max-h-14 overflow-y-auto">
         {history.slice(-3).map((line, i) => (
-          <p key={i} className="text-[11px] font-mono text-[#94A3B8] leading-5">
-            {line}
-          </p>
+          <p key={i} className="text-[11px] font-mono text-[#94A3B8] leading-5">{line}</p>
         ))}
       </div>
-      <form onSubmit={handleSubmit} className="px-4 pb-2 flex items-center gap-2">
-        <span className="text-[#3B82F6] text-xs font-mono">{">"}</span>
+      <form onSubmit={handleSubmit} className="px-5 pb-2.5 flex items-center gap-2">
+        <span className="text-[#3B82F6] text-xs font-mono shrink-0">{">"}</span>
         <input
           ref={inputRef}
           type="text"
