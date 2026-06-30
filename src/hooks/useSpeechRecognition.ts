@@ -2,14 +2,6 @@
 
 import { useState, useCallback, useRef } from "react"
 
-interface SpeechRecognitionHook {
-  isListening: boolean
-  transcript: string
-  isSupported: boolean
-  startListening: () => void
-  stopListening: () => void
-}
-
 declare global {
   interface Window {
     SpeechRecognition: new () => SpeechRecognition
@@ -23,47 +15,23 @@ interface SpeechRecognition extends EventTarget {
   lang: string
   start: () => void
   stop: () => void
-  onresult: ((event: SpeechRecognitionEvent) => void) | null
-  onerror: ((event: SpeechRecognitionErrorEvent) => void) | null
+  onresult: ((event: any) => void) | null
+  onerror: ((event: any) => void) | null
   onend: (() => void) | null
 }
 
-interface SpeechRecognitionEvent {
-  results: SpeechRecognitionResultList
-}
-
-interface SpeechRecognitionResultList {
-  length: number
-  item(index: number): SpeechRecognitionResult
-  [index: number]: SpeechRecognitionResult
-}
-
-interface SpeechRecognitionResult {
-  isFinal: boolean
-  item(index: number): SpeechRecognitionAlternative
-  [index: number]: SpeechRecognitionAlternative
-}
-
-interface SpeechRecognitionAlternative {
-  transcript: string
-  confidence: number
-}
-
-interface SpeechRecognitionErrorEvent extends Event {
-  error: string
-}
-
-export const COMMANDS: Record<string, string[]> = {
-  "who is aryan": ["hero", "Aryan Sonsurkar is a full-stack developer and founder of Fixly. He builds web applications, AI tools, and automation systems."],
-  "tell me about kokanam": ["kokanam", "Kokanam Marketplace is his flagship client project. A full e-commerce marketplace with admin panel, customer portal, and production deployment."],
-  "what is fixly": ["fixly", "Fixly is an AI-powered student productivity platform he founded. It helps students manage assignments, deadlines, and productivity with AI assistance."],
-  "what is draco": ["draco", "Draco CLI is a modern AI-powered command-line assistant for developers."],
-  "show me projects": ["projects", "His featured projects include Kokanam Marketplace, Fixly, and Draco CLI."],
-  "show experience": ["experience", "Aryan was Best Performing Intern at Kaevron Technologies and has delivered multiple production client projects."],
-  "show skills": ["skills", "Aryan's skills span frontend, backend, AI and automation, databases, cloud, and design tools."],
-  "show timeline": ["timeline", "His journey started in 2024 and includes college, internship at Kaevron, Fixly beta, and Kokanam delivery."],
-  "contact aryan": ["contact", "You can reach Aryan via email, LinkedIn, or GitHub. He usually responds within 24 hours."],
-  "help": ["hero", "You can ask me about Aryan, his projects, experience, skills, or contact information. Try saying 'tell me about kokanam' or 'show me projects'."],
+export const VOICE_COMMANDS: Record<string, { response: string; windowId?: string }> = {
+  "tell me about aryan": { response: "Aryan Sonsurkar is an AI Engineer, Founder of Fixly, and Full-Stack Developer. He builds AI-powered products, automation systems, and production web applications.", windowId: "about" },
+  "show fixly": { response: "Opening Fixly project. AI-powered student productivity platform.", windowId: "fixly" },
+  "show kokanam": { response: "Opening Kokanam Marketplace. Production e-commerce platform.", windowId: "kokanam" },
+  "show project x": { response: "Opening Project X. AI career guidance platform in research phase.", windowId: "projectx" },
+  "show resume": { response: "Opening resume details.", windowId: "about" },
+  "show skills": { response: "Opening skills panel. Aryan works with Next.js, Python, AI, and cloud technologies.", windowId: "skills" },
+  "show experience": { response: "Best Performing Intern at Kaevron Technologies. Founder of Fixly. Delivered Kokanam Marketplace.", windowId: "experience" },
+  "open contact": { response: "Opening contact panel. You can reach Aryan via email, LinkedIn, or GitHub.", windowId: "contact" },
+  "show timeline": { response: "Aryan's journey started in 2024. From first project to founding Fixly and building AI products.", windowId: "timeline" },
+  "show achievements": { response: "Best Performing Intern, SHI Hackathon Award, Founder of Fixly, Marketing Head at EDP Committee.", windowId: "achievements" },
+  help: { response: "You can ask: tell me about aryan, show fixly, show kokanam, show project x, show skills, show experience, open contact, show timeline, show achievements." },
 }
 
 export function useSpeechRecognition() {
@@ -71,33 +39,21 @@ export function useSpeechRecognition() {
   const [transcript, setTranscript] = useState("")
   const recognitionRef = useRef<SpeechRecognition | null>(null)
 
-  const isSupported =
-    typeof window !== "undefined" &&
-    (!!window.SpeechRecognition || !!window.webkitSpeechRecognition)
+  const isSupported = typeof window !== "undefined" && (!!window.SpeechRecognition || !!window.webkitSpeechRecognition)
 
   const startListening = useCallback(() => {
     if (!isSupported) return
-
     const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition
     const recognition = new SpeechRecognitionAPI()
     recognition.continuous = false
     recognition.interimResults = true
     recognition.lang = "en-US"
-
-    recognition.onresult = (event: SpeechRecognitionEvent) => {
+    recognition.onresult = (event: any) => {
       const result = event.results[event.results.length - 1]
-      const text = result.item(0).transcript.toLowerCase()
-      setTranscript(text)
+      setTranscript(result.item(0).transcript.toLowerCase())
     }
-
-    recognition.onerror = () => {
-      setIsListening(false)
-    }
-
-    recognition.onend = () => {
-      setIsListening(false)
-    }
-
+    recognition.onerror = () => setIsListening(false)
+    recognition.onend = () => setIsListening(false)
     recognitionRef.current = recognition
     recognition.start()
     setIsListening(true)
@@ -111,27 +67,5 @@ export function useSpeechRecognition() {
     setIsListening(false)
   }, [])
 
-  const processCommand = useCallback(
-    (transcript: string): { sectionId: string; response: string } | null => {
-      const lower = transcript.toLowerCase().trim()
-
-      for (const [phrase, [sectionId, response]] of Object.entries(COMMANDS)) {
-        if (lower.includes(phrase)) {
-          return { sectionId, response }
-        }
-      }
-
-      return null
-    },
-    []
-  )
-
-  return {
-    isListening,
-    transcript,
-    isSupported,
-    startListening,
-    stopListening,
-    processCommand,
-  }
+  return { isListening, transcript, isSupported, startListening, stopListening }
 }

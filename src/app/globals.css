@@ -6,181 +6,104 @@
 
 @layer base {
   :root {
-    --bg-primary: #0a0a0b;
-    --bg-secondary: #121214;
-    --bg-card: #18181b;
-    --bg-card-hover: #1f1f23;
-    --bg-glass: rgba(18, 18, 20, 0.6);
-    --border: rgba(255, 255, 255, 0.06);
-    --border-hover: rgba(255, 255, 255, 0.12);
-    --text-primary: #fafafa;
-    --text-secondary: #a1a1aa;
-    --text-tertiary: #71717a;
-    --accent: #60a5fa;
-    --accent-soft: rgba(96, 165, 250, 0.15);
-    --accent-glow: rgba(96, 165, 250, 0.3);
-    --success: #4ade80;
+    --bg: #05070A;
+    --bg-card: #0C1118;
+    --border: rgba(59, 130, 246, 0.12);
+    --border-active: rgba(59, 130, 246, 0.35);
+    --primary: #3B82F6;
+    --primary-glow: rgba(59, 130, 246, 0.25);
+    --accent-glow: #00D4FF;
+    --text: #F5F7FA;
+    --text-secondary: #94A3B8;
+    --text-muted: #475569;
     --radius: 12px;
   }
-}
 
-@layer base {
-  * {
-    box-sizing: border-box;
-  }
+  * { box-sizing: border-box; }
 
-  html {
-    scroll-behavior: auto;
-  }
-
-  body {
+  html, body {
     margin: 0;
-    background: var(--bg-primary);
-    color: var(--text-primary);
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    user-select: none;
   }
 
-  ::selection {
-    background: var(--accent-soft);
-    color: var(--text-primary);
-  }
-
-  ::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: var(--bg-primary);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 3px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.15);
-  }
+  ::selection { background: rgba(59, 130, 246, 0.3); color: #fff; }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(59, 130, 246, 0.2); border-radius: 2px; }
 }
 
 @layer components {
   .glass {
-    background: var(--bg-glass);
+    background: rgba(12, 17, 24, 0.6);
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     border: 1px solid var(--border);
   }
-
   .glass-hover:hover {
-    background: rgba(24, 24, 27, 0.8);
-    border-color: var(--border-hover);
+    border-color: var(--border-active);
+    background: rgba(12, 17, 24, 0.8);
   }
-
-  .gradient-text {
-    background: linear-gradient(135deg, #fafafa 0%, #a1a1aa 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .glow-border {
+    box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.1),
+                0 0 20px rgba(59, 130, 246, 0.05);
   }
-
-  .gradient-text-accent {
-    background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #60a5fa 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .glow-text {
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
   }
-
-  .gradient-border {
-    position: relative;
+  .glow-box {
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.08),
+                0 0 60px rgba(59, 130, 246, 0.04);
   }
-
-  .gradient-border::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(135deg, rgba(96, 165, 250, 0.3), rgba(167, 139, 250, 0.3), rgba(96, 165, 250, 0.3));
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
+  .scanline {
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(59, 130, 246, 0.015) 2px,
+      rgba(59, 130, 246, 0.015) 4px
+    );
   }
-
-  .glow {
-    box-shadow: 0 0 40px rgba(96, 165, 250, 0.1), 0 0 80px rgba(96, 165, 250, 0.05);
+  .window-shadow {
+    box-shadow: 0 24px 80px rgba(0,0,0,0.6),
+                0 0 40px rgba(59, 130, 246, 0.06);
   }
-
-  .glow-sm {
-    box-shadow: 0 0 20px rgba(96, 165, 250, 0.08);
-  }
-
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
+  .hud-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.05em;
   }
 }
 
-@layer utilities {
-  .animate-in {
-    animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
-  .animate-in-delay-1 { animation-delay: 0.1s; }
-  .animate-in-delay-2 { animation-delay: 0.2s; }
-  .animate-in-delay-3 { animation-delay: 0.3s; }
-  .animate-in-delay-4 { animation-delay: 0.4s; }
-  .animate-in-delay-5 { animation-delay: 0.5s; }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes pulse-soft {
+@keyframes bootPulse {
   0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.8; }
+  50% { opacity: 1; }
 }
-
-@keyframes scan {
+@keyframes scanDown {
   0% { transform: translateY(-100%); }
   100% { transform: translateY(100%); }
 }
-
-@keyframes wave {
-  0%, 100% { transform: scaleY(0.3); }
-  50% { transform: scaleY(1); }
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(59,130,246,0.1); }
+  50% { box-shadow: 0 0 40px rgba(59,130,246,0.2); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes terminalBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
-@keyframes orb-float {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-10px) scale(1.02); }
-}
-
-@keyframes load-bar {
-  0% { width: 0%; }
-  100% { width: 100%; }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+.animate-boot-pulse { animation: bootPulse 1.5s ease-in-out infinite; }
+.animate-glow-pulse { animation: glowPulse 3s ease-in-out infinite; }
+.animate-float { animation: float 4s ease-in-out infinite; }
+.animate-terminal-blink { animation: terminalBlink 1s step-end infinite; }
