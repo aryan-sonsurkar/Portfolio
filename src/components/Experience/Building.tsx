@@ -68,9 +68,18 @@ function WindowGrid({
 
 function BuildingBody({ config }: { config: BuildingConfig }) {
   const meshRef = useRef<THREE.Mesh>(null);
-  const { focusBuilding, focusedBuilding, setHoveredBuilding } = useStore();
+  const { focusBuilding, focusedBuilding, setHoveredBuilding, introComplete, introProgress, enterBuilding } = useStore();
   const isFocused = focusedBuilding === config.id;
   const [hovered, setHovered] = useState(false);
+  const canInteract = introComplete;
+  const glowStrength = config.id === "modcodes-hq"
+    ? Math.max(0.2, Math.min(1.25, introProgress * 1.2 + (introComplete ? 0.35 : 0)))
+    : hovered
+      ? 0.35
+      : 0.15;
+  const doorOpen = introComplete
+    ? 1
+    : Math.max(0, Math.min(1, (introProgress - 0.72) / 0.2));
 
   useFrame(() => {
     if (!meshRef.current) return;
@@ -95,10 +104,13 @@ function BuildingBody({ config }: { config: BuildingConfig }) {
         castShadow
         receiveShadow
         onClick={(e) => {
+          if (!canInteract) return;
           e.stopPropagation();
           focusBuilding(config.id);
+          enterBuilding(config.id);
         }}
         onPointerEnter={(e) => {
+          if (!canInteract) return;
           e.stopPropagation();
           setHovered(true);
           setHoveredBuilding(config.id);
@@ -115,6 +127,8 @@ function BuildingBody({ config }: { config: BuildingConfig }) {
           color={config.color}
           roughness={0.85}
           metalness={0.05}
+          emissive={config.emissive || "#ffd700"}
+          emissiveIntensity={glowStrength}
         />
         <Edges threshold={15} color="#00000020" lineWidth={1} />
       </mesh>
@@ -187,10 +201,25 @@ function BuildingBody({ config }: { config: BuildingConfig }) {
         </mesh>
       )}
 
+      {config.id === "modcodes-hq" && (
+        <group position={[0, -0.2, config.scale[2] / 2 + 0.02]}>
+          <group rotation={[0, doorOpen * -1.2, 0]}>
+            <mesh position={[0.38, 0.1, 0]} castShadow>
+              <boxGeometry args={[0.76, 1.6, 0.05]} />
+              <meshStandardMaterial color="#120c16" metalness={0.4} roughness={0.3} />
+            </mesh>
+          </group>
+          <mesh position={[0, 0.1, 0]}>
+            <boxGeometry args={[0.9, 1.7, 0.03]} />
+            <meshStandardMaterial color="#2a1e2c" emissive="#ffd166" emissiveIntensity={0.25} />
+          </mesh>
+        </group>
+      )}
+
       {/* Point light from windows */}
       <pointLight
         color={config.emissive || "#ffd700"}
-        intensity={hovered ? 2.0 : 0.8}
+        intensity={hovered ? 2.0 : !introComplete && config.id === "modcodes-hq" ? 1.2 : 0.8}
         distance={8}
         position={[0, 0, config.scale[2] / 2 + 1]}
       />
