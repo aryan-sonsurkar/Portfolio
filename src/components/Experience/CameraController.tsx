@@ -17,23 +17,21 @@ export default function CameraController() {
 
   useEffect(() => {
     if (!introComplete) {
-      // Intro: far away view
       camera.position.set(20, 16, 20);
       targetPosition.current.set(20, 16, 20);
-      targetLookAt.current.set(0, 1, -1);
+      targetLookAt.current.set(0, 1, -3);
     }
   }, [introComplete, camera]);
 
   useEffect(() => {
     if (cameraMode === "orbit") {
-      targetPosition.current.set(12, 8, 12);
-      targetLookAt.current.set(0, 1, -1);
+      targetPosition.current.set(14, 9, 14);
+      targetLookAt.current.set(0, 1, -3);
     } else if (cameraMode === "focused" && focusedBuilding) {
       const building = BUILDINGS.find((b) => b.id === focusedBuilding);
       if (building) {
         const [bx, , bz] = building.position;
         const bh = building.scale[1];
-        // Position camera closer to the building
         targetPosition.current.set(bx + 6, bh * 0.7, bz + 6);
         targetLookAt.current.set(bx, bh * 0.35, bz);
       }
@@ -65,7 +63,7 @@ export default function CameraController() {
       maxPolarAngle={Math.PI / 2.2}
       autoRotate={cameraMode === "orbit"}
       autoRotateSpeed={0.3}
-      target={[0, 1, -1]}
+      target={[0, 1, -3]}
     />
   );
 }

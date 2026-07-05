@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import City from "./City";
 import Atmosphere from "./Atmosphere";
 import CameraController from "./CameraController";
+import Weather from "./Weather";
 
 function LoadingFallback() {
   return (
@@ -29,6 +30,7 @@ export default function Scene() {
     >
       <Suspense fallback={<LoadingFallback />}>
         <Atmosphere />
+        <Weather />
         <City />
         <CameraController />
       </Suspense>

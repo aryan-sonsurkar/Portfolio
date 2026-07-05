@@ -3,9 +3,12 @@
 import { useRef, useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
+import { useStore } from "@/lib/store";
 
 function Clouds() {
   const groupRef = useRef<THREE.Group>(null);
+  const { weatherActive } = useStore();
+  const windPhase = useRef(0);
 
   const clouds = useMemo(() => {
     return Array.from({ length: 12 }, (_, i) => ({
@@ -15,15 +18,20 @@ function Clouds() {
         (Math.random() - 0.5) * 40,
       ] as [number, number, number],
       scale: 1 + Math.random() * 2.5,
-      speed: 0.02 + Math.random() * 0.03,
+      baseSpeed: 0.02 + Math.random() * 0.03,
       opacity: 0.15 + Math.random() * 0.15,
     }));
   }, []);
 
   useFrame((_, delta) => {
     if (!groupRef.current) return;
+    windPhase.current += delta * 0.5;
+    const windMultiplier = weatherActive
+      ? 1.5 + Math.sin(windPhase.current * 1.7) * 0.8
+      : 1;
+
     groupRef.current.children.forEach((child, i) => {
-      child.position.x += clouds[i].speed * delta;
+      child.position.x += clouds[i].baseSpeed * windMultiplier * delta;
       if (child.position.x > 35) child.position.x = -35;
     });
   });

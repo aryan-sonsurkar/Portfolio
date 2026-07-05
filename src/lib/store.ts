@@ -8,6 +8,7 @@ interface AppState {
   introComplete: boolean;
   loadingComplete: boolean;
   hoveredBuilding: string | null;
+  weatherActive: boolean;
 
   setCameraMode: (mode: CameraMode) => void;
   focusBuilding: (id: string) => void;
@@ -15,6 +16,7 @@ interface AppState {
   completeIntro: () => void;
   completeLoading: () => void;
   setHoveredBuilding: (id: string | null) => void;
+  toggleWeather: () => void;
 }
 
 export const useStore = create<AppState>((set) => ({
@@ -23,6 +25,7 @@ export const useStore = create<AppState>((set) => ({
   introComplete: false,
   loadingComplete: false,
   hoveredBuilding: null,
+  weatherActive: false,
 
   setCameraMode: (mode) => set({ cameraMode: mode }),
 
@@ -38,4 +41,6 @@ export const useStore = create<AppState>((set) => ({
   completeLoading: () => set({ loadingComplete: true }),
 
   setHoveredBuilding: (id) => set({ hoveredBuilding: id }),
+
+  toggleWeather: () => set((s) => ({ weatherActive: !s.weatherActive })),
 }));

@@ -19,29 +19,29 @@ function Ground() {
       </mesh>
 
       {/* City block platform */}
-      <mesh position={[0, -0.05, -2]} receiveShadow>
-        <boxGeometry args={[22, 0.1, 16]} />
+      <mesh position={[0, -0.05, -3]} receiveShadow>
+        <boxGeometry args={[24, 0.1, 22]} />
         <meshStandardMaterial color="#1e1825" roughness={0.9} metalness={0.05} />
       </mesh>
 
       {/* Subtle grid lines */}
-      {Array.from({ length: 15 }, (_, i) => (
+      {Array.from({ length: 17 }, (_, i) => (
         <mesh
           key={`line-x-${i}`}
-          position={[-7 + i, 0.01, -2]}
+          position={[-8 + i, 0.01, -3]}
           rotation={[-Math.PI / 2, 0, 0]}
         >
-          <planeGeometry args={[0.015, 16]} />
+          <planeGeometry args={[0.015, 22]} />
           <meshBasicMaterial color="#ffffff" transparent opacity={0.03} />
         </mesh>
       ))}
-      {Array.from({ length: 11 }, (_, i) => (
+      {Array.from({ length: 15 }, (_, i) => (
         <mesh
           key={`line-z-${i}`}
-          position={[0, 0.01, -10 + i]}
+          position={[0, 0.01, -14 + i]}
           rotation={[-Math.PI / 2, 0, Math.PI / 2]}
         >
-          <planeGeometry args={[0.015, 22]} />
+          <planeGeometry args={[0.015, 24]} />
           <meshBasicMaterial color="#ffffff" transparent opacity={0.03} />
         </mesh>
       ))}
@@ -57,12 +57,14 @@ function Ground() {
 
 function StreetLamps() {
   const positions: [number, number, number][] = [
-    [-8, 0, 4],
-    [-3, 0, 4],
-    [3, 0, 4],
-    [8, 0, 4],
-    [-8, 0, -7],
-    [8, 0, -7],
+    [-9, 0, 4],
+    [-4, 0, 4],
+    [4, 0, 4],
+    [9, 0, 4],
+    [-9, 0, -13],
+    [9, 0, -13],
+    [-1, 0, -13],
+    [1, 0, -13],
   ];
 
   return (
@@ -122,8 +124,10 @@ export default function City() {
     <group>
       <Ground />
       <StreetLamps />
-      <Bench position={[-4, 0, 4.5]} />
-      <Bench position={[4, 0, 4.5]} />
+      <Bench position={[-5, 0, 4.5]} />
+      <Bench position={[5, 0, 4.5]} />
+      <Bench position={[-7, 0, -12]} />
+      <Bench position={[7, 0, -12]} />
 
       {BUILDINGS.map((config) => (
         <Building key={config.id} config={config} />
