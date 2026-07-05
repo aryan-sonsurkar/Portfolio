@@ -1,22 +1,26 @@
-import type { Metadata } from "next"
-import "@/app/globals.css"
+import type { Metadata } from "next";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "ARYAN OS | Aryan Sonsurkar",
+  title: "MODCODES District — Aryan Sonsurkar",
   description:
-    "ARYAN OS — AI Engineering Portfolio by Aryan Sonsurkar. Founder of Fixly. AI Engineer. Full-Stack Developer.",
-  keywords: ["Aryan Sonsurkar", "AI Engineer", "Fixly", "Kokanam", "Full-Stack Developer", "Portfolio"],
-  openGraph: {
-    title: "ARYAN OS | Aryan Sonsurkar",
-    description: "AI Engineering Portfolio",
-    type: "website",
-  },
-}
+    "An interactive world built by a builder. Not a portfolio. A district.",
+};
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body>{children}</body>
     </html>
-  )
+  );
 }
