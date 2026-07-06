@@ -72,7 +72,12 @@ export default function CharacterController() {
     };
 
     const lockChange = () => {
-      isPointerLocked.current = document.pointerLockElement === gl.domElement;
+      const locked = document.pointerLockElement === gl.domElement;
+      isPointerLocked.current = locked;
+      // Always restore cursor when pointer lock exits
+      if (!locked) {
+        document.body.style.cursor = "default";
+      }
     };
 
     const handleCanvasClick = () => {

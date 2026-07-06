@@ -241,6 +241,99 @@ class AudioManager {
     this.masterVolume.gain.linearRampToValueAtTime(this.isMuted ? 0 : 0.35, now + 0.2);
     return this.isMuted;
   }
+
+  public playHoverSound() {
+    this.init();
+    if (!this.ctx || !this.masterVolume) return;
+    const now = this.ctx.currentTime;
+
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(1200, now);
+    osc.frequency.exponentialRampToValueAtTime(1600, now + 0.06);
+
+    gain.gain.setValueAtTime(0.015, now);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.08);
+
+    osc.connect(gain);
+    gain.connect(this.masterVolume);
+
+    osc.start(now);
+    osc.stop(now + 0.1);
+  }
+
+  public playClickSound() {
+    this.init();
+    if (!this.ctx || !this.masterVolume) return;
+    const now = this.ctx.currentTime;
+
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+
+    osc.type = "triangle";
+    osc.frequency.setValueAtTime(800, now);
+    osc.frequency.exponentialRampToValueAtTime(400, now + 0.1);
+
+    gain.gain.setValueAtTime(0.04, now);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.12);
+
+    osc.connect(gain);
+    gain.connect(this.masterVolume);
+
+    osc.start(now);
+    osc.stop(now + 0.15);
+  }
+
+  public playEnterDistrict() {
+    this.init();
+    if (!this.ctx || !this.masterVolume) return;
+    const now = this.ctx.currentTime;
+
+    // Ascending chord sweep
+    const freqs = [220, 330, 440, 660, 880];
+    freqs.forEach((f, i) => {
+      if (!this.ctx || !this.masterVolume) return;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+
+      osc.type = i % 2 === 0 ? "sine" : "triangle";
+      osc.frequency.setValueAtTime(f, now + i * 0.06);
+
+      gain.gain.setValueAtTime(0, now + i * 0.06);
+      gain.gain.linearRampToValueAtTime(0.04, now + i * 0.06 + 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.2);
+
+      osc.connect(gain);
+      gain.connect(this.masterVolume);
+
+      osc.start(now + i * 0.06);
+      osc.stop(now + 1.5);
+    });
+  }
+
+  public playMonitorOpen() {
+    this.init();
+    if (!this.ctx || !this.masterVolume) return;
+    const now = this.ctx.currentTime;
+
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(600, now);
+    osc.frequency.exponentialRampToValueAtTime(1200, now + 0.15);
+
+    gain.gain.setValueAtTime(0.03, now);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.2);
+
+    osc.connect(gain);
+    gain.connect(this.masterVolume);
+
+    osc.start(now);
+    osc.stop(now + 0.25);
+  }
 }
 
 export const audioManager = new AudioManager();

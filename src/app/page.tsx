@@ -1,25 +1,17 @@
 "use client";
 
+import { useState } from "react";
 import dynamic from "next/dynamic";
-import LoadingScreen from "@/components/UI/LoadingScreen";
-import HUD from "@/components/UI/HUD";
-import MonitorViewerUI from "@/components/UI/MonitorViewerUI";
-import WristTeleportHUD from "@/components/UI/WristTeleportHUD";
-import PortfolioTrailer from "@/components/UI/PortfolioTrailer";
+import LandingPage from "@/components/UI/LandingPage";
 
-const Scene = dynamic(() => import("@/components/Experience/Scene"), {
-  ssr: false,
-});
+const District = dynamic(() => import("./District"), { ssr: false });
 
 export default function Home() {
-  return (
-    <main className="w-screen h-screen overflow-hidden">
-      <Scene />
-      <LoadingScreen />
-      <PortfolioTrailer />
-      <HUD />
-      <MonitorViewerUI />
-      <WristTeleportHUD />
-    </main>
-  );
+  const [entered, setEntered] = useState(false);
+
+  if (!entered) {
+    return <LandingPage onEnterDistrict={() => setEntered(true)} />;
+  }
+
+  return <District />;
 }
