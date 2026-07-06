@@ -66,20 +66,83 @@ function WindowGrid({
   );
 }
 
+function BuildingEntrance({ config }: { config: BuildingConfig }) {
+  const [hovered, setHovered] = useState(false);
+  const doorOpen = hovered ? 1 : 0.15;
+
+  return (
+    <group
+      position={[0, -config.scale[1] / 2 + 0.1, config.scale[2] / 2 + 0.01]}
+      onPointerEnter={() => {
+        setHovered(true);
+        document.body.style.cursor = "pointer";
+      }}
+      onPointerLeave={() => {
+        setHovered(false);
+        document.body.style.cursor = "default";
+      }}
+    >
+      {/* Door frame */}
+      <mesh position={[0, 0.85, 0]}>
+        <boxGeometry args={[0.9, 1.7, 0.06]} />
+        <meshStandardMaterial color="#1a1520" metalness={0.5} roughness={0.4} />
+      </mesh>
+      {/* Door panel */}
+      <group>
+        <mesh position={[0.2, 0.85, 0.02]}>
+          <boxGeometry args={[0.4, 1.5, 0.04]} />
+          <meshStandardMaterial
+            color={hovered ? "#2a1e2c" : "#120c16"}
+            emissive={config.emissive || "#ffd700"}
+            emissiveIntensity={doorOpen}
+            metalness={0.4}
+            roughness={0.3}
+          />
+        </mesh>
+        <mesh position={[-0.2, 0.85, 0.02]}>
+          <boxGeometry args={[0.4, 1.5, 0.04]} />
+          <meshStandardMaterial
+            color={hovered ? "#2a1e2c" : "#120c16"}
+            emissive={config.emissive || "#ffd700"}
+            emissiveIntensity={doorOpen * 0.5}
+            metalness={0.4}
+            roughness={0.3}
+          />
+        </mesh>
+      </group>
+      {/* Door handle */}
+      <mesh position={[0.3, 0.85, 0.06]}>
+        <sphereGeometry args={[0.03, 6, 6]} />
+        <meshStandardMaterial color="#ffd700" metalness={0.8} roughness={0.2} />
+      </mesh>
+      {/* Light above door */}
+      <mesh position={[0, 1.75, 0]}>
+        <boxGeometry args={[0.8, 0.04, 0.15]} />
+        <meshStandardMaterial
+          color={config.emissive || "#ffd700"}
+          emissive={config.emissive || "#ffd700"}
+          emissiveIntensity={hovered ? 3 : 1}
+        />
+      </mesh>
+      <pointLight
+        color={config.emissive || "#ffd700"}
+        intensity={hovered ? 4 : 1.5}
+        distance={4}
+        position={[0, 1.75, 0.2]}
+      />
+    </group>
+  );
+}
+
 function BuildingBody({ config }: { config: BuildingConfig }) {
   const meshRef = useRef<THREE.Mesh>(null);
-  const { focusBuilding, focusedBuilding, setHoveredBuilding, introComplete, introProgress, enterBuilding } = useStore();
-  const isFocused = focusedBuilding === config.id;
+  const { setHoveredBuilding, introComplete, introProgress } = useStore();
   const [hovered, setHovered] = useState(false);
-  const canInteract = introComplete;
   const glowStrength = config.id === "modcodes-hq"
     ? Math.max(0.2, Math.min(1.25, introProgress * 1.2 + (introComplete ? 0.35 : 0)))
     : hovered
       ? 0.35
       : 0.15;
-  const doorOpen = introComplete
-    ? 1
-    : Math.max(0, Math.min(1, (introProgress - 0.72) / 0.2));
 
   useFrame(() => {
     if (!meshRef.current) return;
@@ -103,14 +166,8 @@ function BuildingBody({ config }: { config: BuildingConfig }) {
         ref={meshRef}
         castShadow
         receiveShadow
-        onClick={(e) => {
-          if (!canInteract) return;
-          e.stopPropagation();
-          focusBuilding(config.id);
-          enterBuilding(config.id);
-        }}
         onPointerEnter={(e) => {
-          if (!canInteract) return;
+          if (!introComplete) return;
           e.stopPropagation();
           setHovered(true);
           setHoveredBuilding(config.id);
@@ -192,29 +249,14 @@ function BuildingBody({ config }: { config: BuildingConfig }) {
 
       {/* Antenna / spire for tall buildings */}
       {config.scale[1] > 4 && (
-        <mesh
-          position={[0, config.scale[1] / 2 + 0.6, 0]}
-          castShadow
-        >
+        <mesh position={[0, config.scale[1] / 2 + 0.6, 0]} castShadow>
           <cylinderGeometry args={[0.03, 0.08, 1.0, 8]} />
           <meshStandardMaterial color="#555" metalness={0.6} roughness={0.3} />
         </mesh>
       )}
 
-      {config.id === "modcodes-hq" && (
-        <group position={[0, -0.2, config.scale[2] / 2 + 0.02]}>
-          <group rotation={[0, doorOpen * -1.2, 0]}>
-            <mesh position={[0.38, 0.1, 0]} castShadow>
-              <boxGeometry args={[0.76, 1.6, 0.05]} />
-              <meshStandardMaterial color="#120c16" metalness={0.4} roughness={0.3} />
-            </mesh>
-          </group>
-          <mesh position={[0, 0.1, 0]}>
-            <boxGeometry args={[0.9, 1.7, 0.03]} />
-            <meshStandardMaterial color="#2a1e2c" emissive="#ffd166" emissiveIntensity={0.25} />
-          </mesh>
-        </group>
-      )}
+      {/* Physical door entrance for every building */}
+      <BuildingEntrance config={config} />
 
       {/* Point light from windows */}
       <pointLight

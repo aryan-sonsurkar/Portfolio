@@ -4,6 +4,7 @@ import { Canvas } from "@react-three/fiber";
 import { Suspense, lazy } from "react";
 import Atmosphere from "./Atmosphere";
 import CameraController from "./CameraController";
+import CharacterController from "./CharacterController";
 import Weather from "./Weather";
 import { useStore } from "@/lib/store";
 
@@ -24,7 +25,7 @@ function LoadingFallback() {
 }
 
 export default function Scene() {
-  const { interiorOpen, selectedBuilding } = useStore();
+  const { interiorOpen, selectedBuilding, introComplete } = useStore();
 
   return (
     <Canvas
@@ -46,6 +47,7 @@ export default function Scene() {
           <BuildingInterior buildingId={selectedBuilding} />
         ) : null}
         <CameraController />
+        {introComplete && <CharacterController />}
       </Suspense>
     </Canvas>
   );

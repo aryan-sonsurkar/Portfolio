@@ -7,64 +7,92 @@ import * as THREE from "three";
 import { useStore } from "@/lib/store";
 import { BUILDINGS } from "../Buildings/BuildingData";
 
-const INTRO_DURATION_SECONDS = 16;
+const INTRO_DURATION_SECONDS = 17;
 
 export default function CameraController() {
-  const { cameraMode, focusedBuilding, introComplete } = useStore();
+  const { cameraMode, focusedBuilding, introComplete, activeScreen, selectedBuilding } = useStore();
   const controlsRef = useRef<any>(null);
   const { camera } = useThree();
 
-  const targetPosition = useRef(new THREE.Vector3(12, 10, 12));
-  const targetLookAt = useRef(new THREE.Vector3(0, 1, -1));
+  const targetPosition = useRef(new THREE.Vector3(0, 1.6, 6));
+  const targetLookAt = useRef(new THREE.Vector3(0, 1.2, 0));
   const introStartRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (!introComplete) {
       introStartRef.current = performance.now();
-      camera.position.set(34, 24, 38);
-      targetPosition.current.set(34, 24, 38);
-      targetLookAt.current.set(0, 0, -28);
+      // Start way back in deep space looking towards Earth
+      camera.position.set(0, 60, 200);
+      targetPosition.current.set(0, 60, 200);
+      targetLookAt.current.set(0, 8, -70);
     }
   }, [introComplete, camera]);
 
   useEffect(() => {
     if (cameraMode === "orbit") {
-      targetPosition.current.set(14, 9, 14);
+      targetPosition.current.set(16, 10, 16);
       targetLookAt.current.set(0, 1, -3);
     } else if (cameraMode === "focused" && focusedBuilding) {
       const building = BUILDINGS.find((b) => b.id === focusedBuilding);
       if (building) {
         const [bx, , bz] = building.position;
         const bh = building.scale[1];
-        targetPosition.current.set(bx + 6, bh * 0.7, bz + 6);
-        targetLookAt.current.set(bx, bh * 0.35, bz);
+        targetPosition.current.set(bx + 5, bh * 0.7, bz + 5);
+        targetLookAt.current.set(bx, bh * 0.45, bz);
       }
+    } else if (cameraMode === "screen" && activeScreen) {
+      // Lerp camera right in front of the active interactive monitor
+      const screenOffsets: { [key: string]: { pos: [number, number, number]; look: [number, number, number] } } = {
+        "modcodes-hq": { pos: [0.4, 1.2, -0.4], look: [0.4, 1.2, -1.1] },
+        "achievement-tower": { pos: [0, 1.2, 0.0], look: [0, 1.2, -0.7] },
+        "developer-museum": { pos: [0.2, 1.2, 0.0], look: [0.2, 1.2, -0.7] },
+        "project-factory": { pos: [0.1, 1.25, 0.05], look: [0.1, 1.25, -0.65] },
+        "innovation-lab": { pos: [0.1, 1.3, 0.0], look: [0.1, 1.3, -0.7] },
+        "open-source-center": { pos: [0, 1.5, 0.0], look: [0, 1.5, -0.7] }
+      };
+
+      const setup = screenOffsets[activeScreen];
+      if (setup) {
+        targetPosition.current.set(...setup.pos);
+        targetLookAt.current.set(...setup.look);
+      }
+    } else if (cameraMode === "fpv") {
+      // FPV camera positioning is handled by the CharacterController component
     }
-  }, [cameraMode, focusedBuilding]);
+  }, [cameraMode, focusedBuilding, activeScreen, selectedBuilding]);
 
   useFrame((_, delta) => {
+    if (cameraMode === "fpv") return; // FPV controller takes full control
+
     if (!introComplete) {
       const startedAt = introStartRef.current ?? performance.now();
       const elapsed = (performance.now() - startedAt) / 1000;
       const t = Math.min(elapsed / INTRO_DURATION_SECONDS, 1);
+      
+      // Easing curve (accelerate and then slow down smoothly for landing)
       const eased = t * t * (3 - 2 * t);
 
+      // Deep space zoom path keyframes
       const keyframes = [
         {
-          position: [34, 24, 38],
-          lookAt: [0, 0, -28],
+          position: [0, 60, 200],
+          lookAt: [0, 8, -70], // Orbiting Earth
         },
         {
-          position: [18, 14, -22],
-          lookAt: [0, 0, -12],
+          position: [0, 30, 80],
+          lookAt: [0, 8, -70], // Approaching Asia/India
         },
         {
-          position: [10, 7, -8],
-          lookAt: [0, 1.8, -3],
+          position: [0, 12, -10],
+          lookAt: [0, 5, -20], // Through cloud atmosphere
         },
         {
-          position: [2.6, 3.4, -1.2],
-          lookAt: [0, 2.2, -0.3],
+          position: [0, 5, 12],
+          lookAt: [0, 2, 0], // Sighting Mumbai / District
+        },
+        {
+          position: [0, 1.6, 6],
+          lookAt: [0, 1.2, 0], // Final smooth landing on street level
         },
       ];
 
@@ -92,15 +120,23 @@ export default function CameraController() {
       return;
     }
 
-    camera.position.lerp(targetPosition.current, delta * 1.2);
+    // Smooth transition to target position (for orbit, focused, and screen modes)
+    camera.position.lerp(targetPosition.current, delta * 2.8);
 
-    if (controlsRef.current) {
-      controlsRef.current.target.lerp(targetLookAt.current, delta * 1.2);
+    if (cameraMode === "screen") {
+      // Direct look at target screen without controls
+      const currentLookAt = new THREE.Vector3(0, 0, -1)
+        .applyQuaternion(camera.quaternion)
+        .add(camera.position);
+      currentLookAt.lerp(targetLookAt.current, delta * 3.5);
+      camera.lookAt(currentLookAt);
+    } else if (controlsRef.current) {
+      controlsRef.current.target.lerp(targetLookAt.current, delta * 2.8);
       controlsRef.current.update();
     }
   });
 
-  if (!introComplete) return null;
+  if (!introComplete || cameraMode === "fpv" || cameraMode === "screen") return null;
 
   return (
     <OrbitControls
@@ -108,12 +144,12 @@ export default function CameraController() {
       enablePan={false}
       enableZoom={true}
       enableRotate={cameraMode === "orbit"}
-      minDistance={6}
-      maxDistance={30}
+      minDistance={4}
+      maxDistance={28}
       minPolarAngle={Math.PI / 6}
-      maxPolarAngle={Math.PI / 2.2}
+      maxPolarAngle={Math.PI / 2.15}
       autoRotate={cameraMode === "orbit"}
-      autoRotateSpeed={0.3}
+      autoRotateSpeed={0.25}
       target={[0, 1, -3]}
     />
   );

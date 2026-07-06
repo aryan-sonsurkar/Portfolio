@@ -160,4 +160,27 @@ export const BUILDINGS: BuildingConfig[] = [
       ],
     },
   },
+  {
+    id: "developer-apartment",
+    name: "Developer Apartment",
+    subtitle: "Personal Space",
+    position: [-9, 0, -5],
+    scale: [2.2, 1.8, 2.2],
+    color: "#d4c8b8",
+    emissive: "#ff6b35",
+    roofColor: "#5a4a3a",
+    windowPattern: "grid",
+    content: {
+      title: "Developer Apartment",
+      subtitle: "Where I Build",
+      paragraphs: [
+        "This is where it happens.",
+        "Late nights. Early mornings. Coffee. Code.",
+        "A mechanical keyboard that has seen more words than most novels. A monitor that never sleeps. A notebook full of ideas that started as scribbles and became products.",
+        "The most honest room in the district.",
+      ],
+      tags: ["Personal", "Workspace", "Late Nights", "Coffee"],
+      links: [],
+    },
+  },
 ];

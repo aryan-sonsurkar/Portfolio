@@ -2,7 +2,6 @@
 
 import dynamic from "next/dynamic";
 import LoadingScreen from "@/components/UI/LoadingScreen";
-import BuildingModal from "@/components/UI/BuildingModal";
 import HUD from "@/components/UI/HUD";
 
 const Scene = dynamic(() => import("@/components/Experience/Scene"), {
@@ -15,7 +14,6 @@ export default function Home() {
       <Scene />
       <LoadingScreen />
       <HUD />
-      <BuildingModal />
     </main>
   );
 }

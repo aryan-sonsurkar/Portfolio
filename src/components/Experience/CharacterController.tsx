@@ -1,0 +1,307 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { useFrame, useThree } from "@react-three/fiber";
+import * as THREE from "three";
+import { useStore } from "@/lib/store";
+import { BUILDINGS } from "../Buildings/BuildingData";
+import { audioManager } from "@/lib/audio";
+
+export default function CharacterController() {
+  const { camera, gl } = useThree();
+  const { cameraMode, selectedBuilding, enterBuilding, leaveBuilding, activeScreen, blueprintMode, exitPosition, exitRotation, setExitPosition } = useStore();
+
+  // Movement state
+  const keys = useRef({ w: false, a: false, s: false, d: false });
+  const positionRef = useRef(new THREE.Vector3(0, 1.6, 6));
+  const rotationRef = useRef({ yaw: 0, pitch: 0 });
+  const isPointerLocked = useRef(false);
+  const enteringRef = useRef(false);
+  const leavingRef = useRef(false);
+
+  // Touch controls for Mobile/Tablet
+  const [touchActive, setTouchActive] = useState(false);
+  const touchStart = useRef({ x: 0, y: 0 });
+  const touchMove = useRef({ x: 0, y: 0 });
+
+  // Footstep timing
+  const lastFootstepTime = useRef(0);
+  const footstepInterval = 0.42;
+
+  useEffect(() => {
+    if (cameraMode !== "fpv") return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (activeScreen) return;
+      if (e.key === "w" || e.key === "W" || e.key === "ArrowUp") keys.current.w = true;
+      if (e.key === "a" || e.key === "A" || e.key === "ArrowLeft") keys.current.a = true;
+      if (e.key === "s" || e.key === "S" || e.key === "ArrowDown") keys.current.s = true;
+      if (e.key === "d" || e.key === "D" || e.key === "ArrowRight") keys.current.d = true;
+    };
+
+    const handleKeyUp = (e: KeyboardEvent) => {
+      if (e.key === "w" || e.key === "W" || e.key === "ArrowUp") keys.current.w = false;
+      if (e.key === "a" || e.key === "A" || e.key === "ArrowLeft") keys.current.a = false;
+      if (e.key === "s" || e.key === "S" || e.key === "ArrowDown") keys.current.s = false;
+      if (e.key === "d" || e.key === "D" || e.key === "ArrowRight") keys.current.d = false;
+    };
+
+    // Mouse Look (Pointer Lock)
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isPointerLocked.current || activeScreen) return;
+      const speed = 0.0022;
+      rotationRef.current.yaw -= e.movementX * speed;
+      rotationRef.current.pitch -= e.movementY * speed;
+
+      rotationRef.current.pitch = Math.max(
+        -Math.PI / 2.3,
+        Math.min(Math.PI / 2.3, rotationRef.current.pitch)
+      );
+    };
+
+    const lockChange = () => {
+      isPointerLocked.current = document.pointerLockElement === gl.domElement;
+    };
+
+    const handleCanvasClick = () => {
+      if (cameraMode === "fpv" && !activeScreen) {
+        gl.domElement.requestPointerLock();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+    window.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("pointerlockchange", lockChange);
+    gl.domElement.addEventListener("click", handleCanvasClick);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+      window.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("pointerlockchange", lockChange);
+      gl.domElement.removeEventListener("click", handleCanvasClick);
+      try {
+        document.exitPointerLock();
+      } catch (e) {}
+    };
+  }, [cameraMode, gl.domElement, selectedBuilding, activeScreen]);
+
+  // Set position based on enter/leave transitions
+  useEffect(() => {
+    if (cameraMode !== "fpv") return;
+
+    if (selectedBuilding) {
+      // Inside building – spawn near center
+      positionRef.current.set(0, 1.6, 2);
+      rotationRef.current.yaw = Math.PI;
+      rotationRef.current.pitch = 0;
+    } else {
+      // Outside building – use saved exit position or default
+      positionRef.current.set(exitPosition[0], exitPosition[1], exitPosition[2]);
+      rotationRef.current.yaw = exitRotation;
+      rotationRef.current.pitch = 0;
+    }
+
+    // Snap camera immediately to avoid float
+    camera.position.copy(positionRef.current);
+  }, [selectedBuilding, exitPosition, exitRotation, camera, cameraMode]);
+
+  // Touch listener setup for Mobile
+  useEffect(() => {
+    const handleTouchStart = (e: TouchEvent) => {
+      if (activeScreen) return;
+      setTouchActive(true);
+      touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      touchMove.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!touchActive || activeScreen) return;
+      const speed = 0.005;
+      const dx = e.touches[0].clientX - touchMove.current.x;
+      const dy = e.touches[0].clientY - touchMove.current.y;
+
+      rotationRef.current.yaw -= dx * speed;
+      rotationRef.current.pitch -= dy * speed;
+      rotationRef.current.pitch = Math.max(-Math.PI / 2.3, Math.min(Math.PI / 2.3, rotationRef.current.pitch));
+
+      touchMove.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+
+      const deltaY = e.touches[0].clientY - touchStart.current.y;
+      if (deltaY < -40) keys.current.w = true;
+      else keys.current.w = false;
+    };
+
+    const handleTouchEnd = () => {
+      setTouchActive(false);
+      keys.current.w = false;
+    };
+
+    gl.domElement.addEventListener("touchstart", handleTouchStart, { passive: true });
+    gl.domElement.addEventListener("touchmove", handleTouchMove, { passive: true });
+    gl.domElement.addEventListener("touchend", handleTouchEnd);
+
+    return () => {
+      gl.domElement.removeEventListener("touchstart", handleTouchStart);
+      gl.domElement.removeEventListener("touchmove", handleTouchMove);
+      gl.domElement.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [gl.domElement, touchActive, activeScreen]);
+
+  // Collision detection AABB vs Player position
+  const checkCollision = (newPos: THREE.Vector3) => {
+    // If inside a building, keep player inside room shell
+    if (selectedBuilding) {
+      const boundaryX = 4.6;
+      const boundaryZ = 2.6;
+      
+      if (Math.abs(newPos.x) > boundaryX) {
+        newPos.x = Math.sign(newPos.x) * boundaryX;
+      }
+      if (newPos.z > boundaryZ) {
+        newPos.z = boundaryZ;
+      }
+      if (newPos.z < -boundaryZ) {
+        newPos.z = -boundaryZ;
+      }
+
+      // Check exit door proximity
+      const distToExit = new THREE.Vector2(newPos.x - 3.6, newPos.z - 2.55).length();
+      if (distToExit < 1.1 && !leavingRef.current) {
+        leavingRef.current = true;
+        // Save exit position (outside the building entrance)
+        const building = BUILDINGS.find((b) => b.id === selectedBuilding);
+        if (building) {
+          const entrancePos: [number, number, number] = [
+            building.position[0],
+            1.6,
+            building.position[2] + building.scale[2] / 2 + 1.0,
+          ];
+          setExitPosition(entrancePos, 0);
+        }
+        leaveBuilding();
+        setTimeout(() => { leavingRef.current = false; }, 300);
+      }
+
+      return;
+    }
+
+    // Outside – collision in the main City District
+    const playerRadius = 0.55;
+
+    // Boundary constraints of the district
+    if (newPos.x < -18) newPos.x = -18;
+    if (newPos.x > 18) newPos.x = 18;
+    if (newPos.z < -20) newPos.z = -20;
+    if (newPos.z > 8) newPos.z = 8;
+
+    // Check collision against all buildings
+    BUILDINGS.forEach((b) => {
+      const [bx, , bz] = b.position;
+      const [bw, , bd] = b.scale;
+
+      const minX = bx - bw / 2 - playerRadius;
+      const maxX = bx + bw / 2 + playerRadius;
+      const minZ = bz - bd / 2 - playerRadius;
+      const maxZ = bz + bd / 2 + playerRadius;
+
+      if (newPos.x > minX && newPos.x < maxX && newPos.z > minZ && newPos.z < maxZ) {
+        const leftPen = newPos.x - minX;
+        const rightPen = maxX - newPos.x;
+        const backPen = newPos.z - minZ;
+        const frontPen = maxZ - newPos.z;
+
+        const minPen = Math.min(leftPen, rightPen, backPen, frontPen);
+
+        if (minPen === leftPen) newPos.x = minX;
+        else if (minPen === rightPen) newPos.x = maxX;
+        else if (minPen === backPen) newPos.z = minZ;
+        else if (minPen === frontPen) newPos.z = maxZ;
+      }
+
+      // Check proximity to building entrance to enter
+      const entranceZOffset = bd / 2 + 0.6;
+      const distToEntrance = new THREE.Vector2(newPos.x - bx, newPos.z - (bz + entranceZOffset)).length();
+      if (distToEntrance < 1.0 && !enteringRef.current) {
+        enteringRef.current = true;
+        // Save current position as exit position
+        const currentPos: [number, number, number] = [
+          positionRef.current.x,
+          positionRef.current.y,
+          positionRef.current.z,
+        ];
+        setExitPosition(currentPos, rotationRef.current.yaw);
+        enterBuilding(b.id);
+        setTimeout(() => { enteringRef.current = false; }, 300);
+      }
+    });
+  };
+
+  useFrame((state, delta) => {
+    if (cameraMode !== "fpv" || activeScreen) return;
+
+    const speed = 3.6 * delta;
+    const newPos = positionRef.current.clone();
+
+    const front = new THREE.Vector3(0, 0, -1).applyAxisAngle(new THREE.Vector3(0, 1, 0), rotationRef.current.yaw);
+    const right = new THREE.Vector3(1, 0, 0).applyAxisAngle(new THREE.Vector3(0, 1, 0), rotationRef.current.yaw);
+
+    let isMoving = false;
+
+    if (keys.current.w) {
+      newPos.addScaledVector(front, speed);
+      isMoving = true;
+    }
+    if (keys.current.s) {
+      newPos.addScaledVector(front, -speed);
+      isMoving = true;
+    }
+    if (keys.current.a) {
+      newPos.addScaledVector(right, -speed);
+      isMoving = true;
+    }
+    if (keys.current.d) {
+      newPos.addScaledVector(right, speed);
+      isMoving = true;
+    }
+
+    checkCollision(newPos);
+    positionRef.current.copy(newPos);
+
+    camera.position.copy(positionRef.current);
+    
+    const lookTarget = new THREE.Vector3(0, 0, -1)
+      .applyAxisAngle(new THREE.Vector3(1, 0, 0), rotationRef.current.pitch)
+      .applyAxisAngle(new THREE.Vector3(0, 1, 0), rotationRef.current.yaw)
+      .add(camera.position);
+
+    camera.lookAt(lookTarget);
+
+    // Footstep audio trigger
+    if (isMoving && state.clock.getElapsedTime() - lastFootstepTime.current > footstepInterval) {
+      audioManager.playFootstep(selectedBuilding ? "wood" : "concrete");
+      lastFootstepTime.current = state.clock.getElapsedTime();
+    }
+
+    // Achievement: first steps
+    if (isMoving && !selectedBuilding) {
+      const store = useStore.getState();
+      if (!store.achievements.includes("explorer")) {
+        useStore.getState().addAchievement("explorer");
+      }
+    }
+  });
+
+  // Blueprint mode wireframe
+  if (!blueprintMode) return null;
+
+  return (
+    <group position={positionRef.current}>
+      <mesh position={[0, -0.8, 0]}>
+        <cylinderGeometry args={[0.4, 0.4, 1.8, 8]} />
+        <meshBasicMaterial color="#00ff00" wireframe />
+      </mesh>
+    </group>
+  );
+}

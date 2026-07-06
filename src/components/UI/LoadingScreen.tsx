@@ -1,34 +1,75 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useStore } from "@/lib/store";
+import { audioManager, speakAI } from "@/lib/audio";
 
-const INTRO_DURATION_MS = 16000;
-const SKIP_DELAY_MS = 5000;
+const INTRO_DURATION_MS = 17000;
+const SKIP_DELAY_MS = 4000;
 
 export default function LoadingScreen() {
   const { completeLoading, completeIntro, setIntroProgress } = useStore();
-  const [phase, setPhase] = useState<"loading" | "intro" | "entering">(
-    "loading"
-  );
+  const [startedConnection, setStartedConnection] = useState(false);
+  const [phase, setPhase] = useState<"connect" | "loading" | "intro" | "entering">("connect");
   const [progress, setProgress] = useState(0);
   const [showSkip, setShowSkip] = useState(false);
-  const audioContextRef = useRef<AudioContext | null>(null);
+  const [logs, setLogs] = useState<string[]>([]);
+
+  // Telemetry logs for OS boot feel
+  const bootMilestones = [
+    { threshold: 5, log: "INITIALIZING ARYAN_OS_KERNEL... [OK]" },
+    { threshold: 15, log: "SYNCHRONIZING SYSTEM TIME NODES... [OK]" },
+    { threshold: 25, log: "CONNECTING TO CITIZEN ARCHIVE DATABASE..." },
+    { threshold: 38, log: "SECURITY PROTOCOLS LOADED (LEVEL 5 AUTH)" },
+    { threshold: 48, log: "LOCATION FOUND: LAT: 19.0760° N, LON: 72.8777° E [MUMBAI]" },
+    { threshold: 60, log: "ESTABLISHING SPACESHIP HUD TELEMETRY..." },
+    { threshold: 72, log: "ATMOSPHERIC DESCENT PROFILE SHUTTLE ACTIVE" },
+    { threshold: 85, log: "ESTABLISHED WIRELESS CONNECTION PROTOCOL: SECURE" },
+    { threshold: 95, log: "BUILDER DISTRICT TARGET ACQUIRED." },
+    { threshold: 100, log: "CONNECTION HANDSHAKE COMPLETE. INITIALIZING TRANSLATION STREAM..." }
+  ];
+
+  const handleStartConnection = () => {
+    setStartedConnection(true);
+    setPhase("loading");
+    audioManager.playBootSequence();
+    audioManager.startSpaceHum();
+
+    // Start background loops
+    setTimeout(() => {
+      audioManager.startRainSound();
+    }, 4000);
+  };
 
   useEffect(() => {
+    if (phase !== "loading") return;
+
     const interval = window.setInterval(() => {
       setProgress((p) => {
-        if (p >= 100) {
+        const nextProgress = p + Math.random() * 6 + 1.5;
+        
+        // Find which logs to append
+        bootMilestones.forEach(m => {
+          if (nextProgress >= m.threshold && !logs.includes(m.log)) {
+            setLogs(prev => [...prev, m.log]);
+          }
+        });
+
+        if (nextProgress >= 100) {
           window.clearInterval(interval);
-          window.setTimeout(() => setPhase("intro"), 400);
+          window.setTimeout(() => {
+            setPhase("intro");
+            speakAI("Incoming encrypted signal. Builder District located. Construction status: Active. Objective: Explore the district and uncover the story of its architect. Welcome back, agent.");
+          }, 800);
           return 100;
         }
-        return p + Math.random() * 8 + 2;
+        return nextProgress;
       });
-    }, 80);
+    }, 100);
+
     return () => window.clearInterval(interval);
-  }, []);
+  }, [phase, logs]);
 
   useEffect(() => {
     if (phase !== "intro") return;
@@ -53,92 +94,6 @@ export default function LoadingScreen() {
     };
   }, [phase, setIntroProgress]);
 
-  useEffect(() => {
-    let cleanup: (() => void) | undefined;
-
-    const startAmbientAudio = () => {
-      if (typeof window === "undefined" || audioContextRef.current) return;
-
-      const AudioContextCtor =
-        window.AudioContext ||
-        (window as typeof window & { webkitAudioContext?: typeof AudioContext })
-          .webkitAudioContext;
-
-      if (!AudioContextCtor) return;
-
-      const ctx = new AudioContextCtor();
-      const master = ctx.createGain();
-      master.gain.value = 0.018;
-      master.connect(ctx.destination);
-
-      const oscA = ctx.createOscillator();
-      oscA.type = "sine";
-      oscA.frequency.value = 110;
-
-      const oscB = ctx.createOscillator();
-      oscB.type = "triangle";
-      oscB.frequency.value = 220;
-
-      const filter = ctx.createBiquadFilter();
-      filter.type = "lowpass";
-      filter.frequency.value = 700;
-
-      const lfo = ctx.createOscillator();
-      lfo.type = "sine";
-      lfo.frequency.value = 0.06;
-
-      const lfoGain = ctx.createGain();
-      lfoGain.gain.value = 18;
-
-      lfo.connect(lfoGain);
-      lfoGain.connect(oscA.frequency);
-      lfoGain.connect(oscB.frequency);
-
-      oscA.connect(filter);
-      oscB.connect(filter);
-      filter.connect(master);
-
-      oscA.start();
-      oscB.start();
-      lfo.start();
-
-      const modulate = () => {
-        const now = ctx.currentTime;
-        master.gain.linearRampToValueAtTime(0.023, now + 0.4);
-        master.gain.linearRampToValueAtTime(0.016, now + 1.2);
-      };
-
-      const loop = window.setInterval(modulate, 1800);
-      audioContextRef.current = ctx;
-
-      cleanup = () => {
-        window.clearInterval(loop);
-        master.gain.cancelScheduledValues(ctx.currentTime);
-        master.gain.setValueAtTime(0, ctx.currentTime);
-        oscA.stop();
-        oscB.stop();
-        lfo.stop();
-        ctx.close();
-        audioContextRef.current = null;
-      };
-    };
-
-    const onInteraction = () => {
-      if (!audioContextRef.current) {
-        startAmbientAudio();
-      }
-    };
-
-    window.addEventListener("pointerdown", onInteraction, { once: true });
-    window.addEventListener("keydown", onInteraction, { once: true });
-
-    return () => {
-      cleanup?.();
-      window.removeEventListener("pointerdown", onInteraction);
-      window.removeEventListener("keydown", onInteraction);
-    };
-  }, []);
-
   const finishIntro = () => {
     setIntroProgress(1);
     completeIntro();
@@ -156,71 +111,88 @@ export default function LoadingScreen() {
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.2, ease: "easeInOut" }}
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center"
-          style={{ background: "#04050d" }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center select-none"
+          style={{ background: "#020306", color: "#f8fafc" }}
         >
+          {/* Subtle star particle decoration */}
+          <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.06),transparent_70%)] pointer-events-none" />
+
+          {phase === "connect" && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8 }}
+              className="flex flex-col items-center gap-6 max-w-md px-6 text-center"
+            >
+              <h1 className="text-sm font-light tracking-[0.4em] text-amber-500/80 uppercase" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                System Offline
+              </h1>
+              <p className="text-xs text-slate-500 tracking-widest leading-relaxed" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                SILENT TRANSMISSION FROM ORBIT SHUTTLE #0X42F <br />
+                AWAITING AUTHENTICATION FROM COMMAND PORTAL.
+              </p>
+              <button
+                onClick={handleStartConnection}
+                className="mt-8 px-6 py-3 rounded border text-xs font-semibold cursor-pointer tracking-[0.25em] transition-all hover:bg-amber-500/10 hover:border-amber-400 hover:shadow-[0_0_20px_rgba(212,175,55,0.15)]"
+                style={{
+                  borderColor: "rgba(212,175,55,0.3)",
+                  color: "#f0e6d8",
+                  background: "transparent",
+                  fontFamily: "'JetBrains Mono', monospace",
+                }}
+              >
+                [ INITIALIZE TRANSLATION ]
+              </button>
+            </motion.div>
+          )}
+
           {phase === "loading" && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="flex flex-col items-center gap-8"
+              className="flex flex-col items-start w-full max-w-xl px-8 py-6 rounded border"
+              style={{
+                borderColor: "rgba(255,255,255,0.05)",
+                background: "rgba(6,8,12,0.65)",
+                backdropFilter: "blur(8px)",
+                fontFamily: "'JetBrains Mono', monospace",
+              }}
             >
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.8 }}
-                className="text-4xl font-light tracking-widest"
-                style={{
-                  color: "#f0e6d8",
-                  fontFamily: "'JetBrains Mono', monospace",
-                  textShadow: "0 0 40px rgba(255,215,0,0.3)",
-                }}
-              >
-                MODCODES
-              </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.5 }}
-                transition={{ delay: 0.6 }}
-                className="text-sm tracking-widest uppercase"
-                style={{
-                  color: "#8888aa",
-                  fontFamily: "'JetBrains Mono', monospace",
-                }}
-              >
-                Preparing arrival...
-              </motion.p>
-
-              <div className="w-64 relative">
-                <div
-                  className="h-px w-full"
-                  style={{ background: "rgba(255,255,255,0.1)" }}
-                />
-                <motion.div
-                  className="h-px absolute top-0 left-0"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, #ffd700, #ff6b35)",
-                  }}
-                  animate={{ width: `${Math.min(progress, 100)}%` }}
-                  transition={{ duration: 0.1 }}
-                />
+              <div className="flex items-center justify-between w-full mb-4 border-b border-white/5 pb-2 text-[10px] uppercase text-slate-500 tracking-wider">
+                <span>SYSTEM DIAGNOSTIC LOG</span>
+                <span>OS_VER 0.9.2</span>
               </div>
 
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.3 }}
-                transition={{ delay: 1 }}
-                className="text-xs"
-                style={{
-                  color: "#666",
-                  fontFamily: "'JetBrains Mono', monospace",
-                }}
-              >
-                {Math.floor(Math.min(progress, 100))}%
-              </motion.p>
+              {/* Scrolling Boot Logs */}
+              <div className="w-full h-48 overflow-y-auto space-y-1.5 scrollbar-none text-[11px] text-slate-400">
+                {logs.map((log, index) => (
+                  <div key={index} className="flex gap-2 items-start">
+                    <span className="text-amber-500/50">&gt;</span>
+                    <span>{log}</span>
+                  </div>
+                ))}
+                {logs.length < 10 && (
+                  <div className="flex gap-1.5 items-center">
+                    <span className="text-amber-500 animate-pulse">&gt;</span>
+                    <span className="w-1.5 h-3 bg-amber-500/80 animate-pulse" />
+                  </div>
+                )}
+              </div>
+
+              {/* Progress bar */}
+              <div className="w-full mt-6 space-y-2">
+                <div className="h-[2px] w-full bg-white/5 relative">
+                  <motion.div
+                    className="h-full absolute top-0 left-0 bg-gradient-to-r from-amber-600 to-amber-400"
+                    style={{ width: `${progress}%` }}
+                  />
+                </div>
+                <div className="flex justify-between text-[9px] text-slate-600 uppercase tracking-widest">
+                  <span>SYSTEM COMM SYNCING</span>
+                  <span>{Math.floor(progress)}%</span>
+                </div>
+              </div>
             </motion.div>
           )}
 
@@ -228,74 +200,62 @@ export default function LoadingScreen() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.8 }}
-              className="relative flex flex-col items-center justify-center px-8 text-center"
+              transition={{ duration: 1.2 }}
+              className="relative flex flex-col items-center justify-center px-8 text-center max-w-xl"
             >
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,215,0,0.08),transparent_65%)]" />
-
               <motion.div
-                initial={{ opacity: 0, y: 18 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.9 }}
-                className="relative z-10 max-w-2xl"
+                transition={{ delay: 0.2, duration: 1.0, ease: "easeOut" }}
+                className="relative z-10"
               >
-                <p
-                  className="mb-4 text-[11px] uppercase tracking-[0.4em]"
+                <span
+                  className="mb-4 inline-block text-[10px] uppercase tracking-[0.5em] px-3 py-1 rounded border"
                   style={{
-                    color: "rgba(255,215,0,0.55)",
+                    color: "rgba(255,215,0,0.65)",
+                    borderColor: "rgba(255,215,0,0.2)",
+                    background: "rgba(255,215,0,0.02)",
                     fontFamily: "'JetBrains Mono', monospace",
                   }}
                 >
-                  Arriving from deep space
-                </p>
+                  TRANSMISSION DECODED
+                </span>
                 <h1
-                  className="mb-4 text-5xl font-light tracking-[0.35em]"
+                  className="mb-6 text-4xl font-light tracking-[0.3em]"
                   style={{
                     color: "#f0e6d8",
                     fontFamily: "'JetBrains Mono', monospace",
-                    textShadow: "0 0 60px rgba(255,215,0,0.28)",
+                    textShadow: "0 0 40px rgba(255,215,0,0.2)",
                   }}
                 >
-                  ARYAN SONSURKAR
+                  ARYAN OS
                 </h1>
                 <p
-                  className="mx-auto max-w-xl text-lg leading-8 tracking-[0.2em]"
+                  className="mx-auto max-w-md text-sm leading-relaxed tracking-[0.18em]"
                   style={{
                     color: "rgba(224, 232, 255, 0.7)",
                     fontFamily: "'JetBrains Mono', monospace",
                   }}
                 >
-                  A vessel crosses the void. Earth turns slowly below. The district awakens as you approach.
+                  A vessel crosses the void. Earth turns slowly below. <br />
+                  The Builder District awaits your command.
                 </p>
 
-                <div className="mt-8 flex flex-wrap items-center justify-center gap-4 text-[10px] uppercase tracking-[0.3em]">
-                  {[
-                    "Orbit",
-                    "India",
-                    "Mumbai",
-                    "District",
-                  ].map((label) => (
-                    <span
-                      key={label}
-                      className="rounded-full border px-3 py-1"
-                      style={{
-                        color: "rgba(255,255,255,0.4)",
-                        borderColor: "rgba(255,215,0,0.18)",
-                        background: "rgba(255,255,255,0.03)",
-                      }}
-                    >
-                      {label}
-                    </span>
-                  ))}
+                <div className="mt-8 flex flex-wrap items-center justify-center gap-3 text-[9px] uppercase tracking-[0.25em] font-medium text-slate-500">
+                  <span>ORBIT TRANSIT</span>
+                  <span className="text-amber-500/45">·</span>
+                  <span>MUMBAI BOUND</span>
+                  <span className="text-amber-500/45">·</span>
+                  <span>CITIZEN AUTHENTICATED</span>
                 </div>
               </motion.div>
 
               <motion.button
                 initial={{ opacity: 0 }}
-                animate={{ opacity: showSkip ? 1 : 0 }}
+                animate={{ opacity: showSkip ? 0.6 : 0 }}
                 transition={{ duration: 0.4 }}
                 onClick={handleSkip}
-                className="absolute bottom-10 right-10 cursor-pointer text-xs uppercase tracking-[0.35em] transition-opacity hover:opacity-80"
+                className="absolute bottom-[-100px] cursor-pointer text-[10px] uppercase tracking-[0.3em] border-b border-transparent pb-1 hover:border-amber-400 hover:text-amber-400 transition-all"
                 style={{
                   color: "rgba(255,255,255,0.4)",
                   fontFamily: "'JetBrains Mono', monospace",
@@ -303,7 +263,7 @@ export default function LoadingScreen() {
                   border: "none",
                 }}
               >
-                Skip Intro
+                Skip Descent
               </motion.button>
             </motion.div>
           )}
