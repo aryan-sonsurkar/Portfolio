@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useStore } from "@/lib/store";
+import { audioManager } from "@/lib/audio";
+import { useIsMobile } from "@/lib/useIsMobile";
 
 const BUILDING_LABELS: Record<string, string> = {
   "modcodes-hq": "MODCODES HQ — Flagship Product",
@@ -26,6 +28,7 @@ const ACHIEVEMENT_DEFS: Record<string, { label: string; icon: string }> = {
 };
 
 export default function HUD() {
+  const isMobile = useIsMobile();
   const {
     hoveredBuilding,
     introComplete,
@@ -40,34 +43,30 @@ export default function HUD() {
     achievements,
     addAchievement,
     activeScreen,
+    visitedBuildings,
+    addVisitedBuilding,
   } = useStore();
 
   const [newAchievement, setNewAchievement] = useState<string | null>(null);
-  const [visitedBuildings, setVisitedBuildings] = useState<Set<string>>(new Set());
   const [showControls, setShowControls] = useState(false);
 
   // Track visited buildings for achievements
   useEffect(() => {
     if (!selectedBuilding) return;
-
-    setVisitedBuildings((prev) => {
-      const next = new Set(prev);
-      next.add(selectedBuilding);
-      return next;
-    });
-  }, [selectedBuilding]);
+    addVisitedBuilding(selectedBuilding);
+  }, [selectedBuilding, addVisitedBuilding]);
 
   // Check achievements after visitedBuildings updates
   useEffect(() => {
-    if (visitedBuildings.size === 1 && !achievements.includes("first-step")) {
+    if (visitedBuildings.length === 1 && !achievements.includes("first-step")) {
       addAchievement("first-step");
       triggerAchievement("first-step");
     }
-    if (visitedBuildings.size >= 9 && !achievements.includes("explorer")) {
+    if (visitedBuildings.length >= 9 && !achievements.includes("explorer")) {
       addAchievement("explorer");
       triggerAchievement("explorer");
     }
-  }, [visitedBuildings.size]);
+  }, [visitedBuildings.length]);
 
   useEffect(() => {
     if (blueprintMode && !achievements.includes("hacker")) {
@@ -78,6 +77,7 @@ export default function HUD() {
 
   const triggerAchievement = (id: string) => {
     setNewAchievement(id);
+    audioManager.playAchievementUnlock();
     setTimeout(() => setNewAchievement(null), 4000);
   };
 
@@ -145,9 +145,11 @@ export default function HUD() {
             MODCODES District
           </p>
           <p className="text-[10px] tracking-wider mt-1" style={{ color: "rgba(255,255,255,0.18)" }}>
-            {isFPV
-              ? "Click canvas → lock mouse · WASD move · R weather"
-              : "Click a building to explore · Drag to orbit"}
+            {isMobile
+              ? "Joystick to move · Drag to look · Tap building to enter"
+              : isFPV
+                ? "Click canvas → lock mouse · WASD move · R weather"
+                : "Click a building to explore · Drag to orbit"}
           </p>
         </div>
       )}
@@ -202,11 +204,20 @@ export default function HUD() {
               }}
             >
               {[
-                ["WASD / Arrow Keys", "Move"],
-                ["Mouse (click first)", "Look around"],
-                ["T", "Teleport panel"],
+                ...(isMobile
+                  ? [
+                      ["Joystick", "Move"],
+                      ["Drag screen", "Look around"],
+                      ["Tap building", "Enter"],
+                      ["T", "Teleport panel"],
+                    ]
+                  : [
+                      ["WASD / Arrow Keys", "Move"],
+                      ["Mouse (click first)", "Look around"],
+                      ["T", "Teleport panel"],
+                    ]),
                 ["R", "Toggle rain"],
-                ["Ctrl+Shift+A", "Blueprint mode"],
+                ...(!isMobile ? [["Ctrl+Shift+A", "Blueprint mode"]] : []),
                 ["ESC", "Exit screen / modal"],
                 ["Walk to exit door", "Leave building"],
               ].map(([key, action]) => (

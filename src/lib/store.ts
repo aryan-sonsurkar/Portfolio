@@ -26,6 +26,9 @@ interface AppState {
   preFocusPosition: [number, number, number] | null;
   preFocusRotation: number | null;
   teleportOpen: boolean;
+  visitedBuildings: string[];
+  flyoverActive: boolean;
+  flyoverTarget: [number, number, number] | null;
 
   setCameraMode: (mode: CameraMode) => void;
   focusBuilding: (id: string) => void;
@@ -39,12 +42,14 @@ interface AppState {
   toggleWeather: () => void;
   setBlueprintMode: (active: boolean) => void;
   addAchievement: (id: string) => void;
+  addVisitedBuilding: (id: string) => void;
   setActiveScreen: (id: string | null, monitor?: MonitorConfig | null) => void;
   setActiveRoom: (id: string | null) => void;
   setTimeOfDay: (time: TimeOfDay) => void;
   setExitPosition: (pos: [number, number, number], rot: number) => void;
   setPreFocusPosition: (pos: [number, number, number], rot: number) => void;
   setTeleportOpen: (open: boolean) => void;
+  setFlyover: (active: boolean, target?: [number, number, number]) => void;
   teleportToBuilding: (buildingId: string) => void;
 }
 
@@ -69,6 +74,9 @@ export const useStore = create<AppState>((set) => ({
   preFocusPosition: null,
   preFocusRotation: null,
   teleportOpen: false,
+  visitedBuildings: [],
+  flyoverActive: false,
+  flyoverTarget: null,
 
   setCameraMode: (mode) => set({ cameraMode: mode }),
 
@@ -115,6 +123,11 @@ export const useStore = create<AppState>((set) => ({
     return { achievements: [...s.achievements, id] };
   }),
 
+  addVisitedBuilding: (id) => set((s) => {
+    if (s.visitedBuildings.includes(id)) return s;
+    return { visitedBuildings: [...s.visitedBuildings, id] };
+  }),
+
   setActiveScreen: (id, monitor) => set((s) => {
     if (id) {
       return { activeScreen: id, activeMonitor: monitor ?? null, cameraMode: "screen" as CameraMode };
@@ -131,6 +144,7 @@ export const useStore = create<AppState>((set) => ({
   setPreFocusPosition: (pos, rot) => set({ preFocusPosition: pos, preFocusRotation: rot }),
 
   setTeleportOpen: (open) => set({ teleportOpen: open }),
+  setFlyover: (active, target) => set({ flyoverActive: active, flyoverTarget: target ?? null }),
 
   teleportToBuilding: (buildingId) => {
     const building = BUILDINGS.find((b) => b.id === buildingId);
@@ -151,7 +165,8 @@ export const useStore = create<AppState>((set) => ({
       activeRoom: null,
       activeScreen: null,
       focusedBuilding: null,
-      cameraMode: "fpv",
+      flyoverActive: true,
+      flyoverTarget: exitPos,
     });
   },
 }));

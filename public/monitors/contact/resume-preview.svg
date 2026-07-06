@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 270">
+  <rect width="360" height="270" fill="#1a0a2a"/>
+  <rect x="1" y="1" width="358" height="268" fill="none" stroke="#c084fc" stroke-width="1.5"/>
+  <text x="180" y="30" fill="#c084fc" font-size="16" font-family="sans-serif" text-anchor="middle" font-weight="bold">RESUME PREVIEW</text>
+  <line x1="40" y1="40" x2="320" y2="40" stroke="#a855f7" stroke-width="0.8" opacity="0.4"/>
+  <text x="40" y="65" fill="#e0d0ff" font-size="12" font-family="sans-serif" font-weight="bold">ARYAN SONSURKAR</text>
+  <text x="40" y="82" fill="#a89cc0" font-size="9" font-family="sans-serif">Full-Stack Developer | AI Enthusiast</text>
+  <line x1="40" y1="90" x2="320" y2="90" stroke="#a855f7" stroke-width="0.5" opacity="0.3"/>
+  <text x="40" y="108" fill="#c084fc" font-size="10" font-family="sans-serif" font-weight="bold">EXPERIENCE</text>
+  <text x="40" y="122" fill="#e0d0ff" font-size="8" font-family="sans-serif">Best Performer Intern @ Kaevron Automations</text>
+  <text x="40" y="134" fill="#a89cc0" font-size="7" font-family="sans-serif">SIH 2025 Special Recognition</text>
+  <text x="40" y="155" fill="#c084fc" font-size="10" font-family="sans-serif" font-weight="bold">PROJECTS</text>
+  <text x="40" y="169" fill="#e0d0ff" font-size="8" font-family="sans-serif">MODCODES — AI Student Platform</text>
+  <text x="40" y="181" fill="#a89cc0" font-size="7" font-family="sans-serif">Vishwanath Insurance — Client Delivery</text>
+  <text x="40" y="193" fill="#a89cc0" font-size="7" font-family="sans-serif">CodeShortsBot — Autonomous Content Pipeline</text>
+  <text x="40" y="214" fill="#c084fc" font-size="10" font-family="sans-serif" font-weight="bold">SKILLS</text>
+  <text x="40" y="228" fill="#e0d0ff" font-size="8" font-family="sans-serif">Python, JavaScript, TypeScript, React, Next.js</text>
+  <text x="40" y="240" fill="#a89cc0" font-size="7" font-family="sans-serif">Node.js, FastAPI, Three.js, PostgreSQL</text>
+  <text x="180" y="262" fill="#a855f7" font-size="9" font-family="sans-serif" text-anchor="middle" opacity="0.6">Full resume available on request</text>
+</svg>

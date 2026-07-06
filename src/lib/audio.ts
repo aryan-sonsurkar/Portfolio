@@ -6,6 +6,7 @@ class AudioManager {
   private masterVolume: GainNode | null = null;
   private spaceHum: { oscA: OscillatorNode; oscB: OscillatorNode; filter: BiquadFilterNode; gain: GainNode } | null = null;
   private rainNoise: { source: AudioWorkletNode | ScriptProcessorNode; gain: GainNode } | null = null;
+  private ambience: { source: OscillatorNode | null; lfo: OscillatorNode | null; gain: GainNode } | null = null;
   private isMuted: boolean = false;
 
   private init() {
@@ -333,6 +334,190 @@ class AudioManager {
 
     osc.start(now);
     osc.stop(now + 0.25);
+  }
+
+  public playMonitorClose() {
+    this.init();
+    if (!this.ctx || !this.masterVolume) return;
+    const now = this.ctx.currentTime;
+
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(1000, now);
+    osc.frequency.exponentialRampToValueAtTime(400, now + 0.12);
+
+    gain.gain.setValueAtTime(0.025, now);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.15);
+
+    osc.connect(gain);
+    gain.connect(this.masterVolume);
+
+    osc.start(now);
+    osc.stop(now + 0.2);
+  }
+
+  public playTeleportWhoosh() {
+    this.init();
+    if (!this.ctx || !this.masterVolume) return;
+    const now = this.ctx.currentTime;
+
+    // Sweeping noise whoosh
+    const bufferSize = this.ctx.sampleRate * 0.8;
+    const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = (Math.random() * 2 - 1) * (1 - i / bufferSize);
+    }
+
+    const source = this.ctx.createBufferSource();
+    source.buffer = buffer;
+
+    const filter = this.ctx.createBiquadFilter();
+    filter.type = "bandpass";
+    filter.frequency.setValueAtTime(200, now);
+    filter.frequency.exponentialRampToValueAtTime(3000, now + 0.3);
+    filter.frequency.exponentialRampToValueAtTime(400, now + 0.8);
+    filter.Q.setValueAtTime(2, now);
+
+    const gain = this.ctx.createGain();
+    gain.gain.setValueAtTime(0, now);
+    gain.gain.linearRampToValueAtTime(0.15, now + 0.15);
+    gain.gain.linearRampToValueAtTime(0, now + 0.8);
+
+    source.connect(filter);
+    filter.connect(gain);
+    gain.connect(this.masterVolume);
+
+    source.start(now);
+    source.stop(now + 0.9);
+
+    // Add tonal sweep
+    const osc = this.ctx.createOscillator();
+    const oscGain = this.ctx.createGain();
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(150, now);
+    osc.frequency.exponentialRampToValueAtTime(800, now + 0.3);
+    osc.frequency.exponentialRampToValueAtTime(100, now + 0.8);
+    oscGain.gain.setValueAtTime(0, now);
+    oscGain.gain.linearRampToValueAtTime(0.04, now + 0.15);
+    oscGain.gain.linearRampToValueAtTime(0, now + 0.8);
+    osc.connect(oscGain);
+    oscGain.connect(this.masterVolume);
+    osc.start(now);
+    osc.stop(now + 0.9);
+  }
+
+  public startAmbience(type: "industrial" | "lab" | "outdoor" | "office" | "apartment" = "office") {
+    this.init();
+    if (!this.ctx || !this.masterVolume) return;
+    this.stopAmbience();
+    const now = this.ctx.currentTime;
+
+    const gain = this.ctx.createGain();
+    gain.gain.setValueAtTime(0, now);
+    gain.gain.linearRampToValueAtTime(0.06, now + 1.5);
+
+    if (type === "industrial") {
+      // Low drone + occasional clank
+      const osc = this.ctx.createOscillator();
+      osc.type = "sawtooth";
+      osc.frequency.setValueAtTime(45, now);
+      const filter = this.ctx.createBiquadFilter();
+      filter.type = "lowpass";
+      filter.frequency.setValueAtTime(100, now);
+      osc.connect(filter);
+      filter.connect(gain);
+      osc.start();
+      this.ambience = { source: osc, lfo: null, gain };
+    } else if (type === "lab") {
+      // High hum + oscillating tone
+      const osc = this.ctx.createOscillator();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(220, now);
+      const lfo = this.ctx.createOscillator();
+      lfo.type = "sine";
+      lfo.frequency.setValueAtTime(0.3, now);
+      const lfoGain = this.ctx.createGain();
+      lfoGain.gain.setValueAtTime(15, now);
+      lfo.connect(lfoGain);
+      lfoGain.connect(osc.frequency);
+      osc.connect(gain);
+      osc.start();
+      lfo.start();
+      this.ambience = { source: osc, lfo, gain };
+    } else if (type === "outdoor") {
+      // Wind-like filtered noise
+      const bufferSize = 2 * this.ctx.sampleRate;
+      const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+      const data = buffer.getChannelData(0);
+      let last = 0;
+      for (let i = 0; i < bufferSize; i++) {
+        const white = Math.random() * 2 - 1;
+        data[i] = (last + 0.02 * white) / 1.02;
+        last = data[i];
+        data[i] *= 3.5;
+      }
+      const source = this.ctx.createBufferSource();
+      source.buffer = buffer;
+      (source as any).loop = true;
+      const filter = this.ctx.createBiquadFilter();
+      filter.type = "lowpass";
+      filter.frequency.setValueAtTime(300, now);
+      source.connect(filter);
+      filter.connect(gain);
+      source.start();
+      this.ambience = { source: source as any, lfo: null, gain };
+    } else {
+      // Office / apartment — gentle hum
+      const osc = this.ctx.createOscillator();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(60, now);
+      osc.connect(gain);
+      osc.start();
+      this.ambience = { source: osc, lfo: null, gain };
+    }
+
+    gain.connect(this.masterVolume);
+  }
+
+  public stopAmbience() {
+    if (!this.ambience || !this.ctx) return;
+    const now = this.ctx.currentTime;
+    const { source, lfo, gain } = this.ambience;
+    gain.gain.cancelScheduledValues(now);
+    gain.gain.setValueAtTime(gain.gain.value, now);
+    gain.gain.linearRampToValueAtTime(0, now + 0.8);
+    setTimeout(() => {
+      try { if (source) (source as any).stop(); } catch (e) {}
+      try { if (lfo) lfo.stop(); } catch (e) {}
+    }, 1000);
+    this.ambience = null;
+  }
+
+  public playAchievementUnlock() {
+    this.init();
+    if (!this.ctx || !this.masterVolume) return;
+    const now = this.ctx.currentTime;
+    const master = this.masterVolume;
+
+    // Triumphant ascending arpeggio
+    const freqs = [523, 659, 784, 1047];
+    freqs.forEach((f, i) => {
+      if (!this.ctx) return;
+      const osc = this.ctx!.createOscillator();
+      const gain = this.ctx!.createGain();
+      osc.type = "triangle";
+      osc.frequency.setValueAtTime(f, now + i * 0.08);
+      gain.gain.setValueAtTime(0, now + i * 0.08);
+      gain.gain.linearRampToValueAtTime(0.06, now + i * 0.08 + 0.04);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.08 + 0.5);
+      osc.connect(gain);
+      gain.connect(master);
+      osc.start(now + i * 0.08);
+      osc.stop(now + i * 0.08 + 0.6);
+    });
   }
 }
 

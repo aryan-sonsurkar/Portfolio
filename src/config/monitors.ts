@@ -654,4 +654,31 @@ export const monitorConfig: Record<string, BuildingMonitors> = {
       },
     ],
   },
+  "contact-kiosk": {
+    room: { floorColor: "#1a0a2a", ambientColor: "#a855f7", ambientIntensity: 0.5 },
+    ceilingLights: [
+      { color: "#a855f7", x: 0, z: 0 },
+    ],
+    monitors: [
+      {
+        id: "contact-links",
+        image: "/monitors/contact/contact-links.svg",
+        label: "CONTACT LINKS",
+        position: [0, 2.2, -2.9],
+        width: 2.0,
+        height: 1.2,
+        emissiveColor: "#a855f7",
+      },
+      {
+        id: "resume-preview",
+        image: "/monitors/contact/resume-preview.svg",
+        label: "RESUME PREVIEW",
+        position: [-1.9, 1.8, 0],
+        rotation: Math.PI / 2,
+        width: 1.0,
+        height: 0.8,
+        emissiveColor: "#c084fc",
+      },
+    ],
+  },
 };

@@ -252,4 +252,32 @@ export const BUILDINGS: BuildingConfig[] = [
       links: [],
     },
   },
+  {
+    id: "contact-kiosk",
+    name: "Contact Kiosk",
+    subtitle: "Connect & Convert",
+    position: [18, 0, -5],
+    scale: [1.8, 2.2, 1.8],
+    color: "#1a0a2a",
+    emissive: "#a855f7",
+    roofColor: "#0a0020",
+    windowPattern: "grid",
+    content: {
+      title: "Let's Connect",
+      subtitle: "Get in Touch",
+      paragraphs: [
+        "Open to opportunities, collaborations, and conversations.",
+        "GitHub: github.com/aryan-sonsurkar",
+        "LinkedIn: linkedin.com/in/aryan-sonsurkar",
+        "Email: aryan@example.com",
+        "Resume available on request.",
+      ],
+      tags: ["GitHub", "LinkedIn", "Email", "Resume"],
+      links: [
+        { label: "GitHub", url: "https://github.com/aryan-sonsurkar", icon: "github" },
+        { label: "LinkedIn", url: "https://linkedin.com/in/aryan-sonsurkar", icon: "linkedin" },
+        { label: "Email", url: "mailto:aryan@example.com", icon: "mail" },
+      ],
+    },
+  },
 ];

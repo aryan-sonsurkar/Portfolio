@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360">
+  <rect width="600" height="360" fill="#1a0a2a"/>
+  <rect x="1" y="1" width="598" height="358" fill="none" stroke="#a855f7" stroke-width="2"/>
+  <text x="300" y="45" fill="#c084fc" font-size="20" font-family="sans-serif" text-anchor="middle" font-weight="bold">CONTACT LINKS</text>
+  <line x1="80" y1="60" x2="520" y2="60" stroke="#a855f7" stroke-width="1" opacity="0.4"/>
+  <text x="300" y="95" fill="#e0d0ff" font-size="14" font-family="sans-serif" text-anchor="middle">Open to opportunities &amp; collaborations</text>
+  <rect x="80" y="120" width="440" height="50" rx="8" fill="#0a0020" stroke="#a855f7" stroke-width="1"/>
+  <text x="120" y="150" fill="#c084fc" font-size="16" font-family="sans-serif">GitHub</text>
+  <text x="480" y="150" fill="#e0d0ff" font-size="12" font-family="sans-serif" text-anchor="end">github.com/aryan-sonsurkar</text>
+  <rect x="80" y="180" width="440" height="50" rx="8" fill="#0a0020" stroke="#a855f7" stroke-width="1"/>
+  <text x="120" y="210" fill="#c084fc" font-size="16" font-family="sans-serif">LinkedIn</text>
+  <text x="480" y="210" fill="#e0d0ff" font-size="12" font-family="sans-serif" text-anchor="end">linkedin.com/in/aryan-sonsurkar</text>
+  <rect x="80" y="240" width="440" height="50" rx="8" fill="#0a0020" stroke="#a855f7" stroke-width="1"/>
+  <text x="120" y="270" fill="#c084fc" font-size="16" font-family="sans-serif">Email</text>
+  <text x="480" y="270" fill="#e0d0ff" font-size="12" font-family="sans-serif" text-anchor="end">aryan@example.com</text>
+  <rect x="80" y="300" width="440" height="40" rx="8" fill="#a855f7" opacity="0.15" stroke="#a855f7" stroke-width="1"/>
+  <text x="300" y="325" fill="#c084fc" font-size="13" font-family="sans-serif" text-anchor="middle">Resume available on request</text>
+</svg>

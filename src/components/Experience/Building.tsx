@@ -136,21 +136,30 @@ function BuildingEntrance({ config }: { config: BuildingConfig }) {
 
 function BuildingBody({ config }: { config: BuildingConfig }) {
   const meshRef = useRef<THREE.Mesh>(null);
-  const { setHoveredBuilding, introComplete, introProgress } = useStore();
+  const glowRef = useRef<THREE.Mesh>(null);
+  const { setHoveredBuilding, introComplete, introProgress, visitedBuildings } = useStore();
   const [hovered, setHovered] = useState(false);
+  const isVisited = visitedBuildings.includes(config.id);
   const glowStrength = config.id === "modcodes-hq"
     ? Math.max(0.2, Math.min(1.25, introProgress * 1.2 + (introComplete ? 0.35 : 0)))
     : hovered
       ? 0.35
       : 0.15;
 
-  useFrame(() => {
+  useFrame((state) => {
     if (!meshRef.current) return;
     const target = hovered ? 1.02 : 1.0;
     meshRef.current.scale.lerp(
       new THREE.Vector3(target, target, target),
       0.08
     );
+
+    // Discovery glow pulse for unvisited buildings
+    if (glowRef.current && !isVisited && introComplete) {
+      const pulse = Math.sin(state.clock.getElapsedTime() * 2) * 0.3 + 0.7;
+      glowRef.current.scale.setScalar(1.0 + pulse * 0.08);
+      (glowRef.current.material as THREE.MeshStandardMaterial).opacity = pulse * 0.25;
+    }
   });
 
   return (
@@ -265,6 +274,40 @@ function BuildingBody({ config }: { config: BuildingConfig }) {
         distance={8}
         position={[0, 0, config.scale[2] / 2 + 1]}
       />
+
+      {/* Discovery glow ring for unvisited buildings */}
+      {!isVisited && introComplete && (
+        <mesh
+          ref={glowRef}
+          position={[0, config.scale[1] / 2 + 0.3, 0]}
+          rotation={[-Math.PI / 2, 0, 0]}
+        >
+          <ringGeometry args={[config.scale[0] * 0.6, config.scale[0] * 0.7, 32]} />
+          <meshStandardMaterial
+            color={config.emissive || "#ffd700"}
+            emissive={config.emissive || "#ffd700"}
+            emissiveIntensity={2}
+            transparent
+            opacity={0.25}
+            side={THREE.DoubleSide}
+          />
+        </mesh>
+      )}
+
+      {/* Floating icon for unvisited buildings */}
+      {!isVisited && introComplete && (
+        <group position={[0, config.scale[1] / 2 + 1.5, 0]}>
+          <mesh>
+            <sphereGeometry args={[0.12, 8, 8]} />
+            <meshStandardMaterial
+              color={config.emissive || "#ffd700"}
+              emissive={config.emissive || "#ffd700"}
+              emissiveIntensity={3}
+            />
+          </mesh>
+          <pointLight color={config.emissive || "#ffd700"} intensity={1} distance={3} />
+        </group>
+      )}
     </group>
   );
 }
