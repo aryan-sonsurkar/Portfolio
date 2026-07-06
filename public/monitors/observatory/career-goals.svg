@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#050a14"/>
+      <stop offset="50%" style="stop-color:#001122;stop-opacity:0.5"/>
+      <stop offset="100%" style="stop-color:#050a14"/>
+    </linearGradient>
+    <linearGradient id="checkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0088ff"/>
+      <stop offset="100%" style="stop-color:#004499"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="300" fill="#050a14"/>
+
+  <g opacity="0.04" stroke="#0088ff">
+    <line x1="30" y1="80" x2="30" y2="280" stroke-width="0.5"/>
+    <line x1="370" y1="80" x2="370" y2="280" stroke-width="0.5"/>
+  </g>
+
+  <rect x="0" y="0" width="400" height="42" fill="url(#headerGrad)"/>
+  <text x="200" y="28" text-anchor="middle" font-family="monospace" font-size="14" font-weight="bold" fill="#0088ff" filter="url(#glow)">CAREER GOALS</text>
+  <line x1="100" y1="38" x2="300" y2="38" stroke="#0088ff" stroke-width="0.5" opacity="0.4"/>
+
+  <!-- Goal 1 -->
+  <rect x="30" y="56" width="340" height="48" rx="4" fill="#0a1628" stroke="#003355" stroke-width="0.5"/>
+  <circle cx="52" cy="80" r="10" fill="none" stroke="#0088ff" stroke-width="1.5"/>
+  <path d="M47 80 L50 84 L58 76" stroke="#0088ff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="75" y="76" font-family="monospace" font-size="11" fill="#00ccff">Full-Stack</text>
+  <text x="150" y="76" font-family="monospace" font-size="11" fill="#00ccff">Developer</text>
+  <line x1="75" y1="88" x2="200" y2="88" stroke="#0088ff" stroke-width="0.5" opacity="0.3"/>
+  <text x="75" y="96" font-family="monospace" font-size="7" fill="#334466">React | Node | Next.js | Systems</text>
+
+  <!-- Goal 2 -->
+  <rect x="30" y="112" width="340" height="48" rx="4" fill="#0a1628" stroke="#003355" stroke-width="0.5"/>
+  <circle cx="52" cy="136" r="10" fill="none" stroke="#0088ff" stroke-width="1.5"/>
+  <path d="M47 136 L50 140 L58 132" stroke="#0088ff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="75" y="132" font-family="monospace" font-size="11" fill="#00ccff">Open Source</text>
+  <text x="178" y="132" font-family="monospace" font-size="11" fill="#00ccff">Maintainer</text>
+  <line x1="75" y1="144" x2="200" y2="144" stroke="#0088ff" stroke-width="0.5" opacity="0.3"/>
+  <text x="75" y="152" font-family="monospace" font-size="7" fill="#334466">MODCODES | Community | Tools</text>
+
+  <!-- Goal 3 -->
+  <rect x="30" y="168" width="340" height="48" rx="4" fill="#0a1628" stroke="#003355" stroke-width="0.5"/>
+  <circle cx="52" cy="192" r="10" fill="none" stroke="#0088ff" stroke-width="1.5"/>
+  <path d="M47 192 L50 196 L58 188" stroke="#0088ff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="75" y="188" font-family="monospace" font-size="11" fill="#00ccff">Hardware</text>
+  <text x="152" y="188" font-family="monospace" font-size="11" fill="#00ccff">Innovator</text>
+  <line x1="75" y1="200" x2="200" y2="200" stroke="#0088ff" stroke-width="0.5" opacity="0.3"/>
+  <text x="75" y="208" font-family="monospace" font-size="7" fill="#334466">Embedded | IoT | RISC-V | FPGA</text>
+
+  <!-- Goal 4 -->
+  <rect x="30" y="224" width="340" height="48" rx="4" fill="#0a1628" stroke="#003355" stroke-width="0.5"/>
+  <circle cx="52" cy="248" r="10" fill="none" stroke="#0088ff" stroke-width="1.5"/>
+  <path d="M47 248 L50 252 L58 244" stroke="#0088ff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="75" y="244" font-family="monospace" font-size="11" fill="#00ccff">AI/ML</text>
+  <text x="120" y="244" font-family="monospace" font-size="11" fill="#00ccff">Engineer</text>
+  <line x1="75" y1="256" x2="200" y2="256" stroke="#0088ff" stroke-width="0.5" opacity="0.3"/>
+  <text x="75" y="264" font-family="monospace" font-size="7" fill="#334466">LLMs | Neural Nets | Training | Inference</text>
+
+  <!-- Bottom line -->
+  <line x1="30" y1="284" x2="370" y2="284" stroke="#0088ff" stroke-width="0.5" opacity="0.2"/>
+</svg>

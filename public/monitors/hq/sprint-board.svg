@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#161b22"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bgGrad)"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="800" height="60" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="30" y="38" font-family="Segoe UI, Arial" font-size="22" fill="#f0f6fc" font-weight="bold">SPRINT BOARD</text>
+  <text x="200" y="38" font-family="Segoe UI, Arial" font-size="14" fill="#8b949e">July 2026</text>
+  
+  <!-- Sprint Info -->
+  <rect x="30" y="80" width="740" height="40" rx="6" fill="#21262d" stroke="#30363d"/>
+  <text x="50" y="105" font-family="Segoe UI, Arial" font-size="14" fill="#3fb950" font-weight="bold">Sprint 1: Foundation</text>
+  <text x="250" y="105" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e">Started: July 1, 2026</text>
+  <text x="450" y="105" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e">Duration: 2 weeks</text>
+  <text x="650" y="105" font-family="Segoe UI, Arial" font-size="12" fill="#58a6ff">Progress: 65%</text>
+  
+  <!-- Columns -->
+  <!-- To Do -->
+  <rect x="30" y="140" width="180" height="340" rx="8" fill="#21262d" stroke="#30363d"/>
+  <rect x="30" y="140" width="180" height="35" rx="8" fill="#30363d"/>
+  <text x="50" y="162" font-family="Segoe UI, Arial" font-size="13" fill="#f0f6fc" font-weight="bold">TO DO</text>
+  <text x="180" y="162" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">3</text>
+  
+  <!-- Task Cards - To Do -->
+  <rect x="40" y="185" width="160" height="60" rx="6" fill="#161b22" stroke="#30363d"/>
+  <text x="50" y="205" font-family="Segoe UI, Arial" font-size="11" fill="#f0f6fc">Voice Commands</text>
+  <text x="50" y="220" font-family="Segoe UI, Arial" font-size="9" fill="#8b949e">Add JARVIS-style voice control</text>
+  <text x="50" y="235" font-family="Segoe UI, Arial" font-size="9" fill="#d2a8ff">Feature</text>
+  
+  <rect x="40" y="255" width="160" height="60" rx="6" fill="#161b22" stroke="#30363d"/>
+  <text x="50" y="275" font-family="Segoe UI, Arial" font-size="11" fill="#f0f6fc">Plugin System</text>
+  <text x="50" y="290" font-family="Segoe UI, Arial" font-size="9" fill="#8b949e">Extension architecture</text>
+  <text x="50" y="305" font-family="Segoe UI, Arial" font-size="9" fill="#d2a8ff">Feature</text>
+  
+  <rect x="40" y="325" width="160" height="60" rx="6" fill="#161b22" stroke="#30363d"/>
+  <text x="50" y="345" font-family="Segoe UI, Arial" font-size="11" fill="#f0f6fc">Git Integration</text>
+  <text x="50" y="360" font-family="Segoe UI, Arial" font-size="9" fill="#8b949e">Version control in IDE</text>
+  <text x="50" y="375" font-family="Segoe UI, Arial" font-size="9" fill="#d2a8ff">Feature</text>
+  
+  <!-- In Progress -->
+  <rect x="220" y="140" width="180" height="340" rx="8" fill="#21262d" stroke="#30363d"/>
+  <rect x="220" y="140" width="180" height="35" rx="8" fill="#d29e22"/>
+  <text x="240" y="162" font-family="Segoe UI, Arial" font-size="13" fill="#0d1117" font-weight="bold">IN PROGRESS</text>
+  <text x="370" y="162" font-family="Segoe UI, Arial" font-size="11" fill="#0d1117">2</text>
+  
+  <!-- Task Cards - In Progress -->
+  <rect x="230" y="185" width="160" height="60" rx="6" fill="#161b22" stroke="#30363d"/>
+  <text x="240" y="205" font-family="Segoe UI, Arial" font-size="11" fill="#f0f6fc">AI Chat Panel</text>
+  <text x="240" y="220" font-family="Segoe UI, Arial" font-size="9" fill="#8b949e">Ollama integration</text>
+  <text x="240" y="235" font-family="Segoe UI, Arial" font-size="9" fill="#58a6ff">Backend</text>
+  
+  <rect x="230" y="255" width="160" height="60" rx="6" fill="#161b22" stroke="#30363d"/>
+  <text x="240" y="275" font-family="Segoe UI, Arial" font-size="11" fill="#f0f6fc">File Explorer</text>
+  <text x="240" y="290" font-family="Segoe UI, Arial" font-size="9" fill="#8b949e">Project navigation</text>
+  <text x="240" y="305" font-family="Segoe UI, Arial" font-size="9" fill="#58a6ff">Frontend</text>
+  
+  <!-- Done -->
+  <rect x="410" y="140" width="180" height="340" rx="8" fill="#21262d" stroke="#30363d"/>
+  <rect x="410" y="140" width="180" height="35" rx="8" fill="#238636"/>
+  <text x="430" y="162" font-family="Segoe UI, Arial" font-size="13" fill="#f0f6fc" font-weight="bold">DONE</text>
+  <text x="560" y="162" font-family="Segoe UI, Arial" font-size="11" fill="#f0f6fc">4</text>
+  
+  <!-- Task Cards - Done -->
+  <rect x="420" y="185" width="160" height="60" rx="6" fill="#161b22" stroke="#30363d"/>
+  <text x="430" y="205" font-family="Segoe UI, Arial" font-size="11" fill="#3fb950">✓ Project Manager</text>
+  <text x="430" y="220" font-family="Segoe UI, Arial" font-size="9" fill="#8b949e">Task tracking UI</text>
+  <text x="430" y="235" font-family="Segoe UI, Arial" font-size="9" fill="#3fb950">Complete</text>
+  
+  <rect x="420" y="255" width="160" height="60" rx="6" fill="#161b22" stroke="#30363d"/>
+  <text x="430" y="275" font-family="Segoe UI, Arial" font-size="11" fill="#3fb950">✓ Workspace Setup</text>
+  <text x="430" y="290" font-family="Segoe UI, Arial" font-size="9" fill="#8b949e">Multi-panel layout</text>
+  <text x="430" y="305" font-family="Segoe UI, Arial" font-size="9" fill="#3fb950">Complete</text>
+  
+  <rect x="420" y="325" width="160" height="60" rx="6" fill="#161b22" stroke="#30363d"/>
+  <text x="430" y="345" font-family="Segoe UI, Arial" font-size="11" fill="#3fb950">✓ Local Storage</text>
+  <text x="430" y="360" font-family="Segoe UI, Arial" font-size="9" fill="#8b949e">Data persistence</text>
+  <text x="430" y="375" font-family="Segoe UI, Arial" font-size="9" fill="#3fb950">Complete</text>
+  
+  <rect x="420" y="395" width="160" height="60" rx="6" fill="#161b22" stroke="#30363d"/>
+  <text x="430" y="415" font-family="Segoe UI, Arial" font-size="11" fill="#3fb950">✓ Modern UI</text>
+  <text x="430" y="430" font-family="Segoe UI, Arial" font-size="9" fill="#8b949e">Dark theme design</text>
+  <text x="430" y="445" font-family="Segoe UI, Arial" font-size="9" fill="#3fb950">Complete</text>
+  
+  <!-- Review -->
+  <rect x="600" y="140" width="170" height="340" rx="8" fill="#21262d" stroke="#30363d"/>
+  <rect x="600" y="140" width="170" height="35" rx="8" fill="#8957e5"/>
+  <text x="620" y="162" font-family="Segoe UI, Arial" font-size="13" fill="#f0f6fc" font-weight="bold">REVIEW</text>
+  <text x="740" y="162" font-family="Segoe UI, Arial" font-size="11" fill="#f0f6fc">1</text>
+  
+  <!-- Task Card - Review -->
+  <rect x="610" y="185" width="150" height="60" rx="6" fill="#161b22" stroke="#30363d"/>
+  <text x="620" y="205" font-family="Segoe UI, Arial" font-size="11" fill="#f0f6fc">Code Editor</text>
+  <text x="620" y="220" font-family="Segoe UI, Arial" font-size="9" fill="#8b949e">Monaco integration</text>
+  <text x="620" y="235" font-family="Segoe UI, Arial" font-size="9" fill="#8957e5">Testing</text>
+  
+  <!-- Footer -->
+  <rect x="0" y="490" width="800" height="10" fill="#21262d"/>
+</svg>

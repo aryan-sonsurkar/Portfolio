@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#161b22"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bgGrad)"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="800" height="60" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="30" y="38" font-family="Segoe UI, Arial" font-size="22" fill="#f0f6fc" font-weight="bold">FIRST LAPTOP</text>
+  <text x="200" y="38" font-family="Segoe UI, Arial" font-size="14" fill="#8b949e">Where It All Began</text>
+  
+  <!-- Laptop Image Area -->
+  <g transform="translate(30, 80)">
+    <rect x="0" y="0" width="400" height="300" rx="8" fill="#21262d" stroke="#30363d"/>
+    <text x="200" y="150" font-family="Segoe UI, Arial" font-size="16" fill="#8b949e" text-anchor="middle">[Laptop Image]</text>
+    <text x="200" y="170" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e" text-anchor="middle">Add your first laptop photo here</text>
+    
+    <!-- Specs -->
+    <rect x="20" y="200" width="360" height="80" fill="#161b22" rx="6"/>
+    <text x="40" y="225" font-family="Segoe UI, Arial" font-size="12" fill="#3fb950">First Programming Machine</text>
+    <text x="40" y="245" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">The device that started everything</text>
+    <text x="40" y="265" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Python • Draco CLI • First hackathon</text>
+  </g>
+  
+  <!-- Story -->
+  <g transform="translate(450, 80)">
+    <rect x="0" y="0" width="320" height="300" rx="8" fill="#21262d" stroke="#30363d"/>
+    <text x="20" y="30" font-family="Segoe UI, Arial" font-size="14" fill="#f0f6fc" font-weight="bold">THE STORY</text>
+    
+    <text x="20" y="60" font-family="Segoe UI, Arial" font-size="12" fill="#3fb950">The Beginning (2025)</text>
+    <text x="20" y="80" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">After completing SSC with 92%, I received my first laptop. It was a moment that changed everything.</text>
+    
+    <text x="20" y="110" font-family="Segoe UI, Arial" font-size="12" fill="#58a6ff">First Steps</text>
+    <text x="20" y="130" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Started with Python basics. The first "Hello World" felt like magic. Within weeks, I was building CLI tools.</text>
+    
+    <text x="20" y="160" font-family="Segoe UI, Arial" font-size="12" fill="#d2a8ff">Draco CLI</text>
+    <text x="20" y="180" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">My first real project - a JARVIS-inspired AI assistant. This was the moment I knew: "I want to do this forever."</text>
+    
+    <text x="20" y="210" font-family="Segoe UI, Arial" font-size="12" fill="#f0883e">The Spark</text>
+    <text x="20" y="230" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">That laptop became my portal to a new world. Every late night coding session, every bug fixed, every project shipped - it all started here.</text>
+    
+    <text x="20" y="260" font-family="Segoe UI, Arial" font-size="12" fill="#ffd700">Legacy</text>
+    <text x="20" y="280" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">That same laptop runs my development environment today. It's seen 333+ contributions, 15+ projects, and countless hours of learning.</text>
+  </g>
+  
+  <!-- Footer -->
+  <rect x="0" y="490" width="800" height="10" fill="#21262d"/>
+</svg>

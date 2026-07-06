@@ -10,7 +10,7 @@ import { BUILDINGS } from "../Buildings/BuildingData";
 const INTRO_DURATION_SECONDS = 17;
 
 export default function CameraController() {
-  const { cameraMode, focusedBuilding, introComplete, activeScreen, selectedBuilding } = useStore();
+  const { cameraMode, focusedBuilding, introComplete, selectedBuilding } = useStore();
   const controlsRef = useRef<any>(null);
   const { camera } = useThree();
 
@@ -21,7 +21,6 @@ export default function CameraController() {
   useEffect(() => {
     if (!introComplete) {
       introStartRef.current = performance.now();
-      // Start way back in deep space looking towards Earth
       camera.position.set(0, 60, 200);
       targetPosition.current.set(0, 60, 200);
       targetLookAt.current.set(0, 8, -70);
@@ -40,66 +39,30 @@ export default function CameraController() {
         targetPosition.current.set(bx + 5, bh * 0.7, bz + 5);
         targetLookAt.current.set(bx, bh * 0.45, bz);
       }
-    } else if (cameraMode === "screen" && activeScreen) {
-      // Lerp camera right in front of the active interactive monitor
-      const screenOffsets: { [key: string]: { pos: [number, number, number]; look: [number, number, number] } } = {
-        "modcodes-hq": { pos: [0.4, 1.2, -0.4], look: [0.4, 1.2, -1.1] },
-        "achievement-tower": { pos: [0, 1.2, 0.0], look: [0, 1.2, -0.7] },
-        "developer-museum": { pos: [0.2, 1.2, 0.0], look: [0.2, 1.2, -0.7] },
-        "project-factory": { pos: [0.1, 1.25, 0.05], look: [0.1, 1.25, -0.65] },
-        "innovation-lab": { pos: [0.1, 1.3, 0.0], look: [0.1, 1.3, -0.7] },
-        "open-source-center": { pos: [0, 1.5, 0.0], look: [0, 1.5, -0.7] }
-      };
-
-      const setup = screenOffsets[activeScreen];
-      if (setup) {
-        targetPosition.current.set(...setup.pos);
-        targetLookAt.current.set(...setup.look);
-      }
-    } else if (cameraMode === "fpv") {
-      // FPV camera positioning is handled by the CharacterController component
     }
-  }, [cameraMode, focusedBuilding, activeScreen, selectedBuilding]);
+    // cameraMode === "screen": camera stays in place — MonitorFocusPlane handles the visual
+    // cameraMode === "fpv": CharacterController handles the camera
+  }, [cameraMode, focusedBuilding, selectedBuilding, camera]);
 
   useFrame((_, delta) => {
-    if (cameraMode === "fpv") return; // FPV controller takes full control
+    // FPV and screen modes: CharacterController / MonitorFocusPlane own the camera
+    if (cameraMode === "fpv" || cameraMode === "screen") return;
 
     if (!introComplete) {
       const startedAt = introStartRef.current ?? performance.now();
       const elapsed = (performance.now() - startedAt) / 1000;
       const t = Math.min(elapsed / INTRO_DURATION_SECONDS, 1);
-      
-      // Easing curve (accelerate and then slow down smoothly for landing)
       const eased = t * t * (3 - 2 * t);
 
-      // Deep space zoom path keyframes
       const keyframes = [
-        {
-          position: [0, 60, 200],
-          lookAt: [0, 8, -70], // Orbiting Earth
-        },
-        {
-          position: [0, 30, 80],
-          lookAt: [0, 8, -70], // Approaching Asia/India
-        },
-        {
-          position: [0, 12, -10],
-          lookAt: [0, 5, -20], // Through cloud atmosphere
-        },
-        {
-          position: [0, 5, 12],
-          lookAt: [0, 2, 0], // Sighting Mumbai / District
-        },
-        {
-          position: [0, 1.6, 6],
-          lookAt: [0, 1.2, 0], // Final smooth landing on street level
-        },
+        { position: [0, 60, 200], lookAt: [0, 8, -70] },
+        { position: [0, 30, 80], lookAt: [0, 8, -70] },
+        { position: [0, 12, -10], lookAt: [0, 5, -20] },
+        { position: [0, 5, 12], lookAt: [0, 2, 0] },
+        { position: [0, 1.6, 6], lookAt: [0, 1.2, 0] },
       ];
 
-      const segment = Math.min(
-        Math.floor(eased * (keyframes.length - 1)),
-        keyframes.length - 2
-      );
+      const segment = Math.min(Math.floor(eased * (keyframes.length - 1)), keyframes.length - 2);
       const localT = eased * (keyframes.length - 1) - segment;
       const start = keyframes[segment];
       const end = keyframes[segment + 1];
@@ -120,17 +83,11 @@ export default function CameraController() {
       return;
     }
 
-    // Smooth transition to target position (for orbit, focused, and screen modes)
-    camera.position.lerp(targetPosition.current, delta * 2.8);
+    // Orbit / focused mode — smooth follow
+    const lerpSpeed = delta * 2.8;
+    camera.position.lerp(targetPosition.current, lerpSpeed);
 
-    if (cameraMode === "screen") {
-      // Direct look at target screen without controls
-      const currentLookAt = new THREE.Vector3(0, 0, -1)
-        .applyQuaternion(camera.quaternion)
-        .add(camera.position);
-      currentLookAt.lerp(targetLookAt.current, delta * 3.5);
-      camera.lookAt(currentLookAt);
-    } else if (controlsRef.current) {
+    if (controlsRef.current) {
       controlsRef.current.target.lerp(targetLookAt.current, delta * 2.8);
       controlsRef.current.update();
     }

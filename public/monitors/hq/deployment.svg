@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#161b22"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bgGrad)"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="800" height="60" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="30" y="38" font-family="Segoe UI, Arial" font-size="22" fill="#f0f6fc" font-weight="bold">DEPLOYMENT STATUS</text>
+  <text x="280" y="38" font-family="Segoe UI, Arial" font-size="14" fill="#8b949e">MODCODES IDE</text>
+  
+  <!-- Deployment Pipeline -->
+  <g transform="translate(30, 80)">
+    <!-- Build Stage -->
+    <rect x="0" y="0" width="150" height="100" rx="8" fill="#21262d" stroke="#3fb950" stroke-width="2"/>
+    <text x="20" y="30" font-family="Segoe UI, Arial" font-size="14" fill="#3fb950" font-weight="bold">BUILD</text>
+    <text x="20" y="50" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Status: Success</text>
+    <text x="20" y="65" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Time: 2m 34s</text>
+    <text x="20" y="80" font-family="Segoe UI, Arial" font-size="10" fill="#3fb950">✓ Compiled</text>
+    
+    <!-- Arrow -->
+    <path d="M150 50 L180 50" stroke="#30363d" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+    
+    <!-- Test Stage -->
+    <rect x="180" y="0" width="150" height="100" rx="8" fill="#21262d" stroke="#3fb950" stroke-width="2"/>
+    <text x="200" y="30" font-family="Segoe UI, Arial" font-size="14" fill="#3fb950" font-weight="bold">TEST</text>
+    <text x="200" y="50" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Status: Passed</text>
+    <text x="200" y="65" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Tests: 47/47</text>
+    <text x="200" y="80" font-family="Segoe UI, Arial" font-size="10" fill="#3fb950">✓ All Green</text>
+    
+    <!-- Arrow -->
+    <path d="M330 50 L360 50" stroke="#30363d" stroke-width="2" fill="none"/>
+    
+    <!-- Deploy Stage -->
+    <rect x="360" y="0" width="150" height="100" rx="8" fill="#21262d" stroke="#58a6ff" stroke-width="2"/>
+    <text x="380" y="30" font-family="Segoe UI, Arial" font-size="14" fill="#58a6ff" font-weight="bold">DEPLOY</text>
+    <text x="380" y="50" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Status: Active</text>
+    <text x="380" y="65" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Platform: Vercel</text>
+    <text x="380" y="80" font-family="Segoe UI, Arial" font-size="10" fill="#58a6ff">● Live</text>
+    
+    <!-- Arrow -->
+    <path d="M510 50 L540 50" stroke="#30363d" stroke-width="2" fill="none"/>
+    
+    <!-- Monitor Stage -->
+    <rect x="540" y="0" width="150" height="100" rx="8" fill="#21262d" stroke="#3fb950" stroke-width="2"/>
+    <text x="560" y="30" font-family="Segoe UI, Arial" font-size="14" fill="#3fb950" font-weight="bold">MONITOR</text>
+    <text x="560" y="50" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Uptime: 99.9%</text>
+    <text x="560" y="65" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Latency: 42ms</text>
+    <text x="560" y="80" font-family="Segoe UI, Arial" font-size="10" fill="#3fb950">✓ Healthy</text>
+  </g>
+  
+  <!-- Deployment History -->
+  <rect x="30" y="200" width="740" height="280" rx="8" fill="#21262d" stroke="#30363d"/>
+  <text x="50" y="230" font-family="Segoe UI, Arial" font-size="14" fill="#f0f6fc" font-weight="bold">Recent Deployments</text>
+  
+  <!-- Deployment Table -->
+  <g transform="translate(50, 250)">
+    <!-- Header -->
+    <text x="0" y="0" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e" font-weight="bold">ENVIRONMENT</text>
+    <text x="150" y="0" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e" font-weight="bold">VERSION</text>
+    <text x="280" y="0" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e" font-weight="bold">STATUS</text>
+    <text x="400" y="0" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e" font-weight="bold">DEPLOYED</text>
+    <text x="550" y="0" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e" font-weight="bold">DURATION</text>
+    
+    <!-- Row 1 -->
+    <rect x="0" y="15" width="700" height="35" fill="#161b22"/>
+    <text x="0" y="38" font-family="Segoe UI, Arial" font-size="12" fill="#3fb950">Production</text>
+    <text x="150" y="38" font-family="Segoe UI, Arial" font-size="12" fill="#f0f6fc">v0.8.2</text>
+    <text x="280" y="38" font-family="Segoe UI, Arial" font-size="12" fill="#3fb950">✓ Success</text>
+    <text x="400" y="38" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e">2 hours ago</text>
+    <text x="550" y="38" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e">2m 34s</text>
+    
+    <!-- Row 2 -->
+    <rect x="0" y="55" width="700" height="35" fill="#0d1117"/>
+    <text x="0" y="78" font-family="Segoe UI, Arial" font-size="12" fill="#58a6ff">Staging</text>
+    <text x="150" y="78" font-family="Segoe UI, Arial" font-size="12" fill="#f0f6fc">v0.8.3-beta</text>
+    <text x="280" y="78" font-family="Segoe UI, Arial" font-size="12" fill="#3fb950">✓ Success</text>
+    <text x="400" y="78" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e">5 hours ago</text>
+    <text x="550" y="78" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e">3m 12s</text>
+    
+    <!-- Row 3 -->
+    <rect x="0" y="95" width="700" height="35" fill="#161b22"/>
+    <text x="0" y="118" font-family="Segoe UI, Arial" font-size="12" fill="#d2a8ff">Development</text>
+    <text x="150" y="118" font-family="Segoe UI, Arial" font-size="12" fill="#f0f6fc">v0.9.0-dev</text>
+    <text x="280" y="118" font-family="Segoe UI, Arial" font-size="12" fill="#d29e22">● Building</text>
+    <text x="400" y="118" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e">Just now</text>
+    <text x="550" y="118" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e">--</text>
+    
+    <!-- Row 4 -->
+    <rect x="0" y="135" width="700" height="35" fill="#0d1117"/>
+    <text x="0" y="158" font-family="Segoe UI, Arial" font-size="12" fill="#3fb950">Production</text>
+    <text x="150" y="158" font-family="Segoe UI, Arial" font-size="12" fill="#f0f6fc">v0.8.1</text>
+    <text x="280" y="158" font-family="Segoe UI, Arial" font-size="12" fill="#3fb950">✓ Success</text>
+    <text x="400" y="158" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e">1 day ago</text>
+    <text x="550" y="158" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e">2m 18s</text>
+  </g>
+  
+  <!-- Footer -->
+  <rect x="0" y="490" width="800" height="10" fill="#21262d"/>
+</svg>

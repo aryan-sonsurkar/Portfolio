@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="innerGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <radialGradient id="coreGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="30%" stop-color="#00aaff" stop-opacity="0.9"/>
+      <stop offset="70%" stop-color="#0055aa" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#001133" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="coreGrad2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00ddff" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#003366" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="gridPattern" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#00aaff" stroke-width="0.3" stroke-opacity="0.2"/>
+    </pattern>
+    <linearGradient id="scanLine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00aaff" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#00aaff" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#00aaff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="300" fill="#0a0808"/>
+  <rect width="400" height="300" fill="url(#gridPattern)"/>
+
+  <!-- Scan line effect -->
+  <rect x="0" y="0" width="400" height="40" fill="url(#scanLine)" opacity="0.5">
+    <animateTransform attributeName="transform" type="translate" values="0,-40;0,300;0,-40" dur="4s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Corner brackets -->
+  <g stroke="#00aaff" stroke-width="1.5" fill="none" opacity="0.6">
+    <path d="M 10 30 L 10 10 L 30 10"/>
+    <path d="M 370 10 L 390 10 L 390 30"/>
+    <path d="M 390 270 L 390 290 L 370 290"/>
+    <path d="M 30 290 L 10 290 L 10 270"/>
+  </g>
+
+  <!-- Title -->
+  <text x="200" y="28" text-anchor="middle" font-family="'Courier New', monospace" font-size="11" fill="#00aaff" letter-spacing="3" filter="url(#innerGlow)">ARC REACTOR MK I</text>
+
+  <!-- Outer ring -->
+  <circle cx="160" cy="145" r="80" fill="none" stroke="#00aaff" stroke-width="1" opacity="0.3" filter="url(#glow)"/>
+  <circle cx="160" cy="145" r="80" fill="none" stroke="#00aaff" stroke-width="0.5" stroke-dasharray="4,8" opacity="0.4">
+    <animateTransform attributeName="transform" type="rotate" values="0 160 145;360 160 145" dur="20s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Second ring -->
+  <circle cx="160" cy="145" r="65" fill="none" stroke="#00aaff" stroke-width="1.5" opacity="0.4"/>
+  <circle cx="160" cy="145" r="65" fill="none" stroke="#0088cc" stroke-width="0.5" stroke-dasharray="2,6" opacity="0.5">
+    <animateTransform attributeName="transform" type="rotate" values="360 160 145;0 160 145" dur="15s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Third ring -->
+  <circle cx="160" cy="145" r="50" fill="none" stroke="#00ccff" stroke-width="2" opacity="0.5" filter="url(#innerGlow)"/>
+  <circle cx="160" cy="145" r="50" fill="none" stroke="#00aaff" stroke-width="0.8" stroke-dasharray="6,4" opacity="0.6">
+    <animateTransform attributeName="transform" type="rotate" values="0 160 145;360 160 145" dur="10s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Inner ring -->
+  <circle cx="160" cy="145" r="35" fill="none" stroke="#00aaff" stroke-width="1" opacity="0.6"/>
+  <circle cx="160" cy="145" r="35" fill="none" stroke="#0088dd" stroke-width="0.5" stroke-dasharray="3,5" opacity="0.5">
+    <animateTransform attributeName="transform" type="rotate" values="360 160 145;0 160 145" dur="8s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Tri-segment markers -->
+  <g stroke="#00aaff" stroke-width="1.5" fill="none" opacity="0.7">
+    <line x1="160" y1="70" x2="160" y2="80"/>
+    <line x1="160" y1="210" x2="160" y2="220"/>
+    <line x1="95" y1="110" x2="103" y2="115"/>
+    <line x1="217" y1="175" x2="225" y2="180"/>
+    <line x1="95" y1="180" x2="103" y2="175"/>
+    <line x1="217" y1="115" x2="225" y2="110"/>
+  </g>
+
+  <!-- Core glow layers -->
+  <circle cx="160" cy="145" r="25" fill="url(#coreGrad2)" opacity="0.6">
+    <animate attributeName="opacity" values="0.4;0.8;0.4" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="160" cy="145" r="18" fill="url(#coreGrad)" filter="url(#glow)" opacity="0.9">
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="160" cy="145" r="10" fill="#ffffff" opacity="0.8" filter="url(#glow)">
+    <animate attributeName="r" values="9;11;9" dur="1.5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.6;1;0.6" dur="1.5s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Power conduits (radiating lines) -->
+  <g stroke="#00aaff" stroke-width="0.5" opacity="0.3">
+    <line x1="160" y1="65" x2="160" y2="70"/>
+    <line x1="160" y1="220" x2="160" y2="225"/>
+    <line x1="85" y1="145" x2="90" y2="145"/>
+    <line x1="230" y1="145" x2="235" y2="145"/>
+    <line x1="110" y1="95" x2="113" y2="98"/>
+    <line x1="207" y1="192" x2="210" y2="195"/>
+    <line x1="110" y1="195" x2="113" y2="192"/>
+    <line x1="207" y1="98" x2="210" y2="95"/>
+  </g>
+
+  <!-- Spec box -->
+  <rect x="260" y="80" width="130" height="130" rx="2" fill="#0a0808" stroke="#00aaff" stroke-width="0.8" opacity="0.9"/>
+  <rect x="260" y="80" width="130" height="130" rx="2" fill="#001122" opacity="0.3"/>
+
+  <!-- Spec header -->
+  <text x="325" y="98" text-anchor="middle" font-family="'Courier New', monospace" font-size="9" fill="#00aaff" letter-spacing="2">TECHNICAL SPECS</text>
+  <line x1="270" y1="103" x2="380" y2="103" stroke="#00aaff" stroke-width="0.5" opacity="0.5"/>
+
+  <!-- Spec values -->
+  <text x="275" y="122" font-family="'Courier New', monospace" font-size="8" fill="#666666">POWER</text>
+  <text x="380" y="122" text-anchor="end" font-family="'Courier New', monospace" font-size="10" fill="#00ddff" filter="url(#innerGlow)">3 GW</text>
+
+  <text x="275" y="142" font-family="'Courier New', monospace" font-size="8" fill="#666666">CORE</text>
+  <text x="380" y="142" text-anchor="end" font-family="'Courier New', monospace" font-size="10" fill="#00aaff">PALLADIUM</text>
+
+  <text x="275" y="162" font-family="'Courier New', monospace" font-size="8" fill="#666666">TEMP</text>
+  <text x="380" y="162" text-anchor="end" font-family="'Courier New', monospace" font-size="10" fill="#00aaff">347 K</text>
+
+  <text x="275" y="182" font-family="'Courier New', monospace" font-size="8" fill="#666666">EFF</text>
+  <text x="380" y="182" text-anchor="end" font-family="'Courier New', monospace" font-size="10" fill="#00aaff">99.7%</text>
+
+  <!-- Status indicator -->
+  <line x1="270" y1="188" x2="380" y2="188" stroke="#00aaff" stroke-width="0.5" opacity="0.3"/>
+  <text x="275" y="202" font-family="'Courier New', monospace" font-size="8" fill="#666666">STATUS</text>
+  <circle cx="318" cy="199" r="3" fill="#00ff88" opacity="0.8">
+    <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <text x="325" y="202" font-family="'Courier New', monospace" font-size="10" fill="#00ff88" filter="url(#innerGlow)">ACTIVE</text>
+
+  <!-- Bottom status bar -->
+  <line x1="10" y1="240" x2="390" y2="240" stroke="#00aaff" stroke-width="0.5" opacity="0.3"/>
+  <text x="20" y="255" font-family="'Courier New', monospace" font-size="7" fill="#333333">SYS://STARK.INDUSTRIES/REACTOR/MKI</text>
+  <text x="380" y="255" text-anchor="end" font-family="'Courier New', monospace" font-size="7" fill="#333333">v3.2.1</text>
+
+  <!-- Blinking dot -->
+  <circle cx="20" cy="270" r="2" fill="#00aaff" opacity="0.8">
+    <animate attributeName="opacity" values="0.2;1;0.2" dur="1s" repeatCount="indefinite"/>
+  </circle>
+  <text x="28" y="273" font-family="'Courier New', monospace" font-size="7" fill="#333333">BLUEPRINT REF: ARC-001</text>
+</svg>

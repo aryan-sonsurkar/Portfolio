@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#161b22"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bgGrad)"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="800" height="60" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="30" y="38" font-family="Segoe UI, Arial" font-size="22" fill="#f0f6fc" font-weight="bold">THE JOURNEY</text>
+  <text x="180" y="38" font-family="Segoe UI, Arial" font-size="14" fill="#8b949e">A Year of Growth, Learning & Building</text>
+  
+  <!-- Timeline -->
+  <g transform="translate(30, 80)">
+    <!-- Main Timeline Line -->
+    <line x1="400" y1="0" x2="400" y2="400" stroke="#30363d" stroke-width="3"/>
+    
+    <!-- 2025 Q1 -->
+    <circle cx="400" cy="30" r="10" fill="#3fb950"/>
+    <text x="420" y="35" font-family="Segoe UI, Arial" font-size="12" fill="#3fb950" font-weight="bold">Jan 2025</text>
+    <rect x="100" y="10" width="280" height="40" rx="6" fill="#21262d" stroke="#30363d"/>
+    <text x="120" y="35" font-family="Segoe UI, Arial" font-size="11" fill="#f0f6fc">SSC: 92% • Started Python</text>
+    
+    <!-- 2025 Q2 -->
+    <circle cx="400" cy="100" r="10" fill="#58a6ff"/>
+    <text x="420" y="105" font-family="Segoe UI, Arial" font-size="12" fill="#58a6ff" font-weight="bold">Apr 2025</text>
+    <rect x="420" y="80" width="280" height="40" rx="6" fill="#21262d" stroke="#30363d"/>
+    <text x="440" y="105" font-family="Segoe UI, Arial" font-size="11" fill="#f0f6fc">Built Draco CLI • First AI project</text>
+    
+    <!-- 2025 Q3 -->
+    <circle cx="400" cy="170" r="10" fill="#d2a8ff"/>
+    <text x="420" y="175" font-family="Segoe UI, Arial" font-size="12" fill="#d2a8ff" font-weight="bold">Jul 2025</text>
+    <rect x="100" y="150" width="280" height="40" rx="6" fill="#21262d" stroke="#30363d"/>
+    <text x="120" y="175" font-family="Segoe UI, Arial" font-size="11" fill="#f0f6fc">Started Diploma at Vidyalankar</text>
+    
+    <!-- 2025 Q4 -->
+    <circle cx="400" cy="240" r="10" fill="#f0883e"/>
+    <text x="420" y="245" font-family="Segoe UI, Arial" font-size="12" fill="#f0883e" font-weight="bold">Oct 2025</text>
+    <rect x="420" y="220" width="280" height="40" rx="6" fill="#21262d" stroke="#30363d"/>
+    <text x="440" y="245" font-family="Segoe UI, Arial" font-size="11" fill="#f0f6fc">MSCIT: 78 marks • Jio Hackathon</text>
+    
+    <!-- 2026 Q1 -->
+    <circle cx="400" cy="310" r="10" fill="#ffd700"/>
+    <text x="420" y="315" font-family="Segoe UI, Arial" font-size="12" fill="#ffd700" font-weight="bold">Jan 2026</text>
+    <rect x="100" y="290" width="280" height="40" rx="6" fill="#21262d" stroke="#30363d"/>
+    <text x="120" y="315" font-family="Segoe UI, Arial" font-size="11" fill="#f0f6fc">Sem-1: 80% • ESP32 projects</text>
+    
+    <!-- 2026 Q2 -->
+    <circle cx="400" cy="380" r="10" fill="#3fb950"/>
+    <text x="420" y="385" font-family="Segoe UI, Arial" font-size="12" fill="#3fb950" font-weight="bold">Apr 2026</text>
+    <rect x="420" y="360" width="280" height="40" rx="6" fill="#21262d" stroke="#30363d"/>
+    <text x="440" y="385" font-family="Segoe UI, Arial" font-size="11" fill="#f0f6fc">Sem-2: 85% • Started Kaevron</text>
+    
+    <!-- Key Moments -->
+    <rect x="50" y="410" width="700" height="70" rx="8" fill="#161b22" stroke="#30363d"/>
+    <text x="70" y="435" font-family="Segoe UI, Arial" font-size="12" fill="#ffd700" font-weight="bold">KEY MOMENTS</text>
+    <text x="70" y="455" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">SSC 92% → First Python Code → Draco CLI → SIH 2025 → Kaevron Internship → Best Performer → MODCODES</text>
+    <text x="70" y="475" font-family="Segoe UI, Arial" font-size="10" fill="#3fb950">333 contributions • 15+ projects • 10 starred repos • 500+ LinkedIn connections</text>
+  </g>
+  
+  <!-- Footer -->
+  <rect x="0" y="490" width="800" height="10" fill="#21262d"/>
+</svg>

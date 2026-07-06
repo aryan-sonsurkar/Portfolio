@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#161b22"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bgGrad)"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="800" height="60" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="30" y="38" font-family="Segoe UI, Arial" font-size="22" fill="#f0f6fc" font-weight="bold">OPEN SOURCE BOARD</text>
+  <text x="250" y="38" font-family="Segoe UI, Arial" font-size="14" fill="#8b949e">Contributing to the Community</text>
+  
+  <!-- Open Source Stats -->
+  <g transform="translate(30, 80)">
+    <rect x="0" y="0" width="180" height="120" rx="8" fill="#21262d" stroke="#3fb950" stroke-width="2"/>
+    <text x="20" y="30" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e">Public Repos</text>
+    <text x="20" y="70" font-family="Segoe UI, Arial" font-size="42" fill="#3fb950" font-weight="bold">15+</text>
+    <text x="20" y="100" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">and growing</text>
+    
+    <rect x="200" y="0" width="180" height="120" rx="8" fill="#21262d" stroke="#58a6ff" stroke-width="2"/>
+    <text x="220" y="30" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e">Contributions (2026)</text>
+    <text x="220" y="70" font-family="Segoe UI, Arial" font-size="42" fill="#58a6ff" font-weight="bold">333</text>
+    <text x="220" y="100" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">this year</text>
+    
+    <rect x="400" y="0" width="180" height="120" rx="8" fill="#21262d" stroke="#ffd700" stroke-width="2"/>
+    <text x="420" y="30" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e">Stars Earned</text>
+    <text x="420" y="70" font-family="Segoe UI, Arial" font-size="42" fill="#ffd700" font-weight="bold">10</text>
+    <text x="420" y="100" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">self-starred</text>
+    
+    <rect x="600" y="0" width="170" height="120" rx="8" fill="#21262d" stroke="#d2a8ff" stroke-width="2"/>
+    <text x="620" y="30" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e">Languages</text>
+    <text x="620" y="55" font-family="Segoe UI, Arial" font-size="11" fill="#3572A5">■ Python</text>
+    <text x="620" y="72" font-family="Segoe UI, Arial" font-size="11" fill="#f1e05a">■ JavaScript</text>
+    <text x="620" y="89" font-family="Segoe UI, Arial" font-size="11" fill="#3178c6">■ TypeScript</text>
+    <text x="620" y="106" font-family="Segoe UI, Arial" font-size="11" fill="#555555">■ C</text>
+  </g>
+  
+  <!-- Repository List -->
+  <rect x="30" y="220" width="740" height="260" rx="8" fill="#21262d" stroke="#30363d"/>
+  <text x="50" y="250" font-family="Segoe UI, Arial" font-size="14" fill="#f0f6fc" font-weight="bold">NOTABLE REPOSITORIES</text>
+  
+  <g transform="translate(50, 270)">
+    <!-- Repo 1 -->
+    <rect x="0" y="0" width="350" height="60" rx="6" fill="#161b22" stroke="#30363d"/>
+    <text x="20" y="20" font-family="Segoe UI, Arial" font-size="12" fill="#58a6ff" font-weight="bold">aryan-os-portfolio</text>
+    <text x="20" y="35" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">3D Immersive Portfolio • Next.js • TypeScript • R3F</text>
+    <text x="20" y="50" font-family="Segoe UI, Arial" font-size="10" fill="#3fb950">✓ Live</text>
+    
+    <!-- Repo 2 -->
+    <rect x="370" y="0" width="320" height="60" rx="6" fill="#161b22" stroke="#30363d"/>
+    <text x="390" y="20" font-family="Segoe UI, Arial" font-size="12" fill="#58a6ff" font-weight="bold">modcodes-ide</text>
+    <text x="390" y="35" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">AI-Powered Code Editor • Next.js • Electron</text>
+    <text x="390" y="50" font-family="Segoe UI, Arial" font-size="10" fill="#d2a8ff">● Open Source</text>
+    
+    <!-- Repo 3 -->
+    <rect x="0" y="70" width="350" height="60" rx="6" fill="#161b22" stroke="#30363d"/>
+    <text x="20" y="90" font-family="Segoe UI, Arial" font-size="12" fill="#58a6ff" font-weight="bold">fixly-desktop</text>
+    <text x="20" y="105" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">AI Troubleshooting Assistant • TypeScript</text>
+    <text x="20" y="120" font-family="Segoe UI, Arial" font-size="10" fill="#d2a8ff">● In Development</text>
+    
+    <!-- Repo 4 -->
+    <rect x="370" y="70" width="320" height="60" rx="6" fill="#161b22" stroke="#30363d"/>
+    <text x="390" y="90" font-family="Segoe UI, Arial" font-size="12" fill="#58a6ff" font-weight="bold">draco-cli</text>
+    <text x="390" y="105" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">AI-Powered CLI Assistant • Python</text>
+    <text x="390" y="120" font-family="Segoe UI, Arial" font-size="10" fill="#3fb950">✓ Live</text>
+    
+    <!-- Repo 5 -->
+    <rect x="0" y="140" width="350" height="60" rx="6" fill="#161b22" stroke="#30363d"/>
+    <text x="20" y="160" font-family="Segoe UI, Arial" font-size="12" fill="#58a6ff" font-weight="bold">esp32-arc-reactor</text>
+    <text x="20" y="175" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Iron Man Inspired Hardware • ESP32 • C++</text>
+    <text x="20" y="190" font-family="Segoe UI, Arial" font-size="10" fill="#3fb950">✓ Working Prototype</text>
+    
+    <!-- Repo 6 -->
+    <rect x="370" y="140" width="320" height="60" rx="6" fill="#161b22" stroke="#30363d"/>
+    <text x="390" y="160" font-family="Segoe UI, Arial" font-size="12" fill="#58a6ff" font-weight="bold">terminal-chat-app</text>
+    <text x="390" y="175" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Real-time Chat • Python • Socket Programming</text>
+    <text x="390" y="190" font-family="Segoe UI, Arial" font-size="10" fill="#3fb950">✓ Live</text>
+    
+    <!-- More -->
+    <text x="0" y="220" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">+ 9 more repositories including: git-system, weekly-leetcode, smart-cli-timer, student-utility-toolkit, and beginner-python-projects</text>
+  </g>
+  
+  <!-- Footer -->
+  <rect x="0" y="490" width="800" height="10" fill="#21262d"/>
+</svg>

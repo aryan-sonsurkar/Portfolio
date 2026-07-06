@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#161b22"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bgGrad)"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="800" height="60" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="30" y="38" font-family="Segoe UI, Arial" font-size="22" fill="#f0f6fc" font-weight="bold">AI/ML EXPERIMENTS</text>
+  <text x="250" y="38" font-family="Segoe UI, Arial" font-size="14" fill="#8b949e">Exploring the Future of Development</text>
+  
+  <!-- AI Projects -->
+  <g transform="translate(30, 80)">
+    <!-- Draco CLI -->
+    <rect x="0" y="0" width="350" height="180" rx="8" fill="#21262d" stroke="#38bdf8" stroke-width="2"/>
+    <rect x="0" y="0" width="350" height="35" rx="8" fill="#38bdf8"/>
+    <text x="20" y="22" font-family="Segoe UI, Arial" font-size="14" fill="#0d1117" font-weight="bold">DRACO CLI - JARVIS EVOLUTION</text>
+    
+    <text x="20" y="55" font-family="Segoe UI, Arial" font-size="12" fill="#f0f6fc">Features:</text>
+    <text x="20" y="75" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">✓ who are you • system status</text>
+    <text x="20" y="90" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">✓ open website github</text>
+    <text x="20" y="105" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">✓ note add / note show</text>
+    <text x="20" y="120" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">✓ generate questions</text>
+    <text x="20" y="135" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">✓ syllabus show c programming</text>
+    <text x="20" y="150" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">✓ command center</text>
+    <text x="20" y="165" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">✓ practical list / practical done</text>
+    
+    <text x="200" y="75" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">✓ draco project</text>
+    <text x="200" y="90" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">✓ send file on whatsapp</text>
+    <text x="200" y="105" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">✓ end of the day</text>
+    <text x="200" y="120" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">✓ macro record / stop</text>
+    <text x="200" y="135" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">✓ game chess / snake</text>
+    <text x="200" y="150" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">✓ alias add yt open website youtube</text>
+    <text x="200" y="165" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">✓ safe mode on/off/status</text>
+    
+    <!-- MODCODES AI -->
+    <rect x="380" y="0" width="390" height="180" rx="8" fill="#21262d" stroke="#7c3aed" stroke-width="2"/>
+    <rect x="380" y="0" width="390" height="35" rx="8" fill="#7c3aed"/>
+    <text x="400" y="22" font-family="Segoe UI, Arial" font-size="14" fill="#f0f6fc" font-weight="bold">MODCODES AI ENGINE</text>
+    
+    <text x="400" y="55" font-family="Segoe UI, Arial" font-size="12" fill="#f0f6fc">AI Capabilities:</text>
+    <text x="400" y="75" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">✓ Code generation</text>
+    <text x="400" y="90" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">✓ Error detection</text>
+    <text x="400" y="105" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">✓ Refactoring suggestions</text>
+    <text x="400" y="120" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">✓ Project management</text>
+    <text x="400" y="135" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">✓ Local LLM support</text>
+    <text x="400" y="150" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">✓ Workspace automation</text>
+    <text x="400" y="165" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">✓ Hybrid AI mode (planned)</text>
+    
+    <text x="580" y="75" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Models Used:</text>
+    <text x="580" y="90" font-family="Segoe UI, Arial" font-size="10" fill="#38bdf8">• Ollama (Local)</text>
+    <text x="580" y="105" font-family="Segoe UI, Arial" font-size="10" fill="#7c3aed">• OpenRouter</text>
+    <text x="580" y="120" font-family="Segoe UI, Arial" font-size="10" fill="#38bdf8">• Nemotron 3 Ultra</text>
+  </g>
+  
+  <!-- Research Areas -->
+  <rect x="30" y="280" width="740" height="200" rx="8" fill="#21262d" stroke="#30363d"/>
+  <text x="50" y="310" font-family="Segoe UI, Arial" font-size="14" fill="#f0f6fc" font-weight="bold">RESEARCH AGENDA</text>
+  
+  <g transform="translate(50, 330)">
+    <text x="0" y="0" font-family="Segoe UI, Arial" font-size="12" fill="#38bdf8" font-weight="bold">Current Focus</text>
+    <text x="0" y="20" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Local LLM optimization</text>
+    <text x="0" y="35" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• AI-assisted development</text>
+    <text x="0" y="50" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Code generation models</text>
+    
+    <text x="0" y="80" font-family="Segoe UI, Arial" font-size="12" fill="#7c3aed" font-weight="bold">Future Exploration</text>
+    <text x="0" y="100" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Multi-model orchestration</text>
+    <text x="0" y="115" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Context-aware AI assistants</text>
+    <text x="0" y="130" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Autonomous coding agents</text>
+    
+    <text x="350" y="0" font-family="Segoe UI, Arial" font-size="12" fill="#3fb950" font-weight="bold">Philosophy</text>
+    <text x="350" y="20" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">"AI can't work without human interaction"</text>
+    <text x="350" y="40" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">- Aryan Sonsurkar</text>
+    
+    <text x="350" y="70" font-family="Segoe UI, Arial" font-size="12" fill="#ffd700" font-weight="bold">Key Insight</text>
+    <text x="350" y="90" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Build tools that augment human</text>
+    <text x="350" y="105" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">intelligence, not replace it.</text>
+    <text x="350" y="120" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Local-first. Privacy-first. No limits.</text>
+  </g>
+  
+  <!-- Footer -->
+  <rect x="0" y="490" width="800" height="10" fill="#21262d"/>
+</svg>

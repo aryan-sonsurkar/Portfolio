@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#161b22"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bgGrad)"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="800" height="60" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="30" y="38" font-family="Segoe UI, Arial" font-size="22" fill="#f0f6fc" font-weight="bold">CUSTOM LANG / IDE</text>
+  <text x="250" y="38" font-family="Segoe UI, Arial" font-size="14" fill="#8b949e">Building Development Tools</text>
+  
+  <!-- MODCODES IDE -->
+  <g transform="translate(30, 80)">
+    <rect x="0" y="0" width="400" height="200" rx="8" fill="#21262d" stroke="#7c3aed" stroke-width="2"/>
+    <rect x="0" y="0" width="400" height="35" rx="8" fill="#7c3aed"/>
+    <text x="20" y="22" font-family="Segoe UI, Arial" font-size="14" fill="#f0f6fc" font-weight="bold">MODCODES IDE</text>
+    
+    <text x="20" y="55" font-family="Segoe UI, Arial" font-size="12" fill="#f0f6fc">Current Features:</text>
+    <text x="20" y="75" font-family="Segoe UI, Arial" font-size="10" fill="#3fb950">✓ Project Manager UI</text>
+    <text x="20" y="90" font-family="Segoe UI, Arial" font-size="10" fill="#3fb950">✓ Workspace Layout</text>
+    <text x="20" y="105" font-family="Segoe UI, Arial" font-size="10" fill="#3fb950">✓ Local Storage</text>
+    <text x="20" y="120" font-family="Segoe UI, Arial" font-size="10" fill="#58a6ff">● AI Chat Panel</text>
+    <text x="20" y="135" font-family="Segoe UI, Arial" font-size="10" fill="#58a6ff">● Code Editor (Monaco)</text>
+    <text x="20" y="150" font-family="Segoe UI, Arial" font-size="10" fill="#58a6ff">● File Explorer</text>
+    
+    <text x="200" y="75" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Upcoming:</text>
+    <text x="200" y="90" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">○ Ollama Integration</text>
+    <text x="200" y="105" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">○ Terminal Emulator</text>
+    <text x="200" y="120" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">○ Git Integration</text>
+    <text x="200" y="135" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">○ Voice Commands</text>
+    <text x="200" y="150" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">○ Plugin System</text>
+    
+    <text x="20" y="180" font-family="Segoe UI, Arial" font-size="11" fill="#7c3aed" font-weight="bold">Tech: Next.js • Electron • Ollama • Monaco Editor</text>
+  </g>
+  
+  <!-- Fixly Ecosystem -->
+  <g transform="translate(450, 80)">
+    <rect x="0" y="0" width="320" height="200" rx="8" fill="#21262d" stroke="#d2a8ff" stroke-width="2"/>
+    <rect x="0" y="0" width="320" height="35" rx="8" fill="#d2a8ff"/>
+    <text x="20" y="22" font-family="Segoe UI, Arial" font-size="14" fill="#0d1117" font-weight="bold">FIXLY ECOSYSTEM</text>
+    
+    <text x="20" y="55" font-family="Segoe UI, Arial" font-size="12" fill="#f0f6fc">Fixly AI:</text>
+    <text x="20" y="75" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• AI troubleshooting assistant</text>
+    <text x="20" y="90" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Describe problem → get solution</text>
+    <text x="20" y="105" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Context-aware guidance</text>
+    
+    <text x="20" y="130" font-family="Segoe UI, Arial" font-size="12" fill="#f0f6fc">Fixly Desktop:</text>
+    <text x="20" y="150" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Desktop application</text>
+    <text x="20" y="165" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• AI-powered diagnostics</text>
+    <text x="20" y="180" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Developer productivity tool</text>
+    
+    <text x="20" y="195" font-family="Segoe UI, Arial" font-size="10" fill="#d2a8ff">Tech: TypeScript • AI Integration</text>
+  </g>
+  
+  <!-- Vision -->
+  <rect x="30" y="300" width="740" height="180" rx="8" fill="#21262d" stroke="#30363d"/>
+  <text x="50" y="330" font-family="Segoe UI, Arial" font-size="14" fill="#f0f6fc" font-weight="bold">VISION: AI-FIRST DEVELOPMENT</text>
+  
+  <g transform="translate(50, 350)">
+    <text x="0" y="0" font-family="Segoe UI, Arial" font-size="12" fill="#38bdf8" font-weight="bold">The Problem</text>
+    <text x="0" y="20" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Cloud AI has limits and privacy concerns</text>
+    <text x="0" y="35" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Current tools lack local AI integration</text>
+    <text x="0" y="50" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Developers need better productivity tools</text>
+    
+    <text x="0" y="80" font-family="Segoe UI, Arial" font-size="12" fill="#3fb950" font-weight="bold">The Solution</text>
+    <text x="0" y="100" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• MODCODES: Local AI IDE with no limits</text>
+    <text x="0" y="115" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Fixly: AI troubleshooting assistant</text>
+    <text x="0" y="130" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Draco CLI: Personal AI assistant</text>
+    
+    <text x="350" y="0" font-family="Segoe UI, Arial" font-size="12" fill="#ffd700" font-weight="bold">The Goal</text>
+    <text x="350" y="20" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Build an ecosystem of AI tools that:</text>
+    <text x="350" y="40" font-family="Segoe UI, Arial" font-size="10" fill="#3fb950">✓ Keep data private (local-first)</text>
+    <text x="350" y="55" font-family="Segoe UI, Arial" font-size="10" fill="#58a6ff">✓ Have no usage limits</text>
+    <text x="350" y="70" font-family="Segoe UI, Arial" font-size="10" fill="#d2a8ff">✓ Augment human intelligence</text>
+    <text x="350" y="85" font-family="Segoe UI, Arial" font-size="10" fill="#f0883e">✓ Are open-source</text>
+    <text x="350" y="100" font-family="Segoe UI, Arial" font-size="10" fill="#f778ba">✓ Work offline</text>
+    <text x="350" y="115" font-family="Segoe UI, Arial" font-size="10" fill="#38bdf8">✓ Are free forever</text>
+  </g>
+  
+  <!-- Footer -->
+  <rect x="0" y="490" width="800" height="10" fill="#21262d"/>
+</svg>

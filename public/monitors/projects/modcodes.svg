@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#161b22"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bgGrad)"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="800" height="60" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="30" y="38" font-family="Segoe UI, Arial" font-size="22" fill="#f0f6fc" font-weight="bold">SHIPPED PRODUCTS</text>
+  <text x="250" y="38" font-family="Segoe UI, Arial" font-size="14" fill="#8b949e">Aryan's Project Portfolio</text>
+  
+  <!-- Project Grid -->
+  <g transform="translate(30, 80)">
+    <!-- ARYAN OS -->
+    <rect x="0" y="0" width="230" height="120" rx="8" fill="#21262d" stroke="#3fb950" stroke-width="2"/>
+    <text x="20" y="25" font-family="Segoe UI, Arial" font-size="12" fill="#3fb950" font-weight="bold">ARYAN OS PORTFOLIO</text>
+    <text x="20" y="45" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">3D Immersive Portfolio</text>
+    <text x="20" y="60" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Next.js • TypeScript • R3F • Three.js</text>
+    <text x="20" y="80" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Status: Live | June-July 2026</text>
+    <text x="20" y="100" font-family="Segoe UI, Arial" font-size="10" fill="#3fb950">✓ arssystem.vercel.app</text>
+    
+    <!-- MODCODES -->
+    <rect x="250" y="0" width="230" height="120" rx="8" fill="#21262d" stroke="#58a6ff" stroke-width="2"/>
+    <text x="270" y="25" font-family="Segoe UI, Arial" font-size="12" fill="#58a6ff" font-weight="bold">MODCODES IDE</text>
+    <text x="270" y="45" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">AI-Powered Code Editor</text>
+    <text x="270" y="60" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Next.js • Electron • Ollama</text>
+    <text x="270" y="80" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Status: In Development | 2026</text>
+    <text x="270" y="100" font-family="Segoe UI, Arial" font-size="10" fill="#58a6ff">● Open Source</text>
+    
+    <!-- Fixly Desktop -->
+    <rect x="500" y="0" width="240" height="120" rx="8" fill="#21262d" stroke="#d2a8ff" stroke-width="2"/>
+    <text x="520" y="25" font-family="Segoe UI, Arial" font-size="12" fill="#d2a8ff" font-weight="bold">FIXLY DESKTOP</text>
+    <text x="520" y="45" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">AI Troubleshooting Assistant</text>
+    <text x="520" y="60" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">TypeScript • AI Integration</text>
+    <text x="520" y="80" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Status: In Development | 2026</text>
+    <text x="520" y="100" font-family="Segoe UI, Arial" font-size="10" fill="#d2a8ff">● Coming Soon</text>
+    
+    <!-- Draco CLI -->
+    <rect x="0" y="140" width="230" height="120" rx="8" fill="#21262d" stroke="#f0883e" stroke-width="2"/>
+    <text x="20" y="165" font-family="Segoe UI, Arial" font-size="12" fill="#f0883e" font-weight="bold">DRACO CLI</text>
+    <text x="20" y="185" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">AI-Powered CLI Assistant</text>
+    <text x="20" y="200" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Python • AI Automation</text>
+    <text x="20" y="220" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Status: Live | 2025-2026</text>
+    <text x="20" y="240" font-family="Segoe UI, Arial" font-size="10" fill="#f0883e">✓ 20+ commands</text>
+    
+    <!-- ESP32 Arc Reactor -->
+    <rect x="250" y="140" width="230" height="120" rx="8" fill="#21262d" stroke="#ffd700" stroke-width="2"/>
+    <text x="270" y="165" font-family="Segoe UI, Arial" font-size="12" fill="#ffd700" font-weight="bold">ESP32 ARC REACTOR</text>
+    <text x="270" y="185" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Iron Man Inspired Hardware</text>
+    <text x="270" y="200" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">ESP32 • Arduino • C++</text>
+    <text x="270" y="220" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Status: Working Prototype | Jan 2026</text>
+    <text x="270" y="240" font-family="Segoe UI, Arial" font-size="10" fill="#ffd700">✓ LED animations</text>
+    
+    <!-- Kokanam.in -->
+    <rect x="500" y="140" width="240" height="120" rx="8" fill="#21262d" stroke="#f778ba" stroke-width="2"/>
+    <text x="520" y="165" font-family="Segoe UI, Arial" font-size="12" fill="#f778ba" font-weight="bold">KOKANAM.IN</text>
+    <text x="520" y="185" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">E-Commerce Client Project</text>
+    <text x="520" y="200" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">React • Next.js • TypeScript • Tailwind</text>
+    <text x="520" y="220" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Status: Live | 2026</text>
+    <text x="520" y="240" font-family="Segoe UI, Arial" font-size="10" fill="#f778ba">✓ kokanam.in</text>
+    
+    <!-- More Projects -->
+    <rect x="0" y="280" width="740" height="120" rx="8" fill="#21262d" stroke="#30363d"/>
+    <text x="20" y="310" font-family="Segoe UI, Arial" font-size="12" fill="#f0f6fc" font-weight="bold">MORE PROJECTS</text>
+    
+    <text x="20" y="335" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Terminal Chat App (Python Sockets) • Git System (Python) • Smart CLI Timer • Student Utility Toolkit</text>
+    <text x="20" y="355" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• ESP32 Traffic Light • ESP32 OLED Display • 7 Beginner Python Projects • Weekly LeetCode</text>
+    <text x="20" y="375" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Vishwanath Malusare Portfolio (Client) • CodeShorts Bot (YouTube Automation)</text>
+    <text x="20" y="395" font-family="Segoe UI, Arial" font-size="10" fill="#3fb950">Total: 15+ projects • 333 GitHub contributions • 10 starred repos</text>
+  </g>
+  
+  <!-- Footer -->
+  <rect x="0" y="490" width="800" height="10" fill="#21262d"/>
+</svg>

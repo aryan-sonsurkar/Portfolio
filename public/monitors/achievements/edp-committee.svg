@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#161b22"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bgGrad)"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="800" height="60" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="30" y="38" font-family="Segoe UI, Arial" font-size="22" fill="#f0f6fc" font-weight="bold">EDP COMMITTEE</text>
+  <text x="220" y="38" font-family="Segoe UI, Arial" font-size="14" fill="#8b949e">Entrepreneurship Development Program</text>
+  
+  <!-- Profile Card -->
+  <g transform="translate(30, 80)">
+    <rect x="0" y="0" width="350" height="200" rx="8" fill="#21262d" stroke="#ffd700" stroke-width="2"/>
+    <rect x="0" y="0" width="350" height="40" rx="8" fill="#ffd700"/>
+    <text x="20" y="25" font-family="Segoe UI, Arial" font-size="14" fill="#0d1117" font-weight="bold">MARKETING HEAD</text>
+    
+    <text x="20" y="65" font-family="Segoe UI, Arial" font-size="12" fill="#f0f6fc">Aryan Rakesh Sonsurkar</text>
+    <text x="20" y="85" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Marketing Head • EDP Committee</text>
+    <text x="20" y="105" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Vidyalankar Polytechnic</text>
+    
+    <text x="20" y="135" font-family="Segoe UI, Arial" font-size="12" fill="#3fb950" font-weight="bold">Responsibilities</text>
+    <text x="20" y="155" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Planning promotional campaigns</text>
+    <text x="20" y="170" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Designing marketing strategies</text>
+    <text x="20" y="185" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Coordinating workshops and events</text>
+  </g>
+  
+  <!-- Skills -->
+  <g transform="translate(400, 80)">
+    <rect x="0" y="0" width="370" height="200" rx="8" fill="#21262d" stroke="#30363d"/>
+    <text x="20" y="30" font-family="Segoe UI, Arial" font-size="14" fill="#f0f6fc" font-weight="bold">SKILLS DEVELOPED</text>
+    
+    <text x="20" y="60" font-family="Segoe UI, Arial" font-size="11" fill="#3fb950">✓ Communication</text>
+    <text x="20" y="80" font-family="Segoe UI, Arial" font-size="11" fill="#58a6ff">✓ Leadership</text>
+    <text x="20" y="100" font-family="Segoe UI, Arial" font-size="11" fill="#d2a8ff">✓ Teamwork</text>
+    <text x="20" y="120" font-family="Segoe UI, Arial" font-size="11" fill="#f0883e">✓ Event Management</text>
+    
+    <text x="200" y="60" font-family="Segoe UI, Arial" font-size="11" fill="#f778ba">✓ Marketing Strategy</text>
+    <text x="200" y="80" font-family="Segoe UI, Arial" font-size="11" fill="#ffd700">✓ Social Media</text>
+    <text x="200" y="100" font-family="Segoe UI, Arial" font-size="11" fill="#38bdf8">✓ Content Creation</text>
+    <text x="200" y="120" font-family="Segoe UI, Arial" font-size="11" fill="#3fb950">✓ Public Speaking</text>
+    
+    <text x="20" y="150" font-family="Segoe UI, Arial" font-size="12" fill="#f0f6fc" font-weight="bold">Impact</text>
+    <text x="20" y="170" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Increased event participation</text>
+    <text x="20" y="185" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Improved committee visibility</text>
+  </g>
+  
+  <!-- About EDP -->
+  <rect x="30" y="300" width="740" height="180" rx="8" fill="#21262d" stroke="#30363d"/>
+  <text x="50" y="330" font-family="Segoe UI, Arial" font-size="14" fill="#f0f6fc" font-weight="bold">ABOUT EDP</text>
+  
+  <g transform="translate(50, 350)">
+    <text x="0" y="0" font-family="Segoe UI, Arial" font-size="12" fill="#ffd700" font-weight="bold">What is EDP?</text>
+    <text x="0" y="20" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">EDP stands for Entrepreneurship Development Program.</text>
+    <text x="0" y="35" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">It is a student committee that promotes entrepreneurship, innovation,</text>
+    <text x="0" y="50" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">leadership, and startup culture through events, workshops, and activities.</text>
+    
+    <text x="0" y="80" font-family="Segoe UI, Arial" font-size="12" fill="#3fb950" font-weight="bold">Why It Matters</text>
+    <text x="0" y="100" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">"Engineering is not only about writing code. It is also about solving</text>
+    <text x="0" y="115" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">real problems, communicating ideas, leading teams, and creating impact."</text>
+    <text x="0" y="135" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">- Aryan Sonsurkar</text>
+    
+    <text x="350" y="0" font-family="Segoe UI, Arial" font-size="12" fill="#58a6ff" font-weight="bold">Activities</text>
+    <text x="350" y="20" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Workshops on startups</text>
+    <text x="350" y="35" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Competitions</text>
+    <text x="350" y="50" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Guest lectures</text>
+    <text x="350" y="65" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Networking events</text>
+    
+    <text x="350" y="95" font-family="Segoe UI, Arial" font-size="12" fill="#d2a8ff" font-weight="bold">Goals</text>
+    <text x="350" y="115" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Promote entrepreneurship culture</text>
+    <text x="350" y="130" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Develop leadership skills</text>
+    <text x="350" y="145" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Create impact in college community</text>
+  </g>
+  
+  <!-- Footer -->
+  <rect x="0" y="490" width="800" height="10" fill="#21262d"/>
+</svg>

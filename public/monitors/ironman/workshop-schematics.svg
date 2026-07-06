@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="300" viewBox="0 0 600 300">
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <pattern id="blueprintGrid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#ff6600" stroke-width="0.4" stroke-opacity="0.2"/>
+    </pattern>
+    <pattern id="subGrid" width="6" height="6" patternUnits="userSpaceOnUse">
+      <path d="M 6 0 L 0 0 0 6" fill="none" stroke="#ff6600" stroke-width="0.15" stroke-opacity="0.1"/>
+    </pattern>
+    <linearGradient id="zoneFill1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff6600" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#ff6600" stop-opacity="0.02"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="300" fill="#0a0808"/>
+  <rect width="600" height="300" fill="url(#subGrid)"/>
+  <rect width="600" height="300" fill="url(#blueprintGrid)"/>
+
+  <!-- Corner brackets -->
+  <g stroke="#ff6600" stroke-width="1.5" fill="none" opacity="0.6">
+    <path d="M 10 30 L 10 10 L 30 10"/>
+    <path d="M 570 10 L 590 10 L 590 30"/>
+    <path d="M 590 270 L 590 290 L 570 290"/>
+    <path d="M 30 290 L 10 290 L 10 270"/>
+  </g>
+
+  <!-- Title -->
+  <text x="300" y="28" text-anchor="middle" font-family="'Courier New', monospace" font-size="12" fill="#ff6600" letter-spacing="4" filter="url(#glow)">WORKSHOP LAYOUT</text>
+
+  <!-- Outer boundary -->
+  <rect x="30" y="45" width="540" height="220" rx="1" fill="none" stroke="#ff6600" stroke-width="1" opacity="0.5"/>
+  <rect x="30" y="45" width="540" height="220" rx="1" fill="url(#zoneFill1)"/>
+
+  <!-- Assembly Bay (top-left) -->
+  <rect x="35" y="50" width="200" height="105" fill="none" stroke="#ff6600" stroke-width="1.5" opacity="0.7" stroke-dasharray="0"/>
+  <rect x="35" y="50" width="200" height="105" fill="#ff6600" opacity="0.05"/>
+  <text x="135" y="85" text-anchor="middle" font-family="'Courier New', monospace" font-size="11" fill="#ff6600" letter-spacing="2">ASSEMBLY BAY</text>
+  <!-- Assembly icons -->
+  <g stroke="#ff6600" stroke-width="0.8" fill="none" opacity="0.4">
+    <rect x="60" y="100" width="20" height="15" rx="1"/>
+    <rect x="90" y="100" width="20" height="15" rx="1"/>
+    <rect x="120" y="100" width="20" height="15" rx="1"/>
+    <rect x="150" y="100" width="20" height="15" rx="1"/>
+    <rect x="180" y="100" width="20" height="15" rx="1"/>
+    <line x1="60" y1="125" x2="200" y2="125" stroke-dasharray="3,3"/>
+  </g>
+  <text x="135" y="145" text-anchor="middle" font-family="'Courier New', monospace" font-size="7" fill="#664400">ZONE A // 200 SQ FT</text>
+
+  <!-- Testing Area (top-right) -->
+  <rect x="240" y="50" width="150" height="105" fill="none" stroke="#ff6600" stroke-width="1.5" opacity="0.7"/>
+  <rect x="240" y="50" width="150" height="105" fill="#ff6600" opacity="0.05"/>
+  <text x="315" y="85" text-anchor="middle" font-family="'Courier New', monospace" font-size="11" fill="#ff6600" letter-spacing="2">TESTING AREA</text>
+  <!-- Testing icons -->
+  <g stroke="#ff6600" stroke-width="0.8" fill="none" opacity="0.4">
+    <circle cx="280" cy="110" r="12"/>
+    <circle cx="315" cy="110" r="12"/>
+    <circle cx="350" cy="110" r="12"/>
+    <line x1="292" y1="110" x2="303" y2="110"/>
+    <line x1="327" y1="110" x2="338" y2="110"/>
+  </g>
+  <text x="315" y="145" text-anchor="middle" font-family="'Courier New', monospace" font-size="7" fill="#664400">ZONE B // 150 SQ FT</text>
+
+  <!-- Control Panel (middle-right) -->
+  <rect x="395" y="50" width="170" height="105" fill="none" stroke="#ff6600" stroke-width="1.5" opacity="0.7"/>
+  <rect x="395" y="50" width="170" height="105" fill="#ff6600" opacity="0.05"/>
+  <text x="480" y="85" text-anchor="middle" font-family="'Courier New', monospace" font-size="11" fill="#ff6600" letter-spacing="2">CONTROL PANEL</text>
+  <!-- Panel icons -->
+  <g stroke="#ff6600" stroke-width="0.8" fill="none" opacity="0.4">
+    <rect x="415" y="98" width="45" height="30" rx="2"/>
+    <rect x="470" y="98" width="45" height="30" rx="2"/>
+    <line x1="425" y1="108" x2="450" y2="108"/>
+    <line x1="425" y1="115" x2="450" y2="115"/>
+    <line x1="425" y1="122" x2="440" y2="122"/>
+    <circle cx="492" cy="108" r="3" fill="#ff6600" opacity="0.3"/>
+    <circle cx="492" cy="118" r="3" fill="#ff6600" opacity="0.3"/>
+  </g>
+  <text x="480" y="145" text-anchor="middle" font-family="'Courier New', monospace" font-size="7" fill="#664400">ZONE C // 170 SQ FT</text>
+
+  <!-- Workstation (bottom-left) -->
+  <rect x="35" y="160" width="180" height="100" fill="none" stroke="#ff6600" stroke-width="1.5" opacity="0.7"/>
+  <rect x="35" y="160" width="180" height="100" fill="#ff6600" opacity="0.05"/>
+  <text x="125" y="195" text-anchor="middle" font-family="'Courier New', monospace" font-size="11" fill="#ff6600" letter-spacing="2">WORKSTATION</text>
+  <!-- Desk icons -->
+  <g stroke="#ff6600" stroke-width="0.8" fill="none" opacity="0.4">
+    <rect x="55" y="208" width="50" height="30" rx="2"/>
+    <rect x="115" y="208" width="50" height="30" rx="2"/>
+    <line x1="65" y1="218" x2="95" y2="218"/>
+    <line x1="125" y1="218" x2="155" y2="218"/>
+  </g>
+  <text x="125" y="252" text-anchor="middle" font-family="'Courier New', monospace" font-size="7" fill="#664400">ZONE D // 180 SQ FT</text>
+
+  <!-- Storage (bottom-center) -->
+  <rect x="220" y="160" width="160" height="100" fill="none" stroke="#ff6600" stroke-width="1.5" opacity="0.7"/>
+  <rect x="220" y="160" width="160" height="100" fill="#ff6600" opacity="0.05"/>
+  <text x="300" y="195" text-anchor="middle" font-family="'Courier New', monospace" font-size="11" fill="#ff6600" letter-spacing="2">STORAGE</text>
+  <!-- Shelf icons -->
+  <g stroke="#ff6600" stroke-width="0.8" fill="none" opacity="0.4">
+    <line x1="240" y1="210" x2="360" y2="210"/>
+    <line x1="240" y1="225" x2="360" y2="225"/>
+    <line x1="240" y1="240" x2="360" y2="240"/>
+    <rect x="250" y="212" width="15" height="12" rx="1"/>
+    <rect x="275" y="212" width="15" height="12" rx="1"/>
+    <rect x="310" y="227" width="15" height="12" rx="1"/>
+    <rect x="335" y="227" width="15" height="12" rx="1"/>
+  </g>
+  <text x="300" y="252" text-anchor="middle" font-family="'Courier New', monospace" font-size="7" fill="#664400">ZONE E // 160 SQ FT</text>
+
+  <!-- Server Room (bottom-right) -->
+  <rect x="385" y="160" width="180" height="100" fill="none" stroke="#ff6600" stroke-width="1.5" opacity="0.7"/>
+  <rect x="385" y="160" width="180" height="100" fill="#ff6600" opacity="0.05"/>
+  <text x="475" y="195" text-anchor="middle" font-family="'Courier New', monospace" font-size="11" fill="#ff6600" letter-spacing="2">SERVER ROOM</text>
+  <!-- Server rack icons -->
+  <g stroke="#ff6600" stroke-width="0.8" fill="none" opacity="0.4">
+    <rect x="405" y="208" width="12" height="35" rx="1"/>
+    <rect x="422" y="208" width="12" height="35" rx="1"/>
+    <rect x="439" y="208" width="12" height="35" rx="1"/>
+    <rect x="456" y="208" width="12" height="35" rx="1"/>
+    <rect x="473" y="208" width="12" height="35" rx="1"/>
+    <rect x="490" y="208" width="12" height="35" rx="1"/>
+    <rect x="507" y="208" width="12" height="35" rx="1"/>
+    <rect x="524" y="208" width="12" height="35" rx="1"/>
+    <!-- Blinking LEDs -->
+    <circle cx="411" cy="214" r="1.5" fill="#00ff88" opacity="0.6">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="1.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="428" cy="214" r="1.5" fill="#ff4400" opacity="0.6">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="0.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="445" cy="214" r="1.5" fill="#00aaff" opacity="0.6">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="462" cy="214" r="1.5" fill="#00ff88" opacity="0.6">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="1s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  <text x="475" y="252" text-anchor="middle" font-family="'Courier New', monospace" font-size="7" fill="#664400">ZONE F // 180 SQ FT</text>
+
+  <!-- Dimension lines -->
+  <g stroke="#ff6600" stroke-width="0.5" opacity="0.4">
+    <line x1="30" y1="42" x2="570" y2="42"/>
+    <line x1="30" y1="38" x2="30" y2="46"/>
+    <line x1="570" y1="38" x2="570" y2="46"/>
+    <text x="300" y="39" text-anchor="middle" font-family="'Courier New', monospace" font-size="6" fill="#664400">540 FT</text>
+    <line x1="24" y1="45" x2="24" y2="265"/>
+    <line x1="20" y1="45" x2="28" y2="45"/>
+    <line x1="20" y1="265" x2="28" y2="265"/>
+    <text x="20" y="158" text-anchor="middle" font-family="'Courier New', monospace" font-size="6" fill="#664400" transform="rotate(-90 20 158)">220 FT</text>
+  </g>
+
+  <!-- Bottom info bar -->
+  <line x1="10" y1="275" x2="590" y2="275" stroke="#ff6600" stroke-width="0.5" opacity="0.3"/>
+  <text x="20" y="288" font-family="'Courier New', monospace" font-size="7" fill="#333333">SYS://STARK.INDUSTRIES/WORKSHOP/LAYOUT</text>
+  <text x="300" y="288" text-anchor="middle" font-family="'Courier New', monospace" font-size="7" fill="#333333">TOTAL: 1040 SQ FT</text>
+  <text x="580" y="288" text-anchor="end" font-family="'Courier New', monospace" font-size="7" fill="#333333">SCALE 1:50</text>
+</svg>

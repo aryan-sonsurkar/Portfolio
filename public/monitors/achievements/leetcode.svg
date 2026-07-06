@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#161b22"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bgGrad)"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="800" height="60" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="30" y="38" font-family="Segoe UI, Arial" font-size="22" fill="#f0f6fc" font-weight="bold">LEETCODE STATS</text>
+  <text x="200" y="38" font-family="Segoe UI, Arial" font-size="14" fill="#8b949e">@aryansonsurkar_10</text>
+  
+  <!-- Stats Cards -->
+  <g transform="translate(30, 80)">
+    <!-- Problems Solved -->
+    <rect x="0" y="0" width="180" height="150" rx="8" fill="#21262d" stroke="#ffa116" stroke-width="2"/>
+    <text x="20" y="30" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e">Problems Solved</text>
+    <text x="20" y="80" font-family="Segoe UI, Arial" font-size="48" fill="#ffa116" font-weight="bold">5</text>
+    <text x="20" y="105" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Weekly Goal: 1/week</text>
+    <text x="20" y="125" font-family="Segoe UI, Arial" font-size="10" fill="#3fb950">✓ On track</text>
+    
+    <!-- Easy -->
+    <rect x="200" y="0" width="150" height="150" rx="8" fill="#21262d" stroke="#00b8a3" stroke-width="2"/>
+    <text x="220" y="30" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e">Easy</text>
+    <text x="220" y="80" font-family="Segoe UI, Arial" font-size="48" fill="#00b8a3" font-weight="bold">3</text>
+    <text x="220" y="105" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">60% of total</text>
+    <text x="220" y="125" font-family="Segoe UI, Arial" font-size="10" fill="#00b8a3">✓ Strong foundation</text>
+    
+    <!-- Medium -->
+    <rect x="370" y="0" width="150" height="150" rx="8" fill="#21262d" stroke="#ffcc02" stroke-width="2"/>
+    <text x="390" y="30" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e">Medium</text>
+    <text x="390" y="80" font-family="Segoe UI, Arial" font-size="48" fill="#ffc202" font-weight="bold">2</text>
+    <text x="390" y="105" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">40% of total</text>
+    <text x="390" y="125" font-family="Segoe UI, Arial" font-size="10" fill="#ffc202">● Improving</text>
+    
+    <!-- Hard -->
+    <rect x="540" y="0" width="150" height="150" rx="8" fill="#21262d" stroke="#ff375f" stroke-width="2"/>
+    <text x="560" y="30" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e">Hard</text>
+    <text x="560" y="80" font-family="Segoe UI, Arial" font-size="48" fill="#ff375f" font-weight="bold">0</text>
+    <text x="560" y="105" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">0% of total</text>
+    <text x="560" y="125" font-family="Segoe UI, Arial" font-size="10" fill="#ff375f">○ Upcoming</text>
+  </g>
+  
+  <!-- Weekly Progress -->
+  <rect x="30" y="250" width="740" height="230" rx="8" fill="#21262d" stroke="#30363d"/>
+  <text x="50" y="280" font-family="Segoe UI, Arial" font-size="14" fill="#f0f6fc" font-weight="bold">Weekly Progress</text>
+  
+  <g transform="translate(50, 300)">
+    <!-- Week 1 -->
+    <rect x="0" y="0" width="100" height="150" rx="6" fill="#161b22" stroke="#30363d"/>
+    <text x="20" y="25" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Week 1</text>
+    <text x="20" y="50" font-family="Segoe UI, Arial" font-size="20" fill="#ffa116" font-weight="bold">1</text>
+    <text x="20" y="70" font-family="Segoe UI, Arial" font-size="9" fill="#8b949e">Two Sum</text>
+    <text x="20" y="85" font-family="Segoe UI, Arial" font-size="9" fill="#00b8a3">Easy</text>
+    <rect x="20" y="100" width="60" height="4" fill="#00b8a3"/>
+    
+    <!-- Week 2 -->
+    <rect x="120" y="0" width="100" height="150" rx="6" fill="#161b22" stroke="#30363d"/>
+    <text x="140" y="25" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Week 2</text>
+    <text x="140" y="50" font-family="Segoe UI, Arial" font-size="20" fill="#ffa116" font-weight="bold">1</text>
+    <text x="140" y="70" font-family="Segoe UI, Arial" font-size="9" fill="#8b949e">Valid Parentheses</text>
+    <text x="140" y="85" font-family="Segoe UI, Arial" font-size="9" fill="#00b8a3">Easy</text>
+    <rect x="140" y="100" width="60" height="4" fill="#00b8a3"/>
+    
+    <!-- Week 3 -->
+    <rect x="240" y="0" width="100" height="150" rx="6" fill="#161b22" stroke="#30363d"/>
+    <text x="260" y="25" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Week 3</text>
+    <text x="260" y="50" font-family="Segoe UI, Arial" font-size="20" fill="#ffa116" font-weight="bold">1</text>
+    <text x="260" y="70" font-family="Segoe UI, Arial" font-size="9" fill="#8b949e">Merge Sorted Array</text>
+    <text x="260" y="85" font-family="Segoe UI, Arial" font-size="9" fill="#00b8a3">Easy</text>
+    <rect x="260" y="100" width="60" height="4" fill="#00b8a3"/>
+    
+    <!-- Week 4 -->
+    <rect x="360" y="0" width="100" height="150" rx="6" fill="#161b22" stroke="#30363d"/>
+    <text x="380" y="25" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Week 4</text>
+    <text x="380" y="50" font-family="Segoe UI, Arial" font-size="20" fill="#ffa116" font-weight="bold">1</text>
+    <text x="380" y="70" font-family="Segoe UI, Arial" font-size="9" fill="#8b949e">Best Time to Buy Stock</text>
+    <text x="380" y="85" font-family="Segoe UI, Arial" font-size="9" fill="#ffc202">Medium</text>
+    <rect x="380" y="100" width="60" height="4" fill="#ffc202"/>
+    
+    <!-- Week 5 -->
+    <rect x="480" y="0" width="100" height="150" rx="6" fill="#161b22" stroke="#30363d"/>
+    <text x="500" y="25" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Week 5</text>
+    <text x="500" y="50" font-family="Segoe UI, Arial" font-size="20" fill="#ffa116" font-weight="bold">1</text>
+    <text x="500" y="70" font-family="Segoe UI, Arial" font-size="9" fill="#8b949e">Maximum Subarray</text>
+    <text x="500" y="85" font-family="Segoe UI, Arial" font-size="9" fill="#ffc202">Medium</text>
+    <rect x="500" y="100" width="60" height="4" fill="#ffc202"/>
+    
+    <!-- Stats -->
+    <rect x="600" y="0" width="120" height="150" rx="6" fill="#161b22" stroke="#30363d"/>
+    <text x="620" y="25" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Total</text>
+    <text x="620" y="55" font-family="Segoe UI, Arial" font-size="24" fill="#ffa116" font-weight="bold">5</text>
+    <text x="620" y="75" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">problems</text>
+    <text x="620" y="100" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Streak: 5 weeks</text>
+    <text x="620" y="120" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Goal: 52/year</text>
+  </g>
+  
+  <!-- Footer -->
+  <rect x="0" y="490" width="800" height="10" fill="#21262d"/>
+</svg>

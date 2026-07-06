@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0a14"/>
+      <stop offset="100%" stop-color="#0d1117"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffec80"/>
+      <stop offset="40%" stop-color="#ffd700"/>
+      <stop offset="100%" stop-color="#b8960c"/>
+    </linearGradient>
+    <linearGradient id="goldDark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#b8960c"/>
+      <stop offset="100%" stop-color="#8a6d0b"/>
+    </linearGradient>
+    <linearGradient id="trophyShine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#b8960c"/>
+      <stop offset="30%" stop-color="#ffec80"/>
+      <stop offset="50%" stop-color="#ffd700"/>
+      <stop offset="70%" stop-color="#ffec80"/>
+      <stop offset="100%" stop-color="#b8960c"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#bgGrad)"/>
+
+  <!-- Ambient glow -->
+  <ellipse cx="200" cy="180" rx="180" ry="100" fill="#ffd700" opacity="0.03" filter="url(#softGlow)"/>
+
+  <!-- Display case border -->
+  <rect x="15" y="15" width="370" height="270" rx="6" fill="none" stroke="#ffd700" stroke-width="1.5" opacity="0.3"/>
+  <rect x="18" y="18" width="364" height="264" rx="4" fill="none" stroke="#ffd700" stroke-width="0.5" opacity="0.15"/>
+
+  <!-- Shelf line -->
+  <line x1="30" y1="195" x2="370" y2="195" stroke="#ffd700" stroke-width="0.5" opacity="0.3"/>
+
+  <!-- TROPHY ROOM header -->
+  <text x="200" y="48" text-anchor="middle" font-family="'Courier New', monospace" font-size="20" font-weight="bold" fill="#ffd700" letter-spacing="6" filter="url(#glow)">TROPHY ROOM</text>
+  <line x1="100" y1="55" x2="300" y2="55" stroke="#ffd700" stroke-width="1" opacity="0.5"/>
+  <line x1="120" y1="60" x2="280" y2="60" stroke="#ffd700" stroke-width="0.5" opacity="0.3"/>
+
+  <!-- Trophy 1 - Ballon d'Or (Left) -->
+  <g transform="translate(80, 75)">
+    <!-- Glow behind -->
+    <ellipse cx="50" cy="65" rx="30" ry="35" fill="#ffd700" opacity="0.06" filter="url(#softGlow)"/>
+
+    <!-- Trophy cup body -->
+    <path d="M30,30 Q30,15 50,10 Q70,15 70,30 L65,75 Q50,85 35,75 Z" fill="url(#gold)" stroke="#b8960c" stroke-width="1"/>
+
+    <!-- Trophy cup rim -->
+    <ellipse cx="50" cy="30" rx="22" ry="6" fill="url(#trophyShine)" stroke="#b8960c" stroke-width="0.5"/>
+
+    <!-- Trophy stem -->
+    <rect x="46" y="75" width="8" height="15" fill="url(#gold)" stroke="#b8960c" stroke-width="0.5"/>
+
+    <!-- Trophy base -->
+    <rect x="35" y="90" width="30" height="8" rx="2" fill="url(#goldDark)" stroke="#b8960c" stroke-width="0.5"/>
+
+    <!-- Star decoration -->
+    <polygon points="50,25 52,32 59,32 54,37 56,44 50,40 44,44 46,37 41,32 48,32" fill="#ffec80" opacity="0.8"/>
+
+    <!-- Shine line -->
+    <line x1="42" y1="35" x2="40" y2="65" stroke="#ffec80" stroke-width="1" opacity="0.4"/>
+  </g>
+
+  <!-- Trophy 2 - Champions League (Center) -->
+  <g transform="translate(165, 65)">
+    <!-- Glow behind -->
+    <ellipse cx="50" cy="70" rx="35" ry="40" fill="#ffd700" opacity="0.08" filter="url(#softGlow)"/>
+
+    <!-- Trophy main body - larger -->
+    <path d="M25,35 Q25,15 50,8 Q75,15 75,35 L68,85 Q50,98 32,85 Z" fill="url(#gold)" stroke="#b8960c" stroke-width="1.2"/>
+
+    <!-- Trophy rim -->
+    <ellipse cx="50" cy="35" rx="27" ry="7" fill="url(#trophyShine)" stroke="#b8960c" stroke-width="0.5"/>
+
+    <!-- Handles -->
+    <path d="M25,40 Q10,45 12,60 Q14,72 28,68" fill="none" stroke="url(#gold)" stroke-width="3" stroke-linecap="round"/>
+    <path d="M75,40 Q90,45 88,60 Q86,72 72,68" fill="none" stroke="url(#gold)" stroke-width="3" stroke-linecap="round"/>
+
+    <!-- Stem -->
+    <rect x="46" y="85" width="8" height="18" fill="url(#gold)" stroke="#b8960c" stroke-width="0.5"/>
+
+    <!-- Base -->
+    <rect x="30" y="103" width="40" height="10" rx="3" fill="url(#goldDark)" stroke="#b8960c" stroke-width="0.5"/>
+
+    <!-- Star on top -->
+    <polygon points="50,3 52,10 60,10 54,15 56,22 50,18 44,22 46,15 40,10 48,10" fill="#ffec80" opacity="0.9" filter="url(#glow)"/>
+
+    <!-- Shine -->
+    <line x1="38" y1="40" x2="36" y2="75" stroke="#ffec80" stroke-width="1.2" opacity="0.4"/>
+  </g>
+
+  <!-- Trophy 3 - Premier League (Right) -->
+  <g transform="translate(255, 75)">
+    <!-- Glow behind -->
+    <ellipse cx="50" cy="65" rx="30" ry="35" fill="#ffd700" opacity="0.06" filter="url(#softGlow)"/>
+
+    <!-- Trophy body -->
+    <path d="M30,30 Q30,15 50,10 Q70,15 70,30 L65,75 Q50,85 35,75 Z" fill="url(#gold)" stroke="#b8960c" stroke-width="1"/>
+
+    <!-- Trophy rim -->
+    <ellipse cx="50" cy="30" rx="22" ry="6" fill="url(#trophyShine)" stroke="#b8960c" stroke-width="0.5"/>
+
+    <!-- Crown top -->
+    <path d="M38,15 L42,5 L46,12 L50,2 L54,12 L58,5 L62,15" fill="url(#gold)" stroke="#b8960c" stroke-width="0.5"/>
+
+    <!-- Stem -->
+    <rect x="46" y="75" width="8" height="15" fill="url(#gold)" stroke="#b8960c" stroke-width="0.5"/>
+
+    <!-- Base -->
+    <rect x="35" y="90" width="30" height="8" rx="2" fill="url(#goldDark)" stroke="#b8960c" stroke-width="0.5"/>
+
+    <!-- Shield decoration -->
+    <path d="M50,25 L56,30 L56,38 Q50,44 44,38 L44,30 Z" fill="none" stroke="#ffec80" stroke-width="0.8" opacity="0.7"/>
+
+    <!-- Shine -->
+    <line x1="42" y1="35" x2="40" y2="65" stroke="#ffec80" stroke-width="1" opacity="0.4"/>
+  </g>
+
+  <!-- Labels -->
+  <text x="130" y="192" text-anchor="middle" font-family="'Courier New', monospace" font-size="9" fill="#ffd700" opacity="0.8">BALLON D'OR</text>
+  <text x="215" y="192" text-anchor="middle" font-family="'Courier New', monospace" font-size="9" fill="#ffd700" opacity="0.8">CHAMPIONS LEAGUE</text>
+  <text x="300" y="192" text-anchor="middle" font-family="'Courier New', monospace" font-size="9" fill="#ffd700" opacity="0.8">PREMIER LEAGUE</text>
+
+  <!-- Bottom decorative line -->
+  <line x1="50" y1="260" x2="350" y2="260" stroke="#ffd700" stroke-width="0.5" opacity="0.2"/>
+
+  <!-- Corner accents -->
+  <path d="M15,15 L30,15" stroke="#ffd700" stroke-width="1.5" opacity="0.6"/>
+  <path d="M15,15 L15,30" stroke="#ffd700" stroke-width="1.5" opacity="0.6"/>
+  <path d="M385,15 L370,15" stroke="#ffd700" stroke-width="1.5" opacity="0.6"/>
+  <path d="M385,15 L385,30" stroke="#ffd700" stroke-width="1.5" opacity="0.6"/>
+  <path d="M15,285 L30,285" stroke="#ffd700" stroke-width="1.5" opacity="0.6"/>
+  <path d="M15,285 L15,270" stroke="#ffd700" stroke-width="1.5" opacity="0.6"/>
+  <path d="M385,285 L370,285" stroke="#ffd700" stroke-width="1.5" opacity="0.6"/>
+  <path d="M385,285 L385,270" stroke="#ffd700" stroke-width="1.5" opacity="0.6"/>
+</svg>

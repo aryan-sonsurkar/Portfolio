@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#050a14"/>
+      <stop offset="50%" style="stop-color:#002233;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#050a14"/>
+    </linearGradient>
+    <linearGradient id="bar1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#00ccff"/>
+      <stop offset="100%" style="stop-color:#004466"/>
+    </linearGradient>
+    <linearGradient id="bar2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#00bbdd"/>
+      <stop offset="100%" style="stop-color:#003355"/>
+    </linearGradient>
+    <linearGradient id="bar3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#00aacc"/>
+      <stop offset="100%" style="stop-color:#002244"/>
+    </linearGradient>
+    <linearGradient id="bar4" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0099bb"/>
+      <stop offset="100%" style="stop-color:#001133"/>
+    </linearGradient>
+    <linearGradient id="bar5" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0088aa"/>
+      <stop offset="100%" style="stop-color:#001020"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="300" fill="#050a14"/>
+
+  <g opacity="0.05" stroke="#00ccff">
+    <line x1="70" y1="60" x2="70" y2="250" stroke-width="0.5"/>
+    <line x1="70" y1="250" x2="380" y2="250" stroke-width="0.5"/>
+    <line x1="70" y1="100" x2="380" y2="100" stroke-width="0.5" stroke-dasharray="4,4"/>
+    <line x1="70" y1="150" x2="380" y2="150" stroke-width="0.5" stroke-dasharray="4,4"/>
+    <line x1="70" y1="200" x2="380" y2="200" stroke-width="0.5" stroke-dasharray="4,4"/>
+  </g>
+
+  <rect x="0" y="0" width="400" height="42" fill="url(#headerGrad)"/>
+  <text x="200" y="28" text-anchor="middle" font-family="monospace" font-size="14" font-weight="bold" fill="#00ccff" filter="url(#glow)">SKILLS EVOLUTION</text>
+  <line x1="90" y1="38" x2="310" y2="38" stroke="#00ccff" stroke-width="0.5" opacity="0.4"/>
+
+  <text x="65" y="103" text-anchor="end" font-family="monospace" font-size="8" fill="#334455">100%</text>
+  <text x="65" y="153" text-anchor="end" font-family="monospace" font-size="8" fill="#334455">75%</text>
+  <text x="65" y="203" text-anchor="end" font-family="monospace" font-size="8" fill="#334455">50%</text>
+  <text x="65" y="253" text-anchor="end" font-family="monospace" font-size="8" fill="#334455">0%</text>
+
+  <!-- Python 90% -->
+  <rect x="85" y="69" width="42" height="181" rx="2" fill="url(#bar1)" opacity="0.85"/>
+  <rect x="85" y="69" width="42" height="181" rx="2" fill="none" stroke="#00ccff" stroke-width="0.5" opacity="0.5"/>
+  <text x="106" y="64" text-anchor="middle" font-family="monospace" font-size="9" fill="#00ccff" font-weight="bold">90%</text>
+  <text x="106" y="268" text-anchor="middle" font-family="monospace" font-size="8" fill="#008899">Python</text>
+
+  <!-- Next.js 85% -->
+  <rect x="148" y="79" width="42" height="171" rx="2" fill="url(#bar2)" opacity="0.85"/>
+  <rect x="148" y="79" width="42" height="171" rx="2" fill="none" stroke="#00bbdd" stroke-width="0.5" opacity="0.5"/>
+  <text x="169" y="74" text-anchor="middle" font-family="monospace" font-size="9" fill="#00bbdd" font-weight="bold">85%</text>
+  <text x="169" y="268" text-anchor="middle" font-family="monospace" font-size="8" fill="#008899">Next.js</text>
+
+  <!-- Systems 70% -->
+  <rect x="211" y="109" width="42" height="141" rx="2" fill="url(#bar3)" opacity="0.85"/>
+  <rect x="211" y="109" width="42" height="141" rx="2" fill="none" stroke="#00aacc" stroke-width="0.5" opacity="0.5"/>
+  <text x="232" y="104" text-anchor="middle" font-family="monospace" font-size="9" fill="#00aacc" font-weight="bold">70%</text>
+  <text x="232" y="268" text-anchor="middle" font-family="monospace" font-size="8" fill="#008899">Systems</text>
+
+  <!-- Compiler 60% -->
+  <rect x="274" y="129" width="42" height="121" rx="2" fill="url(#bar4)" opacity="0.85"/>
+  <rect x="274" y="129" width="42" height="121" rx="2" fill="none" stroke="#0099bb" stroke-width="0.5" opacity="0.5"/>
+  <text x="295" y="124" text-anchor="middle" font-family="monospace" font-size="9" fill="#0099bb" font-weight="bold">60%</text>
+  <text x="295" y="268" text-anchor="middle" font-family="monospace" font-size="8" fill="#008899">Compiler</text>
+
+  <!-- Hardware 50% -->
+  <rect x="337" y="149" width="42" height="101" rx="2" fill="url(#bar5)" opacity="0.85"/>
+  <rect x="337" y="149" width="42" height="101" rx="2" fill="none" stroke="#0088aa" stroke-width="0.5" opacity="0.5"/>
+  <text x="358" y="144" text-anchor="middle" font-family="monospace" font-size="9" fill="#0088aa" font-weight="bold">50%</text>
+  <text x="358" y="268" text-anchor="middle" font-family="monospace" font-size="8" fill="#008899">Hardware</text>
+
+  <line x1="70" y1="250" x2="380" y2="250" stroke="#00ccff" stroke-width="1" opacity="0.3"/>
+  <text x="200" y="290" text-anchor="middle" font-family="monospace" font-size="9" fill="#334466">Mastery Level Progression</text>
+</svg>

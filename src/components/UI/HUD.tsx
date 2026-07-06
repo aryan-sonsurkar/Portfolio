@@ -11,6 +11,10 @@ const BUILDING_LABELS: Record<string, string> = {
   "project-factory": "Project Factory — Shipped Work",
   "innovation-lab": "Innovation Lab — Future Builds",
   "open-source-center": "Open Source Center — Building in Public",
+  "developer-apartment": "Developer Apartment — Personal Space",
+  "football-arena": "Football Arena — Aryan's Happy Place",
+  "ironman-destiny-lab": "Ironman Destiny Lab — Hardware & Dreams",
+  "future-observatory": "Future Observatory — Vision & Roadmap",
 };
 
 const ACHIEVEMENT_DEFS: Record<string, { label: string; icon: string }> = {
@@ -36,7 +40,6 @@ export default function HUD() {
     achievements,
     addAchievement,
     activeScreen,
-    setActiveScreen,
   } = useStore();
 
   const [newAchievement, setNewAchievement] = useState<string | null>(null);
@@ -45,24 +48,26 @@ export default function HUD() {
 
   // Track visited buildings for achievements
   useEffect(() => {
-    if (selectedBuilding) {
-      setVisitedBuildings((prev) => {
-        const next = new Set(prev);
-        next.add(selectedBuilding);
-        // First entry achievement
-        if (next.size === 1 && !achievements.includes("first-step")) {
-          addAchievement("first-step");
-          triggerAchievement("first-step");
-        }
-        // Explorer — visited all 6
-        if (next.size >= 6 && !achievements.includes("explorer")) {
-          addAchievement("explorer");
-          triggerAchievement("explorer");
-        }
-        return next;
-      });
-    }
+    if (!selectedBuilding) return;
+
+    setVisitedBuildings((prev) => {
+      const next = new Set(prev);
+      next.add(selectedBuilding);
+      return next;
+    });
   }, [selectedBuilding]);
+
+  // Check achievements after visitedBuildings updates
+  useEffect(() => {
+    if (visitedBuildings.size === 1 && !achievements.includes("first-step")) {
+      addAchievement("first-step");
+      triggerAchievement("first-step");
+    }
+    if (visitedBuildings.size >= 9 && !achievements.includes("explorer")) {
+      addAchievement("explorer");
+      triggerAchievement("explorer");
+    }
+  }, [visitedBuildings.size]);
 
   useEffect(() => {
     if (blueprintMode && !achievements.includes("hacker")) {
@@ -85,14 +90,10 @@ export default function HUD() {
       if (e.ctrlKey && e.shiftKey && (e.key === "a" || e.key === "A")) {
         setBlueprintMode(!blueprintMode);
       }
-      // ESC to exit active screen
-      if (e.key === "Escape" && activeScreen) {
-        setActiveScreen(null);
-      }
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [focusedBuilding, interiorOpen, toggleWeather, blueprintMode, setBlueprintMode, activeScreen, setActiveScreen]);
+  }, [focusedBuilding, interiorOpen, toggleWeather, blueprintMode, setBlueprintMode]);
 
   if (!introComplete) return null;
 
@@ -203,6 +204,7 @@ export default function HUD() {
               {[
                 ["WASD / Arrow Keys", "Move"],
                 ["Mouse (click first)", "Look around"],
+                ["T", "Teleport panel"],
                 ["R", "Toggle rain"],
                 ["Ctrl+Shift+A", "Blueprint mode"],
                 ["ESC", "Exit screen / modal"],
@@ -314,7 +316,10 @@ export default function HUD() {
             className="absolute bottom-8 left-1/2 -translate-x-1/2 pointer-events-auto"
           >
             <button
-              onClick={() => setActiveScreen(null)}
+              onClick={() => {
+                // Dispatch ESC event so CharacterController handles position restore
+                window.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
+              }}
               style={{
                 color: "rgba(255,255,255,0.35)",
                 fontFamily: "'JetBrains Mono', monospace",
@@ -331,6 +336,29 @@ export default function HUD() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* ── Bottom center — Teleport button ── */}
+      {isFPV && !activeScreen && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 pointer-events-auto"
+        >
+          <button
+            onClick={() => useStore.getState().setTeleportOpen(true)}
+            className="px-4 py-2 rounded-lg text-[11px] tracking-widest uppercase transition-all hover:scale-105"
+            style={{
+              color: "#38bdf8",
+              border: "1px solid rgba(56,189,248,0.25)",
+              background: "rgba(56,189,248,0.06)",
+              fontFamily: "'JetBrains Mono', monospace",
+              backdropFilter: "blur(8px)",
+            }}
+          >
+            ⚡ Teleport <span style={{ opacity: 0.5, marginLeft: 6 }}>[ T ]</span>
+          </button>
+        </motion.div>
+      )}
 
       {/* ── Bottom right — Version + Weather badge ── */}
       <div className="absolute bottom-6 right-6 flex items-center gap-3">

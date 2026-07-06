@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#161b22"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bgGrad)"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="800" height="60" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="30" y="38" font-family="Segoe UI, Arial" font-size="22" fill="#f0f6fc" font-weight="bold">MODCODES ROADMAP</text>
+  <text x="250" y="38" font-family="Segoe UI, Arial" font-size="14" fill="#8b949e">2026 - 2027</text>
+  
+  <!-- Timeline -->
+  <g transform="translate(30, 80)">
+    <!-- Q3 2026 -->
+    <rect x="0" y="0" width="230" height="400" rx="8" fill="#21262d" stroke="#3fb950" stroke-width="2"/>
+    <rect x="0" y="0" width="230" height="40" rx="8" fill="#238636"/>
+    <text x="20" y="25" font-family="Segoe UI, Arial" font-size="14" fill="#f0f6fc" font-weight="bold">Q3 2026</text>
+    <text x="120" y="25" font-family="Segoe UI, Arial" font-size="11" fill="#f0f6fc">Current</text>
+    
+    <text x="20" y="65" font-family="Segoe UI, Arial" font-size="12" fill="#3fb950">✓ Foundation</text>
+    <text x="20" y="85" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Project Manager UI</text>
+    <text x="20" y="100" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Workspace Layout</text>
+    <text x="20" y="115" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Local Storage</text>
+    
+    <text x="20" y="145" font-family="Segoe UI, Arial" font-size="12" fill="#58a6ff">● In Progress</text>
+    <text x="20" y="165" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• AI Chat Panel</text>
+    <text x="20" y="180" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Code Editor (Monaco)</text>
+    <text x="20" y="195" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• File Explorer</text>
+    
+    <text x="20" y="225" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e">○ Upcoming</text>
+    <text x="20" y="245" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Ollama Integration</text>
+    <text x="20" y="260" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Terminal Emulator</text>
+    <text x="20" y="275" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Git Integration</text>
+    
+    <text x="20" y="305" font-family="Segoe UI, Arial" font-size="11" fill="#d2a8ff" font-weight="bold">MVP Release</text>
+    <text x="20" y="325" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Target: Aug 2026</text>
+    
+    <!-- Q4 2026 -->
+    <rect x="250" y="0" width="230" height="400" rx="8" fill="#21262d" stroke="#58a6ff" stroke-width="2"/>
+    <rect x="250" y="0" width="230" height="40" rx="8" fill="#1f6feb"/>
+    <text x="270" y="25" font-family="Segoe UI, Arial" font-size="14" fill="#f0f6fc" font-weight="bold">Q4 2026</text>
+    
+    <text x="270" y="65" font-family="Segoe UI, Arial" font-size="12" fill="#58a6ff">○ AI Features</text>
+    <text x="270" y="85" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Code Completion</text>
+    <text x="270" y="100" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Error Detection</text>
+    <text x="270" y="115" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Refactoring Suggestions</text>
+    
+    <text x="270" y="145" font-family="Segoe UI, Arial" font-size="12" fill="#58a6ff">○ Developer Tools</text>
+    <text x="270" y="165" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Debug Console</text>
+    <text x="270" y="180" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Performance Profiler</text>
+    <text x="270" y="195" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Database Viewer</text>
+    
+    <text x="270" y="225" font-family="Segoe UI, Arial" font-size="12" fill="#58a6ff">○ Extensions</text>
+    <text x="270" y="245" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Plugin Architecture</text>
+    <text x="270" y="260" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Theme System</text>
+    <text x="270" y="275" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Custom Keybindings</text>
+    
+    <text x="270" y="305" font-family="Segoe UI, Arial" font-size="11" fill="#d2a8ff" font-weight="bold">Beta Release</text>
+    <text x="270" y="325" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Target: Nov 2026</text>
+    
+    <!-- Q1 2027 -->
+    <rect x="500" y="0" width="250" height="400" rx="8" fill="#21262d" stroke="#d2a8ff" stroke-width="2"/>
+    <rect x="500" y="0" width="250" height="40" rx="8" fill="#8957e5"/>
+    <text x="520" y="25" font-family="Segoe UI, Arial" font-size="14" fill="#f0f6fc" font-weight="bold">Q1 2027</text>
+    
+    <text x="520" y="65" font-family="Segoe UI, Arial" font-size="12" fill="#d2a8ff">○ Advanced AI</text>
+    <text x="520" y="85" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Multi-Model Support</text>
+    <text x="520" y="100" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Context-Aware Assistance</text>
+    <text x="520" y="115" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Code Generation</text>
+    
+    <text x="520" y="145" font-family="Segoe UI, Arial" font-size="12" fill="#d2a8ff">○ Collaboration</text>
+    <text x="520" y="165" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Real-time Editing</text>
+    <text x="520" y="180" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Code Review Tools</text>
+    <text x="520" y="195" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Team Workspaces</text>
+    
+    <text x="520" y="225" font-family="Segoe UI, Arial" font-size="12" fill="#d2a8ff">○ Ecosystem</text>
+    <text x="520" y="245" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Marketplace</text>
+    <text x="520" y="260" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Community Plugins</text>
+    <text x="520" y="275" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">• Documentation Hub</text>
+    
+    <text x="520" y="305" font-family="Segoe UI, Arial" font-size="11" fill="#d2a8ff" font-weight="bold">v1.0 Release</text>
+    <text x="520" y="325" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Target: Feb 2027</text>
+  </g>
+  
+  <!-- Footer -->
+  <rect x="0" y="490" width="800" height="10" fill="#21262d"/>
+</svg>

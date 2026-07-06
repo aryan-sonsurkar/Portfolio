@@ -1,0 +1,260 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="300" viewBox="0 0 600 300">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0a14"/>
+      <stop offset="100%" stop-color="#0d1117"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffec80"/>
+      <stop offset="50%" stop-color="#ffd700"/>
+      <stop offset="100%" stop-color="#b8960c"/>
+    </linearGradient>
+    <linearGradient id="frameGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#b8960c"/>
+      <stop offset="50%" stop-color="#ffd700"/>
+      <stop offset="100%" stop-color="#b8960c"/>
+    </linearGradient>
+    <linearGradient id="skyBlue" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a3a5c"/>
+      <stop offset="100%" stop-color="#0d2137"/>
+    </linearGradient>
+    <linearGradient id="fieldGreen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a4d2e"/>
+      <stop offset="100%" stop-color="#0d2a18"/>
+    </linearGradient>
+    <linearGradient id="celebOrange" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4a2a0a"/>
+      <stop offset="100%" stop-color="#2a1505"/>
+    </linearGradient>
+    <linearGradient id="nightPurple" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a1a3a"/>
+      <stop offset="100%" stop-color="#150d1f"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="300" fill="url(#bgGrad)"/>
+
+  <!-- Ambient glow -->
+  <ellipse cx="300" cy="160" rx="280" ry="120" fill="#ffd700" opacity="0.02" filter="url(#softGlow)"/>
+
+  <!-- MEMORABLE MOMENTS header -->
+  <text x="300" y="38" text-anchor="middle" font-family="'Courier New', monospace" font-size="18" font-weight="bold" fill="#ffd700" letter-spacing="5" filter="url(#glow)">MEMORABLE MOMENTS</text>
+  <line x1="140" y1="46" x2="460" y2="46" stroke="#ffd700" stroke-width="0.8" opacity="0.4"/>
+
+  <!-- Gold accent lines -->
+  <line x1="20" y1="55" x2="100" y2="55" stroke="#ffd700" stroke-width="0.5" opacity="0.3"/>
+  <line x1="500" y1="55" x2="580" y2="55" stroke="#ffd700" stroke-width="0.5" opacity="0.3"/>
+
+  <!-- Frame 1 - GOALS (Left) -->
+  <g transform="translate(25, 65)">
+    <!-- Frame border -->
+    <rect x="0" y="0" width="125" height="185" rx="3" fill="url(#frameGrad)" opacity="0.9"/>
+    <rect x="4" y="4" width="117" height="177" rx="1" fill="url(#skyBlue)"/>
+
+    <!-- Goal post -->
+    <line x1="80" y1="30" x2="80" y2="130" stroke="#ffffff" stroke-width="3" opacity="0.8"/>
+    <line x1="80" y1="30" x2="110" y2="30" stroke="#ffffff" stroke-width="2" opacity="0.8"/>
+    <line x1="80" y1="30" x2="80" y2="25" stroke="#ffffff" stroke-width="2" opacity="0.8"/>
+
+    <!-- Net mesh -->
+    <line x1="80" y1="30" x2="80" y2="130" stroke="#ffffff" stroke-width="0.3" opacity="0.3"/>
+    <line x1="85" y1="30" x2="85" y2="130" stroke="#ffffff" stroke-width="0.3" opacity="0.3"/>
+    <line x1="90" y1="30" x2="90" y2="130" stroke="#ffffff" stroke-width="0.3" opacity="0.3"/>
+    <line x1="95" y1="30" x2="95" y2="130" stroke="#ffffff" stroke-width="0.3" opacity="0.3"/>
+    <line x1="100" y1="30" x2="100" y2="130" stroke="#ffffff" stroke-width="0.3" opacity="0.3"/>
+    <line x1="105" y1="30" x2="105" y2="130" stroke="#ffffff" stroke-width="0.3" opacity="0.3"/>
+    <line x1="80" y1="40" x2="110" y2="40" stroke="#ffffff" stroke-width="0.3" opacity="0.3"/>
+    <line x1="80" y1="50" x2="110" y2="50" stroke="#ffffff" stroke-width="0.3" opacity="0.3"/>
+    <line x1="80" y1="60" x2="110" y2="60" stroke="#ffffff" stroke-width="0.3" opacity="0.3"/>
+    <line x1="80" y1="70" x2="110" y2="70" stroke="#ffffff" stroke-width="0.3" opacity="0.3"/>
+
+    <!-- Football in net -->
+    <circle cx="90" cy="55" r="6" fill="#ffffff" stroke="#333333" stroke-width="0.5"/>
+    <path d="M87,52 L90,50 L93,52 L92,56 L88,56 Z" fill="#333333" opacity="0.5"/>
+
+    <!-- Field -->
+    <rect x="4" y="130" width="117" height="51" fill="url(#fieldGreen)"/>
+    <line x1="4" y1="130" x2="121" y2="130" stroke="#2d7a4a" stroke-width="1"/>
+
+    <!-- Field lines -->
+    <line x1="62" y1="130" x2="62" y2="181" stroke="#2d7a4a" stroke-width="0.5" stroke-dasharray="4,4"/>
+
+    <!-- Player silhouette -->
+    <circle cx="40" cy="105" r="5" fill="#1a3050" opacity="0.7"/>
+    <rect x="37" y="110" width="6" height="15" rx="2" fill="#1a3050" opacity="0.7"/>
+    <line x1="35" y1="125" x2="32" y2="140" stroke="#1a3050" stroke-width="2" opacity="0.7"/>
+    <line x1="43" y1="125" x2="46" y2="140" stroke="#1a3050" stroke-width="2" opacity="0.7"/>
+
+    <!-- Label -->
+    <text x="62" y="200" text-anchor="middle" font-family="'Courier New', monospace" font-size="10" font-weight="bold" fill="#ffd700">GOALS</text>
+  </g>
+
+  <!-- Frame 2 - CELEBRATIONS -->
+  <g transform="translate(165, 65)">
+    <!-- Frame border -->
+    <rect x="0" y="0" width="125" height="185" rx="3" fill="url(#frameGrad)" opacity="0.9"/>
+    <rect x="4" y="4" width="117" height="177" rx="1" fill="url(#celebOrange)"/>
+
+    <!-- Stadium lights -->
+    <circle cx="30" cy="20" r="4" fill="#ffd700" opacity="0.6"/>
+    <circle cx="95" cy="20" r="4" fill="#ffd700" opacity="0.6"/>
+    <line x1="30" y1="24" x2="30" y2="50" stroke="#ffd700" stroke-width="0.5" opacity="0.3"/>
+    <line x1="95" y1="24" x2="95" y2="50" stroke="#ffd700" stroke-width="0.5" opacity="0.3"/>
+
+    <!-- Crowd suggestion -->
+    <ellipse cx="62" cy="90" rx="50" ry="30" fill="#3a2010" opacity="0.5"/>
+
+    <!-- Celebrating player 1 - arms up -->
+    <circle cx="50" cy="80" r="6" fill="#1a2a1a" opacity="0.8"/>
+    <rect x="47" y="86" width="6" height="18" rx="2" fill="#1a2a1a" opacity="0.8"/>
+    <line x1="47" y1="90" x2="38" y2="78" stroke="#1a2a1a" stroke-width="2.5" opacity="0.8"/>
+    <line x1="53" y1="90" x2="62" y2="78" stroke="#1a2a1a" stroke-width="2.5" opacity="0.8"/>
+    <line x1="48" y1="104" x2="44" y2="120" stroke="#1a2a1a" stroke-width="2" opacity="0.8"/>
+    <line x1="52" y1="104" x2="56" y2="120" stroke="#1a2a1a" stroke-width="2" opacity="0.8"/>
+
+    <!-- Celebrating player 2 -->
+    <circle cx="75" cy="82" r="5" fill="#2a1a1a" opacity="0.7"/>
+    <rect x="72.5" y="87" width="5" height="15" rx="2" fill="#2a1a1a" opacity="0.7"/>
+    <line x1="72.5" y1="91" x2="66" y2="80" stroke="#2a1a1a" stroke-width="2" opacity="0.7"/>
+    <line x1="77.5" y1="91" x2="84" y2="80" stroke="#2a1a1a" stroke-width="2" opacity="0.7"/>
+
+    <!-- Confetti -->
+    <rect x="25" y="40" width="3" height="2" fill="#ff4444" opacity="0.6" transform="rotate(30,26,41)"/>
+    <rect x="55" y="35" width="3" height="2" fill="#44ff44" opacity="0.6" transform="rotate(-20,56,36)"/>
+    <rect x="80" y="45" width="3" height="2" fill="#4444ff" opacity="0.6" transform="rotate(45,81,46)"/>
+    <rect x="40" y="30" width="3" height="2" fill="#ffd700" opacity="0.6" transform="rotate(-40,41,31)"/>
+    <rect x="70" y="28" width="3" height="2" fill="#ff44ff" opacity="0.5" transform="rotate(15,71,29)"/>
+
+    <!-- Ground -->
+    <rect x="4" y="130" width="117" height="51" fill="#2a1a0a" opacity="0.4"/>
+
+    <!-- Label -->
+    <text x="62" y="200" text-anchor="middle" font-family="'Courier New', monospace" font-size="10" font-weight="bold" fill="#ffd700">CELEBRATIONS</text>
+  </g>
+
+  <!-- Frame 3 - SKILLS -->
+  <g transform="translate(305, 65)">
+    <!-- Frame border -->
+    <rect x="0" y="0" width="125" height="185" rx="3" fill="url(#frameGrad)" opacity="0.9"/>
+    <rect x="4" y="4" width="117" height="177" rx="1" fill="#0d2a18"/>
+
+    <!-- Field -->
+    <rect x="4" y="4" width="117" height="177" fill="url(#fieldGreen)"/>
+    <line x1="62" y1="4" x2="62" y2="181" stroke="#2d7a4a" stroke-width="0.5" stroke-dasharray="4,4"/>
+
+    <!-- Skill move - stepover player -->
+    <circle cx="62" cy="80" r="6" fill="#ffffff" opacity="0.8"/>
+    <rect x="59" y="86" width="6" height="18" rx="2" fill="#cc0000" opacity="0.8"/>
+    <!-- Legs in motion -->
+    <line x1="59" y1="104" x2="52" y2="120" stroke="#cc0000" stroke-width="2" opacity="0.8"/>
+    <line x1="65" y1="104" x2="72" y2="118" stroke="#cc0000" stroke-width="2" opacity="0.8"/>
+
+    <!-- Football with motion lines -->
+    <circle cx="55" cy="118" r="5" fill="#ffffff" stroke="#333333" stroke-width="0.5"/>
+    <path d="M52,116 L55,114 L58,116 L57,120 L53,120 Z" fill="#333333" opacity="0.5"/>
+    <!-- Motion trail -->
+    <line x1="45" y1="118" x2="50" y2="118" stroke="#ffffff" stroke-width="1" opacity="0.3"/>
+    <line x1="40" y1="118" x2="43" y2="118" stroke="#ffffff" stroke-width="0.5" opacity="0.2"/>
+
+    <!-- Defending player -->
+    <circle cx="85" cy="90" r="5" fill="#1a1a4a" opacity="0.6"/>
+    <rect x="82.5" y="95" width="5" height="15" rx="2" fill="#1a1a4a" opacity="0.6"/>
+
+    <!-- Dribble path indicator -->
+    <path d="M50,115 Q45,100 55,95 Q65,90 62,80" fill="none" stroke="#ffd700" stroke-width="0.8" opacity="0.4" stroke-dasharray="3,3"/>
+
+    <!-- Speed lines -->
+    <line x1="30" y1="75" x2="40" y2="75" stroke="#ffffff" stroke-width="0.5" opacity="0.3"/>
+    <line x1="28" y1="82" x2="38" y2="82" stroke="#ffffff" stroke-width="0.5" opacity="0.3"/>
+    <line x1="32" y1="89" x2="42" y2="89" stroke="#ffffff" stroke-width="0.5" opacity="0.3"/>
+
+    <!-- Label -->
+    <text x="62" y="200" text-anchor="middle" font-family="'Courier New', monospace" font-size="10" font-weight="bold" fill="#ffd700">SKILLS</text>
+  </g>
+
+  <!-- Frame 4 - TEAM -->
+  <g transform="translate(445, 65)">
+    <!-- Frame border -->
+    <rect x="0" y="0" width="125" height="185" rx="3" fill="url(#frameGrad)" opacity="0.9"/>
+    <rect x="4" y="4" width="117" height="177" rx="1" fill="url(#nightPurple)"/>
+
+    <!-- Night sky -->
+    <circle cx="25" cy="25" r="1.5" fill="#ffffff" opacity="0.4"/>
+    <circle cx="80" cy="20" r="1" fill="#ffffff" opacity="0.3"/>
+    <circle cx="50" cy="15" r="1.2" fill="#ffffff" opacity="0.35"/>
+    <circle cx="100" cy="35" r="0.8" fill="#ffffff" opacity="0.25"/>
+
+    <!-- Stadium background -->
+    <rect x="4" y="60" width="117" height="125" fill="#1a1a2a" opacity="0.3"/>
+    <rect x="4" y="60" width="117" height="20" fill="#2a2a3a" opacity="0.4"/>
+
+    <!-- Team lineup - 5 players -->
+    <!-- Player 1 -->
+    <circle cx="30" cy="95" r="5" fill="#ffffff" opacity="0.7"/>
+    <rect x="27.5" y="100" width="5" height="14" rx="2" fill="#cc0000" opacity="0.7"/>
+    <line x1="28" y1="114" x2="26" y2="125" stroke="#cc0000" stroke-width="1.5" opacity="0.7"/>
+    <line x1="32" y1="114" x2="34" y2="125" stroke="#cc0000" stroke-width="1.5" opacity="0.7"/>
+
+    <!-- Player 2 -->
+    <circle cx="50" cy="93" r="5.5" fill="#ffffff" opacity="0.75"/>
+    <rect x="47.5" y="98.5" width="5" height="15" rx="2" fill="#cc0000" opacity="0.75"/>
+    <line x1="48" y1="113.5" x2="46" y2="125" stroke="#cc0000" stroke-width="1.5" opacity="0.75"/>
+    <line x1="52" y1="113.5" x2="54" y2="125" stroke="#cc0000" stroke-width="1.5" opacity="0.75"/>
+
+    <!-- Player 3 (center) -->
+    <circle cx="70" cy="92" r="6" fill="#ffffff" opacity="0.8"/>
+    <rect x="67" y="98" width="6" height="16" rx="2" fill="#cc0000" opacity="0.8"/>
+    <line x1="68" y1="114" x2="66" y2="126" stroke="#cc0000" stroke-width="2" opacity="0.8"/>
+    <line x1="72" y1="114" x2="74" y2="126" stroke="#cc0000" stroke-width="2" opacity="0.8"/>
+
+    <!-- Player 4 -->
+    <circle cx="90" cy="93" r="5.5" fill="#ffffff" opacity="0.75"/>
+    <rect x="87.5" y="98.5" width="5" height="15" rx="2" fill="#cc0000" opacity="0.75"/>
+    <line x1="88" y1="113.5" x2="86" y2="125" stroke="#cc0000" stroke-width="1.5" opacity="0.75"/>
+    <line x1="92" y1="113.5" x2="94" y2="125" stroke="#cc0000" stroke-width="1.5" opacity="0.75"/>
+
+    <!-- Player 5 -->
+    <circle cx="108" cy="95" r="5" fill="#ffffff" opacity="0.7"/>
+    <rect x="105.5" y="100" width="5" height="14" rx="2" fill="#cc0000" opacity="0.7"/>
+    <line x1="106" y1="114" x2="104" y2="125" stroke="#cc0000" stroke-width="1.5" opacity="0.7"/>
+    <line x1="110" y1="114" x2="112" y2="125" stroke="#cc0000" stroke-width="1.5" opacity="0.7"/>
+
+    <!-- Field -->
+    <rect x="4" y="130" width="117" height="51" fill="#0d1a0d" opacity="0.5"/>
+    <line x1="4" y1="130" x2="121" y2="130" stroke="#2d7a4a" stroke-width="1"/>
+
+    <!-- "TEAM" text in background -->
+    <text x="62" y="160" text-anchor="middle" font-family="'Courier New', monospace" font-size="24" font-weight="bold" fill="#ffd700" opacity="0.1">TEAM</text>
+
+    <!-- Label -->
+    <text x="62" y="200" text-anchor="middle" font-family="'Courier New', monospace" font-size="10" font-weight="bold" fill="#ffd700">TEAM</text>
+  </g>
+
+  <!-- Bottom decorative elements -->
+  <line x1="25" y1="275" x2="575" y2="275" stroke="#ffd700" stroke-width="0.5" opacity="0.15"/>
+
+  <!-- Corner accents -->
+  <path d="M10,10 L25,10" stroke="#ffd700" stroke-width="1" opacity="0.5"/>
+  <path d="M10,10 L10,25" stroke="#ffd700" stroke-width="1" opacity="0.5"/>
+  <path d="M590,10 L575,10" stroke="#ffd700" stroke-width="1" opacity="0.5"/>
+  <path d="M590,10 L590,25" stroke="#ffd700" stroke-width="1" opacity="0.5"/>
+  <path d="M10,290 L25,290" stroke="#ffd700" stroke-width="1" opacity="0.5"/>
+  <path d="M10,290 L10,275" stroke="#ffd700" stroke-width="1" opacity="0.5"/>
+  <path d="M590,290 L575,290" stroke="#ffd700" stroke-width="1" opacity="0.5"/>
+  <path d="M590,290 L590,275" stroke="#ffd700" stroke-width="1" opacity="0.5"/>
+</svg>

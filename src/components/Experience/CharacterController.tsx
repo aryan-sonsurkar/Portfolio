@@ -1,15 +1,15 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
-import { useStore } from "@/lib/store";
+import { useStore, fpvState } from "@/lib/store";
 import { BUILDINGS } from "../Buildings/BuildingData";
 import { audioManager } from "@/lib/audio";
 
 export default function CharacterController() {
   const { camera, gl } = useThree();
-  const { cameraMode, selectedBuilding, enterBuilding, leaveBuilding, activeScreen, blueprintMode, exitPosition, exitRotation, setExitPosition } = useStore();
+  const { cameraMode, selectedBuilding, enterBuilding, leaveBuilding, activeScreen, blueprintMode, exitPosition, exitRotation, setExitPosition, setActiveScreen, teleportOpen } = useStore();
 
   const keys = useRef({ w: false, a: false, s: false, d: false });
   const positionRef = useRef(new THREE.Vector3(0, 1.6, 6));
@@ -18,10 +18,30 @@ export default function CharacterController() {
   const enteringRef = useRef(false);
   const leavingRef = useRef(false);
   const transitionRef = useRef(0);
+  const returningFromScreenRef = useRef(false);
 
   const lastFootstepTime = useRef(0);
   const footstepInterval = 0.42;
 
+  // ESC handler for screen focus mode
+  useEffect(() => {
+    if (!activeScreen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        returningFromScreenRef.current = true;
+        positionRef.current.set(fpvState.position[0], fpvState.position[1], fpvState.position[2]);
+        rotationRef.current.yaw = fpvState.yaw;
+        rotationRef.current.pitch = 0;
+        setActiveScreen(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [activeScreen, setActiveScreen]);
+
+  // FPV keyboard + mouse controls
   useEffect(() => {
     if (cameraMode !== "fpv") return;
 
@@ -77,17 +97,30 @@ export default function CharacterController() {
     };
   }, [cameraMode, gl.domElement, selectedBuilding, activeScreen]);
 
+  // Exit pointer lock when teleport opens so HTML clicks work
+  useEffect(() => {
+    if (teleportOpen) {
+      try { document.exitPointerLock(); } catch (e) {}
+      keys.current = { w: false, a: false, s: false, d: false };
+    }
+  }, [teleportOpen]);
+
   // Spawn position on enter/leave transitions
   useEffect(() => {
     if (cameraMode !== "fpv") return;
 
+    // If returning from screen focus, position was already restored by ESC handler
+    if (returningFromScreenRef.current) {
+      returningFromScreenRef.current = false;
+      camera.position.copy(positionRef.current);
+      return;
+    }
+
     if (selectedBuilding) {
-      // Inside building — spawn at center, facing back wall
-      positionRef.current.set(0, 1.6, 0.5);
-      rotationRef.current.yaw = Math.PI;
+      positionRef.current.set(0, 1.6, 1.5);
+      rotationRef.current.yaw = 0;
       rotationRef.current.pitch = 0;
     } else {
-      // Outside — use saved exit position
       positionRef.current.set(exitPosition[0], exitPosition[1], exitPosition[2]);
       rotationRef.current.yaw = exitRotation;
       rotationRef.current.pitch = 0;
@@ -109,17 +142,19 @@ export default function CharacterController() {
       const distToExit = new THREE.Vector2(newPos.x - 3.6, newPos.z - 2.7).length();
       if (distToExit < 1.2 && !leavingRef.current) {
         leavingRef.current = true;
+        enteringRef.current = true;
         const building = BUILDINGS.find((b) => b.id === selectedBuilding);
         if (building) {
           const exitPos: [number, number, number] = [
             building.position[0],
             1.6,
-            building.position[2] + building.scale[2] / 2 + 1.2,
+            building.position[2] + building.scale[2] / 2 + 4.0,
           ];
-          setExitPosition(exitPos, Math.PI);
+          setExitPosition(exitPos, 0);
         }
         leaveBuilding();
-        setTimeout(() => { leavingRef.current = false; }, 400);
+        setTimeout(() => { leavingRef.current = false; }, 800);
+        setTimeout(() => { enteringRef.current = false; }, 800);
       }
       return;
     }
@@ -194,6 +229,12 @@ export default function CharacterController() {
 
     checkCollision(newPos);
     positionRef.current.copy(newPos);
+
+    // Update module-level fpv state for non-reactive access
+    fpvState.position[0] = positionRef.current.x;
+    fpvState.position[1] = positionRef.current.y;
+    fpvState.position[2] = positionRef.current.z;
+    fpvState.yaw = rotationRef.current.yaw;
 
     // Smooth camera position
     camera.position.lerp(positionRef.current, delta * 12);

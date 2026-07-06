@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="600" height="300">
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#050a14"/>
+      <stop offset="50%" style="stop-color:#002244;stop-opacity:0.5"/>
+      <stop offset="100%" style="stop-color:#050a14"/>
+    </linearGradient>
+    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0066ff;stop-opacity:0.2"/>
+      <stop offset="50%" style="stop-color:#0066ff;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#0066ff;stop-opacity:0.2"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="300" fill="#050a14"/>
+
+  <!-- Background grid -->
+  <g opacity="0.04" stroke="#0066ff">
+    <line x1="100" y1="0" x2="100" y2="300" stroke-width="0.5"/>
+    <line x1="200" y1="0" x2="200" y2="300" stroke-width="0.5"/>
+    <line x1="300" y1="0" x2="300" y2="300" stroke-width="0.5"/>
+    <line x1="400" y1="0" x2="400" y2="300" stroke-width="0.5"/>
+    <line x1="500" y1="0" x2="500" y2="300" stroke-width="0.5"/>
+  </g>
+
+  <!-- Header -->
+  <rect x="0" y="0" width="600" height="50" fill="url(#headerGrad)"/>
+  <text x="300" y="32" text-anchor="middle" font-family="monospace" font-size="16" font-weight="bold" fill="#0066ff" filter="url(#glow)">2026 ROADMAP</text>
+  <line x1="180" y1="46" x2="420" y2="46" stroke="#0066ff" stroke-width="1" opacity="0.4"/>
+
+  <!-- Timeline line -->
+  <line x1="80" y1="150" x2="520" y2="150" stroke="url(#lineGrad)" stroke-width="2"/>
+
+  <!-- Glow on timeline -->
+  <line x1="80" y1="150" x2="520" y2="150" stroke="#0066ff" stroke-width="1" opacity="0.3" filter="url(#softGlow)"/>
+
+  <!-- Q1 Milestone -->
+  <line x1="150" y1="120" x2="150" y2="180" stroke="#0066ff" stroke-width="1" opacity="0.5"/>
+  <circle cx="150" cy="150" r="6" fill="#050a14" stroke="#0066ff" stroke-width="2"/>
+  <circle cx="150" cy="150" r="3" fill="#0066ff" filter="url(#glow)"/>
+  <text x="150" y="90" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#0088ff">Q1</text>
+  <text x="150" y="106" text-anchor="middle" font-family="monospace" font-size="9" fill="#00ccff">MODCODES Beta</text>
+  <rect x="110" y="190" width="80" height="28" rx="4" fill="#0a1628" stroke="#003366" stroke-width="0.5"/>
+  <text x="150" y="208" text-anchor="middle" font-family="monospace" font-size="8" fill="#00aaff">PHASE 1</text>
+
+  <!-- Q2 Milestone -->
+  <line x1="273" y1="120" x2="273" y2="180" stroke="#0066ff" stroke-width="1" opacity="0.5"/>
+  <circle cx="273" cy="150" r="6" fill="#050a14" stroke="#0066ff" stroke-width="2"/>
+  <circle cx="273" cy="150" r="3" fill="#0066ff" filter="url(#glow)"/>
+  <text x="273" y="90" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#0088ff">Q2</text>
+  <text x="273" y="106" text-anchor="middle" font-family="monospace" font-size="9" fill="#00ccff">AI IDE Alpha</text>
+  <rect x="233" y="190" width="80" height="28" rx="4" fill="#0a1628" stroke="#003366" stroke-width="0.5"/>
+  <text x="273" y="208" text-anchor="middle" font-family="monospace" font-size="8" fill="#00aaff">PHASE 2</text>
+
+  <!-- Q3 Milestone -->
+  <line x1="396" y1="120" x2="396" y2="180" stroke="#0066ff" stroke-width="1" opacity="0.5"/>
+  <circle cx="396" cy="150" r="6" fill="#050a14" stroke="#0066ff" stroke-width="2"/>
+  <circle cx="396" cy="150" r="3" fill="#0066ff" filter="url(#glow)"/>
+  <text x="396" y="90" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#0088ff">Q3</text>
+  <text x="396" y="106" text-anchor="middle" font-family="monospace" font-size="9" fill="#00ccff">Custom Language v0.1</text>
+  <rect x="356" y="190" width="80" height="28" rx="4" fill="#0a1628" stroke="#003366" stroke-width="0.5"/>
+  <text x="396" y="208" text-anchor="middle" font-family="monospace" font-size="8" fill="#00aaff">PHASE 3</text>
+
+  <!-- Q4 Milestone -->
+  <line x1="520" y1="120" x2="520" y2="180" stroke="#0066ff" stroke-width="1" opacity="0.5"/>
+  <circle cx="520" cy="150" r="8" fill="#050a14" stroke="#0066ff" stroke-width="2"/>
+  <circle cx="520" cy="150" r="4" fill="#00aaff" filter="url(#glow)"/>
+  <text x="520" y="90" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#0088ff">Q4</text>
+  <text x="520" y="106" text-anchor="middle" font-family="monospace" font-size="9" fill="#00ccff">Full Platform Launch</text>
+  <rect x="480" y="190" width="80" height="28" rx="4" fill="#0066ff;stop-opacity:0.15" stroke="#0066ff" stroke-width="1"/>
+  <text x="520" y="208" text-anchor="middle" font-family="monospace" font-size="8" fill="#00ccff" font-weight="bold">LAUNCH</text>
+
+  <!-- Bottom accent -->
+  <line x1="0" y1="290" x2="600" y2="290" stroke="#0066ff" stroke-width="1" opacity="0.2"/>
+  <text x="300" y="280" text-anchor="middle" font-family="monospace" font-size="9" fill="#334466">MODCODES &gt; AI IDE &gt; LANGUAGE &gt; PLATFORM</text>
+</svg>
