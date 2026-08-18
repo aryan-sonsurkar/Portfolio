@@ -24,7 +24,6 @@ export default function CharacterController() {
 
   const lastFootstepTime = useRef(0);
   const footstepInterval = 0.42;
-  const bobRef = useRef({ phase: 0, intensity: 0 });
 
   // ESC handler for screen focus mode
   useEffect(() => {
@@ -356,23 +355,6 @@ export default function CharacterController() {
       .add(camera.position);
 
     camera.lookAt(lookTarget);
-
-    // Head bob + tilt when walking
-    if (isMoving && !selectedBuilding) {
-      bobRef.current.phase += delta * 8;
-      bobRef.current.intensity = Math.min(1, bobRef.current.intensity + delta * 4);
-    } else {
-      bobRef.current.intensity = Math.max(0, bobRef.current.intensity - delta * 4);
-    }
-
-    if (bobRef.current.intensity > 0) {
-      const bobY = Math.sin(bobRef.current.phase) * 0.025 * bobRef.current.intensity;
-      const tiltZ = Math.sin(bobRef.current.phase * 0.5) * 0.012 * bobRef.current.intensity;
-      camera.position.y += bobY;
-      camera.rotation.z = tiltZ;
-    } else {
-      camera.rotation.z = 0;
-    }
 
     if (isMoving && state.clock.getElapsedTime() - lastFootstepTime.current > footstepInterval) {
       audioManager.playFootstep(selectedBuilding ? "wood" : "concrete");
