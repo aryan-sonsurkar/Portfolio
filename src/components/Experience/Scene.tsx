@@ -46,6 +46,7 @@ export default function Scene() {
   return (
     <Canvas
       shadows
+      dpr={[1, 1.5]}
       camera={{ position: [20, 16, 20], fov: 45, near: 0.1, far: 220 }}
       gl={{
         antialias: true,

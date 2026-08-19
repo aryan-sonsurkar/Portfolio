@@ -41,11 +41,10 @@ function Clouds() {
       {clouds.map((cloud, i) => (
         <mesh key={i} position={cloud.position}>
           <sphereGeometry args={[cloud.scale, 8, 6]} />
-          <meshStandardMaterial
+          <meshBasicMaterial
             color="#fff5e6"
             transparent
             opacity={cloud.opacity}
-            roughness={1}
             depthWrite={false}
           />
         </mesh>
@@ -125,11 +124,11 @@ function Moon() {
   return (
     <group position={[15, 18, -20]}>
       <mesh>
-        <sphereGeometry args={[1.5, 32, 32]} />
+        <sphereGeometry args={[1.5, 20, 20]} />
         <meshBasicMaterial color="#f0e6d8" />
       </mesh>
       <mesh>
-        <sphereGeometry args={[2.2, 32, 32]} />
+        <sphereGeometry args={[2.2, 20, 20]} />
         <meshBasicMaterial
           color="#f0e6d8"
           transparent
@@ -147,6 +146,7 @@ function DropPod() {
 
   useFrame(() => {
     if (!groupRef.current) return;
+    if (introProgress >= 0.35) return;
 
     const eased = introProgress < 0.35 ? introProgress / 0.35 : 1;
     const x = THREE.MathUtils.lerp(-70, 0, eased);
@@ -294,7 +294,7 @@ function Earth() {
   return (
     <group ref={groupRef} position={[0, 8, -70]} scale={[16, 16, 16]}>
       <mesh>
-        <sphereGeometry args={[1, 64, 64]} />
+        <sphereGeometry args={[1, 32, 32]} />
         <meshPhongMaterial
           map={earthTexture || undefined}
           emissive="#173b63"
@@ -302,7 +302,7 @@ function Earth() {
         />
       </mesh>
       <mesh ref={cloudsRef}>
-        <sphereGeometry args={[1.01, 64, 64]} />
+        <sphereGeometry args={[1.01, 32, 32]} />
         <meshBasicMaterial
           map={cloudTexture || undefined}
           transparent
@@ -317,7 +317,7 @@ function Earth() {
         <pointsMaterial size={0.008} color="#ffd166" transparent opacity={0.9} depthWrite={false} />
       </points>
       <mesh>
-        <sphereGeometry args={[1.02, 64, 64]} />
+        <sphereGeometry args={[1.02, 32, 32]} />
         <meshBasicMaterial color="#82d3ff" transparent opacity={0.08} depthWrite={false} />
       </mesh>
     </group>
@@ -342,14 +342,14 @@ export default function Atmosphere() {
         intensity={1.8}
         color="#ffd4a8"
         castShadow
-        shadow-mapSize-width={2048}
-        shadow-mapSize-height={2048}
+        shadow-mapSize-width={1024}
+        shadow-mapSize-height={1024}
         shadow-camera-near={0.5}
         shadow-camera-far={50}
-        shadow-camera-left={-15}
-        shadow-camera-right={15}
-        shadow-camera-top={15}
-        shadow-camera-bottom={-15}
+        shadow-camera-left={-14}
+        shadow-camera-right={14}
+        shadow-camera-top={14}
+        shadow-camera-bottom={-14}
       />
       <directionalLight position={[-5, 8, -3]} intensity={0.4} color="#4a6fa5" />
       <directionalLight position={[0, 3, -10]} intensity={0.3} color="#ff8c42" />

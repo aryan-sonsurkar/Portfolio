@@ -101,11 +101,11 @@ function StreetLamps() {
 function Bench({ position }: { position: [number, number, number] }) {
   return (
     <group position={position}>
-      <mesh position={[0, 0.38, 0]} castShadow>
+      <mesh position={[0, 0.38, 0]}>
         <boxGeometry args={[1.3, 0.07, 0.42]} />
         <meshStandardMaterial color="#5a4a3a" roughness={0.8} />
       </mesh>
-      <mesh position={[0, 0.65, -0.18]} castShadow>
+      <mesh position={[0, 0.65, -0.18]}>
         <boxGeometry args={[1.3, 0.35, 0.06]} />
         <meshStandardMaterial color="#5a4a3a" roughness={0.8} />
       </mesh>
@@ -122,7 +122,7 @@ function Bench({ position }: { position: [number, number, number] }) {
 function Mailbox({ position }: { position: [number, number, number] }) {
   return (
     <group position={position}>
-      <mesh position={[0, 0.65, 0]} castShadow>
+      <mesh position={[0, 0.65, 0]}>
         <boxGeometry args={[0.22, 0.18, 0.3]} />
         <meshStandardMaterial color="#1a3a5c" metalness={0.5} roughness={0.4} />
       </mesh>
@@ -137,7 +137,7 @@ function Mailbox({ position }: { position: [number, number, number] }) {
 function TrashCan({ position }: { position: [number, number, number] }) {
   return (
     <group position={position}>
-      <mesh position={[0, 0.24, 0]} castShadow>
+      <mesh position={[0, 0.24, 0]}>
         <cylinderGeometry args={[0.13, 0.11, 0.48, 8]} />
         <meshStandardMaterial color="#1c1c24" metalness={0.3} roughness={0.7} />
       </mesh>

@@ -1,11 +1,13 @@
 "use client";
 
 import { useRef, useState, useMemo, useLayoutEffect } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { Edges } from "@react-three/drei";
 import * as THREE from "three";
 import { BuildingConfig } from "@/types/building";
 import { useStore } from "@/lib/store";
+
+const scratchWorldPos = new THREE.Vector3();
 
 interface BuildingProps {
   config: BuildingConfig;
@@ -67,13 +69,19 @@ function WindowGrid({
 
     mesh.instanceMatrix.needsUpdate = true;
     if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
-  }, [windows, color]);
+
+    // Bounding sphere covering all windows so frustum culling works
+    const radius = Math.sqrt(size[0] * size[0] + size[1] * size[1]) * 0.5;
+    mesh.geometry.boundingSphere = new THREE.Sphere(
+      new THREE.Vector3(0, 0, 0),
+      radius
+    );
+  }, [windows, color, size]);
 
   return (
     <instancedMesh
       ref={ref}
       args={[undefined, undefined, windows.length]}
-      frustumCulled={false}
     >
       <planeGeometry args={[winW, winH]} />
       <meshBasicMaterial toneMapped={false} />
@@ -152,7 +160,9 @@ function BuildingEntrance({ config }: { config: BuildingConfig }) {
 function BuildingBody({ config }: { config: BuildingConfig }) {
   const meshRef = useRef<THREE.Mesh>(null);
   const glowRef = useRef<THREE.Mesh>(null);
+  const glowAnimating = useRef(false);
   const scaleTarget = useRef(new THREE.Vector3());
+  const { camera } = useThree();
   const { setHoveredBuilding, introComplete, introProgress, visitedBuildings } = useStore();
   const [hovered, setHovered] = useState(false);
   const isVisited = visitedBuildings.includes(config.id);
@@ -168,11 +178,25 @@ function BuildingBody({ config }: { config: BuildingConfig }) {
     scaleTarget.current.set(target, target, target);
     meshRef.current.scale.lerp(scaleTarget.current, 0.08);
 
-    // Discovery glow pulse for unvisited buildings
+    // Discovery glow pulse for unvisited buildings — only when near the player
     if (glowRef.current && !isVisited && introComplete) {
-      const pulse = Math.sin(state.clock.getElapsedTime() * 2) * 0.3 + 0.7;
-      glowRef.current.scale.setScalar(1.0 + pulse * 0.08);
-      (glowRef.current.material as THREE.MeshStandardMaterial).opacity = pulse * 0.25;
+      scratchWorldPos.set(
+        config.position[0],
+        config.scale[1] + 0.3,
+        config.position[2]
+      );
+      const dist = scratchWorldPos.distanceTo(camera.position);
+      if (dist < 28) {
+        const pulse = Math.sin(state.clock.getElapsedTime() * 2) * 0.3 + 0.7;
+        glowRef.current.scale.setScalar(1.0 + pulse * 0.08);
+        (glowRef.current.material as THREE.MeshStandardMaterial).opacity =
+          pulse * 0.25;
+        glowAnimating.current = true;
+      } else if (glowAnimating.current) {
+        glowRef.current.scale.setScalar(1.0);
+        (glowRef.current.material as THREE.MeshStandardMaterial).opacity = 0.25;
+        glowAnimating.current = false;
+      }
     }
   });
 
@@ -281,14 +305,6 @@ function BuildingBody({ config }: { config: BuildingConfig }) {
       {/* Physical door entrance for every building */}
       <BuildingEntrance config={config} />
 
-      {/* Point light from windows */}
-      <pointLight
-        color={config.emissive || "#ffd700"}
-        intensity={hovered ? 2.0 : !introComplete && config.id === "modcodes-hq" ? 1.2 : 0.8}
-        distance={8}
-        position={[0, 0, config.scale[2] / 2 + 1]}
-      />
-
       {/* Discovery glow ring for unvisited buildings */}
       {!isVisited && introComplete && (
         <mesh
@@ -319,7 +335,6 @@ function BuildingBody({ config }: { config: BuildingConfig }) {
               emissiveIntensity={3}
             />
           </mesh>
-          <pointLight color={config.emissive || "#ffd700"} intensity={1} distance={3} />
         </group>
       )}
     </group>

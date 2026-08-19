@@ -7,7 +7,7 @@ import { useStore } from "@/lib/store";
 
 function Rain() {
   const ref = useRef<THREE.InstancedMesh>(null);
-  const count = 1500;
+  const count = 900;
   const dummy = useMemo(() => new THREE.Object3D(), []);
 
   const drops = useMemo(

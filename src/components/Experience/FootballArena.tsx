@@ -115,8 +115,6 @@ function RonaldoPhoto({
       >
         {label}
       </Text>
-      {/* Frame glow */}
-      <pointLight color="#ffd700" intensity={0.5} distance={2} position={[0, 0, 0.3]} />
     </group>
   );
 }
@@ -149,8 +147,6 @@ function Banner({
       >
         {text}
       </Text>
-      {/* Glow */}
-      <pointLight color={color} intensity={0.8} distance={3} position={[0, 0, 0.5]} />
     </group>
   );
 }
@@ -307,7 +303,6 @@ function FloodLights() {
             intensity={3}
             color="#ffffee"
             distance={18}
-            castShadow
           />
         </group>
       ))}
