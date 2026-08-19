@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360">
+  <rect width="600" height="360" fill="#120c06"/>
+  <rect x="1" y="1" width="598" height="358" fill="none" stroke="#ffd700" stroke-width="2"/>
+  <text x="300" y="45" fill="#fde68a" font-size="20" font-family="sans-serif" text-anchor="middle" font-weight="bold">GITHUB STATS</text>
+  <line x1="80" y1="60" x2="520" y2="60" stroke="#ffd700" stroke-width="1" opacity="0.4"/>
+  <rect x="80" y="100" width="130" height="80" rx="8" fill="#1a150a" stroke="#ffd700" stroke-width="1"/>
+  <text x="145" y="140" fill="#fde68a" font-size="28" font-family="sans-serif" text-anchor="middle" font-weight="bold">34</text>
+  <text x="145" y="164" fill="#94a3b8" font-size="11" font-family="sans-serif" text-anchor="middle">REPOS</text>
+  <rect x="235" y="100" width="130" height="80" rx="8" fill="#1a150a" stroke="#ffd700" stroke-width="1"/>
+  <text x="300" y="140" fill="#fde68a" font-size="28" font-family="sans-serif" text-anchor="middle" font-weight="bold">100%</text>
+  <text x="300" y="164" fill="#94a3b8" font-size="11" font-family="sans-serif" text-anchor="middle">CODED</text>
+  <rect x="390" y="100" width="130" height="80" rx="8" fill="#1a150a" stroke="#ffd700" stroke-width="1"/>
+  <text x="455" y="140" fill="#fde68a" font-size="28" font-family="sans-serif" text-anchor="middle" font-weight="bold">BUILT</text>
+  <text x="455" y="164" fill="#94a3b8" font-size="11" font-family="sans-serif" text-anchor="middle">IN PUBLIC</text>
+  <text x="300" y="240" fill="#fde68a" font-size="13" font-family="sans-serif" text-anchor="middle">NO FORKS, NO FAKE STARS</text>
+  <text x="300" y="275" fill="#94a3b8" font-size="11" font-family="sans-serif" text-anchor="middle">github.com/aryan-sonsurkar</text>
+  <text x="300" y="310" fill="#eab308" font-size="11" font-family="sans-serif" text-anchor="middle">every star earned, not bought</text>
+</svg>

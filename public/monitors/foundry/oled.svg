@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360">
+  <rect width="600" height="360" fill="#0a1208"/>
+  <rect x="1" y="1" width="598" height="358" fill="none" stroke="#38bdf8" stroke-width="2"/>
+  <text x="300" y="45" fill="#7dd3fc" font-size="20" font-family="sans-serif" text-anchor="middle" font-weight="bold">OLED DISPLAY LAB</text>
+  <line x1="80" y1="60" x2="520" y2="60" stroke="#38bdf8" stroke-width="1" opacity="0.4"/>
+  <rect x="140" y="100" width="320" height="120" rx="6" fill="#001018"/>
+  <rect x="160" y="120" width="280" height="80" rx="4" fill="#01263a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="300" y="152" fill="#38bdf8" font-size="14" font-family="monospace" text-anchor="middle">HELLO FROM ESP32</text>
+  <text x="300" y="176" fill="#7dd3fc" font-size="11" font-family="monospace" text-anchor="middle">I2C · 128x64 · SSD1306</text>
+  <text x="300" y="260" fill="#e2e8f0" font-size="13" font-family="sans-serif" text-anchor="middle">TEXT, GRAPHS &amp; DEBUG OUTPUT</text>
+  <text x="300" y="300" fill="#94a3b8" font-size="11" font-family="sans-serif" text-anchor="middle">every pixel earned by hand</text>
+</svg>

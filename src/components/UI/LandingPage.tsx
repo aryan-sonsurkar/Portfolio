@@ -11,7 +11,7 @@ const PROJECTS = [
     description: "Python, FastAPI, Ollama local LLMs, speech recognition. Currently in Beta.",
     tags: ["Python", "FastAPI", "Ollama", "SQLite"],
     color: "#ffd700",
-    link: "https://github.com/aryan-sonsurkar",
+    link: "https://github.com/aryan-sonsurkar/mod-codes-ide",
   },
   {
     title: "Vishwanath Insurance",
@@ -41,8 +41,7 @@ const SKILLS = [
 const LINKS = [
   { label: "GitHub", url: "https://github.com/aryan-sonsurkar", icon: "GH" },
   { label: "LinkedIn", url: "https://linkedin.com/in/aryan-sonsurkar", icon: "LI" },
-  { label: "Email", url: "mailto:aryan@example.com", icon: "@" },
-  { label: "Resume", url: "#", icon: "CV" },
+  { label: "Email", url: "mailto:aryansonsurkar87@gmail.com", icon: "@" },
 ];
 
 export default function LandingPage({ onEnterDistrict }: { onEnterDistrict: () => void }) {

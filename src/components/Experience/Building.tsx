@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useMemo } from "react";
+import { useRef, useState, useMemo, useLayoutEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Edges } from "@react-three/drei";
 import * as THREE from "three";
@@ -22,9 +22,10 @@ function WindowGrid({
 }) {
   const cols = Math.floor(size[0] * 3);
   const rows = Math.floor(size[1] * 4);
+  const ref = useRef<THREE.InstancedMesh>(null);
 
   const windows = useMemo(() => {
-    const result: { x: number; y: number; opacity: number }[] = [];
+    const result: { x: number; y: number; brightness: number }[] = [];
 
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
@@ -37,7 +38,7 @@ function WindowGrid({
           result.push({
             x: (c - cols / 2 + 0.5) * (size[0] / cols),
             y: (r - rows / 2 + 0.5) * (size[1] / rows),
-            opacity: 0.3 + Math.random() * 0.5,
+            brightness: 0.3 + Math.random() * 0.5,
           });
         }
       }
@@ -48,21 +49,35 @@ function WindowGrid({
   const winW = size[0] / cols * 0.6;
   const winH = size[1] / rows * 0.5;
 
+  // Apply per-instance matrices + colors once per building face
+  useLayoutEffect(() => {
+    if (!ref.current) return;
+    const mesh = ref.current;
+    const dummy = new THREE.Object3D();
+    const base = new THREE.Color(color);
+    const tint = new THREE.Color();
+
+    windows.forEach((w, i) => {
+      dummy.position.set(w.x, w.y, 0);
+      dummy.updateMatrix();
+      mesh.setMatrixAt(i, dummy.matrix);
+      tint.copy(base).multiplyScalar(w.brightness);
+      mesh.setColorAt(i, tint);
+    });
+
+    mesh.instanceMatrix.needsUpdate = true;
+    if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
+  }, [windows, color]);
+
   return (
-    <>
-      {windows.map((w, i) => (
-        <mesh key={i} position={[w.x, w.y, 0]}>
-          <planeGeometry args={[winW, winH]} />
-          <meshStandardMaterial
-            color={color}
-            emissive={color}
-            emissiveIntensity={w.opacity * 0.6}
-            transparent
-            opacity={w.opacity}
-          />
-        </mesh>
-      ))}
-    </>
+    <instancedMesh
+      ref={ref}
+      args={[undefined, undefined, windows.length]}
+      frustumCulled={false}
+    >
+      <planeGeometry args={[winW, winH]} />
+      <meshBasicMaterial toneMapped={false} />
+    </instancedMesh>
   );
 }
 
@@ -137,6 +152,7 @@ function BuildingEntrance({ config }: { config: BuildingConfig }) {
 function BuildingBody({ config }: { config: BuildingConfig }) {
   const meshRef = useRef<THREE.Mesh>(null);
   const glowRef = useRef<THREE.Mesh>(null);
+  const scaleTarget = useRef(new THREE.Vector3());
   const { setHoveredBuilding, introComplete, introProgress, visitedBuildings } = useStore();
   const [hovered, setHovered] = useState(false);
   const isVisited = visitedBuildings.includes(config.id);
@@ -149,10 +165,8 @@ function BuildingBody({ config }: { config: BuildingConfig }) {
   useFrame((state) => {
     if (!meshRef.current) return;
     const target = hovered ? 1.02 : 1.0;
-    meshRef.current.scale.lerp(
-      new THREE.Vector3(target, target, target),
-      0.08
-    );
+    scaleTarget.current.set(target, target, target);
+    meshRef.current.scale.lerp(scaleTarget.current, 0.08);
 
     // Discovery glow pulse for unvisited buildings
     if (glowRef.current && !isVisited && introComplete) {

@@ -1,7 +1,8 @@
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import { Suspense, lazy, useEffect, useRef } from "react";
+import { Suspense, lazy, useEffect } from "react";
+import * as THREE from "three";
 import Atmosphere from "./Atmosphere";
 import CameraController from "./CameraController";
 import CharacterController from "./CharacterController";
@@ -48,7 +49,7 @@ export default function Scene() {
       camera={{ position: [20, 16, 20], fov: 45, near: 0.1, far: 220 }}
       gl={{
         antialias: true,
-        toneMapping: 3,
+        toneMapping: THREE.ACESFilmicToneMapping,
         toneMappingExposure: 1.1,
         powerPreference: "high-performance",
       }}

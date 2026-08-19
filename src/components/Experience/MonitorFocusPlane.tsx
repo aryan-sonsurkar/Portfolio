@@ -4,9 +4,7 @@ import { useState, useEffect, useMemo, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { useStore } from "@/lib/store";
-
-// ── Texture cache: reuse across clicks, never recreate ──
-const textureCache = new Map<string, THREE.CanvasTexture>();
+import { loadMonitorTexture, getCachedMonitorTexture } from "@/lib/monitorTextures";
 
 // ── Easing ──
 function easeOutCubic(t: number): number {
@@ -66,7 +64,7 @@ export default function MonitorFocusPlane() {
       return;
     }
 
-    const cached = textureCache.get(activeMonitor.image);
+    const cached = getCachedMonitorTexture(activeMonitor.image);
     if (cached) {
       setTexture(cached);
       targetProgress.current = 1;
@@ -74,43 +72,14 @@ export default function MonitorFocusPlane() {
     }
 
     let cancelled = false;
-    (async () => {
-      try {
-        const res = await fetch(activeMonitor.image);
-        if (!res.ok) throw new Error(`${res.status}`);
-        const svgText = await res.text();
-        const blob = new Blob([svgText], { type: "image/svg+xml;charset=utf-8" });
-        const url = URL.createObjectURL(blob);
+    loadMonitorTexture(activeMonitor.image)
+      .then((tex) => {
+        if (cancelled) return;
+        setTexture(tex);
+        targetProgress.current = 1;
+      })
+      .catch((e) => console.error("[MonitorFocusPlane]", e));
 
-        const img = new Image();
-        img.crossOrigin = "anonymous";
-        img.onload = () => {
-          if (cancelled) return;
-          const canvas = document.createElement("canvas");
-          canvas.width = 1920;
-          canvas.height = 1080;
-          canvas.getContext("2d")!.drawImage(img, 0, 0, 1920, 1080);
-          URL.revokeObjectURL(url);
-
-          const tex = new THREE.CanvasTexture(canvas);
-          tex.colorSpace = THREE.SRGBColorSpace;
-          tex.minFilter = THREE.LinearFilter;
-          tex.magFilter = THREE.LinearFilter;
-          tex.generateMipmaps = false;
-          tex.needsUpdate = true;
-
-          textureCache.set(activeMonitor.image, tex);
-          if (!cancelled) {
-            setTexture(tex);
-            targetProgress.current = 1;
-          }
-        };
-        img.onerror = () => URL.revokeObjectURL(url);
-        img.src = url;
-      } catch (e) {
-        console.error("[MonitorFocusPlane]", e);
-      }
-    })();
     return () => {
       cancelled = true;
     };

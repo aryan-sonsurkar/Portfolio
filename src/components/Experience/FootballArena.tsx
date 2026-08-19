@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Text } from "@react-three/drei";
 import * as THREE from "three";
-import { useStore } from "@/lib/store";
 
 const ARENA_CENTER: [number, number, number] = [10, 0, -6];
 

@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import { Html } from "@react-three/drei";
 import * as THREE from "three";
-import { useStore, fpvState } from "@/lib/store";
+import { useStore } from "@/lib/store";
+import { loadMonitorTexture } from "@/lib/monitorTextures";
 import type { MonitorConfig } from "@/config/monitors";
 
 interface ImageMonitorProps {
@@ -19,46 +20,15 @@ export default function ImageMonitor({ config }: ImageMonitorProps) {
   useEffect(() => {
     let cancelled = false;
 
-    async function load() {
-      try {
-        const res = await fetch(image);
-        if (!res.ok) throw new Error(`${res.status}`);
-        const svgText = await res.text();
+    loadMonitorTexture(image)
+      .then((tex) => {
+        if (!cancelled) setTexture(tex);
+      })
+      .catch((e) => console.error(`[Monitor:${id}] load failed:`, e));
 
-        const blob = new Blob([svgText], { type: "image/svg+xml;charset=utf-8" });
-        const url = URL.createObjectURL(blob);
-
-        const img = new Image();
-        img.crossOrigin = "anonymous";
-        img.onload = () => {
-          if (cancelled) return;
-          const canvas = document.createElement("canvas");
-          canvas.width = 1920;
-          canvas.height = 1080;
-          const ctx = canvas.getContext("2d")!;
-          ctx.drawImage(img, 0, 0, 1920, 1080);
-          URL.revokeObjectURL(url);
-
-          const tex = new THREE.CanvasTexture(canvas);
-          tex.colorSpace = THREE.SRGBColorSpace;
-          tex.minFilter = THREE.LinearFilter;
-          tex.magFilter = THREE.LinearFilter;
-          tex.generateMipmaps = false;
-          tex.needsUpdate = true;
-          if (!cancelled) setTexture(tex);
-        };
-        img.onerror = () => {
-          console.error(`[Monitor:${id}] SVG render failed: ${image}`);
-          URL.revokeObjectURL(url);
-        };
-        img.src = url;
-      } catch (e) {
-        console.error(`[Monitor:${id}] fetch failed:`, e);
-      }
-    }
-
-    load();
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [id, image]);
 
   const handleClick = () => {

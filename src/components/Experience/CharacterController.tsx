@@ -8,6 +8,15 @@ import { BUILDINGS } from "../Buildings/BuildingData";
 import { audioManager } from "@/lib/audio";
 import { inputBus } from "@/lib/inputBus";
 
+// Scratch objects — reused every frame to avoid GC churn
+const scratchPos = new THREE.Vector3();
+const scratchFront = new THREE.Vector3();
+const scratchRight = new THREE.Vector3();
+const scratchLook = new THREE.Vector3();
+const scratchDist = new THREE.Vector2();
+const scratchYAxis = new THREE.Vector3(0, 1, 0);
+const scratchXAxis = new THREE.Vector3(1, 0, 0);
+
 export default function CharacterController() {
   const { camera, gl } = useThree();
   const { cameraMode, selectedBuilding, enterBuilding, leaveBuilding, activeScreen, blueprintMode, exitPosition, exitRotation, setExitPosition, setActiveScreen, teleportOpen, flyoverActive, flyoverTarget, setFlyover } = useStore();
@@ -191,7 +200,7 @@ export default function CharacterController() {
       if (newPos.z > boundaryZ) newPos.z = boundaryZ;
       if (newPos.z < -boundaryZ) newPos.z = -boundaryZ;
 
-      const distToExit = new THREE.Vector2(newPos.x - 3.6, newPos.z - 2.7).length();
+      const distToExit = scratchDist.set(newPos.x - 3.6, newPos.z - 2.7).length();
       if (distToExit < 1.2 && !leavingRef.current) {
         leavingRef.current = true;
         enteringRef.current = true;
@@ -241,7 +250,7 @@ export default function CharacterController() {
       }
 
       const entranceZOffset = bd / 2 + 0.6;
-      const distToEntrance = new THREE.Vector2(newPos.x - bx, newPos.z - (bz + entranceZOffset)).length();
+      const distToEntrance = scratchDist.set(newPos.x - bx, newPos.z - (bz + entranceZOffset)).length();
       if (distToEntrance < 1.0 && !enteringRef.current) {
         enteringRef.current = true;
         const currentPos: [number, number, number] = [
@@ -263,6 +272,11 @@ export default function CharacterController() {
           "ironman-destiny-lab": "industrial",
           "future-observatory": "lab",
           "contact-kiosk": "office",
+          "algorithm-dojo": "office",
+          "hardware-foundry": "industrial",
+          "the-vault": "office",
+          "hackathon-war-room": "office",
+          "the-roastery": "apartment",
         };
         audioManager.startAmbience(ambienceMap[b.id] || "office");
         enterBuilding(b.id);
@@ -314,10 +328,14 @@ export default function CharacterController() {
     }
 
     const speed = 3.6 * delta;
-    const newPos = positionRef.current.clone();
+    const newPos = scratchPos.copy(positionRef.current);
 
-    const front = new THREE.Vector3(0, 0, -1).applyAxisAngle(new THREE.Vector3(0, 1, 0), rotationRef.current.yaw);
-    const right = new THREE.Vector3(1, 0, 0).applyAxisAngle(new THREE.Vector3(0, 1, 0), rotationRef.current.yaw);
+    const front = scratchFront
+      .set(0, 0, -1)
+      .applyAxisAngle(scratchYAxis, rotationRef.current.yaw);
+    const right = scratchRight
+      .set(1, 0, 0)
+      .applyAxisAngle(scratchYAxis, rotationRef.current.yaw);
 
     let isMoving = false;
 
@@ -349,9 +367,10 @@ export default function CharacterController() {
     // Smooth camera position
     camera.position.lerp(positionRef.current, delta * 12);
 
-    const lookTarget = new THREE.Vector3(0, 0, -1)
-      .applyAxisAngle(new THREE.Vector3(1, 0, 0), rotationRef.current.pitch)
-      .applyAxisAngle(new THREE.Vector3(0, 1, 0), rotationRef.current.yaw)
+    const lookTarget = scratchLook
+      .set(0, 0, -1)
+      .applyAxisAngle(scratchXAxis, rotationRef.current.pitch)
+      .applyAxisAngle(scratchYAxis, rotationRef.current.yaw)
       .add(camera.position);
 
     camera.lookAt(lookTarget);

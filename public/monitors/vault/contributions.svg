@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360">
+  <rect width="600" height="360" fill="#120c06"/>
+  <rect x="1" y="1" width="598" height="358" fill="none" stroke="#22c55e" stroke-width="2"/>
+  <text x="300" y="45" fill="#4ade80" font-size="20" font-family="sans-serif" text-anchor="middle" font-weight="bold">CONTRIBUTION MAP</text>
+  <line x1="80" y1="60" x2="520" y2="60" stroke="#22c55e" stroke-width="1" opacity="0.4"/>
+  <g>
+    <rect x="80" y="90" width="22" height="22" rx="3" fill="#0f1a2e"/>
+    <rect x="106" y="90" width="22" height="22" rx="3" fill="#0f1a2e"/>
+    <rect x="132" y="90" width="22" height="22" rx="3" fill="#166534"/>
+    <rect x="158" y="90" width="22" height="22" rx="3" fill="#0f1a2e"/>
+    <rect x="184" y="90" width="22" height="22" rx="3" fill="#166534"/>
+    <rect x="210" y="90" width="22" height="22" rx="3" fill="#22c55e"/>
+    <rect x="236" y="90" width="22" height="22" rx="3" fill="#0f1a2e"/>
+    <rect x="262" y="90" width="22" height="22" rx="3" fill="#4ade80"/>
+    <rect x="288" y="90" width="22" height="22" rx="3" fill="#166534"/>
+    <rect x="314" y="90" width="22" height="22" rx="3" fill="#0f1a2e"/>
+    <rect x="340" y="90" width="22" height="22" rx="3" fill="#22c55e"/>
+    <rect x="366" y="90" width="22" height="22" rx="3" fill="#166534"/>
+    <rect x="392" y="90" width="22" height="22" rx="3" fill="#0f1a2e"/>
+    <rect x="418" y="90" width="22" height="22" rx="3" fill="#4ade80"/>
+    <rect x="444" y="90" width="22" height="22" rx="3" fill="#0f1a2e"/>
+    <rect x="470" y="90" width="22" height="22" rx="3" fill="#166534"/>
+    <rect x="80" y="118" width="22" height="22" rx="3" fill="#166534"/>
+    <rect x="106" y="118" width="22" height="22" rx="3" fill="#4ade80"/>
+    <rect x="132" y="118" width="22" height="22" rx="3" fill="#0f1a2e"/>
+    <rect x="158" y="118" width="22" height="22" rx="3" fill="#22c55e"/>
+    <rect x="184" y="118" width="22" height="22" rx="3" fill="#0f1a2e"/>
+    <rect x="210" y="118" width="22" height="22" rx="3" fill="#0f1a2e"/>
+    <rect x="236" y="118" width="22" height="22" rx="3" fill="#166534"/>
+    <rect x="262" y="118" width="22" height="22" rx="3" fill="#4ade80"/>
+    <rect x="288" y="118" width="22" height="22" rx="3" fill="#0f1a2e"/>
+    <rect x="314" y="118" width="22" height="22" rx="3" fill="#166534"/>
+    <rect x="340" y="118" width="22" height="22" rx="3" fill="#0f1a2e"/>
+    <rect x="366" y="118" width="22" height="22" rx="3" fill="#22c55e"/>
+    <rect x="392" y="118" width="22" height="22" rx="3" fill="#166534"/>
+    <rect x="418" y="118" width="22" height="22" rx="3" fill="#0f1a2e"/>
+    <rect x="444" y="118" width="22" height="22" rx="3" fill="#4ade80"/>
+    <rect x="470" y="118" width="22" height="22" rx="3" fill="#0f1a2e"/>
+    <rect x="80" y="146" width="22" height="22" rx="3" fill="#22c55e"/>
+    <rect x="106" y="146" width="22" height="22" rx="3" fill="#0f1a2e"/>
+    <rect x="132" y="146" width="22" height="22" rx="3" fill="#4ade80"/>
+    <rect x="158" y="146" width="22" height="22" rx="3" fill="#0f1a2e"/>
+    <rect x="184" y="146" width="22" height="22" rx="3" fill="#166534"/>
+    <rect x="210" y="146" width="22" height="22" rx="3" fill="#0f1a2e"/>
+    <rect x="236" y="146" width="22" height="22" rx="3" fill="#22c55e"/>
+    <rect x="262" y="146" width="22" height="22" rx="3" fill="#0f1a2e"/>
+    <rect x="288" y="146" width="22" height="22" rx="3" fill="#166534"/>
+    <rect x="314" y="146" width="22" height="22" rx="3" fill="#4ade80"/>
+    <rect x="340" y="146" width="22" height="22" rx="3" fill="#0f1a2e"/>
+    <rect x="366" y="146" width="22" height="22" rx="3" fill="#0f1a2e"/>
+    <rect x="392" y="146" width="22" height="22" rx="3" fill="#22c55e"/>
+    <rect x="418" y="146" width="22" height="22" rx="3" fill="#166534"/>
+    <rect x="444" y="146" width="22" height="22" rx="3" fill="#0f1a2e"/>
+    <rect x="470" y="146" width="22" height="22" rx="3" fill="#4ade80"/>
+    <rect x="80" y="174" width="22" height="22" rx="3" fill="#0f1a2e"/>
+    <rect x="106" y="174" width="22" height="22" rx="3" fill="#166534"/>
+    <rect x="132" y="174" width="22" height="22" rx="3" fill="#0f1a2e"/>
+    <rect x="158" y="174" width="22" height="22" rx="3" fill="#22c55e"/>
+    <rect x="184" y="174" width="22" height="22" rx="3" fill="#0f1a2e"/>
+    <rect x="210" y="174" width="22" height="22" rx="3" fill="#166534"/>
+    <rect x="236" y="174" width="22" height="22" rx="3" fill="#0f1a2e"/>
+    <rect x="262" y="174" width="22" height="22" rx="3" fill="#4ade80"/>
+    <rect x="288" y="174" width="22" height="22" rx="3" fill="#0f1a2e"/>
+    <rect x="314" y="174" width="22" height="22" rx="3" fill="#166534"/>
+    <rect x="340" y="174" width="22" height="22" rx="3" fill="#22c55e"/>
+    <rect x="366" y="174" width="22" height="22" rx="3" fill="#0f1a2e"/>
+    <rect x="392" y="174" width="22" height="22" rx="3" fill="#4ade80"/>
+    <rect x="418" y="174" width="22" height="22" rx="3" fill="#0f1a2e"/>
+    <rect x="444" y="174" width="22" height="22" rx="3" fill="#166534"/>
+    <rect x="470" y="174" width="22" height="22" rx="3" fill="#0f1a2e"/>
+  </g>
+  <text x="300" y="230" fill="#e2e8f0" font-size="13" font-family="sans-serif" text-anchor="middle">THIS YEAR: 1,200+ CONTRIBUTIONS</text>
+  <text x="300" y="265" fill="#94a3b8" font-size="11" font-family="sans-serif" text-anchor="middle">green squares, real work</text>
+  <text x="300" y="300" fill="#4ade80" font-size="11" font-family="sans-serif" text-anchor="middle">check it live: github.com/aryan-sonsurkar</text>
+</svg>

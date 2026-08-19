@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useStore } from "@/lib/store";
 import { audioManager } from "@/lib/audio";
 import { useIsMobile } from "@/lib/useIsMobile";
+import { BUILDINGS } from "@/components/Buildings/BuildingData";
 
 const BUILDING_LABELS: Record<string, string> = {
   "modcodes-hq": "MODCODES HQ — Flagship Product",
@@ -17,14 +18,24 @@ const BUILDING_LABELS: Record<string, string> = {
   "football-arena": "Football Arena — Aryan's Happy Place",
   "ironman-destiny-lab": "Ironman Destiny Lab — Hardware & Dreams",
   "future-observatory": "Future Observatory — Vision & Roadmap",
+  "contact-kiosk": "Contact Kiosk — Connect & Convert",
+  "algorithm-dojo": "Algorithm Dojo — The Daily Grind",
+  "hardware-foundry": "Hardware Foundry — ESP32 Workshop",
+  "the-vault": "The Vault — Proof of Numbers",
+  "hackathon-war-room": "Hackathon War Room — SIH-2025",
+  "the-roastery": "The Roastery — Fuel & Focus",
 };
 
 const ACHIEVEMENT_DEFS: Record<string, { label: string; icon: string }> = {
   "first-step": { label: "First Step", icon: "🚶" },
   "explorer": { label: "District Explorer", icon: "🗺️" },
-  "curator": { label: "Museum Curator", icon: "🏛️" },
+  "curator": { label: "Vault Curator", icon: "🔐" },
   "engineer": { label: "Senior Engineer", icon: "⚙️" },
   "hacker": { label: "Blueprint Mode", icon: "🔧" },
+  "dojo-100-days": { label: "100-Day Grind", icon: "📅" },
+  "tinkerer": { label: "Tinkerer", icon: "🔧" },
+  "survivor": { label: "SIH Survivor", icon: "🔥" },
+  "coffee-break": { label: "Coffee Break", icon: "☕" },
 };
 
 export default function HUD() {
@@ -62,7 +73,7 @@ export default function HUD() {
       addAchievement("first-step");
       triggerAchievement("first-step");
     }
-    if (visitedBuildings.length >= 9 && !achievements.includes("explorer")) {
+    if (visitedBuildings.length >= BUILDINGS.length && !achievements.includes("explorer")) {
       addAchievement("explorer");
       triggerAchievement("explorer");
     }

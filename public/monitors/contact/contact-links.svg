@@ -12,7 +12,5 @@
   <text x="480" y="210" fill="#e0d0ff" font-size="12" font-family="sans-serif" text-anchor="end">linkedin.com/in/aryan-sonsurkar</text>
   <rect x="80" y="240" width="440" height="50" rx="8" fill="#0a0020" stroke="#a855f7" stroke-width="1"/>
   <text x="120" y="270" fill="#c084fc" font-size="16" font-family="sans-serif">Email</text>
-  <text x="480" y="270" fill="#e0d0ff" font-size="12" font-family="sans-serif" text-anchor="end">aryan@example.com</text>
-  <rect x="80" y="300" width="440" height="40" rx="8" fill="#a855f7" opacity="0.15" stroke="#a855f7" stroke-width="1"/>
-  <text x="300" y="325" fill="#c084fc" font-size="13" font-family="sans-serif" text-anchor="middle">Resume available on request</text>
+  <text x="480" y="270" fill="#e0d0ff" font-size="12" font-family="sans-serif" text-anchor="end">aryansonsurkar87@gmail.com</text>
 </svg>

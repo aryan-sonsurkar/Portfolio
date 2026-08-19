@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useStore } from "@/lib/store";
 import { monitorConfig } from "@/config/monitors";
@@ -38,7 +38,6 @@ export default function MonitorViewerUI() {
   const { activeMonitor, setActiveScreen } = useStore();
   const [loadingPhase, setLoadingPhase] = useState<LoadingPhase>("idle");
   const [showUI, setShowUI] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // ── Loading sequence ──
   useEffect(() => {
@@ -48,18 +47,23 @@ export default function MonitorViewerUI() {
       return;
     }
 
+    const timeouts: ReturnType<typeof setTimeout>[] = [];
     setLoadingPhase("connecting");
     setShowUI(false);
 
-    timerRef.current = setTimeout(() => {
-      setLoadingPhase("connected");
-      timerRef.current = setTimeout(() => {
-        setShowUI(true);
-      }, 100);
-    }, 150);
+    timeouts.push(
+      setTimeout(() => {
+        setLoadingPhase("connected");
+        timeouts.push(
+          setTimeout(() => {
+            setShowUI(true);
+          }, 100)
+        );
+      }, 150)
+    );
 
     return () => {
-      if (timerRef.current) clearTimeout(timerRef.current);
+      timeouts.forEach(clearTimeout);
     };
   }, [activeMonitor?.id]);
 

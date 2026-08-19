@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://aryan-sonsurkar.dev"),
   title: "Aryan Sonsurkar — Developer, Builder, Creator",
   description:
     "Aryan Sonsurkar is a developer building AI-powered products, shipping real projects, and turning ideas into reality. Explore the MODCODES District — an interactive 3D portfolio experience.",
