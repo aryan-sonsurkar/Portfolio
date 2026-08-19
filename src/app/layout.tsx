@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://aryan-sonsurkar.dev"),
+  metadataBase: new URL("https://arssystem.vercel.app"),
   title: "Aryan Sonsurkar — Developer, Builder, Creator",
   description:
     "Aryan Sonsurkar is a developer building AI-powered products, shipping real projects, and turning ideas into reality. Explore the MODCODES District — an interactive 3D portfolio experience.",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://aryan-sonsurkar.dev",
+    url: "https://arssystem.vercel.app",
     siteName: "Aryan Sonsurkar — MODCODES District",
     title: "Aryan Sonsurkar — Developer, Builder, Creator",
     description:
@@ -66,7 +66,7 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Aryan Sonsurkar",
-    url: "https://aryan-sonsurkar.dev",
+    url: "https://arssystem.vercel.app",
     jobTitle: "Developer",
     description:
       "Developer building AI-powered products, shipping real projects, and turning ideas into reality.",
@@ -101,7 +101,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="canonical" href="https://aryan-sonsurkar.dev" />
+        <link rel="canonical" href="https://arssystem.vercel.app" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
