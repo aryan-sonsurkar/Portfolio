@@ -5,8 +5,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useStore } from "@/lib/store";
 import { audioManager, speakAI } from "@/lib/audio";
 
-const INTRO_DURATION_MS = 17000;
-const SKIP_DELAY_MS = 4000;
+const INTRO_DURATION_MS = 9000;
+const SKIP_DELAY_MS = 2000;
 
 export default function LoadingScreen() {
   const { completeLoading, completeIntro, setIntroProgress } = useStore();
@@ -39,7 +39,7 @@ export default function LoadingScreen() {
     // Start background loops
     setTimeout(() => {
       audioManager.startRainSound();
-    }, 4000);
+    }, 2500);
   };
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export default function LoadingScreen() {
 
     const interval = window.setInterval(() => {
       setProgress((p) => {
-        const nextProgress = p + Math.random() * 6 + 1.5;
+        const nextProgress = p + Math.random() * 9 + 3;
         
         // Find which logs to append
         bootMilestones.forEach(m => {
@@ -61,7 +61,7 @@ export default function LoadingScreen() {
           window.setTimeout(() => {
             setPhase("intro");
             speakAI("Incoming encrypted signal. Builder District located. Construction status: Active. Objective: Explore the district and uncover the story of its architect. Welcome back, agent.");
-          }, 800);
+          }, 300);
           return 100;
         }
         return nextProgress;

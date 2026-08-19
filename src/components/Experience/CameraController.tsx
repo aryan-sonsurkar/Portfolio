@@ -7,7 +7,7 @@ import * as THREE from "three";
 import { useStore } from "@/lib/store";
 import { BUILDINGS } from "../Buildings/BuildingData";
 
-const INTRO_DURATION_SECONDS = 17;
+const INTRO_DURATION_SECONDS = 9;
 
 export default function CameraController() {
   const { cameraMode, focusedBuilding, introComplete, selectedBuilding } = useStore();
