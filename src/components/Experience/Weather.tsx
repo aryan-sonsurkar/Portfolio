@@ -4,10 +4,12 @@ import { useRef, useMemo, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useStore } from "@/lib/store";
+import { isMobileDevice } from "@/lib/useIsMobile";
 
 function Rain() {
   const ref = useRef<THREE.InstancedMesh>(null);
-  const count = 900;
+  const mobile = isMobileDevice();
+  const count = mobile ? 250 : 900;
   const dummy = useMemo(() => new THREE.Object3D(), []);
 
   const drops = useMemo(
@@ -117,6 +119,16 @@ export default function Weather() {
   const { weatherActive } = useStore();
 
   if (!weatherActive) return null;
+
+  // Mobile: rain only — no lightning flash light, no splash ring (saves GPU + CPU)
+  if (isMobileDevice()) {
+    return (
+      <group>
+        <Rain />
+        <ambientLight intensity={0.08} color="#667799" />
+      </group>
+    );
+  }
 
   return (
     <group>

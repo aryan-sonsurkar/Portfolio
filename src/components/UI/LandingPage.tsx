@@ -130,17 +130,42 @@ export default function LandingPage({ onEnterDistrict }: { onEnterDistrict: () =
               border: "1px solid rgba(56,189,248,0.4)",
               background: "rgba(56,189,248,0.06)",
               boxShadow: "0 0 30px rgba(56,189,248,0.08)",
+              minHeight: 48,
             }}
           >
-            Enter the District
+            Enter the District →
           </motion.button>
 
           <p
             className="mt-4 text-[10px] tracking-wider"
             style={{ color: "rgba(255,255,255,0.2)" }}
           >
-            3D interactive experience · Best on desktop
+            3D interactive experience · Mobile optimized · 16 buildings to explore
           </p>
+
+          {/* Proof strip */}
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-2 max-w-lg mx-auto">
+            {["🏆 Best Intern @ Kaevron", "🔥 SIH-2025 Recognition", "🚀 1 Client Shipped", "⭐ 34 Public Repos"].map((t) => (
+              <span key={t} className="text-[10px] px-3 py-1.5 rounded-full" style={{ color: "rgba(255,215,0,0.75)", background: "rgba(255,215,0,0.05)", border: "1px solid rgba(255,215,0,0.15)" }}>
+                {t}
+              </span>
+            ))}
+          </div>
+
+          {/* How it works */}
+          <div className="mt-8 grid grid-cols-3 gap-2 max-w-md mx-auto text-center">
+            {[
+              ["①", "Enter", "Walk or teleport"],
+              ["②", "Explore", "16 buildings"],
+              ["③", "Connect", "Hire / collab"],
+            ].map(([n, h, s]) => (
+              <div key={h} className="px-2 py-3 rounded-lg" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                <div style={{ fontSize: 14 }}>{n}</div>
+                <div className="text-[11px] font-bold mt-1" style={{ color: "#e8f4ff" }}>{h}</div>
+                <div className="text-[9px]" style={{ color: "rgba(255,255,255,0.35)" }}>{s}</div>
+              </div>
+            ))}
+          </div>
         </motion.div>
 
         {/* Scroll indicator */}

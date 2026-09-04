@@ -98,26 +98,41 @@ export default function CharacterController() {
       }
     };
 
-    // Mobile touch look
+    // Mobile touch look — single-finger drag, multi-touch safe, tap doesn't spin
+    let lookTouchId: number | null = null;
     let touchStartX = 0;
     let touchStartY = 0;
     const handleTouchStart = (e: TouchEvent) => {
-      if (activeScreen) return;
-      touchStartX = e.touches[0].clientX;
-      touchStartY = e.touches[0].clientY;
+      if (activeScreen || useStore.getState().teleportOpen) return;
+      if (lookTouchId !== null) return;
+      const t = e.changedTouches[0];
+      lookTouchId = t.identifier;
+      touchStartX = t.clientX;
+      touchStartY = t.clientY;
     };
     const handleTouchMove = (e: TouchEvent) => {
-      if (activeScreen) return;
-      const dx = e.touches[0].clientX - touchStartX;
-      const dy = e.touches[0].clientY - touchStartY;
-      touchStartX = e.touches[0].clientX;
-      touchStartY = e.touches[0].clientY;
-      rotationRef.current.yaw -= dx * 0.004;
-      rotationRef.current.pitch -= dy * 0.004;
-      rotationRef.current.pitch = Math.max(
-        -Math.PI / 2.3,
-        Math.min(Math.PI / 2.3, rotationRef.current.pitch)
-      );
+      if (activeScreen || lookTouchId === null) return;
+      for (let i = 0; i < e.changedTouches.length; i++) {
+        const t = e.changedTouches[i];
+        if (t.identifier !== lookTouchId) continue;
+        const dx = t.clientX - touchStartX;
+        const dy = t.clientY - touchStartY;
+        touchStartX = t.clientX;
+        touchStartY = t.clientY;
+        // Ignore tiny jitter so taps don't rotate the camera
+        if (Math.abs(dx) + Math.abs(dy) < 1.5) continue;
+        rotationRef.current.yaw -= dx * 0.0055;
+        rotationRef.current.pitch -= dy * 0.0055;
+        rotationRef.current.pitch = Math.max(
+          -Math.PI / 2.3,
+          Math.min(Math.PI / 2.3, rotationRef.current.pitch)
+        );
+      }
+    };
+    const handleTouchEnd = (e: TouchEvent) => {
+      for (let i = 0; i < e.changedTouches.length; i++) {
+        if (e.changedTouches[i].identifier === lookTouchId) lookTouchId = null;
+      }
     };
 
     window.addEventListener("keydown", handleKeyDown);
@@ -127,6 +142,8 @@ export default function CharacterController() {
     gl.domElement.addEventListener("click", handleCanvasClick);
     gl.domElement.addEventListener("touchstart", handleTouchStart, { passive: true });
     gl.domElement.addEventListener("touchmove", handleTouchMove, { passive: true });
+    gl.domElement.addEventListener("touchend", handleTouchEnd, { passive: true });
+    gl.domElement.addEventListener("touchcancel", handleTouchEnd, { passive: true });
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
@@ -136,6 +153,8 @@ export default function CharacterController() {
       gl.domElement.removeEventListener("click", handleCanvasClick);
       gl.domElement.removeEventListener("touchstart", handleTouchStart);
       gl.domElement.removeEventListener("touchmove", handleTouchMove);
+      gl.domElement.removeEventListener("touchend", handleTouchEnd);
+      gl.domElement.removeEventListener("touchcancel", handleTouchEnd);
       try { document.exitPointerLock(); } catch (e) {}
     };
   }, [cameraMode, gl.domElement, selectedBuilding, activeScreen]);
@@ -251,7 +270,9 @@ export default function CharacterController() {
 
       const entranceZOffset = bd / 2 + 0.6;
       const distToEntrance = scratchDist.set(newPos.x - bx, newPos.z - (bz + entranceZOffset)).length();
-      if (distToEntrance < 1.0 && !enteringRef.current) {
+      // Mobile: 2.2m radius (joystick is imprecise) vs 1.0m desktop
+      const enterRadius = inputBus.moveX !== 0 || inputBus.moveY !== 0 ? 2.2 : 1.2;
+      if (distToEntrance < enterRadius && !enteringRef.current) {
         enteringRef.current = true;
         const currentPos: [number, number, number] = [
           positionRef.current.x,

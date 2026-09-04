@@ -6,6 +6,7 @@ import { Edges } from "@react-three/drei";
 import * as THREE from "three";
 import { BuildingConfig } from "@/types/building";
 import { useStore } from "@/lib/store";
+import { isMobileDevice } from "@/lib/useIsMobile";
 
 const scratchWorldPos = new THREE.Vector3();
 
@@ -147,12 +148,14 @@ function BuildingEntrance({ config }: { config: BuildingConfig }) {
           emissiveIntensity={hovered ? 3 : 1}
         />
       </mesh>
-      <pointLight
-        color={config.emissive || "#ffd700"}
-        intensity={hovered ? 4 : 1.5}
-        distance={4}
-        position={[0, 1.75, 0.2]}
-      />
+      {!isMobileDevice() && (
+        <pointLight
+          color={config.emissive || "#ffd700"}
+          intensity={hovered ? 4 : 1.5}
+          distance={4}
+          position={[0, 1.75, 0.2]}
+        />
+      )}
     </group>
   );
 }
@@ -163,8 +166,9 @@ function BuildingBody({ config }: { config: BuildingConfig }) {
   const glowAnimating = useRef(false);
   const scaleTarget = useRef(new THREE.Vector3());
   const { camera } = useThree();
-  const { setHoveredBuilding, introComplete, introProgress, visitedBuildings } = useStore();
+  const { setHoveredBuilding, introComplete, introProgress, visitedBuildings, enterBuilding, setExitPosition } = useStore();
   const [hovered, setHovered] = useState(false);
+  const mobile = isMobileDevice();
   const isVisited = visitedBuildings.includes(config.id);
   const glowStrength = config.id === "modcodes-hq"
     ? Math.max(0.2, Math.min(1.25, introProgress * 1.2 + (introComplete ? 0.35 : 0)))
@@ -174,6 +178,8 @@ function BuildingBody({ config }: { config: BuildingConfig }) {
 
   useFrame((state) => {
     if (!meshRef.current) return;
+    // Mobile: skip per-frame scale lerp + glow pulse (saves CPU on 16 buildings)
+    if (mobile) return;
     const target = hovered ? 1.02 : 1.0;
     scaleTarget.current.set(target, target, target);
     meshRef.current.scale.lerp(scaleTarget.current, 0.08);
@@ -211,8 +217,8 @@ function BuildingBody({ config }: { config: BuildingConfig }) {
       {/* Main body */}
       <mesh
         ref={meshRef}
-        castShadow
-        receiveShadow
+        castShadow={!mobile}
+        receiveShadow={!mobile}
         onPointerEnter={(e) => {
           if (!introComplete) return;
           e.stopPropagation();
@@ -225,6 +231,13 @@ function BuildingBody({ config }: { config: BuildingConfig }) {
           setHoveredBuilding(null);
           document.body.style.cursor = "default";
         }}
+        onClick={(e) => {
+          // Mobile tap-to-enter: no precise walking needed
+          if (!introComplete || !mobile) return;
+          e.stopPropagation();
+          setExitPosition([0, 1.6, 6], 0);
+          enterBuilding(config.id);
+        }}
       >
         <boxGeometry args={config.scale} />
         <meshStandardMaterial
@@ -234,7 +247,7 @@ function BuildingBody({ config }: { config: BuildingConfig }) {
           emissive={config.emissive || "#ffd700"}
           emissiveIntensity={glowStrength}
         />
-        <Edges threshold={15} color="#00000020" lineWidth={1} />
+        {!mobile && <Edges threshold={15} color="#00000020" lineWidth={1} />}
       </mesh>
 
       {/* Windows — front face */}

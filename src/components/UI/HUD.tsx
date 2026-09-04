@@ -111,7 +111,7 @@ export default function HUD() {
   const isFPV = cameraMode === "fpv";
 
   return (
-    <div className="fixed inset-0 z-30 pointer-events-none" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+    <div className="fixed inset-0 z-30 pointer-events-none" data-ui="hud" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
 
       {/* ── FPV Crosshair ── */}
       <AnimatePresence>
@@ -150,7 +150,7 @@ export default function HUD() {
       </AnimatePresence>
 
       {/* ── Top Left — District / Room label ── */}
-      {!interiorOpen && (
+      {!interiorOpen && !isMobile && (
         <div className="absolute top-6 left-6">
           <p className="text-xs tracking-widest uppercase" style={{ color: "rgba(255,215,0,0.45)" }}>
             MODCODES District
@@ -164,7 +164,7 @@ export default function HUD() {
           </p>
         </div>
       )}
-      {interiorOpen && selectedBuilding && (
+      {interiorOpen && selectedBuilding && !isMobile && (
         <div className="absolute top-6 left-6">
           <p className="text-xs tracking-widest uppercase" style={{ color: "rgba(255,215,0,0.5)" }}>
             {BUILDING_LABELS[selectedBuilding] ?? selectedBuilding}
@@ -174,9 +174,17 @@ export default function HUD() {
           </p>
         </div>
       )}
+      {/* Mobile: single compact chip, no paragraph clutter */}
+      {isMobile && (
+        <div className="absolute top-3 left-3 px-3 py-2 rounded-full" style={{ background: "rgba(4,6,18,0.7)", border: "1px solid rgba(255,215,0,0.15)", backdropFilter: "blur(8px)" }}>
+          <p className="text-[10px] tracking-widest uppercase" style={{ color: "rgba(255,215,0,0.7)" }}>
+            {interiorOpen && selectedBuilding ? (BUILDING_LABELS[selectedBuilding] ?? selectedBuilding) : "MODCODES District"}
+          </p>
+        </div>
+      )}
 
       {/* ── Top Right — Controls legend + Blueprint badge ── */}
-      <div className="absolute top-6 right-6 flex flex-col items-end gap-2">
+      <div className={`absolute flex flex-col items-end gap-2 ${isMobile ? "top-[68px] right-3" : "top-6 right-6"}`}>
         {blueprintMode && (
           <motion.div
             initial={{ opacity: 0, x: 20 }}
@@ -275,8 +283,8 @@ export default function HUD() {
         )}
       </AnimatePresence>
 
-      {/* ── Achievement badges (persistent row) ── */}
-      {achievements.length > 0 && (
+      {/* ── Achievement badges (persistent row) — desktop only, clutter on mobile ── */}
+      {achievements.length > 0 && !isMobile && (
         <div className="absolute bottom-14 left-6 flex gap-2">
           {achievements.map((id) => (
             ACHIEVEMENT_DEFS[id] && (
@@ -308,7 +316,7 @@ export default function HUD() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 5 }}
             transition={{ duration: 0.18 }}
-            className="absolute bottom-10 left-1/2 -translate-x-1/2"
+            className={`absolute left-1/2 -translate-x-1/2 ${isMobile ? "bottom-36" : "bottom-10"}`}
           >
             <p
               className="text-xs tracking-widest uppercase px-5 py-2 rounded-full border"
@@ -359,8 +367,8 @@ export default function HUD() {
         )}
       </AnimatePresence>
 
-      {/* ── Bottom center — Teleport button ── */}
-      {isFPV && !activeScreen && (
+      {/* ── Bottom center — Teleport button — desktop only (mobile uses Explore bar) ── */}
+      {isFPV && !activeScreen && !isMobile && (
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -382,7 +390,8 @@ export default function HUD() {
         </motion.div>
       )}
 
-      {/* ── Bottom right — Version + Weather badge ── */}
+      {/* ── Bottom right — Version + Weather badge — desktop only ── */}
+      {!isMobile && (
       <div className="absolute bottom-6 right-6 flex items-center gap-3">
         <AnimatePresence>
           {weatherActive && (
@@ -405,6 +414,7 @@ export default function HUD() {
           v0.3.0 — District Live
         </p>
       </div>
+      )}
     </div>
   );
 }

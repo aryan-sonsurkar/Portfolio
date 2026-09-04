@@ -9,6 +9,7 @@ import WristTeleportHUD from "@/components/UI/WristTeleportHUD";
 import PortfolioTrailer from "@/components/UI/PortfolioTrailer";
 import MiniMap from "@/components/UI/MiniMap";
 import VirtualJoystick from "@/components/UI/VirtualJoystick";
+import MobileExploreUI from "@/components/UI/MobileExploreUI";
 import { useIsMobile } from "@/lib/useIsMobile";
 import { useStore } from "@/lib/store";
 
@@ -37,6 +38,7 @@ export default function District() {
       <MiniMap />
       <MonitorViewerUI />
       <WristTeleportHUD />
+      <MobileExploreUI />
       {showJoystick && (
         <VirtualJoystick
           onMove={() => {}}

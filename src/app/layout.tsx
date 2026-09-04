@@ -1,5 +1,12 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
+
+export const viewport: Viewport = {
+  themeColor: "#0a0612",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://arssystem.vercel.app"),
@@ -29,7 +36,7 @@ export const metadata: Metadata = {
       "An interactive world built by a builder. AI-powered products, real projects, and a 3D district to explore.",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.svg",
         width: 1200,
         height: 630,
         alt: "Aryan Sonsurkar — MODCODES District",
@@ -41,7 +48,7 @@ export const metadata: Metadata = {
     title: "Aryan Sonsurkar — Developer, Builder, Creator",
     description:
       "An interactive world built by a builder. AI-powered products, real projects, and a 3D district to explore.",
-    images: ["/og-image.png"],
+    images: ["/og-image.svg"],
     creator: "@aryan_sonsurkar",
   },
   robots: {
@@ -100,7 +107,8 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500;600;700;800&display=swap"
           rel="stylesheet"
         />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/og-image.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/og-image.svg" />
         <link rel="canonical" href="https://arssystem.vercel.app" />
         <script
           type="application/ld+json"

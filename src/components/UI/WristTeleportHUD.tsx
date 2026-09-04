@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useStore } from "@/lib/store";
 import { BUILDINGS } from "@/components/Buildings/BuildingData";
+import { useIsMobile } from "@/lib/useIsMobile";
 
 const BUILDING_ICONS: Record<string, string> = {
   "modcodes-hq": "⚡",
@@ -16,9 +17,16 @@ const BUILDING_ICONS: Record<string, string> = {
   "football-arena": "⚽",
   "ironman-destiny-lab": "🤖",
   "future-observatory": "🔭",
+  "contact-kiosk": "✉️",
+  "algorithm-dojo": "🥋",
+  "hardware-foundry": "🔧",
+  "the-vault": "🔐",
+  "hackathon-war-room": "🔥",
+  "the-roastery": "☕",
 };
 
 export default function WristTeleportHUD() {
+  const isMobile = useIsMobile();
   const {
     teleportOpen,
     setTeleportOpen,
@@ -106,7 +114,7 @@ export default function WristTeleportHUD() {
 
           {/* Building list */}
           <div className="p-4 max-h-[60vh] overflow-y-auto" style={{ scrollbarWidth: "thin", scrollbarColor: "rgba(56,189,248,0.2) transparent" }}>
-            <div className="grid grid-cols-2 gap-2">
+            <div className={`grid gap-2 ${isMobile ? "grid-cols-1" : "grid-cols-2"}`}>
               {BUILDINGS.map((building, i) => {
                 const isHere = interiorOpen && selectedBuilding === building.id;
                 return (
@@ -126,6 +134,7 @@ export default function WristTeleportHUD() {
                       borderColor: isHere ? "rgba(56,189,248,0.4)" : "rgba(56,189,248,0.1)",
                       opacity: isHere ? 0.6 : 1,
                       cursor: isHere ? "default" : "pointer",
+                      minHeight: isMobile ? 56 : undefined,
                     }}
                     onMouseEnter={(e) => {
                       if (!isHere) {

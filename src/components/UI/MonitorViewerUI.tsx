@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useStore } from "@/lib/store";
 import { monitorConfig } from "@/config/monitors";
+import { BUILDINGS } from "@/components/Buildings/BuildingData";
 import type { MonitorConfig } from "@/config/monitors";
 
 // ── Building subtitles ──
@@ -15,6 +16,15 @@ const BUILDING_SUBTITLES: Record<string, string> = {
   "innovation-lab": "Experimental Projects",
   "open-source-center": "GitHub Contributions",
   "developer-apartment": "Personal Workspace",
+  "football-arena": "Football & Balance",
+  "ironman-destiny-lab": "Hardware & Dreams",
+  "future-observatory": "Vision & Roadmap",
+  "contact-kiosk": "Connect & Convert",
+  "algorithm-dojo": "DSA Training Log",
+  "hardware-foundry": "ESP32 Workshop",
+  "the-vault": "Proof of Numbers",
+  "hackathon-war-room": "SIH-2025 Mission Control",
+  "the-roastery": "Fuel & Focus",
 };
 
 // ── Find which building a monitor belongs to ──
@@ -110,6 +120,7 @@ export default function MonitorViewerUI() {
   const subtitle = buildingId ? BUILDING_SUBTITLES[buildingId] ?? "" : "";
   const monitors = buildingId ? getBuildingMonitors(buildingId) : [];
   const currentIndex = monitors.findIndex((m) => m.id === activeMonitor.id);
+  const proofLinks = buildingId ? (BUILDINGS.find((b) => b.id === buildingId)?.content.links ?? []).filter((l) => l.url && l.url !== "#") : [];
 
   return (
     <div
@@ -209,13 +220,16 @@ export default function MonitorViewerUI() {
             <div className="flex items-center justify-center gap-8 mb-3">
               <button
                 onClick={() => navigateMonitor("prev")}
-                className="text-[10px] tracking-[3px] uppercase transition-colors hover:text-[#ffd700]"
+                className="transition-colors hover:text-[#ffd700]"
                 style={{
                   color: "rgba(255,255,255,0.3)",
                   background: "none",
                   border: "none",
                   cursor: "pointer",
                   fontFamily: "'JetBrains Mono', monospace",
+                  fontSize: 10,
+                  minWidth: 64,
+                  minHeight: 44,
                 }}
               >
                 ← Prev
@@ -230,18 +244,47 @@ export default function MonitorViewerUI() {
 
               <button
                 onClick={() => navigateMonitor("next")}
-                className="text-[10px] tracking-[3px] uppercase transition-colors hover:text-[#ffd700]"
+                className="transition-colors hover:text-[#ffd700]"
                 style={{
                   color: "rgba(255,255,255,0.3)",
                   background: "none",
                   border: "none",
                   cursor: "pointer",
                   fontFamily: "'JetBrains Mono', monospace",
+                  fontSize: 10,
+                  minWidth: 64,
+                  minHeight: 44,
                 }}
               >
                 Next →
               </button>
             </div>
+
+            {/* Proof links — real URLs from BuildingData */}
+            {proofLinks.length > 0 && (
+              <div className="flex items-center justify-center gap-2 mb-3 flex-wrap px-4">
+                {proofLinks.slice(0, 3).map((l) => (
+                  <a
+                    key={l.label}
+                    href={l.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 rounded-full no-underline"
+                    style={{
+                      color: "#38bdf8",
+                      border: "1px solid rgba(56,189,248,0.35)",
+                      background: "rgba(56,189,248,0.08)",
+                      fontSize: 11,
+                      minHeight: 44,
+                      display: "inline-flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    {l.label} ↗
+                  </a>
+                ))}
+              </div>
+            )}
 
             {/* ESC hint */}
             <button

@@ -4,6 +4,7 @@ import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useStore } from "@/lib/store";
+import { isMobileDevice } from "@/lib/useIsMobile";
 
 function Clouds() {
   const groupRef = useRef<THREE.Group>(null);
@@ -11,7 +12,9 @@ function Clouds() {
   const windPhase = useRef(0);
 
   const clouds = useMemo(() => {
-    return Array.from({ length: 12 }, (_, i) => ({
+    const mobile = isMobileDevice();
+    const count = mobile ? 5 : 12;
+    return Array.from({ length: count }, (_, i) => ({
       position: [
         (Math.random() - 0.5) * 60,
         8 + Math.random() * 6,
@@ -56,7 +59,7 @@ function Clouds() {
 function Particles() {
   const ref = useRef<THREE.Points>(null);
 
-  const count = 200;
+  const count = isMobileDevice() ? 60 : 200;
   const positions = useMemo(() => {
     const arr = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
@@ -180,8 +183,9 @@ function DropPod() {
 function Stars() {
   const ref = useRef<THREE.Points>(null);
   const positions = useMemo(() => {
-    const arr = new Float32Array(1200 * 3);
-    for (let i = 0; i < 1200; i++) {
+    const starCount = isMobileDevice() ? 350 : 1200;
+    const arr = new Float32Array(starCount * 3);
+    for (let i = 0; i < starCount; i++) {
       arr[i * 3] = (Math.random() - 0.5) * 180;
       arr[i * 3 + 1] = (Math.random() - 0.5) * 100;
       arr[i * 3 + 2] = (Math.random() - 0.5) * 220;
@@ -243,7 +247,7 @@ function Earth() {
 
     const texture = new THREE.CanvasTexture(canvas);
     texture.colorSpace = THREE.SRGBColorSpace;
-    texture.anisotropy = 8;
+    texture.anisotropy = isMobileDevice() ? 1 : 8;
     return texture;
   }, []);
 
@@ -266,7 +270,7 @@ function Earth() {
 
     const texture = new THREE.CanvasTexture(canvas);
     texture.colorSpace = THREE.SRGBColorSpace;
-    texture.anisotropy = 8;
+    texture.anisotropy = isMobileDevice() ? 1 : 8;
     return texture;
   }, []);
 
@@ -291,25 +295,30 @@ function Earth() {
     }
   });
 
+  const mobile = isMobileDevice();
+  const seg = mobile ? 16 : 32;
+
   return (
     <group ref={groupRef} position={[0, 8, -70]} scale={[16, 16, 16]}>
       <mesh>
-        <sphereGeometry args={[1, 32, 32]} />
+        <sphereGeometry args={[1, seg, seg]} />
         <meshPhongMaterial
           map={earthTexture || undefined}
           emissive="#173b63"
           emissiveIntensity={0.12}
         />
       </mesh>
-      <mesh ref={cloudsRef}>
-        <sphereGeometry args={[1.01, 32, 32]} />
-        <meshBasicMaterial
-          map={cloudTexture || undefined}
-          transparent
-          opacity={0.3}
-          depthWrite={false}
-        />
-      </mesh>
+      {!mobile && (
+        <mesh ref={cloudsRef}>
+          <sphereGeometry args={[1.01, seg, seg]} />
+          <meshBasicMaterial
+            map={cloudTexture || undefined}
+            transparent
+            opacity={0.3}
+            depthWrite={false}
+          />
+        </mesh>
+      )}
       <points>
         <bufferGeometry>
           <bufferAttribute attach="attributes-position" args={[lightPositions, 3]} />
@@ -317,7 +326,7 @@ function Earth() {
         <pointsMaterial size={0.008} color="#ffd166" transparent opacity={0.9} depthWrite={false} />
       </points>
       <mesh>
-        <sphereGeometry args={[1.02, 32, 32]} />
+        <sphereGeometry args={[1.02, seg, seg]} />
         <meshBasicMaterial color="#82d3ff" transparent opacity={0.08} depthWrite={false} />
       </mesh>
     </group>
@@ -325,6 +334,7 @@ function Earth() {
 }
 
 export default function Atmosphere() {
+  const mobile = isMobileDevice();
   return (
     <>
       <color attach="background" args={["#0a0612"]} />
@@ -335,15 +345,15 @@ export default function Atmosphere() {
       <Earth />
       <DropPod />
       <Clouds />
-      <Particles />
+      {!mobile && <Particles />}
       <ambientLight intensity={0.2} color="#b4c6e7" />
       <directionalLight
         position={[8, 12, 5]}
         intensity={1.8}
         color="#ffd4a8"
-        castShadow
-        shadow-mapSize-width={1024}
-        shadow-mapSize-height={1024}
+        castShadow={!mobile}
+        shadow-mapSize-width={mobile ? 512 : 1024}
+        shadow-mapSize-height={mobile ? 512 : 1024}
         shadow-camera-near={0.5}
         shadow-camera-far={50}
         shadow-camera-left={-14}

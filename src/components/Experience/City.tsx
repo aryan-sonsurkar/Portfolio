@@ -4,6 +4,8 @@ import { useRef } from "react";
 import * as THREE from "three";
 import Building from "./Building";
 import { BUILDINGS } from "../Buildings/BuildingData";
+import DistrictLife from "./DistrictLife";
+import { isMobileDevice } from "@/lib/useIsMobile";
 
 function Ground() {
   return (
@@ -61,6 +63,7 @@ function Ground() {
 }
 
 function StreetLamps() {
+  const mobile = isMobileDevice();
   const positions: [number, number, number][] = [
     [-10, 0, 4.5],
     [-5, 0, 4.5],
@@ -91,7 +94,8 @@ function StreetLamps() {
             <sphereGeometry args={[0.14, 10, 10]} />
             <meshStandardMaterial color="#ffd700" emissive="#ffd700" emissiveIntensity={3} />
           </mesh>
-          <pointLight color="#ffd700" intensity={2.5} distance={7} position={[0.45, 3.2, 0]} />
+          {/* Mobile: emissive only, no per-lamp pointLight (8 lights → 0) */}
+          {!mobile && <pointLight color="#ffd700" intensity={2.5} distance={7} position={[0.45, 3.2, 0]} />}
         </group>
       ))}
     </>
@@ -147,6 +151,7 @@ function TrashCan({ position }: { position: [number, number, number] }) {
 
 /** Under-construction building — "The Future is Under Construction" */
 function ConstructionSite() {
+  const mobile = isMobileDevice();
   return (
     <group position={[8, 0, 4]}>
       {/* Foundation slab */}
@@ -190,29 +195,30 @@ function ConstructionSite() {
           <boxGeometry args={[1.4, 0.48, 0.04]} />
           <meshStandardMaterial color="#111" />
         </mesh>
-        <pointLight color="#f59e0b" intensity={1.5} distance={3} position={[0, 0, 0.3]} />
+        {!mobile && <pointLight color="#f59e0b" intensity={1.5} distance={3} position={[0, 0, 0.3]} />}
       </group>
       {/* Warning lights */}
       <mesh position={[-1.5, 3.1, -1.5]}>
         <sphereGeometry args={[0.09, 6, 6]} />
         <meshStandardMaterial color="#ef4444" emissive="#ef4444" emissiveIntensity={3} />
       </mesh>
-      <pointLight color="#ef4444" intensity={1.2} distance={4} position={[-1.5, 3.1, -1.5]} />
+      {!mobile && <pointLight color="#ef4444" intensity={1.2} distance={4} position={[-1.5, 3.1, -1.5]} />}
       <mesh position={[1.5, 3.1, 1.5]}>
         <sphereGeometry args={[0.09, 6, 6]} />
         <meshStandardMaterial color="#ef4444" emissive="#ef4444" emissiveIntensity={3} />
       </mesh>
-      <pointLight color="#ef4444" intensity={1.2} distance={4} position={[1.5, 3.1, 1.5]} />
+      {!mobile && <pointLight color="#ef4444" intensity={1.2} distance={4} position={[1.5, 3.1, 1.5]} />}
     </group>
   );
 }
 
 /** Inaccessible "ARYAN v2.0" future building */
 function FutureBuilding() {
+  const mobile = isMobileDevice();
   return (
     <group position={[-9, 0, 5]}>
       {/* Silhouette — dark, fogged out */}
-      <mesh position={[0, 3, 0]} castShadow>
+      <mesh position={[0, 3, 0]} castShadow={!mobile}>
         <boxGeometry args={[2.2, 6, 2.2]} />
         <meshStandardMaterial
           color="#0a0810"
@@ -230,7 +236,7 @@ function FutureBuilding() {
         <meshStandardMaterial color="#7c3aed" emissive="#7c3aed" emissiveIntensity={0.4} />
       </mesh>
       {/* Glowing outline effect */}
-      <pointLight color="#7c3aed" intensity={1.0} distance={5} position={[0, 3, 0]} />
+      {!mobile && <pointLight color="#7c3aed" intensity={1.0} distance={5} position={[0, 3, 0]} />}
       {/* "COMING SOON" marker */}
       <mesh position={[0, 0.2, 1.2]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[2.0, 0.5]} />
@@ -262,6 +268,7 @@ export default function City() {
       {/* Construction site + future building */}
       <ConstructionSite />
       <FutureBuilding />
+      <DistrictLife />
 
       {/* All main buildings */}
       {BUILDINGS.map((config) => (
