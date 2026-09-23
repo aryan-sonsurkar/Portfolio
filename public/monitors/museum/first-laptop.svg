@@ -33,7 +33,7 @@
     <text x="20" y="30" font-family="Segoe UI, Arial" font-size="14" fill="#f0f6fc" font-weight="bold">THE STORY</text>
     
     <text x="20" y="60" font-family="Segoe UI, Arial" font-size="12" fill="#3fb950">The Beginning (2025)</text>
-    <text x="20" y="80" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">After completing SSC with 92%, I received my first laptop. It was a moment that changed everything.</text>
+    <text x="20" y="80" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">After completing SSC, I received my first laptop. It was a moment that changed everything.</text>
     
     <text x="20" y="110" font-family="Segoe UI, Arial" font-size="12" fill="#58a6ff">First Steps</text>
     <text x="20" y="130" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Started with Python basics. The first "Hello World" felt like magic. Within weeks, I was building CLI tools.</text>

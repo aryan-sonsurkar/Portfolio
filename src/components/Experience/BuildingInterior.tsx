@@ -582,6 +582,188 @@ function HardwareFoundryDecor() {
   );
 }
 
+// ═══════════════════════════════════════════════════════════════
+// BARE-ROOM FOCAL DECOR — one clear focal point per room, meshes only,
+// no new lights, no per-frame logic.
+// ═══════════════════════════════════════════════════════════════
+
+// MODCODES HQ — product console (focal)
+function ModcodesHqDecor() {
+  return (
+    <group position={[3.4, 0, -2.2]}>
+      {/* Pedestal */}
+      <mesh position={[0, 0.5, 0]} castShadow>
+        <boxGeometry args={[0.9, 1.0, 0.6]} />
+        <meshStandardMaterial color="#141a26" metalness={0.6} roughness={0.35} />
+      </mesh>
+      {/* Angled console top */}
+      <mesh position={[0, 1.12, 0.05]} rotation={[-0.28, 0, 0]} castShadow>
+        <boxGeometry args={[0.8, 0.06, 0.5]} />
+        <meshStandardMaterial color="#0d1420" metalness={0.7} roughness={0.3} />
+      </mesh>
+      {/* Console glow strip */}
+      <mesh position={[0, 1.16, 0.12]} rotation={[-0.28, 0, 0]}>
+        <boxGeometry args={[0.66, 0.015, 0.05]} />
+        <meshStandardMaterial color="#7c9fc4" emissive="#7c9fc4" emissiveIntensity={1.2} toneMapped={false} />
+      </mesh>
+    </group>
+  );
+}
+
+// PROJECT FACTORY — assembly workbench + crates (focal)
+function ProjectFactoryDecor() {
+  return (
+    <>
+      <group position={[-4.2, 0, 1.2]}>
+        <mesh position={[0, 0.55, 0]} castShadow>
+          <boxGeometry args={[1.6, 0.08, 0.8]} />
+          <meshStandardMaterial color="#1c1a14" roughness={0.5} metalness={0.3} />
+        </mesh>
+        {[[-0.7], [0.7]].map((x, i) => (
+          <mesh key={i} position={[x[0], 0.27, 0]}>
+            <boxGeometry args={[0.08, 0.55, 0.7]} />
+            <meshStandardMaterial color="#14120e" roughness={0.7} />
+          </mesh>
+        ))}
+        {/* Toolbox with status light */}
+        <mesh position={[0.4, 0.68, 0]}>
+          <boxGeometry args={[0.3, 0.14, 0.2]} />
+          <meshStandardMaterial color="#5a1f1f" roughness={0.5} />
+        </mesh>
+        <mesh position={[0.4, 0.76, 0]}>
+          <boxGeometry args={[0.06, 0.02, 0.06]} />
+          <meshStandardMaterial color="#22c55e" emissive="#22c55e" emissiveIntensity={1.4} toneMapped={false} />
+        </mesh>
+      </group>
+      {/* Shipping crates */}
+      {[[-4.3, 0.25, 2.2, 0.5], [-3.6, 0.2, 2.3, 0.4]].map((c, i) => (
+        <mesh key={i} position={[c[0], c[1], c[2]]} castShadow>
+          <boxGeometry args={[c[3], c[3], c[3]]} />
+          <meshStandardMaterial color="#2a2118" roughness={0.8} />
+        </mesh>
+      ))}
+    </>
+  );
+}
+
+// INNOVATION LAB — experiment bench with beakers (focal)
+function InnovationLabDecor() {
+  return (
+    <group position={[4.2, 0, 1.0]}>
+      <mesh position={[0, 0.55, 0]} castShadow>
+        <boxGeometry args={[1.6, 0.08, 0.7]} />
+        <meshStandardMaterial color="#101820" roughness={0.4} metalness={0.4} />
+      </mesh>
+      {/* Beakers with faint reactive glow */}
+      {[[-0.4, 0.22, "#38bdf8"], [0.1, 0.3, "#7c3aed"], [0.55, 0.18, "#22c55e"]].map((b, i) => (
+        <group key={i} position={[b[0] as number, 0.59 + (b[1] as number) / 2, 0]}>
+          <mesh>
+            <cylinderGeometry args={[0.09, 0.07, b[1] as number, 12]} />
+            <meshStandardMaterial color="#0d1420" transparent opacity={0.7} roughness={0.2} metalness={0.1} />
+          </mesh>
+          <mesh position={[0, -(b[1] as number) / 4, 0]}>
+            <cylinderGeometry args={[0.07, 0.06, (b[1] as number) / 2, 12]} />
+            <meshStandardMaterial color={b[2] as string} emissive={b[2] as string} emissiveIntensity={0.9} toneMapped={false} />
+          </mesh>
+        </group>
+      ))}
+    </group>
+  );
+}
+
+// OPEN SOURCE CENTER — round share-table + wall frame (focal)
+function OpenSourceCenterDecor() {
+  return (
+    <>
+      <group position={[0, 0, 1.6]}>
+        <mesh position={[0, 0.5, 0]} castShadow>
+          <cylinderGeometry args={[0.7, 0.7, 0.07, 20]} />
+          <meshStandardMaterial color="#0f1a12" roughness={0.5} metalness={0.3} />
+        </mesh>
+        <mesh position={[0, 0.25, 0]}>
+          <cylinderGeometry args={[0.08, 0.12, 0.5, 10]} />
+          <meshStandardMaterial color="#131a14" roughness={0.7} />
+        </mesh>
+        {/* Open-source emblem ring */}
+        <mesh position={[0, 0.55, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+          <torusGeometry args={[0.4, 0.02, 8, 32]} />
+          <meshStandardMaterial color="#22c55e" emissive="#22c55e" emissiveIntensity={1.1} toneMapped={false} />
+        </mesh>
+      </group>
+      {/* Wall frame */}
+      <group position={[-4.9, 2.0, 1.0]} rotation={[0, Math.PI / 2, 0]}>
+        <mesh>
+          <boxGeometry args={[1.2, 0.8, 0.05]} />
+          <meshStandardMaterial color="#0d120e" metalness={0.5} roughness={0.4} />
+        </mesh>
+        <mesh position={[0, 0, 0.03]}>
+          <planeGeometry args={[1.05, 0.65]} />
+          <meshBasicMaterial color="#0f2a1a" toneMapped={false} />
+        </mesh>
+      </group>
+    </>
+  );
+}
+
+// FOOTBALL ARENA — trophy pedestal + banner (focal)
+function FootballArenaDecor() {
+  return (
+    <>
+      <group position={[0, 0, -2.0]}>
+        <mesh position={[0, 0.3, 0]} castShadow>
+          <boxGeometry args={[0.6, 0.6, 0.6]} />
+          <meshStandardMaterial color="#0f2a12" roughness={0.6} />
+        </mesh>
+        {/* Trophy cup */}
+        <mesh position={[0, 0.78, 0]}>
+          <cylinderGeometry args={[0.14, 0.07, 0.22, 12]} />
+          <meshStandardMaterial color="#ffd700" metalness={0.9} roughness={0.2} />
+        </mesh>
+        <mesh position={[0, 0.62, 0]}>
+          <cylinderGeometry args={[0.05, 0.09, 0.08, 10]} />
+          <meshStandardMaterial color="#8a6a1a" metalness={0.8} roughness={0.3} />
+        </mesh>
+      </group>
+      {/* Banner */}
+      <mesh position={[0, 2.9, -2.9]}>
+        <planeGeometry args={[2.2, 0.5]} />
+        <meshBasicMaterial color="#0d3a18" toneMapped={false} />
+      </mesh>
+    </>
+  );
+}
+
+// CONTACT KIOSK — counter + link totem (focal)
+function ContactKioskDecor() {
+  return (
+    <>
+      <group position={[0, 0, -1.5]}>
+        <mesh position={[0, 0.55, 0]} castShadow>
+          <boxGeometry args={[1.8, 0.08, 0.6]} />
+          <meshStandardMaterial color="#151226" roughness={0.5} metalness={0.3} />
+        </mesh>
+        <mesh position={[0, 0.27, 0]}>
+          <boxGeometry args={[1.6, 0.55, 0.45]} />
+          <meshStandardMaterial color="#100d1c" roughness={0.7} />
+        </mesh>
+      </group>
+      {/* Totem with three link bands: GitHub / LinkedIn / Email */}
+      <group position={[-3.5, 0, -2.0]}>
+        <mesh position={[0, 1.0, 0]} castShadow>
+          <boxGeometry args={[0.3, 2.0, 0.3]} />
+          <meshStandardMaterial color="#0d0d18" metalness={0.6} roughness={0.4} />
+        </mesh>
+        {["#e8edf2", "#38bdf8", "#ffd700"].map((c, i) => (
+          <mesh key={i} position={[0, 0.5 + i * 0.5, 0]}>
+            <boxGeometry args={[0.34, 0.1, 0.34]} />
+            <meshStandardMaterial color={c} emissive={c} emissiveIntensity={1.0} toneMapped={false} />
+          </mesh>
+        ))}
+      </group>
+    </>
+  );
+}
+
 function VaultDecor() {
   return (
     <>
@@ -723,6 +905,12 @@ function ConfiguredRoom({ buildingId, config }: { buildingId: string; config: Bu
       {buildingId === "the-vault" && <VaultDecor />}
       {buildingId === "hackathon-war-room" && <HackathonWarRoomDecor />}
       {buildingId === "the-roastery" && <RoasteryDecor />}
+      {buildingId === "modcodes-hq" && <ModcodesHqDecor />}
+      {buildingId === "project-factory" && <ProjectFactoryDecor />}
+      {buildingId === "innovation-lab" && <InnovationLabDecor />}
+      {buildingId === "open-source-center" && <OpenSourceCenterDecor />}
+      {buildingId === "football-arena" && <FootballArenaDecor />}
+      {buildingId === "contact-kiosk" && <ContactKioskDecor />}
 
       {/* Lighting — bright enough to see everything */}
       <ambientLight intensity={0.6} color={config.room.ambientColor} />

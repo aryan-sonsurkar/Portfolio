@@ -12,7 +12,7 @@
   <!-- Header -->
   <rect x="0" y="0" width="800" height="60" fill="#161b22" stroke="#30363d" stroke-width="1"/>
   <text x="30" y="38" font-family="Segoe UI, Arial" font-size="22" fill="#f0f6fc" font-weight="bold">RESEARCH AGENDA</text>
-  <text x="230" y="38" font-family="Segoe UI, Arial" font-size="14" fill="#8b949e">AI & Development Tools Research</text>
+  <text x="230" y="38" font-family="Segoe UI, Arial" font-size="14" fill="#8b949e">AI &amp; Development Tools Research</text>
   
   <!-- Research Areas -->
   <g transform="translate(30, 80)">

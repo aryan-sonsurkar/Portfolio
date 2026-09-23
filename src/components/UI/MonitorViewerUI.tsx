@@ -9,10 +9,10 @@ import type { MonitorConfig } from "@/config/monitors";
 
 // ── Building subtitles ──
 const BUILDING_SUBTITLES: Record<string, string> = {
-  "modcodes-hq": "Infrastructure Dashboard",
+  "modcodes-hq": "Modcodes · AI Student Platform",
   "achievement-tower": "Certificates & Milestones",
-  "developer-museum": "Journey Timeline",
-  "project-factory": "Production Dashboards",
+  "developer-museum": "Journey & World Guide",
+  "project-factory": "Shipped Work Archive",
   "innovation-lab": "Experimental Projects",
   "open-source-center": "GitHub Contributions",
   "developer-apartment": "Personal Workspace",
@@ -22,7 +22,7 @@ const BUILDING_SUBTITLES: Record<string, string> = {
   "contact-kiosk": "Connect & Convert",
   "algorithm-dojo": "DSA Training Log",
   "hardware-foundry": "ESP32 Workshop",
-  "the-vault": "Proof of Numbers",
+  "the-vault": "Seema Netra Lab",
   "hackathon-war-room": "SIH-2025 Mission Control",
   "the-roastery": "Fuel & Focus",
 };
@@ -198,6 +198,89 @@ export default function MonitorViewerUI() {
               {activeMonitor.label}
             </p>
           </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ── Info panel (progressive disclosure, data-driven) ── */}
+      <AnimatePresence>
+        {showUI && activeMonitor.info && (
+          <motion.aside
+            key="info"
+            initial={{ opacity: 0, x: -16 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -16 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="absolute pointer-events-auto info-panel"
+            style={{
+              background: "rgba(4,6,12,0.88)",
+              border: "1px solid rgba(255,215,0,0.16)",
+              backdropFilter: "blur(12px)",
+              borderRadius: "10px",
+              padding: "14px 16px",
+              maxWidth: 300,
+            }}
+          >
+            <p
+              className="text-[13px] font-bold mb-1"
+              style={{ color: "#ffd700", fontFamily: "'JetBrains Mono', monospace" }}
+            >
+              {activeMonitor.info.title}
+            </p>
+            <p
+              className="text-[12px] leading-relaxed mb-2"
+              style={{ color: "rgba(255,255,255,0.72)" }}
+            >
+              {activeMonitor.info.summary}
+            </p>
+            {activeMonitor.info.stack && (
+              <p className="text-[11px] leading-relaxed mb-2" style={{ color: "rgba(56,189,248,0.85)" }}>
+                {activeMonitor.info.stack}
+              </p>
+            )}
+            {activeMonitor.info.features && activeMonitor.info.features.length > 0 && (
+              <ul className="mb-1">
+                {activeMonitor.info.features.map((f) => (
+                  <li
+                    key={f}
+                    className="text-[11px] leading-relaxed"
+                    style={{ color: "rgba(255,255,255,0.6)" }}
+                  >
+                    • {f}
+                  </li>
+                ))}
+              </ul>
+            )}
+            {activeMonitor.info.link ? (
+              <a
+                href={activeMonitor.info.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="no-underline"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  minHeight: 44,
+                  padding: "0 18px",
+                  marginTop: 8,
+                  color: "#0a0612",
+                  background: "#ffd700",
+                  borderRadius: 8,
+                  fontSize: 12,
+                  fontWeight: 700,
+                  fontFamily: "'JetBrains Mono', monospace",
+                }}
+              >
+                {activeMonitor.info.linkLabel ?? "Open"} ↗
+              </a>
+            ) : activeMonitor.info.linkLabel ? (
+              <p
+                className="text-[11px] tracking-widest uppercase"
+                style={{ color: "rgba(255,255,255,0.4)", marginTop: 8 }}
+              >
+                {activeMonitor.info.linkLabel}
+              </p>
+            ) : null}
+          </motion.aside>
         )}
       </AnimatePresence>
 

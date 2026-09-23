@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540">
+  <rect width="960" height="540" fill="#05080e"/>
+  <rect x="2" y="2" width="956" height="536" fill="none" stroke="#8fb8dd" stroke-width="2" opacity="0.55"/>
+  <rect x="0" y="0" width="960" height="64" fill="#080d16"/>
+  <text x="36" y="40" fill="#8fb8dd" font-size="15" font-family="'JetBrains Mono', monospace">03</text>
+  <text x="80" y="40" fill="#e8edf2" font-size="21" font-family="Arial, sans-serif" font-weight="bold">THIS WORLD · CONTROLS</text>
+  <line x1="36" y1="64" x2="924" y2="64" stroke="#8fb8dd" stroke-width="1" opacity="0.35"/>
+  <text x="36" y="150" fill="#e8edf2" font-size="15" font-family="Arial, sans-serif" font-weight="bold">MOVE</text>
+  <text x="36" y="170" fill="#66717c" font-size="12" font-family="'JetBrains Mono', monospace">WASD / arrows · touch joystick</text>
+  <text x="924" y="158" fill="#8fb8dd" font-size="12" font-family="'JetBrains Mono', monospace" text-anchor="end">DESKTOP + MOBILE</text>
+  <text x="36" y="194" fill="#e8edf2" font-size="15" font-family="Arial, sans-serif" font-weight="bold">LOOK</text>
+  <text x="36" y="214" fill="#66717c" font-size="12" font-family="'JetBrains Mono', monospace">mouse · drag on touch</text>
+  <text x="924" y="202" fill="#8fb8dd" font-size="12" font-family="'JetBrains Mono', monospace" text-anchor="end">FREE</text>
+  <text x="36" y="238" fill="#e8edf2" font-size="15" font-family="Arial, sans-serif" font-weight="bold">INSPECT</text>
+  <text x="36" y="258" fill="#66717c" font-size="12" font-family="'JetBrains Mono', monospace">click / tap any monitor</text>
+  <text x="924" y="246" fill="#22c55e" font-size="12" font-family="'JetBrains Mono', monospace" text-anchor="end">TRY IT</text>
+  <text x="36" y="282" fill="#e8edf2" font-size="15" font-family="Arial, sans-serif" font-weight="bold">TRAVEL</text>
+  <text x="36" y="302" fill="#66717c" font-size="12" font-family="'JetBrains Mono', monospace">teleport panel · minimap · ESC exits</text>
+  <text x="924" y="290" fill="#8fb8dd" font-size="12" font-family="'JetBrains Mono', monospace" text-anchor="end">FAST</text>
+  <line x1="36" y1="492" x2="924" y2="492" stroke="#8fb8dd" stroke-width="1" opacity="0.35"/>
+  <text x="36" y="516" fill="#66717c" font-size="13" font-family="'JetBrains Mono', monospace">NO TUTORIAL NEEDED</text>
+</svg>

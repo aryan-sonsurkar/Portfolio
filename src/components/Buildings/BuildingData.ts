@@ -22,7 +22,7 @@ export const BUILDINGS: BuildingConfig[] = [
       ],
       tags: ["Python", "FastAPI", "SQLite", "Ollama", "Speech Recognition"],
       links: [
-        { label: "Website Coming Soon", url: "#", icon: "rocket" },
+        { label: "View Source", url: "https://github.com/aryan-sonsurkar/mod-codes-ide", icon: "external" },
       ],
     },
   },
@@ -38,15 +38,25 @@ export const BUILDINGS: BuildingConfig[] = [
     windowPattern: "stripe",
     content: {
       title: "Project Factory",
-      subtitle: "Real Products, Real Clients",
+      subtitle: "Real Products, Shipped",
       paragraphs: [
         "Every project in this factory has been shipped, deployed, or delivered.",
-        "Vishwanath Insurance Portfolio — a production website delivered to a real client with Google Sheets integration, responsive design, and a consultation workflow.",
-        "CodeShortsBot v2 — an autonomous content pipeline that researches topics, generates scripts, creates assets, assembles videos, and prepares YouTube Shorts. No human involvement.",
-        "These are not demos. These are products that exist in the real world.",
+        "Fixly — an AI-powered student workspace with assignments, AI assistance, focus sessions, notes and progress tracking. Live now.",
+        "KOKANAM — a regional e-commerce marketplace for Konkan-region brands, built during the Kaevron internship. Live now.",
+        "Vishwanath Insurance Portfolio — a production website delivered to a real client. CodeShortsBot v2 — an autonomous content pipeline. These are products that exist in the real world.",
       ],
-      tags: ["Next.js", "Google Sheets", "FFmpeg", "Playwright", "Ollama"],
+      tags: ["Fixly", "KOKANAM", "Client Delivery", "Automation"],
       links: [
+        {
+          label: "View Fixly",
+          url: "https://fixly-student-assistant.vercel.app/",
+          icon: "external",
+        },
+        {
+          label: "View KOKANAM",
+          url: "https://www.kokanam.in/",
+          icon: "external",
+        },
         {
           label: "View Vishwanath Insurance",
           url: "https://vishwanath-malusare.vercel.app",
@@ -120,14 +130,14 @@ export const BUILDINGS: BuildingConfig[] = [
     windowPattern: "stripe",
     content: {
       title: "Developer Museum",
-      subtitle: "The Timeline",
+      subtitle: "The Journey — and This World",
       paragraphs: [
         "Started with curiosity. Built with obsession. Shipped with purpose.",
         "From first line of code to deploying production systems — every step documented, every failure analyzed, every success earned.",
-        "Diploma in Computer Science. Not a degree. A foundation. The real education happens here, in the district.",
+        "This room also explains the district itself: the stack, the controls and the performance tiers behind the world you are standing in.",
         "Best Performing Intern. SIH-2025 Recognition. Client delivery. These are not just titles — they are proof of work.",
       ],
-      tags: ["Journey", "Growth", "Milestones", "Proof of Work"],
+      tags: ["Journey", "This World", "Milestones", "Proof of Work"],
       links: [],
     },
   },
@@ -354,21 +364,15 @@ export const BUILDINGS: BuildingConfig[] = [
     windowPattern: "stripe",
     content: {
       title: "The Vault",
-      subtitle: "Proof of Numbers",
+      subtitle: "Focused Work — Seema Netra",
       paragraphs: [
-        "Numbers don't lie. This vault guards the real ones.",
-        "34 public repositories. Contributions on the map. Every star earned, not bought.",
-        "Built in public, documented in code, verifiable on GitHub.",
-        "Look for the plaque. It holds a secret.",
+        "This vault guards focused, request-based work.",
+        "Seema Netra — an AI-powered video surveillance prototype with object tracking, boundary intrusion detection, loitering detection, evidence snapshots and incident logging.",
+        "Built with YOLOv8, ByteTrack, OpenCV, FastAPI, React and SQLite. Human verification stays in the loop.",
+        "Full demo available on request. Look for the plaque — it holds a secret.",
       ],
-      tags: ["GitHub", "Open Source", "Stats", "Transparency"],
-      links: [
-        {
-          label: "View GitHub",
-          url: "https://github.com/aryan-sonsurkar",
-          icon: "external",
-        },
-      ],
+      tags: ["Seema Netra", "Computer Vision", "Prototype", "Demo on Request"],
+      links: [],
     },
   },
   {

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540">
+  <rect width="960" height="540" fill="#05080e"/>
+  <rect x="2" y="2" width="956" height="536" fill="none" stroke="#7c9fc4" stroke-width="2" opacity="0.55"/>
+  <rect x="0" y="0" width="960" height="64" fill="#080d16"/>
+  <text x="36" y="40" fill="#7c9fc4" font-size="15" font-family="'JetBrains Mono', monospace">01</text>
+  <text x="80" y="40" fill="#e8edf2" font-size="21" font-family="Arial, sans-serif" font-weight="bold">MODCODES · OVERVIEW</text>
+  <line x1="36" y1="64" x2="924" y2="64" stroke="#7c9fc4" stroke-width="1" opacity="0.35"/>
+  <text x="36" y="110" fill="#a8b2bd" font-size="15" font-family="Arial, sans-serif">AI-powered student platform.</text>
+  <text x="36" y="26" fill="#a8b2bd" font-size="15" font-family="Arial, sans-serif">Solves missed assignments, deadline chaos and disorganized planning.</text>
+  <rect x="36" y="220" width="76" height="30" rx="4" fill="#0a1d33" stroke="#7c9fc4" stroke-width="1" opacity="0.9"/>
+  <text x="49" y="240" fill="#a8b2bd" font-size="13" font-family="'JetBrains Mono', monospace">Python</text>
+  <rect x="120" y="220" width="85" height="30" rx="4" fill="#0a1d33" stroke="#7c9fc4" stroke-width="1" opacity="0.9"/>
+  <text x="133" y="240" fill="#a8b2bd" font-size="13" font-family="'JetBrains Mono', monospace">FastAPI</text>
+  <rect x="213" y="220" width="76" height="30" rx="4" fill="#0a1d33" stroke="#7c9fc4" stroke-width="1" opacity="0.9"/>
+  <text x="226" y="240" fill="#a8b2bd" font-size="13" font-family="'JetBrains Mono', monospace">Ollama</text>
+  <rect x="298" y="220" width="76" height="30" rx="4" fill="#0a1d33" stroke="#7c9fc4" stroke-width="1" opacity="0.9"/>
+  <text x="311" y="240" fill="#a8b2bd" font-size="13" font-family="'JetBrains Mono', monospace">SQLite</text>
+  <line x1="36" y1="492" x2="924" y2="492" stroke="#7c9fc4" stroke-width="1" opacity="0.35"/>
+  <text x="36" y="516" fill="#66717c" font-size="13" font-family="'JetBrains Mono', monospace">STATUS · BETA</text>
+</svg>

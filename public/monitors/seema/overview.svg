@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540">
+  <rect width="960" height="540" fill="#05080e"/>
+  <rect x="2" y="2" width="956" height="536" fill="none" stroke="#5b8fb9" stroke-width="2" opacity="0.55"/>
+  <rect x="0" y="0" width="960" height="64" fill="#080d16"/>
+  <text x="36" y="40" fill="#5b8fb9" font-size="15" font-family="'JetBrains Mono', monospace">01</text>
+  <text x="80" y="40" fill="#e8edf2" font-size="21" font-family="Arial, sans-serif" font-weight="bold">SEEMA NETRA · OVERVIEW</text>
+  <line x1="36" y1="64" x2="924" y2="64" stroke="#5b8fb9" stroke-width="1" opacity="0.35"/>
+  <text x="36" y="110" fill="#a8b2bd" font-size="15" font-family="Arial, sans-serif">AI-powered video surveillance prototype.</text>
+  <text x="36" y="26" fill="#a8b2bd" font-size="15" font-family="Arial, sans-serif">Detects, tracks and logs events from video — with human verification.</text>
+  <rect x="36" y="220" width="76" height="30" rx="4" fill="#0a1d33" stroke="#5b8fb9" stroke-width="1" opacity="0.9"/>
+  <text x="49" y="240" fill="#a8b2bd" font-size="13" font-family="'JetBrains Mono', monospace">YOLOv8</text>
+  <rect x="120" y="220" width="102" height="30" rx="4" fill="#0a1d33" stroke="#5b8fb9" stroke-width="1" opacity="0.9"/>
+  <text x="133" y="240" fill="#a8b2bd" font-size="13" font-family="'JetBrains Mono', monospace">ByteTrack</text>
+  <rect x="230" y="220" width="76" height="30" rx="4" fill="#0a1d33" stroke="#5b8fb9" stroke-width="1" opacity="0.9"/>
+  <text x="243" y="240" fill="#a8b2bd" font-size="13" font-family="'JetBrains Mono', monospace">OpenCV</text>
+  <rect x="314" y="220" width="85" height="30" rx="4" fill="#0a1d33" stroke="#5b8fb9" stroke-width="1" opacity="0.9"/>
+  <text x="327" y="240" fill="#a8b2bd" font-size="13" font-family="'JetBrains Mono', monospace">FastAPI</text>
+  <rect x="407" y="220" width="110" height="30" rx="4" fill="#0a1d33" stroke="#5b8fb9" stroke-width="1" opacity="0.9"/>
+  <text x="420" y="240" fill="#a8b2bd" font-size="13" font-family="'JetBrains Mono', monospace">React/Vite</text>
+  <rect x="525" y="220" width="76" height="30" rx="4" fill="#0a1d33" stroke="#5b8fb9" stroke-width="1" opacity="0.9"/>
+  <text x="538" y="240" fill="#a8b2bd" font-size="13" font-family="'JetBrains Mono', monospace">SQLite</text>
+  <rect x="36" y="290" width="283" height="110" rx="6" fill="#080d16" stroke="#5b8fb9" stroke-width="1.2"/>
+  <text x="177" y="324" fill="#e8edf2" font-size="15" font-family="Arial, sans-serif" font-weight="bold" text-anchor="middle">DETECT</text>
+  <text x="177" y="348" fill="#66717c" font-size="12" font-family="'JetBrains Mono', monospace" text-anchor="middle">object detection</text>
+  <rect x="339" y="290" width="283" height="110" rx="6" fill="#080d16" stroke="#5b8fb9" stroke-width="1.2"/>
+  <text x="480" y="324" fill="#e8edf2" font-size="15" font-family="Arial, sans-serif" font-weight="bold" text-anchor="middle">TRACK</text>
+  <text x="480" y="348" fill="#66717c" font-size="12" font-family="'JetBrains Mono', monospace" text-anchor="middle">object tracking</text>
+  <rect x="641" y="290" width="283" height="110" rx="6" fill="#080d16" stroke="#5b8fb9" stroke-width="1.2"/>
+  <text x="783" y="324" fill="#e8edf2" font-size="15" font-family="Arial, sans-serif" font-weight="bold" text-anchor="middle">LOG</text>
+  <text x="783" y="348" fill="#66717c" font-size="12" font-family="'JetBrains Mono', monospace" text-anchor="middle">incidents + evidence</text>
+  <line x1="36" y1="492" x2="924" y2="492" stroke="#5b8fb9" stroke-width="1" opacity="0.35"/>
+  <text x="36" y="516" fill="#66717c" font-size="13" font-family="'JetBrains Mono', monospace">PROTOTYPE · DEMO ON REQUEST</text>
+</svg>

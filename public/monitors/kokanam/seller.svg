@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540">
+  <rect width="960" height="540" fill="#05080e"/>
+  <rect x="2" y="2" width="956" height="536" fill="none" stroke="#d9a441" stroke-width="2" opacity="0.55"/>
+  <rect x="0" y="0" width="960" height="64" fill="#080d16"/>
+  <text x="36" y="40" fill="#d9a441" font-size="15" font-family="'JetBrains Mono', monospace">04</text>
+  <text x="80" y="40" fill="#e8edf2" font-size="21" font-family="Arial, sans-serif" font-weight="bold">KOKANAM · SELLER ONBOARDING</text>
+  <line x1="36" y1="64" x2="924" y2="64" stroke="#d9a441" stroke-width="1" opacity="0.35"/>
+  <text x="36" y="150" fill="#e8edf2" font-size="15" font-family="Arial, sans-serif" font-weight="bold">APPLY</text>
+  <text x="36" y="170" fill="#66717c" font-size="12" font-family="'JetBrains Mono', monospace">brand details + catalog</text>
+  <text x="924" y="158" fill="#d9a441" font-size="12" font-family="'JetBrains Mono', monospace" text-anchor="end">STEP 1</text>
+  <text x="36" y="194" fill="#e8edf2" font-size="15" font-family="Arial, sans-serif" font-weight="bold">VERIFY</text>
+  <text x="36" y="214" fill="#66717c" font-size="12" font-family="'JetBrains Mono', monospace">identity + product checks</text>
+  <text x="924" y="202" fill="#d9a441" font-size="12" font-family="'JetBrains Mono', monospace" text-anchor="end">STEP 2</text>
+  <text x="36" y="238" fill="#e8edf2" font-size="15" font-family="Arial, sans-serif" font-weight="bold">LIST</text>
+  <text x="36" y="258" fill="#66717c" font-size="12" font-family="'JetBrains Mono', monospace">photos, pricing, stock</text>
+  <text x="924" y="246" fill="#d9a441" font-size="12" font-family="'JetBrains Mono', monospace" text-anchor="end">STEP 3</text>
+  <text x="36" y="282" fill="#e8edf2" font-size="15" font-family="Arial, sans-serif" font-weight="bold">SELL</text>
+  <text x="36" y="302" fill="#66717c" font-size="12" font-family="'JetBrains Mono', monospace">orders + dashboard</text>
+  <text x="924" y="290" fill="#22c55e" font-size="12" font-family="'JetBrains Mono', monospace" text-anchor="end">LIVE</text>
+  <line x1="36" y1="492" x2="924" y2="492" stroke="#d9a441" stroke-width="1" opacity="0.35"/>
+  <text x="36" y="516" fill="#66717c" font-size="13" font-family="'JetBrains Mono', monospace">FROM KONKAN TO EVERYWHERE</text>
+</svg>

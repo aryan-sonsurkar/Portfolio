@@ -16,6 +16,11 @@ export default function ImageMonitor({ config }: ImageMonitorProps) {
   const { setActiveScreen, addAchievement } = useStore();
   const [texture, setTexture] = useState<THREE.Texture | null>(null);
   const [hovered, setHovered] = useState(false);
+  // Touch devices have no hover — the affordance chip is always visible there.
+  const [isCoarse] = useState(
+    () => typeof window !== "undefined" && !!window.matchMedia?.("(pointer: coarse)").matches
+  );
+  const showHint = hovered || isCoarse;
 
   useEffect(() => {
     let cancelled = false;
@@ -77,8 +82,8 @@ export default function ImageMonitor({ config }: ImageMonitorProps) {
         <meshBasicMaterial map={texture} toneMapped={false} />
       </mesh>
 
-      {/* Hover hint */}
-      {hovered && (
+      {/* Interact hint — hover on desktop, always-on for touch */}
+      {showHint && (
         <Html
           transform
           position={[0, height + 0.15, 0.05]}
@@ -100,7 +105,7 @@ export default function ImageMonitor({ config }: ImageMonitorProps) {
               textTransform: "uppercase",
             }}
           >
-            Click to Inspect
+            {isCoarse ? "Tap to Inspect" : "Click to Inspect"}
           </div>
         </Html>
       )}

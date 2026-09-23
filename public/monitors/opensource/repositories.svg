@@ -53,13 +53,13 @@
     <!-- Repo 2 -->
     <rect x="370" y="0" width="320" height="60" rx="6" fill="#161b22" stroke="#30363d"/>
     <text x="390" y="20" font-family="Segoe UI, Arial" font-size="12" fill="#58a6ff" font-weight="bold">modcodes-ide</text>
-    <text x="390" y="35" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">AI-Powered Code Editor • Next.js • Electron</text>
+    <text x="390" y="35" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">AI student platform • Python • FastAPI</text>
     <text x="390" y="50" font-family="Segoe UI, Arial" font-size="10" fill="#d2a8ff">● Open Source</text>
     
     <!-- Repo 3 -->
     <rect x="0" y="70" width="350" height="60" rx="6" fill="#161b22" stroke="#30363d"/>
     <text x="20" y="90" font-family="Segoe UI, Arial" font-size="12" fill="#58a6ff" font-weight="bold">fixly-desktop</text>
-    <text x="20" y="105" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">AI Troubleshooting Assistant • TypeScript</text>
+    <text x="20" y="105" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">AI student workspace • Next.js</text>
     <text x="20" y="120" font-family="Segoe UI, Arial" font-size="10" fill="#d2a8ff">● In Development</text>
     
     <!-- Repo 4 -->

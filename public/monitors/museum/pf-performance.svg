@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540">
+  <rect width="960" height="540" fill="#05080e"/>
+  <rect x="2" y="2" width="956" height="536" fill="none" stroke="#8fb8dd" stroke-width="2" opacity="0.55"/>
+  <rect x="0" y="0" width="960" height="64" fill="#080d16"/>
+  <text x="36" y="40" fill="#8fb8dd" font-size="15" font-family="'JetBrains Mono', monospace">04</text>
+  <text x="80" y="40" fill="#e8edf2" font-size="21" font-family="Arial, sans-serif" font-weight="bold">THIS WORLD · PERFORMANCE</text>
+  <line x1="36" y1="64" x2="924" y2="64" stroke="#8fb8dd" stroke-width="1" opacity="0.35"/>
+  <rect x="36" y="200" width="283" height="130" rx="6" fill="#080d16" stroke="#8fb8dd" stroke-width="1.2"/>
+  <text x="177" y="234" fill="#e8edf2" font-size="15" font-family="Arial, sans-serif" font-weight="bold" text-anchor="middle">AUTO</text>
+  <text x="177" y="258" fill="#66717c" font-size="12" font-family="'JetBrains Mono', monospace" text-anchor="middle">adapts to device</text>
+  <rect x="339" y="200" width="283" height="130" rx="6" fill="#080d16" stroke="#8fb8dd" stroke-width="1.2"/>
+  <text x="480" y="234" fill="#e8edf2" font-size="15" font-family="Arial, sans-serif" font-weight="bold" text-anchor="middle">BALANCED</text>
+  <text x="480" y="258" fill="#66717c" font-size="12" font-family="'JetBrains Mono', monospace" text-anchor="middle">capped DPR</text>
+  <rect x="641" y="200" width="283" height="130" rx="6" fill="#080d16" stroke="#8fb8dd" stroke-width="1.2"/>
+  <text x="783" y="234" fill="#e8edf2" font-size="15" font-family="Arial, sans-serif" font-weight="bold" text-anchor="middle">LIGHT</text>
+  <text x="783" y="258" fill="#66717c" font-size="12" font-family="'JetBrains Mono', monospace" text-anchor="middle">mobile reductions</text>
+  <text x="480" y="390" fill="#66717c" font-size="13" font-family="'JetBrains Mono', monospace" text-anchor="middle">quality tiers · texture cache · instanced rendering</text>
+  <line x1="36" y1="492" x2="924" y2="492" stroke="#8fb8dd" stroke-width="1" opacity="0.35"/>
+  <text x="36" y="516" fill="#66717c" font-size="13" font-family="'JetBrains Mono', monospace">SMOOTH ON PHONE AND DESKTOP</text>
+</svg>

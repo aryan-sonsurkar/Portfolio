@@ -21,7 +21,7 @@
     
     <text x="20" y="60" font-family="Segoe UI, Arial" font-size="12" fill="#f0f6fc">Name: CodeShorts Bot</text>
     <text x="20" y="80" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e">Type: Content Automation Tool</text>
-    <text x="20" y="100" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e">Status: In Development</text>
+    <text x="20" y="100" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e">Status: Working pipeline</text>
     <text x="20" y="120" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e">Purpose: Convert code to short-form content</text>
     
     <text x="20" y="150" font-family="Segoe UI, Arial" font-size="12" fill="#f0f6fc">Tech Stack:</text>
@@ -67,14 +67,14 @@
     <text x="350" y="0" font-family="Segoe UI, Arial" font-size="11" fill="#d2a8ff">✓ Multi-Platform Support</text>
     <text x="350" y="20" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Instagram, LinkedIn, YouTube Shorts</text>
     
-    <text x="350" y="45" font-family="Segoe UI, Arial" font-size="11" fill="#f0883e">✓ Content Scheduling</text>
-    <text x="350" y="65" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Plan and schedule posts</text>
+    <text x="350" y="45" font-family="Segoe UI, Arial" font-size="11" fill="#f0883e">✓ Asset Creation</text>
+    <text x="350" y="65" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Generates video assets</text>
     
-    <text x="0" y="90" font-family="Segoe UI, Arial" font-size="11" fill="#f778ba">✓ Analytics Dashboard</text>
-    <text x="0" y="110" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Track performance metrics</text>
+    <text x="0" y="90" font-family="Segoe UI, Arial" font-size="11" fill="#f778ba">✓ Topic Research</text>
+    <text x="0" y="110" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Finds topics worth covering</text>
     
-    <text x="350" y="90" font-family="Segoe UI, Arial" font-size="11" fill="#ffd700">✓ Coming Soon</text>
-    <text x="350" y="110" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Full automation pipeline</text>
+    <text x="350" y="90" font-family="Segoe UI, Arial" font-size="11" fill="#ffd700">✓ Autonomous Flow</text>
+    <text x="350" y="110" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Zero human involvement</text>
   </g>
   
   <!-- Footer -->

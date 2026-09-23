@@ -21,15 +21,15 @@
     
     <text x="20" y="60" font-family="Segoe UI, Arial" font-size="12" fill="#f0f6fc">Client: Vishwanath Malusare</text>
     <text x="20" y="80" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e">Type: Professional Portfolio Website</text>
-    <text x="20" y="100" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e">Duration: 2 weeks</text>
-    <text x="20" y="120" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e">Role: Frontend Developer</text>
-    <text x="20" y="140" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e">Company: Kaevron Technologies</text>
+    <text x="20" y="100" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e">Status: Live and delivered</text>
+    <text x="20" y="120" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e">Flow: Consultation workflow</text>
+    <text x="20" y="140" font-family="Segoe UI, Arial" font-size="12" fill="#8b949e">Delivery: Production website</text>
     
     <text x="400" y="60" font-family="Segoe UI, Arial" font-size="12" fill="#f0f6fc">Tech Stack:</text>
-    <text x="400" y="80" font-family="Segoe UI, Arial" font-size="11" fill="#58a6ff">React</text>
-    <text x="400" y="100" font-family="Segoe UI, Arial" font-size="11" fill="#3fb950">TypeScript</text>
-    <text x="400" y="120" font-family="Segoe UI, Arial" font-size="11" fill="#d2a8ff">Tailwind CSS</text>
-    <text x="400" y="140" font-family="Segoe UI, Arial" font-size="11" fill="#f0883e">Next.js</text>
+    <text x="400" y="80" font-family="Segoe UI, Arial" font-size="11" fill="#58a6ff">Google Sheets integration</text>
+    <text x="400" y="100" font-family="Segoe UI, Arial" font-size="11" fill="#3fb950">Responsive design</text>
+    <text x="400" y="120" font-family="Segoe UI, Arial" font-size="11" fill="#d2a8ff">Consultation workflow</text>
+    <text x="400" y="140" font-family="Segoe UI, Arial" font-size="11" fill="#f0883e">Deployed on Vercel</text>
   </g>
   
   <!-- Live Preview -->
@@ -48,7 +48,7 @@
     <!-- Website Content Preview -->
     <text x="200" y="100" font-family="Segoe UI, Arial" font-size="16" fill="#f0f6fc" text-anchor="middle">VISHWANATH MALUSARE</text>
     <text x="200" y="120" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e" text-anchor="middle">Professional Portfolio</text>
-    <text x="200" y="140" font-family="Segoe UI, Arial" font-size="10" fill="#3fb950" text-anchor="middle">Built with React + TypeScript + Tailwind</text>
+    <text x="200" y="140" font-family="Segoe UI, Arial" font-size="10" fill="#3fb950" text-anchor="middle">Built for a real client</text>
     
     <!-- Features -->
     <text x="400" y="90" font-family="Segoe UI, Arial" font-size="11" fill="#f0f6fc">Features:</text>

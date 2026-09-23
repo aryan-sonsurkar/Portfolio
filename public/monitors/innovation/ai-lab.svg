@@ -55,7 +55,7 @@
     <text x="580" y="75" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Models Used:</text>
     <text x="580" y="90" font-family="Segoe UI, Arial" font-size="10" fill="#38bdf8">• Ollama (Local)</text>
     <text x="580" y="105" font-family="Segoe UI, Arial" font-size="10" fill="#7c3aed">• OpenRouter</text>
-    <text x="580" y="120" font-family="Segoe UI, Arial" font-size="10" fill="#38bdf8">• Nemotron 3 Ultra</text>
+    <text x="580" y="120" font-family="Segoe UI, Arial" font-size="10" fill="#38bdf8">• Right-sized local models</text>
   </g>
   
   <!-- Research Areas -->

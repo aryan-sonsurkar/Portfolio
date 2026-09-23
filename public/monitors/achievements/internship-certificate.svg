@@ -21,11 +21,11 @@
     <rect x="0" y="0" width="230" height="40" rx="8" fill="#ffd700"/>
     <text x="20" y="25" font-family="Segoe UI, Arial" font-size="14" fill="#0d1117" font-weight="bold">BEST PERFORMER</text>
     <text x="20" y="65" font-family="Segoe UI, Arial" font-size="12" fill="#f0f6fc">Kaevron Technologies</text>
-    <text x="20" y="85" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">June 2026</text>
-    <text x="20" y="105" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Web Dev & AI Integration Intern</text>
+    <text x="20" y="85" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">May 2026 — Aug 2026</text>
+    <text x="20" y="105" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Web Dev &amp; AI Integration Intern</text>
     <text x="20" y="130" font-family="Segoe UI, Arial" font-size="11" fill="#ffd700">✓ Awarded for exceptional performance</text>
-    <text x="20" y="150" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Prize: T20 match at Wankhede Stadium</text>
-    <text x="20" y="170" font-family="Segoe UI, Arial" font-size="10" fill="#3fb950">3-month internship (ends Aug/Sep 2026)</text>
+    <text x="20" y="150" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Recognized for ownership and delivery</text>
+    <text x="20" y="170" font-family="Segoe UI, Arial" font-size="10" fill="#3fb950">Web Developer &amp; AI Intern</text>
     
     <!-- SIH 2025 -->
     <rect x="250" y="0" width="230" height="180" rx="8" fill="#21262d" stroke="#3fb950" stroke-width="2"/>
@@ -35,19 +35,19 @@
     <text x="270" y="85" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Internal Level Competition</text>
     <text x="270" y="105" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Team Leader</text>
     <text x="270" y="130" font-family="Segoe UI, Arial" font-size="11" fill="#3fb950">✓ Education platform for rural students</text>
-    <text x="270" y="150" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Built with ChatGPT, presented live</text>
-    <text x="270" y="170" font-family="Segoe UI, Arial" font-size="10" fill="#d2a8ff">Best among 14 first-year teams</text>
+    <text x="270" y="150" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Presented live to judges</text>
+    <text x="270" y="170" font-family="Segoe UI, Arial" font-size="10" fill="#d2a8ff">First-year team · zero prior experience</text>
     
     <!-- Industrial Hackathon -->
     <rect x="500" y="0" width="250" height="180" rx="8" fill="#21262d" stroke="#58a6ff" stroke-width="2"/>
     <rect x="500" y="0" width="250" height="40" rx="8" fill="#1f6feb"/>
-    <text x="520" y="25" font-family="Segoe UI, Arial" font-size="14" fill="#f0f6fc" font-weight="bold">INDUSTRIAL HACKATHON 2026</text>
-    <text x="520" y="65" font-family="Segoe UI, Arial" font-size="12" fill="#f0f6fc">Runner-Up</text>
-    <text x="520" y="85" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Accunity Services LLP</text>
+    <text x="520" y="25" font-family="Segoe UI, Arial" font-size="14" fill="#f0f6fc" font-weight="bold">HACKATHON EXPERIENCE</text>
+    <text x="520" y="65" font-family="Segoe UI, Arial" font-size="12" fill="#f0f6fc">Team leadership under pressure</text>
+    <text x="520" y="85" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Built and presented live</text>
     <text x="520" y="105" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Team Leader</text>
-    <text x="520" y="130" font-family="Segoe UI, Arial" font-size="11" fill="#58a6ff">✓ Customer support assistant</text>
-    <text x="520" y="150" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Built website for client</text>
-    <text x="520" y="170" font-family="Segoe UI, Arial" font-size="10" fill="#d2a8ff">Learned: Communication skills</text>
+    <text x="520" y="130" font-family="Segoe UI, Arial" font-size="11" fill="#58a6ff">✓ Shipped a working demo</text>
+    <text x="520" y="150" font-family="Segoe UI, Arial" font-size="11" fill="#8b949e">Led from the front</text>
+    <text x="520" y="170" font-family="Segoe UI, Arial" font-size="10" fill="#d2a8ff">Short clock · real demo · shipped</text>
   </g>
   
   <!-- Academic Achievements -->
@@ -58,25 +58,25 @@
     <!-- SSC -->
     <rect x="20" y="50" width="150" height="80" rx="6" fill="#161b22" stroke="#30363d"/>
     <text x="40" y="75" font-family="Segoe UI, Arial" font-size="12" fill="#3fb950" font-weight="bold">SSC</text>
-    <text x="40" y="95" font-family="Segoe UI, Arial" font-size="24" fill="#f0f6fc" font-weight="bold">92%</text>
+    <text x="40" y="95" font-family="Segoe UI, Arial" font-size="24" fill="#f0f6fc" font-weight="bold">DONE</text>
     <text x="40" y="115" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">2025</text>
     
     <!-- Sem 1 -->
     <rect x="190" y="50" width="150" height="80" rx="6" fill="#161b22" stroke="#30363d"/>
     <text x="210" y="75" font-family="Segoe UI, Arial" font-size="12" fill="#58a6ff" font-weight="bold">SEM-1</text>
-    <text x="210" y="95" font-family="Segoe UI, Arial" font-size="24" fill="#f0f6fc" font-weight="bold">80%</text>
+    <text x="210" y="95" font-family="Segoe UI, Arial" font-size="24" fill="#f0f6fc" font-weight="bold">DONE</text>
     <text x="210" y="115" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Diploma</text>
     
     <!-- Sem 2 -->
     <rect x="360" y="50" width="150" height="80" rx="6" fill="#161b22" stroke="#30363d"/>
     <text x="380" y="75" font-family="Segoe UI, Arial" font-size="12" fill="#d2a8ff" font-weight="bold">SEM-2</text>
-    <text x="380" y="95" font-family="Segoe UI, Arial" font-size="24" fill="#f0f6fc" font-weight="bold">85%</text>
+    <text x="380" y="95" font-family="Segoe UI, Arial" font-size="24" fill="#f0f6fc" font-weight="bold">DONE</text>
     <text x="380" y="115" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">Diploma</text>
     
     <!-- MSCIT -->
     <rect x="530" y="50" width="180" height="80" rx="6" fill="#161b22" stroke="#30363d"/>
     <text x="550" y="75" font-family="Segoe UI, Arial" font-size="12" fill="#f0883e" font-weight="bold">MSCIT</text>
-    <text x="550" y="95" font-family="Segoe UI, Arial" font-size="24" fill="#f0f6fc" font-weight="bold">78/100</text>
+    <text x="550" y="95" font-family="Segoe UI, Arial" font-size="24" fill="#f0f6fc" font-weight="bold">DONE</text>
     <text x="550" y="115" font-family="Segoe UI, Arial" font-size="10" fill="#8b949e">June 2025</text>
     
     <!-- Additional Info -->

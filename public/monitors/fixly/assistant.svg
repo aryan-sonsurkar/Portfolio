@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540">
+  <rect width="960" height="540" fill="#05080e"/>
+  <rect x="2" y="2" width="956" height="536" fill="none" stroke="#22c55e" stroke-width="2" opacity="0.55"/>
+  <rect x="0" y="0" width="960" height="64" fill="#080d16"/>
+  <text x="36" y="40" fill="#22c55e" font-size="15" font-family="'JetBrains Mono', monospace">03</text>
+  <text x="80" y="40" fill="#e8edf2" font-size="21" font-family="Arial, sans-serif" font-weight="bold">FIXLY · AI ASSISTANT</text>
+  <line x1="36" y1="64" x2="924" y2="64" stroke="#22c55e" stroke-width="1" opacity="0.35"/>
+  <rect x="36" y="110" width="700" height="70" rx="8" fill="#0a1d33" stroke="#22c55e" stroke-width="1"/>
+  <text x="60" y="140" fill="#e8edf2" font-size="15" font-family="Arial, sans-serif">Help me plan tonight’s study session</text>
+  <text x="60" y="163" fill="#66717c" font-size="12" font-family="'JetBrains Mono', monospace">you</text>
+  <rect x="224" y="200" width="700" height="150" rx="8" fill="#080d16" stroke="#22c55e" stroke-width="1"/>
+  <text x="248" y="232" fill="#e8edf2" font-size="15" font-family="Arial, sans-serif">Here is a focused 90-minute plan:</text>
+  <text x="248" y="260" fill="#a8b2bd" font-size="14" font-family="Arial, sans-serif">• 40 min assignments • 30 min review • 20 min notes</text>
+  <text x="248" y="290" fill="#a8b2bd" font-size="14" font-family="Arial, sans-serif">Want me to start a focus timer?</text>
+  <text x="248" y="322" fill="#66717c" font-size="12" font-family="'JetBrains Mono', monospace">fixly assistant</text>
+  <line x1="36" y1="492" x2="924" y2="492" stroke="#22c55e" stroke-width="1" opacity="0.35"/>
+  <text x="36" y="516" fill="#66717c" font-size="13" font-family="'JetBrains Mono', monospace">CONTEXT-AWARE · STUDY-FIRST</text>
+</svg>
