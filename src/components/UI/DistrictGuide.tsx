@@ -73,14 +73,12 @@ export default function DistrictGuide() {
           style={{ bottom: isMobile ? 210 : 88 }}
         >
           <div
-            className="rounded-2xl px-5 py-4"
+            className="hud-panel px-5 py-4"
             style={{
-              background: "rgba(4,6,18,0.9)",
-              border: "1px solid rgba(255,215,0,0.25)",
-              backdropFilter: "blur(12px)",
-              boxShadow: "0 0 32px rgba(255,215,0,0.12)",
+              boxShadow: "0 0 32px rgba(255,215,0,0.1)",
               minWidth: 260,
               maxWidth: "calc(100vw - 32px)",
+              borderColor: "rgba(255,215,0,0.22)",
             }}
           >
             <p
@@ -99,14 +97,12 @@ export default function DistrictGuide() {
             </div>
             <button
               onClick={() => setDismissed(true)}
-              className="w-full mt-3 rounded-lg text-[11px] tracking-[0.2em] uppercase"
+              className="hud-kbtn w-full mt-3 rounded-lg text-[11px] tracking-[0.2em] uppercase"
               style={{
                 minHeight: 44,
                 background: "rgba(255,215,0,0.08)",
                 border: "1px solid rgba(255,215,0,0.25)",
                 color: "#ffd700",
-                fontFamily: "'JetBrains Mono', monospace",
-                cursor: "pointer",
               }}
             >
               Got it — explore ▸

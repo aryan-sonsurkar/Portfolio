@@ -178,8 +178,8 @@ export default function HUD() {
       )}
       {/* Mobile: single compact chip, no paragraph clutter */}
       {isMobile && (
-        <div className="absolute top-3 left-3 px-3 py-2 rounded-full" style={{ background: "rgba(4,6,18,0.7)", border: "1px solid rgba(255,215,0,0.15)", backdropFilter: "blur(8px)" }}>
-          <p className="text-[10px] tracking-widest uppercase" style={{ color: "rgba(255,215,0,0.7)" }}>
+        <div className="hud-chip absolute top-3 left-3 px-3 py-2" style={{ background: "rgba(4,6,18,0.75)", border: "1px solid rgba(255,215,0,0.15)" }}>
+          <p className="text-[10px] tracking-widest uppercase" style={{ color: "rgba(255,215,0,0.75)" }}>
             {interiorOpen && selectedBuilding ? (BUILDING_LABELS[selectedBuilding] ?? selectedBuilding) : "MODCODES District"}
           </p>
         </div>
@@ -202,8 +202,8 @@ export default function HUD() {
           </motion.div>
         )}
         <button
-          className="pointer-events-auto text-[10px] tracking-wider opacity-30 hover:opacity-70 transition-opacity"
-          style={{ color: "rgba(255,215,0,0.8)", background: "none", border: "none", cursor: "pointer" }}
+          className="hud-kbtn pointer-events-auto text-[10px] tracking-wider opacity-40 hover:opacity-90"
+          style={{ color: "rgba(255,215,0,0.85)", background: "none", border: "none", minHeight: 44, padding: "0 4px" }}
           onClick={() => setShowControls((s) => !s)}
         >
           {showControls ? "HIDE CONTROLS" : "SHOW CONTROLS"}
@@ -214,14 +214,10 @@ export default function HUD() {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              className="pointer-events-auto text-[10px] space-y-1 text-right"
+              className="hud-panel pointer-events-auto text-[10px] space-y-1 text-right"
               style={{
-                background: "rgba(4,6,12,0.82)",
-                border: "1px solid rgba(255,215,0,0.08)",
-                backdropFilter: "blur(10px)",
-                borderRadius: "8px",
-                padding: "10px 14px",
-                color: "rgba(255,255,255,0.45)",
+                padding: "12px 16px",
+                color: "rgba(255,255,255,0.5)",
               }}
             >
               {[
@@ -256,16 +252,14 @@ export default function HUD() {
                       key={q}
                       onClick={() => setQualityMode(q)}
                       aria-pressed={active}
-                      className="rounded text-[9px] tracking-wider uppercase"
+                      className="hud-kbtn rounded text-[9px] tracking-wider uppercase"
                       style={{
                         minWidth: 44,
-                        minHeight: 36,
+                        minHeight: 44,
                         padding: "6px 8px",
                         color: active ? "#0a0612" : "rgba(255,215,0,0.6)",
                         background: active ? "#ffd700" : "transparent",
                         border: "1px solid rgba(255,215,0,0.3)",
-                        cursor: "pointer",
-                        fontFamily: "'JetBrains Mono', monospace",
                       }}
                     >
                       {q === "auto" ? "Auto" : q === "performance" ? "Perf" : "High"}
@@ -290,11 +284,8 @@ export default function HUD() {
             style={{ marginTop: "80px" }}
           >
             <div
+              className="hud-panel"
               style={{
-                background: "rgba(4,6,12,0.92)",
-                border: "1px solid rgba(255,215,0,0.2)",
-                backdropFilter: "blur(14px)",
-                borderRadius: "10px",
                 padding: "12px 18px",
                 boxShadow: "0 0 30px rgba(255,215,0,0.08)",
               }}
@@ -347,12 +338,11 @@ export default function HUD() {
             className={`absolute left-1/2 -translate-x-1/2 ${isMobile ? "bottom-36" : "bottom-10"}`}
           >
             <p
-              className="text-xs tracking-widest uppercase px-5 py-2 rounded-full border"
+              className="hud-chip text-xs tracking-widest uppercase px-5 py-2 border"
               style={{
                 color: "#ffd700",
-                borderColor: "rgba(255,215,0,0.2)",
-                background: "rgba(10,6,18,0.82)",
-                backdropFilter: "blur(8px)",
+                borderColor: "rgba(255,215,0,0.22)",
+                background: "rgba(10,6,18,0.85)",
               }}
             >
               {BUILDING_LABELS[hoveredBuilding] ?? hoveredBuilding}
@@ -378,15 +368,16 @@ export default function HUD() {
                 // Dispatch ESC event so CharacterController handles position restore
                 window.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
               }}
+              className="hud-kbtn"
               style={{
-                color: "rgba(255,255,255,0.35)",
-                fontFamily: "'JetBrains Mono', monospace",
+                color: "rgba(255,255,255,0.4)",
                 fontSize: "10px",
                 letterSpacing: "3px",
                 textTransform: "uppercase",
                 background: "none",
                 border: "none",
-                cursor: "pointer",
+                minHeight: 44,
+                padding: "0 8px",
               }}
             >
               [ ESC ] Back to room
@@ -427,18 +418,18 @@ export default function HUD() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
-              className="px-2.5 py-1 rounded-full text-[10px] tracking-wider"
+              className="hud-chip px-2.5 py-1 text-[10px] tracking-wider"
               style={{
                 color: "#7799bb",
-                border: "1px solid rgba(119,153,187,0.2)",
-                background: "rgba(119,153,187,0.06)",
+                border: "1px solid rgba(119,153,187,0.22)",
+                background: "rgba(119,153,187,0.07)",
               }}
             >
               ☁ Rain Active
             </motion.div>
           )}
         </AnimatePresence>
-        <p className="text-[10px] tracking-wider" style={{ color: "rgba(255,255,255,0.12)" }}>
+        <p className="text-[10px] tracking-wider" style={{ color: "rgba(255,255,255,0.14)" }}>
           v0.3.0 — District Live
         </p>
       </div>

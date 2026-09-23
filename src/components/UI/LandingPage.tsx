@@ -1,13 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { audioManager } from "@/lib/audio";
 
 // ── Monochrome engineering shell (reference aesthetic).
 // Content below is strictly repo-truth: no invented stacks, metrics, or links.
 
-const SANS = "'Geist', system-ui, -apple-system, 'Segoe UI', sans-serif";
 const MONO = "'JetBrains Mono', monospace";
 
 const HAIRLINE = "rgba(255,255,255,0.09)";
@@ -148,12 +147,12 @@ function SectionHead({ index, title, aside }: { index: string; title: string; as
       className="flex justify-between items-baseline pb-3 mb-8"
       style={{ borderBottom: `1px solid ${HAIRLINE}` }}
     >
-      <div className="flex items-center gap-2 uppercase" style={{ fontFamily: MONO, fontSize: 12, letterSpacing: "0.08em", color: INK }}>
+      <div className="ln-mono flex items-center gap-2 uppercase" style={{ fontSize: 12, letterSpacing: "0.08em", color: INK }}>
         <span style={{ color: MUTED }}>{index}</span>
         <span style={{ color: MUTED }}>/</span>
         <span>{title}</span>
       </div>
-      <span className="uppercase" style={{ fontFamily: MONO, fontSize: 11, color: MUTED }}>
+      <span className="ln-mono uppercase" style={{ fontSize: 11, color: MUTED }}>
         {aside}
       </span>
     </div>
@@ -161,7 +160,6 @@ function SectionHead({ index, title, aside }: { index: string; title: string; as
 }
 
 export default function LandingPage({ onEnterDistrict, anchor }: { onEnterDistrict: () => void; anchor?: string | null }) {
-  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
@@ -184,32 +182,20 @@ export default function LandingPage({ onEnterDistrict, anchor }: { onEnterDistri
   };
 
   return (
-    <div
-      className="min-h-screen overflow-y-auto"
-      style={{
-        background: "#0e0e0e",
-        fontFamily: SANS,
-        color: INK,
-        scrollbarWidth: "thin",
-        scrollbarColor: "rgba(255,255,255,0.2) transparent",
-      }}
-    >
+    <div className="landing-shell min-h-screen overflow-y-auto landing-scroll">
       {/* Header */}
-      <header
-        className="sticky top-0 z-40"
-        style={{ background: "rgba(14,14,14,0.92)", backdropFilter: "blur(12px)", borderBottom: `1px solid ${HAIRLINE}` }}
-      >
+      <header className="ln-header">
         <div className="h-14 max-w-6xl mx-auto px-6 flex items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" })}
-              className="uppercase cursor-pointer"
-              style={{ background: "none", border: "none", fontFamily: MONO, fontSize: 12, letterSpacing: "0.04em", color: INK, minHeight: 48 }}
+              className="ln-mono uppercase cursor-pointer"
+              style={{ background: "none", border: "none", fontSize: 12, letterSpacing: "0.04em", color: INK, minHeight: 48 }}
               aria-label="Back to top"
             >
               Aryan Rakesh Sonsurkar
             </button>
-            <span className="w-1.5 h-1.5" style={{ background: FAINT }} title="Systems operational" />
+            <span className="ln-dot ln-dot-live" style={{ background: FAINT }} title="Systems operational" />
           </div>
           <div className="flex items-center gap-4">
             <nav className="hidden md:flex items-center gap-1" aria-label="Primary">
@@ -221,8 +207,7 @@ export default function LandingPage({ onEnterDistrict, anchor }: { onEnterDistri
                     e.preventDefault();
                     scrollTo(id);
                   }}
-                  className="uppercase no-underline transition-colors hover:text-white"
-                  style={{ fontFamily: MONO, fontSize: 12, padding: "14px 10px", color: SECONDARY }}
+                  className="ln-nav"
                 >
                   {label}
                 </a>
@@ -231,17 +216,8 @@ export default function LandingPage({ onEnterDistrict, anchor }: { onEnterDistri
             <button
               onClick={handleEnter}
               onMouseEnter={() => { audioManager.playHoverSound(); }}
-              className="uppercase cursor-pointer"
-              style={{
-                fontFamily: MONO,
-                fontSize: 11,
-                padding: "10px 14px",
-                minHeight: 44,
-                color: INK,
-                border: `1px solid ${HAIRLINE}`,
-                background: CARD_BG,
-                whiteSpace: "nowrap",
-              }}
+              className="ln-btn ln-btn-ghost ln-btn-sm uppercase"
+              style={{ whiteSpace: "nowrap" }}
             >
               [ 3D District ]
             </button>
@@ -254,10 +230,10 @@ export default function LandingPage({ onEnterDistrict, anchor }: { onEnterDistri
           {/* Hero */}
           <section className="w-full max-w-5xl mx-auto px-6 pt-16 md:pt-24 pb-16">
             <div
-              className="inline-flex items-center gap-2 uppercase mb-6"
-              style={{ fontFamily: MONO, fontSize: 11, letterSpacing: "0.08em", color: MUTED }}
+              className="ln-mono inline-flex items-center gap-2 uppercase mb-6"
+              style={{ fontSize: 11, letterSpacing: "0.08em", color: MUTED }}
             >
-              <span className="inline-block w-1.5 h-1.5" style={{ background: INK }} />
+              <span className="ln-dot ln-dot-live" style={{ background: INK }} />
               <span>[ SYS.LOC: Mumbai, IN // Status: open to internships ]</span>
             </div>
 
@@ -300,34 +276,14 @@ export default function LandingPage({ onEnterDistrict, anchor }: { onEnterDistri
               <button
                 onClick={() => scrollTo("work")}
                 onMouseEnter={() => { audioManager.playHoverSound(); }}
-                className="inline-flex items-center justify-center uppercase cursor-pointer"
-                style={{
-                  fontFamily: MONO,
-                  fontSize: 12,
-                  letterSpacing: "0.06em",
-                  background: INK,
-                  color: "#0e0e0e",
-                  padding: "0 28px",
-                  minHeight: 52,
-                  fontWeight: 600,
-                }}
+                className="ln-btn ln-btn-solid"
               >
                 [ View my work ]
               </button>
               <button
                 onClick={handleEnter}
                 onMouseEnter={() => { audioManager.playHoverSound(); }}
-                className="inline-flex items-center justify-center gap-2 uppercase cursor-pointer transition-colors"
-                style={{
-                  fontFamily: MONO,
-                  fontSize: 12,
-                  letterSpacing: "0.06em",
-                  color: INK,
-                  border: `1px solid ${HAIRLINE}`,
-                  background: CARD_BG,
-                  padding: "0 28px",
-                  minHeight: 52,
-                }}
+                className="ln-btn ln-btn-ghost"
               >
                 <span>[ Enter 3D District ]</span>
                 <span aria-hidden>→</span>
@@ -335,8 +291,8 @@ export default function LandingPage({ onEnterDistrict, anchor }: { onEnterDistri
             </motion.div>
 
             <div
-              className="mt-14 pt-6 flex flex-wrap items-center justify-between gap-y-3"
-              style={{ borderTop: `1px solid ${HAIRLINE}`, fontFamily: MONO, fontSize: 11, color: MUTED }}
+              className="ln-mono mt-14 pt-6 flex flex-wrap items-center justify-between gap-y-3"
+              style={{ borderTop: `1px solid ${HAIRLINE}`, fontSize: 11, color: MUTED }}
             >
               <div className="flex items-center gap-4">
                 <span>5 SELECTED UNITS</span>
@@ -350,7 +306,7 @@ export default function LandingPage({ onEnterDistrict, anchor }: { onEnterDistri
           </section>
 
           {/* 01 // Selected work */}
-          <section id="work" className="w-full max-w-5xl mx-auto px-6 py-16 scroll-mt-16">
+          <section id="work" className="ln-section w-full max-w-5xl mx-auto px-6 py-16 scroll-mt-16">
             <SectionHead index="01" title="Selected work" aside="5 units provisioned" />
 
             <div className="flex flex-col" style={{ borderTop: `1px solid ${HAIRLINE}` }}>
@@ -361,13 +317,7 @@ export default function LandingPage({ onEnterDistrict, anchor }: { onEnterDistri
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: Math.min(i * 0.06, 0.3) }}
-                  onMouseEnter={() => { setHoveredProject(i); }}
-                  onMouseLeave={() => setHoveredProject(null)}
-                  className="transition-colors duration-150 p-6"
-                  style={{
-                    borderBottom: `1px solid ${HAIRLINE}`,
-                    background: hoveredProject === i ? "rgba(255,255,255,0.03)" : "transparent",
-                  }}
+                  className="ln-proj"
                 >
                   <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
                     <div className="flex-1 min-w-0">
@@ -382,13 +332,9 @@ export default function LandingPage({ onEnterDistrict, anchor }: { onEnterDistri
                       <p className="text-[15px] leading-relaxed max-w-2xl mb-4" style={{ color: SECONDARY }}>
                         {project.description}
                       </p>
-                      <div className="flex flex-wrap items-center gap-2" style={{ fontFamily: MONO, fontSize: 11 }}>
+                      <div className="flex flex-wrap items-center gap-2">
                         {project.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="px-2 py-0.5"
-                            style={{ border: `1px solid ${HAIRLINE}`, background: CARD_BG, color: SECONDARY }}
-                          >
+                          <span key={tag} className="ln-tag">
                             {tag}
                           </span>
                         ))}
@@ -399,12 +345,11 @@ export default function LandingPage({ onEnterDistrict, anchor }: { onEnterDistri
                         </p>
                       )}
                     </div>
-                    <div className="flex lg:flex-col lg:items-end justify-between gap-3 lg:pt-1 lg:text-right" style={{ fontFamily: MONO, fontSize: 11 }}>
+                    <div className="flex lg:flex-col lg:items-end justify-between gap-3 lg:pt-1 lg:text-right ln-mono" style={{ fontSize: 11 }}>
                       <span className="uppercase" style={{ color: MUTED }}>{project.meta}</span>
                       {project.link ? (
                         <a
-                          className="inline-flex items-center gap-1 underline underline-offset-4"
-                          style={{ color: INK, minHeight: 44, textDecorationColor: FAINT }}
+                          className="ln-link"
                           href={project.link}
                           target="_blank"
                           rel="noopener noreferrer"
@@ -414,8 +359,8 @@ export default function LandingPage({ onEnterDistrict, anchor }: { onEnterDistri
                         </a>
                       ) : "district" in project && project.district ? (
                         <button
-                          className="inline-flex items-center gap-1 underline underline-offset-4 cursor-pointer"
-                          style={{ color: INK, background: "none", border: "none", minHeight: 44, textDecorationColor: FAINT, fontFamily: MONO, fontSize: 11 }}
+                          className="ln-link cursor-pointer"
+                          style={{ background: "none", border: "none" }}
                           onClick={handleEnter}
                         >
                           <span>Enter district ↗</span>
@@ -432,18 +377,17 @@ export default function LandingPage({ onEnterDistrict, anchor }: { onEnterDistri
             <h3 className="uppercase mt-12 mb-4" style={{ fontFamily: MONO, fontSize: 11, letterSpacing: "0.08em", color: MUTED }}>
               Also shipped
             </h3>
-            <div className="grid sm:grid-cols-2 gap-px" style={{ background: HAIRLINE, border: `1px solid ${HAIRLINE}` }}>
+            <div className="ln-grid grid sm:grid-cols-2">
               {MORE_WORK.map((project) => (
                 <a
                   key={project.title}
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block p-5 no-underline transition-colors hover:bg-white/[0.03]"
-                  style={{ background: "#0e0e0e" }}
+                  className="ln-cell block p-5 no-underline"
                   onClick={() => audioManager.playClickSound()}
                 >
-                  <p className="uppercase mb-1" style={{ fontFamily: MONO, fontSize: 10, color: MUTED }}>{project.category}</p>
+                  <p className="ln-mono uppercase mb-1" style={{ fontSize: 10, color: MUTED }}>{project.category}</p>
                   <p className="text-[15px] font-medium mb-2" style={{ color: INK }}>{project.title} ↗</p>
                   <p className="text-sm leading-relaxed" style={{ color: SECONDARY }}>{project.description}</p>
                 </a>
@@ -452,7 +396,7 @@ export default function LandingPage({ onEnterDistrict, anchor }: { onEnterDistri
           </section>
 
           {/* 02 // Experience */}
-          <section id="experience" className="w-full max-w-5xl mx-auto px-6 py-16 scroll-mt-16">
+          <section id="experience" className="ln-section w-full max-w-5xl mx-auto px-6 py-16 scroll-mt-16">
             <SectionHead index="02" title="Experience" aside="Applied industry roles" />
 
             <div className="p-6 md:p-8" style={{ border: `1px solid ${HAIRLINE}`, background: CARD_BG }}>
@@ -463,7 +407,7 @@ export default function LandingPage({ onEnterDistrict, anchor }: { onEnterDistri
                       <h3 className="text-lg font-medium" style={{ color: INK }}>{job.role}</h3>
                       <p className="text-[15px]" style={{ color: SECONDARY }}>{job.org}</p>
                     </div>
-                    <span className="uppercase shrink-0" style={{ fontFamily: MONO, fontSize: 11, color: MUTED }}>
+                    <span className="ln-mono uppercase shrink-0" style={{ fontSize: 11, color: MUTED }}>
                       {job.period}
                     </span>
                   </div>
@@ -481,17 +425,17 @@ export default function LandingPage({ onEnterDistrict, anchor }: { onEnterDistri
           </section>
 
           {/* 03 // Skills */}
-          <section id="skills" className="w-full max-w-5xl mx-auto px-6 py-16 scroll-mt-16">
+          <section id="skills" className="ln-section w-full max-w-5xl mx-auto px-6 py-16 scroll-mt-16">
             <SectionHead index="03" title="Technical skills" aside="Stack & capabilities" />
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px" style={{ background: HAIRLINE, border: `1px solid ${HAIRLINE}` }}>
+            <div className="ln-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
               {SKILLS.map((group, gi) => (
-                <div key={group.category} className="p-6 flex flex-col justify-between gap-8" style={{ background: "#0e0e0e" }}>
+                <div key={group.category} className="ln-cell p-6 flex flex-col justify-between gap-8">
                   <div>
-                    <p className="uppercase mb-4" style={{ fontFamily: MONO, fontSize: 11, color: MUTED }}>
+                    <p className="ln-mono uppercase mb-4" style={{ fontSize: 11, color: MUTED }}>
                       {String(gi + 1).padStart(2, "0")} / {group.category}
                     </p>
-                    <ul className="space-y-2" style={{ fontFamily: MONO, fontSize: 13 }}>
+                    <ul className="space-y-2 ln-mono" style={{ fontSize: 13 }}>
                       {group.items.map((item) => (
                         <li key={item} className="flex items-center gap-2" style={{ color: INK }}>
                           <span aria-hidden style={{ color: FAINT }}>&gt;</span> {item}
@@ -504,23 +448,23 @@ export default function LandingPage({ onEnterDistrict, anchor }: { onEnterDistri
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-px mt-px" style={{ background: HAIRLINE, border: `1px solid ${HAIRLINE}`, borderTop: "none" }}>
+            <div className="ln-grid grid grid-cols-2 md:grid-cols-4" style={{ borderTop: "none", marginTop: -1 }}>
               {[
                 ["15+", "Projects"],
                 ["333", "GitHub contributions"],
                 ["10+", "Starred repos"],
                 ["Best", "Intern @ Kaevron"],
               ].map(([v, l]) => (
-                <div key={l} className="p-6 text-center" style={{ background: "#0e0e0e" }}>
+                <div key={l} className="ln-cell p-6 text-center">
                   <p className="text-2xl font-semibold" style={{ color: INK }}>{v}</p>
-                  <p className="uppercase mt-1" style={{ fontFamily: MONO, fontSize: 11, color: MUTED }}>{l}</p>
+                  <p className="ln-mono uppercase mt-1" style={{ fontSize: 11, color: MUTED }}>{l}</p>
                 </div>
               ))}
             </div>
           </section>
 
           {/* 04 // Contact */}
-          <section id="contact" className="w-full max-w-5xl mx-auto px-6 py-20 scroll-mt-16">
+          <section id="contact" className="ln-section w-full max-w-5xl mx-auto px-6 py-20 scroll-mt-16">
             <SectionHead index="04" title="Contact" aside="Protocol: open" />
 
             <div className="p-8 md:p-12" style={{ border: `1px solid ${HAIRLINE}`, background: "#0e0e0e" }}>
@@ -537,17 +481,16 @@ export default function LandingPage({ onEnterDistrict, anchor }: { onEnterDistri
                     href={link.url}
                     target={link.url.startsWith("mailto") ? undefined : "_blank"}
                     rel="noopener noreferrer"
-                    className="group py-4 flex items-center justify-between no-underline"
-                    style={{ fontFamily: MONO, fontSize: 13, borderBottom: `1px solid ${HAIRLINE}`, color: INK, minHeight: 56 }}
+                    className="ln-contact-row"
                     onClick={() => audioManager.playClickSound()}
                   >
-                    <span className="flex items-center gap-3">
+                    <span className="flex items-center gap-3 min-w-0">
                       <span style={{ fontSize: 11, color: MUTED }}>[ {link.tag} ]</span>
-                      <span>
+                      <span className="truncate">
                         {link.label === "Email" ? "aryansonsurkar87@gmail.com" : link.url.replace("https://", "").replace("mailto:", "")}
                       </span>
                     </span>
-                    <span aria-hidden style={{ color: MUTED }}>↗</span>
+                    <span aria-hidden className="ln-arrow">↗</span>
                   </a>
                 ))}
               </div>
@@ -558,7 +501,7 @@ export default function LandingPage({ onEnterDistrict, anchor }: { onEnterDistri
 
       <footer className="w-full" style={{ background: "#0e0e0e", borderTop: `1px solid ${HAIRLINE}` }}>
         <div className="max-w-6xl mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-center md:text-left" style={{ fontFamily: MONO, fontSize: 11, color: SECONDARY }}>
+          <p className="ln-mono text-center md:text-left" style={{ fontSize: 11, color: SECONDARY }}>
             © 2026 Aryan Rakesh Sonsurkar · Computer Engineering · All systems operational
           </p>
           <div className="flex items-center gap-6">
@@ -568,15 +511,15 @@ export default function LandingPage({ onEnterDistrict, anchor }: { onEnterDistri
                 href={link.url}
                 target={link.url.startsWith("mailto") ? undefined : "_blank"}
                 rel="noopener noreferrer"
-                className="uppercase no-underline"
-                style={{ fontFamily: MONO, fontSize: 11, color: MUTED }}
+                className="ln-mono uppercase no-underline"
+                style={{ fontSize: 11, color: MUTED, minHeight: 44, display: "inline-flex", alignItems: "center" }}
               >
                 {link.label}
               </a>
             ))}
           </div>
         </div>
-        <p className="text-center pb-6" style={{ fontFamily: MONO, fontSize: 10, color: FAINT }}>
+        <p className="ln-mono text-center pb-6" style={{ fontSize: 10, color: FAINT }}>
           Built with Next.js, Three.js, React Three Fiber &amp; Zustand
         </p>
       </footer>

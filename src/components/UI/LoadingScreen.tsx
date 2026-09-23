@@ -147,12 +147,11 @@ export default function LoadingScreen({ onViewPortfolio }: { onViewPortfolio?: (
               </p>
               <button
                 onClick={handleStartConnection}
-                className="mt-8 px-6 py-3 rounded border text-xs font-semibold cursor-pointer tracking-[0.25em] transition-all hover:bg-amber-500/10 hover:border-amber-400 hover:shadow-[0_0_20px_rgba(212,175,55,0.15)]"
+                className="hud-kbtn mt-8 px-6 py-3 rounded border text-xs font-semibold tracking-[0.25em] transition-all hover:bg-amber-500/10 hover:border-amber-400 hover:shadow-[0_0_20px_rgba(212,175,55,0.15)]"
                 style={{
                   borderColor: "rgba(212,175,55,0.3)",
                   color: "#f0e6d8",
                   background: "transparent",
-                  fontFamily: "'JetBrains Mono', monospace",
                   minHeight: 48,
                 }}
               >
@@ -161,12 +160,11 @@ export default function LoadingScreen({ onViewPortfolio }: { onViewPortfolio?: (
               {onViewPortfolio && (
                 <button
                   onClick={onViewPortfolio}
-                  className="px-6 py-3 rounded text-[11px] cursor-pointer tracking-[0.25em] uppercase"
+                  className="hud-kbtn px-6 py-3 rounded text-[11px] tracking-[0.25em] uppercase"
                   style={{
-                    color: "rgba(56,189,248,0.8)",
+                    color: "rgba(56,189,248,0.85)",
                     background: "none",
                     border: "1px solid rgba(56,189,248,0.25)",
-                    fontFamily: "'JetBrains Mono', monospace",
                     minHeight: 48,
                   }}
                 >
@@ -225,12 +223,11 @@ export default function LoadingScreen({ onViewPortfolio }: { onViewPortfolio?: (
               {onViewPortfolio && (
                 <button
                   onClick={onViewPortfolio}
-                  className="mt-4 text-[10px] uppercase tracking-[0.3em] cursor-pointer"
+                  className="hud-kbtn mt-4 text-[10px] uppercase tracking-[0.3em]"
                   style={{
-                    color: "rgba(56,189,248,0.6)",
+                    color: "rgba(56,189,248,0.65)",
                     background: "none",
                     border: "none",
-                    fontFamily: "'JetBrains Mono', monospace",
                     minHeight: 44,
                   }}
                 >
@@ -300,10 +297,9 @@ export default function LoadingScreen({ onViewPortfolio }: { onViewPortfolio?: (
                   animate={{ opacity: showSkip || reduceMotion ? 1 : 0 }}
                   transition={{ duration: 0.4 }}
                   onClick={handleSkip}
-                  className="cursor-pointer text-[11px] uppercase tracking-[0.3em] pb-1 hover:text-amber-400 transition-all"
+                  className="hud-kbtn text-[11px] uppercase tracking-[0.3em] pb-1 hover:text-amber-400"
                   style={{
-                    color: "rgba(255,255,255,0.65)",
-                    fontFamily: "'JetBrains Mono', monospace",
+                    color: "rgba(255,255,255,0.7)",
                     background: "rgba(255,255,255,0.06)",
                     border: "1px solid rgba(255,255,255,0.15)",
                     borderRadius: 8,
@@ -316,10 +312,9 @@ export default function LoadingScreen({ onViewPortfolio }: { onViewPortfolio?: (
                 {onViewPortfolio && (
                   <button
                     onClick={onViewPortfolio}
-                    className="cursor-pointer text-[11px] uppercase tracking-[0.3em]"
+                    className="hud-kbtn text-[11px] uppercase tracking-[0.3em]"
                     style={{
-                      color: "rgba(56,189,248,0.8)",
-                      fontFamily: "'JetBrains Mono', monospace",
+                      color: "rgba(56,189,248,0.85)",
                       background: "none",
                       border: "none",
                       minHeight: 48,
