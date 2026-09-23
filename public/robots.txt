@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://aryan-sonsurkar.dev/sitemap.xml
+Sitemap: https://arssystem.vercel.app/sitemap.xml

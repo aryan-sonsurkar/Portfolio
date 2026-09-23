@@ -60,3 +60,45 @@ export function useMobileQuality() {
 
   return { isMobile, isLowPower, lowQuality: isMobile || isLowPower };
 }
+
+/** Synchronous reduced-motion check (safe for event handlers / effects). */
+export function isReducedMotion() {
+  if (typeof window === "undefined" || typeof window.matchMedia !== "function")
+    return false;
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+/** Reactive reduced-motion hook for components. */
+export function usePrefersReducedMotion() {
+  const [reduced, setReduced] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || typeof window.matchMedia !== "function")
+      return;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduced(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setReduced(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  return reduced;
+}
+
+/**
+ * Effective perf flag: explicit override wins, otherwise device detection.
+ * Reads localStorage so non-reactive 3D code stays correct across remounts.
+ * Scene remounts the Canvas on qualityMode change (key={qualityMode}).
+ */
+export function getEffectiveLowQuality() {
+  if (typeof window !== "undefined") {
+    try {
+      const saved = window.localStorage?.getItem("district-quality");
+      if (saved === "high") return false;
+      if (saved === "performance") return true;
+    } catch {
+      /* ignore */
+    }
+  }
+  return isMobileDevice() || isLowPowerDevice();
+}

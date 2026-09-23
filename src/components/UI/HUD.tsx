@@ -56,6 +56,8 @@ export default function HUD() {
     activeScreen,
     visitedBuildings,
     addVisitedBuilding,
+    qualityMode,
+    setQualityMode,
   } = useStore();
 
   const [newAchievement, setNewAchievement] = useState<string | null>(null);
@@ -227,8 +229,8 @@ export default function HUD() {
                   ? [
                       ["Joystick", "Move"],
                       ["Drag screen", "Look around"],
-                      ["Tap building", "Enter"],
-                      ["T", "Teleport panel"],
+                      ["Tap building", "Fly there / enter"],
+                      ["Explore", "Jump anywhere"],
                     ]
                   : [
                       ["WASD / Arrow Keys", "Move"],
@@ -245,6 +247,32 @@ export default function HUD() {
                   <span>{action}</span>
                 </div>
               ))}
+              {/* Quality tiers — explicit override, persists, remounts scene */}
+              <div className="flex gap-1 justify-end pt-2" role="group" aria-label="Graphics quality">
+                {(["auto", "performance", "high"] as const).map((q) => {
+                  const active = qualityMode === q;
+                  return (
+                    <button
+                      key={q}
+                      onClick={() => setQualityMode(q)}
+                      aria-pressed={active}
+                      className="rounded text-[9px] tracking-wider uppercase"
+                      style={{
+                        minWidth: 44,
+                        minHeight: 36,
+                        padding: "6px 8px",
+                        color: active ? "#0a0612" : "rgba(255,215,0,0.6)",
+                        background: active ? "#ffd700" : "transparent",
+                        border: "1px solid rgba(255,215,0,0.3)",
+                        cursor: "pointer",
+                        fontFamily: "'JetBrains Mono', monospace",
+                      }}
+                    >
+                      {q === "auto" ? "Auto" : q === "performance" ? "Perf" : "High"}
+                    </button>
+                  );
+                })}
+              </div>
             </motion.div>
           )}
         </AnimatePresence>

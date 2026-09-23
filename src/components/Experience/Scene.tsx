@@ -9,7 +9,7 @@ import CharacterController from "./CharacterController";
 import MonitorFocusPlane from "./MonitorFocusPlane";
 import Weather from "./Weather";
 import { useStore } from "@/lib/store";
-import { useIsMobile } from "@/lib/useIsMobile";
+import { useIsMobile, getEffectiveLowQuality } from "@/lib/useIsMobile";
 
 const City = lazy(() => import("./City"));
 const BuildingInterior = lazy(() => import("./BuildingInterior"));
@@ -29,8 +29,10 @@ function LoadingFallback() {
 }
 
 export default function Scene() {
-  const { interiorOpen, selectedBuilding, introComplete, teleportOpen } = useStore();
+  const { interiorOpen, selectedBuilding, introComplete, teleportOpen, qualityMode } = useStore();
   const isMobile = useIsMobile();
+  // Explicit AUTO / PERFORMANCE / HIGH override wins over device detection
+  const lowQuality = getEffectiveLowQuality();
 
   // Disable canvas pointer events when teleport panel is open
   useEffect(() => {
@@ -47,14 +49,15 @@ export default function Scene() {
 
   return (
     <Canvas
-      shadows={!isMobile}
-      dpr={isMobile ? 1 : [1, 1.5]}
-      camera={{ position: [20, 16, 20], fov: isMobile ? 55 : 45, near: 0.1, far: isMobile ? 140 : 220 }}
+      key={qualityMode}
+      shadows={!lowQuality}
+      dpr={lowQuality ? 1 : [1, 1.5]}
+      camera={{ position: [20, 16, 20], fov: isMobile ? 55 : 45, near: 0.1, far: lowQuality ? 140 : 220 }}
       gl={{
-        antialias: !isMobile,
+        antialias: !lowQuality,
         toneMapping: THREE.ACESFilmicToneMapping,
         toneMappingExposure: 1.1,
-        powerPreference: isMobile ? "low-power" : "high-performance",
+        powerPreference: lowQuality ? "low-power" : "high-performance",
       }}
       style={{ position: "fixed", inset: 0, zIndex: 0 }}
     >

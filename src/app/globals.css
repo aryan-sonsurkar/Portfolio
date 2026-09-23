@@ -42,6 +42,30 @@ body {
   }
 }
 
+/* Safe-area support for modern phones (explore bar, joystick, hatch) */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .district-mode {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Visible keyboard focus — recruiter path + all UI buttons */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #38bdf8;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Respect reduced motion in CSS animations */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* Custom scrollbar for modals */
 ::-webkit-scrollbar {
   width: 4px;

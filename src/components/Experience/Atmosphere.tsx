@@ -4,7 +4,7 @@ import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useStore } from "@/lib/store";
-import { isMobileDevice } from "@/lib/useIsMobile";
+import { getEffectiveLowQuality } from "@/lib/useIsMobile";
 
 function Clouds() {
   const groupRef = useRef<THREE.Group>(null);
@@ -12,7 +12,7 @@ function Clouds() {
   const windPhase = useRef(0);
 
   const clouds = useMemo(() => {
-    const mobile = isMobileDevice();
+    const mobile = getEffectiveLowQuality();
     const count = mobile ? 5 : 12;
     return Array.from({ length: count }, (_, i) => ({
       position: [
@@ -59,7 +59,7 @@ function Clouds() {
 function Particles() {
   const ref = useRef<THREE.Points>(null);
 
-  const count = isMobileDevice() ? 60 : 200;
+  const count = getEffectiveLowQuality() ? 60 : 200;
   const positions = useMemo(() => {
     const arr = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
@@ -183,7 +183,7 @@ function DropPod() {
 function Stars() {
   const ref = useRef<THREE.Points>(null);
   const positions = useMemo(() => {
-    const starCount = isMobileDevice() ? 350 : 1200;
+    const starCount = getEffectiveLowQuality() ? 350 : 1200;
     const arr = new Float32Array(starCount * 3);
     for (let i = 0; i < starCount; i++) {
       arr[i * 3] = (Math.random() - 0.5) * 180;
@@ -247,7 +247,7 @@ function Earth() {
 
     const texture = new THREE.CanvasTexture(canvas);
     texture.colorSpace = THREE.SRGBColorSpace;
-    texture.anisotropy = isMobileDevice() ? 1 : 8;
+    texture.anisotropy = getEffectiveLowQuality() ? 1 : 8;
     return texture;
   }, []);
 
@@ -270,7 +270,7 @@ function Earth() {
 
     const texture = new THREE.CanvasTexture(canvas);
     texture.colorSpace = THREE.SRGBColorSpace;
-    texture.anisotropy = isMobileDevice() ? 1 : 8;
+    texture.anisotropy = getEffectiveLowQuality() ? 1 : 8;
     return texture;
   }, []);
 
@@ -295,7 +295,7 @@ function Earth() {
     }
   });
 
-  const mobile = isMobileDevice();
+  const mobile = getEffectiveLowQuality();
   const seg = mobile ? 16 : 32;
 
   return (
@@ -334,7 +334,7 @@ function Earth() {
 }
 
 export default function Atmosphere() {
-  const mobile = isMobileDevice();
+  const mobile = getEffectiveLowQuality();
   return (
     <>
       <color attach="background" args={["#0a0612"]} />

@@ -4,6 +4,7 @@ import { BUILDINGS } from "../components/Buildings/BuildingData";
 
 export type CameraMode = "orbit" | "focused" | "intro" | "fpv" | "screen";
 export type TimeOfDay = "morning" | "golden" | "night" | "late";
+export type QualityMode = "auto" | "performance" | "high";
 
 interface AppState {
   cameraMode: CameraMode;
@@ -29,6 +30,7 @@ interface AppState {
   visitedBuildings: string[];
   flyoverActive: boolean;
   flyoverTarget: [number, number, number] | null;
+  qualityMode: QualityMode;
 
   setCameraMode: (mode: CameraMode) => void;
   focusBuilding: (id: string) => void;
@@ -51,6 +53,7 @@ interface AppState {
   setTeleportOpen: (open: boolean) => void;
   setFlyover: (active: boolean, target?: [number, number, number]) => void;
   teleportToBuilding: (buildingId: string) => void;
+  setQualityMode: (mode: QualityMode) => void;
 }
 
 export const useStore = create<AppState>((set) => ({
@@ -77,6 +80,7 @@ export const useStore = create<AppState>((set) => ({
   visitedBuildings: [],
   flyoverActive: false,
   flyoverTarget: null,
+  qualityMode: (typeof window !== "undefined" && (window.localStorage?.getItem("district-quality") as QualityMode | null)) || "auto",
 
   setCameraMode: (mode) => set({ cameraMode: mode }),
 
@@ -144,6 +148,14 @@ export const useStore = create<AppState>((set) => ({
   setPreFocusPosition: (pos, rot) => set({ preFocusPosition: pos, preFocusRotation: rot }),
 
   setTeleportOpen: (open) => set({ teleportOpen: open }),
+  setQualityMode: (mode) => {
+    try {
+      window.localStorage?.setItem("district-quality", mode);
+    } catch {
+      /* private mode */
+    }
+    return set({ qualityMode: mode });
+  },
   setFlyover: (active, target) => set({ flyoverActive: active, flyoverTarget: target ?? null }),
 
   teleportToBuilding: (buildingId) => {

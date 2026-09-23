@@ -5,7 +5,7 @@ import * as THREE from "three";
 import Building from "./Building";
 import { BUILDINGS } from "../Buildings/BuildingData";
 import DistrictLife from "./DistrictLife";
-import { isMobileDevice } from "@/lib/useIsMobile";
+import { getEffectiveLowQuality } from "@/lib/useIsMobile";
 
 function Ground() {
   return (
@@ -63,7 +63,7 @@ function Ground() {
 }
 
 function StreetLamps() {
-  const mobile = isMobileDevice();
+  const mobile = getEffectiveLowQuality();
   const positions: [number, number, number][] = [
     [-10, 0, 4.5],
     [-5, 0, 4.5],
@@ -151,7 +151,7 @@ function TrashCan({ position }: { position: [number, number, number] }) {
 
 /** Under-construction building — "The Future is Under Construction" */
 function ConstructionSite() {
-  const mobile = isMobileDevice();
+  const mobile = getEffectiveLowQuality();
   return (
     <group position={[8, 0, 4]}>
       {/* Foundation slab */}
@@ -214,7 +214,7 @@ function ConstructionSite() {
 
 /** Inaccessible "ARYAN v2.0" future building */
 function FutureBuilding() {
-  const mobile = isMobileDevice();
+  const mobile = getEffectiveLowQuality();
   return (
     <group position={[-9, 0, 5]}>
       {/* Silhouette — dark, fogged out */}

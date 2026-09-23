@@ -1,15 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useStore } from "@/lib/store";
 import { audioManager, speakAI } from "@/lib/audio";
+import { isReducedMotion } from "@/lib/useIsMobile";
 
 const INTRO_DURATION_MS = 9000;
 const SKIP_DELAY_MS = 2000;
+// Reduced-motion users: brief establishing shot, no 9s cinematic
+const REDUCED_INTRO_MS = 1200;
 
-export default function LoadingScreen() {
+export default function LoadingScreen({ onViewPortfolio }: { onViewPortfolio?: () => void }) {
   const { completeLoading, completeIntro, setIntroProgress } = useStore();
+  const reduceMotion = useReducedMotion();
   const [startedConnection, setStartedConnection] = useState(false);
   const [phase, setPhase] = useState<"connect" | "loading" | "intro" | "entering">("connect");
   const [progress, setProgress] = useState(0);
@@ -60,7 +64,9 @@ export default function LoadingScreen() {
           window.clearInterval(interval);
           window.setTimeout(() => {
             setPhase("intro");
-            speakAI("Incoming encrypted signal. Builder District located. Construction status: Active. Objective: Explore the district and uncover the story of its architect. Welcome back, agent.");
+            if (!isReducedMotion()) {
+              speakAI("Incoming encrypted signal. Builder District located. Construction status: Active. Objective: Explore the district and uncover the story of its architect. Welcome back, agent.");
+            }
           }, 300);
           return 100;
         }
@@ -74,7 +80,14 @@ export default function LoadingScreen() {
   useEffect(() => {
     if (phase !== "intro") return;
 
-    setIntroProgress(0);
+    // Reduced motion: short establishing beat, no voiceover, no 9s wait
+    const reduced = reduceMotion || isReducedMotion();
+    const duration = reduced ? REDUCED_INTRO_MS : INTRO_DURATION_MS;
+    setIntroProgress(reduced ? 1 : 0);
+    if (reduced) {
+      const t = window.setTimeout(() => finishIntro(), duration);
+      return () => window.clearTimeout(t);
+    }
     const startedAt = performance.now();
     const tick = () => {
       const elapsed = performance.now() - startedAt;
@@ -92,7 +105,7 @@ export default function LoadingScreen() {
       window.clearTimeout(completeTimer);
       window.clearInterval(progressTimer);
     };
-  }, [phase, setIntroProgress]);
+  }, [phase, setIntroProgress, reduceMotion]);
 
   const finishIntro = () => {
     setIntroProgress(1);
@@ -140,10 +153,26 @@ export default function LoadingScreen() {
                   color: "#f0e6d8",
                   background: "transparent",
                   fontFamily: "'JetBrains Mono', monospace",
+                  minHeight: 48,
                 }}
               >
                 [ INITIALIZE TRANSLATION ]
               </button>
+              {onViewPortfolio && (
+                <button
+                  onClick={onViewPortfolio}
+                  className="px-6 py-3 rounded text-[11px] cursor-pointer tracking-[0.25em] uppercase"
+                  style={{
+                    color: "rgba(56,189,248,0.8)",
+                    background: "none",
+                    border: "1px solid rgba(56,189,248,0.25)",
+                    fontFamily: "'JetBrains Mono', monospace",
+                    minHeight: 48,
+                  }}
+                >
+                  View portfolio instead →
+                </button>
+              )}
             </motion.div>
           )}
 
@@ -193,6 +222,21 @@ export default function LoadingScreen() {
                   <span>{Math.floor(progress)}%</span>
                 </div>
               </div>
+              {onViewPortfolio && (
+                <button
+                  onClick={onViewPortfolio}
+                  className="mt-4 text-[10px] uppercase tracking-[0.3em] cursor-pointer"
+                  style={{
+                    color: "rgba(56,189,248,0.6)",
+                    background: "none",
+                    border: "none",
+                    fontFamily: "'JetBrains Mono', monospace",
+                    minHeight: 44,
+                  }}
+                >
+                  Skip loading — view portfolio →
+                </button>
+              )}
             </motion.div>
           )}
 
@@ -250,21 +294,42 @@ export default function LoadingScreen() {
                 </div>
               </motion.div>
 
-              <motion.button
-                initial={{ opacity: 0 }}
-                animate={{ opacity: showSkip ? 0.6 : 0 }}
-                transition={{ duration: 0.4 }}
-                onClick={handleSkip}
-                className="absolute bottom-[-100px] cursor-pointer text-[10px] uppercase tracking-[0.3em] border-b border-transparent pb-1 hover:border-amber-400 hover:text-amber-400 transition-all"
-                style={{
-                  color: "rgba(255,255,255,0.4)",
-                  fontFamily: "'JetBrains Mono', monospace",
-                  background: "none",
-                  border: "none",
-                }}
-              >
-                Skip Descent
-              </motion.button>
+              <div className="absolute bottom-[-100px] flex items-center gap-6">
+                <motion.button
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: showSkip || reduceMotion ? 1 : 0 }}
+                  transition={{ duration: 0.4 }}
+                  onClick={handleSkip}
+                  className="cursor-pointer text-[11px] uppercase tracking-[0.3em] pb-1 hover:text-amber-400 transition-all"
+                  style={{
+                    color: "rgba(255,255,255,0.65)",
+                    fontFamily: "'JetBrains Mono', monospace",
+                    background: "rgba(255,255,255,0.06)",
+                    border: "1px solid rgba(255,255,255,0.15)",
+                    borderRadius: 8,
+                    padding: "12px 20px",
+                    minHeight: 48,
+                  }}
+                >
+                  Skip intro →
+                </motion.button>
+                {onViewPortfolio && (
+                  <button
+                    onClick={onViewPortfolio}
+                    className="cursor-pointer text-[11px] uppercase tracking-[0.3em]"
+                    style={{
+                      color: "rgba(56,189,248,0.8)",
+                      fontFamily: "'JetBrains Mono', monospace",
+                      background: "none",
+                      border: "none",
+                      minHeight: 48,
+                      padding: "12px 8px",
+                    }}
+                  >
+                    View portfolio
+                  </button>
+                )}
+              </div>
             </motion.div>
           )}
         </motion.div>

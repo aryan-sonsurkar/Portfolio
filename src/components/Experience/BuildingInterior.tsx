@@ -6,7 +6,7 @@ import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useStore } from "@/lib/store";
 import { BUILDINGS } from "../Buildings/BuildingData";
-import { isMobileDevice } from "@/lib/useIsMobile";
+import { getEffectiveLowQuality } from "@/lib/useIsMobile";
 import { monitorConfig, type BuildingMonitors } from "@/config/monitors";
 import ImageMonitor from "./ImageMonitor";
 
@@ -37,7 +37,7 @@ function RoomShell({ walls }: { walls: BuildingMonitors["walls"] }) {
 }
 
 function CeilingLights({ lights }: { lights: BuildingMonitors["ceilingLights"] }) {
-  const mobile = isMobileDevice();
+  const mobile = getEffectiveLowQuality();
   return (
     <group>
       {lights.map((light, i) => (
@@ -94,7 +94,7 @@ function ServerRacks({ racks }: { racks: BuildingMonitors["serverRacks"] }) {
               />
             </mesh>
           ))}
-          {!isMobileDevice() && <pointLight position={[0, 0, 0.25]} color="#22c55e" intensity={0.6} distance={1.2} />}
+          {!getEffectiveLowQuality() && <pointLight position={[0, 0, 0.25]} color="#22c55e" intensity={0.6} distance={1.2} />}
         </group>
       ))}
     </group>
@@ -132,7 +132,7 @@ function CertificateFrame({
           <div style={{ color: "#94a3b8", fontSize: "7px" }}>{subtitle}</div>
         </div>
       </Html>
-      {!isMobileDevice() && <pointLight color={color} intensity={0.8} distance={2} position={[0, 0, 0.3]} />}
+      {!getEffectiveLowQuality() && <pointLight color={color} intensity={0.8} distance={2} position={[0, 0, 0.3]} />}
     </group>
   );
 }
@@ -160,7 +160,7 @@ function ExitDoor({ onLeave }: { onLeave: () => void }) {
           [ EXIT ]
         </div>
       </Html>
-      {!isMobileDevice() && <pointLight color="#ffd166" intensity={hovered ? 3 : 1.2} distance={3} position={[0, 1.5, 0.3]} />}
+      {!getEffectiveLowQuality() && <pointLight color="#ffd166" intensity={hovered ? 3 : 1.2} distance={3} position={[0, 1.5, 0.3]} />}
     </group>
   );
 }
@@ -398,7 +398,7 @@ function IronmanDestinyLabDecor() {
           <sphereGeometry args={[0.1, 16, 16]} />
           <meshStandardMaterial color="#00ddff" emissive="#00ddff" emissiveIntensity={5} />
         </mesh>
-        {!isMobileDevice() && <pointLight color="#00aaff" intensity={3} distance={4} />}
+        {!getEffectiveLowQuality() && <pointLight color="#00aaff" intensity={3} distance={4} />}
       </group>
 
       {/* Workbench */}
@@ -421,7 +421,7 @@ function IronmanDestinyLabDecor() {
           <boxGeometry args={[0.4, 0.3, 0.3]} />
           <meshStandardMaterial color="#ff4400" metalness={0.8} roughness={0.2} />
         </mesh>
-        {!isMobileDevice() && <pointLight color="#ff4400" intensity={1.5} distance={2} />}
+        {!getEffectiveLowQuality() && <pointLight color="#ff4400" intensity={1.5} distance={2} />}
       </group>
     </>
   );
@@ -577,7 +577,7 @@ function HardwareFoundryDecor() {
         <meshStandardMaterial color="#22c55e" roughness={0.6} />
       </mesh>
       {/* Soldering station light */}
-      {!isMobileDevice() && <pointLight position={[-4, 1.1, -1]} color="#22c55e" intensity={1.2} distance={2.5} />}
+      {!getEffectiveLowQuality() && <pointLight position={[-4, 1.1, -1]} color="#22c55e" intensity={1.2} distance={2.5} />}
     </>
   );
 }
@@ -595,7 +595,7 @@ function VaultDecor() {
           <cylinderGeometry args={[0.28, 0.28, 0.03, 16]} />
           <meshStandardMaterial color="#ffd700" emissive="#ffd700" emissiveIntensity={0.8} metalness={0.9} />
         </mesh>
-        {!isMobileDevice() && <pointLight position={[0, 0, 0.4]} color="#ffd700" intensity={2} distance={3} />}
+        {!getEffectiveLowQuality() && <pointLight position={[0, 0, 0.4]} color="#ffd700" intensity={2} distance={3} />}
       </group>
       {/* Gold bars */}
       {([[3.8, 0.05, -2.2], [3.95, 0.05, -2.2], [3.8, 0.1, -2.05]] as [number, number, number][]).map((p, i) => (
@@ -605,7 +605,7 @@ function VaultDecor() {
         </mesh>
       ))}
       {/* Security panel glow */}
-      {!isMobileDevice() && <pointLight position={[3.8, 0.3, -2.1]} color="#ffd700" intensity={0.8} distance={1.5} />}
+      {!getEffectiveLowQuality() && <pointLight position={[3.8, 0.3, -2.1]} color="#ffd700" intensity={0.8} distance={1.5} />}
     </>
   );
 }
@@ -637,7 +637,7 @@ function HackathonWarRoomDecor() {
           <sphereGeometry args={[0.09, 12, 12]} />
           <meshStandardMaterial color="#ef4444" emissive="#ef4444" emissiveIntensity={1.5} />
         </mesh>
-        {!isMobileDevice() && <pointLight color="#ef4444" intensity={2} distance={5} />}
+        {!getEffectiveLowQuality() && <pointLight color="#ef4444" intensity={2} distance={5} />}
       </group>
       {/* Sticky notes on wall */}
       {([[-2.5, 1.9, -2.85], [-2.0, 2.1, -2.85], [-3.0, 2.0, -2.85]] as [number, number, number][]).map((p, i) => (
@@ -671,7 +671,7 @@ function RoasteryDecor() {
           <meshStandardMaterial color="#f59e0b" emissive="#f59e0b" emissiveIntensity={0.6} />
         </mesh>
         <BlinkingLed color="#c084fc" />
-        {!isMobileDevice() && <pointLight position={[0, 0.3, 0.2]} color="#f59e0b" intensity={1} distance={2} />}
+        {!getEffectiveLowQuality() && <pointLight position={[0, 0.3, 0.2]} color="#f59e0b" intensity={1} distance={2} />}
       </group>
       {/* Cups */}
       {([[4.2, 0.82, -1.2], [4.45, 0.82, -1.2]] as [number, number, number][]).map((p, i) => (
@@ -728,13 +728,13 @@ function ConfiguredRoom({ buildingId, config }: { buildingId: string; config: Bu
       <ambientLight intensity={0.6} color={config.room.ambientColor} />
       <hemisphereLight color="#b4c6e7" groundColor="#1a1a2e" intensity={0.4} />
       <pointLight position={[0, 4, 0]} intensity={8} color="#ffd166" distance={12} decay={2} />
-      {!isMobileDevice() && (
+      {!getEffectiveLowQuality() && (
       <pointLight position={[-3, 3, 1]} intensity={4} color="#ffffff" distance={10} decay={2} />
       )}
-      {!isMobileDevice() && (
+      {!getEffectiveLowQuality() && (
       <pointLight position={[3, 3, 1]} intensity={4} color="#ffffff" distance={10} decay={2} />
       )}
-      {!isMobileDevice() && (
+      {!getEffectiveLowQuality() && (
       <pointLight position={[0, 3, -2]} intensity={3} color={config.ceilingLights[0]?.color ?? "#ffffff"} distance={8} decay={2} />
       )}
     </>

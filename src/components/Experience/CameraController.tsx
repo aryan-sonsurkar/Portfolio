@@ -6,6 +6,7 @@ import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 import { useStore } from "@/lib/store";
 import { BUILDINGS } from "../Buildings/BuildingData";
+import { isReducedMotion } from "@/lib/useIsMobile";
 
 const INTRO_DURATION_SECONDS = 9;
 
@@ -20,6 +21,14 @@ export default function CameraController() {
 
   useEffect(() => {
     if (!introComplete) {
+      // Reduced motion: start at the final street-level frame, no flight
+      if (isReducedMotion()) {
+        camera.position.set(0, 1.6, 6);
+        camera.lookAt(0, 1.2, 0);
+        targetPosition.current.set(0, 1.6, 6);
+        targetLookAt.current.set(0, 1.2, 0);
+        return;
+      }
       introStartRef.current = performance.now();
       camera.position.set(0, 60, 200);
       targetPosition.current.set(0, 60, 200);
@@ -49,6 +58,12 @@ export default function CameraController() {
     if (cameraMode === "fpv" || cameraMode === "screen") return;
 
     if (!introComplete) {
+      // Reduced motion: hold the final frame, no flight
+      if (isReducedMotion()) {
+        camera.position.set(0, 1.6, 6);
+        camera.lookAt(0, 1.2, 0);
+        return;
+      }
       const startedAt = introStartRef.current ?? performance.now();
       const elapsed = (performance.now() - startedAt) / 1000;
       const t = Math.min(elapsed / INTRO_DURATION_SECONDS, 1);

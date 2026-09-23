@@ -5,8 +5,8 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { Edges } from "@react-three/drei";
 import * as THREE from "three";
 import { BuildingConfig } from "@/types/building";
-import { useStore } from "@/lib/store";
-import { isMobileDevice } from "@/lib/useIsMobile";
+import { useStore, fpvState } from "@/lib/store";
+import { isMobileDevice, getEffectiveLowQuality } from "@/lib/useIsMobile";
 
 const scratchWorldPos = new THREE.Vector3();
 
@@ -148,7 +148,7 @@ function BuildingEntrance({ config }: { config: BuildingConfig }) {
           emissiveIntensity={hovered ? 3 : 1}
         />
       </mesh>
-      {!isMobileDevice() && (
+      {!getEffectiveLowQuality() && (
         <pointLight
           color={config.emissive || "#ffd700"}
           intensity={hovered ? 4 : 1.5}
@@ -166,9 +166,10 @@ function BuildingBody({ config }: { config: BuildingConfig }) {
   const glowAnimating = useRef(false);
   const scaleTarget = useRef(new THREE.Vector3());
   const { camera } = useThree();
-  const { setHoveredBuilding, introComplete, introProgress, visitedBuildings, enterBuilding, setExitPosition } = useStore();
+  const { setHoveredBuilding, introComplete, introProgress, visitedBuildings, enterBuilding, setExitPosition, teleportToBuilding } = useStore();
   const [hovered, setHovered] = useState(false);
   const mobile = isMobileDevice();
+  const lq = getEffectiveLowQuality();
   const isVisited = visitedBuildings.includes(config.id);
   const glowStrength = config.id === "modcodes-hq"
     ? Math.max(0.2, Math.min(1.25, introProgress * 1.2 + (introComplete ? 0.35 : 0)))
@@ -178,8 +179,8 @@ function BuildingBody({ config }: { config: BuildingConfig }) {
 
   useFrame((state) => {
     if (!meshRef.current) return;
-    // Mobile: skip per-frame scale lerp + glow pulse (saves CPU on 16 buildings)
-    if (mobile) return;
+    // Low quality: skip per-frame scale lerp + glow pulse (saves CPU on 16 buildings)
+    if (lq) return;
     const target = hovered ? 1.02 : 1.0;
     scaleTarget.current.set(target, target, target);
     meshRef.current.scale.lerp(scaleTarget.current, 0.08);
@@ -217,8 +218,8 @@ function BuildingBody({ config }: { config: BuildingConfig }) {
       {/* Main body */}
       <mesh
         ref={meshRef}
-        castShadow={!mobile}
-        receiveShadow={!mobile}
+        castShadow={!lq}
+        receiveShadow={!lq}
         onPointerEnter={(e) => {
           if (!introComplete) return;
           e.stopPropagation();
@@ -232,11 +233,18 @@ function BuildingBody({ config }: { config: BuildingConfig }) {
           document.body.style.cursor = "default";
         }}
         onClick={(e) => {
-          // Mobile tap-to-enter: no precise walking needed
+          // Mobile tap: near = enter now, far = flyover to entrance
+          // (proximity pill / walk-in radius completes entry — reuses teleport system)
           if (!introComplete || !mobile) return;
           e.stopPropagation();
-          setExitPosition([0, 1.6, 6], 0);
-          enterBuilding(config.id);
+          const dx = fpvState.position[0] - config.position[0];
+          const dz = fpvState.position[2] - (config.position[2] + config.scale[2] / 2 + 0.6);
+          if (Math.hypot(dx, dz) < 6) {
+            setExitPosition([0, 1.6, 6], 0);
+            enterBuilding(config.id);
+          } else {
+            teleportToBuilding(config.id);
+          }
         }}
       >
         <boxGeometry args={config.scale} />
@@ -247,7 +255,7 @@ function BuildingBody({ config }: { config: BuildingConfig }) {
           emissive={config.emissive || "#ffd700"}
           emissiveIntensity={glowStrength}
         />
-        {!mobile && <Edges threshold={15} color="#00000020" lineWidth={1} />}
+        {!lq && <Edges threshold={15} color="#00000020" lineWidth={1} />}
       </mesh>
 
       {/* Windows — front face */}

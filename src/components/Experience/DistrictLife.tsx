@@ -3,25 +3,27 @@
 import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import { isMobileDevice } from "@/lib/useIsMobile";
+import { getEffectiveLowQuality, isReducedMotion } from "@/lib/useIsMobile";
 
 // Cheap ambient life: moving cars (emissive boxes, no lights/shadows) +
-// rooftop beacons on tall buildings. Mobile gets 1 car + static beacons.
+// rooftop beacons on tall buildings. Low quality gets 1 car + static beacons.
+// Reduced motion: cars parked, beacons static.
 function Cars() {
-  const mobile = isMobileDevice();
+  const lowQ = getEffectiveLowQuality();
+  const reduced = isReducedMotion();
   const group = useRef<THREE.Group>(null);
   const cars = useMemo(() => {
-    const n = mobile ? 1 : 3;
+    const n = lowQ ? 1 : 3;
     return Array.from({ length: n }, (_, i) => ({
       x: -12 + i * 9,
       speed: (i % 2 === 0 ? 1 : -1) * (2.2 + i * 0.5),
       lane: i % 2 === 0 ? 2.7 : 3.7,
       color: ["#38bdf8", "#ffd700", "#22c55e"][i % 3],
     }));
-  }, [mobile]);
+  }, [lowQ]);
 
   useFrame((_, delta) => {
-    if (!group.current) return;
+    if (reduced || !group.current) return;
     const d = Math.min(delta, 0.05);
     group.current.children.forEach((child, i) => {
       child.position.x += cars[i].speed * d;
@@ -56,7 +58,8 @@ function Cars() {
 }
 
 function Beacons() {
-  const mobile = isMobileDevice();
+  const lowQ = getEffectiveLowQuality();
+  const reduced = isReducedMotion();
   const ref = useRef<THREE.Mesh>(null);
   // Tall-building rooftop positions
   const spots: [number, number, number][] = [
@@ -65,7 +68,7 @@ function Beacons() {
     [12, 4.6, -13],
   ];
   useFrame(({ clock }) => {
-    if (mobile || !ref.current) return;
+    if (lowQ || reduced || !ref.current) return;
     const m = ref.current.material as THREE.MeshBasicMaterial;
     m.opacity = 0.45 + Math.sin(clock.elapsedTime * 2.4) * 0.35;
   });

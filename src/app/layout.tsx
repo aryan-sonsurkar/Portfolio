@@ -10,7 +10,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://arssystem.vercel.app"),
-  title: "Aryan Sonsurkar — Developer, Builder, Creator",
+  title: "Aryan Rakesh Sonsurkar — Developer, Builder, Creator",
   description:
     "Aryan Sonsurkar is a developer building AI-powered products, shipping real projects, and turning ideas into reality. Explore the MODCODES District — an interactive 3D portfolio experience.",
   keywords: [
@@ -30,8 +30,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://arssystem.vercel.app",
-    siteName: "Aryan Sonsurkar — MODCODES District",
-    title: "Aryan Sonsurkar — Developer, Builder, Creator",
+    siteName: "Aryan Rakesh Sonsurkar — MODCODES District",
+    title: "Aryan Rakesh Sonsurkar — Developer, Builder, Creator",
     description:
       "An interactive world built by a builder. AI-powered products, real projects, and a 3D district to explore.",
     images: [
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aryan Sonsurkar — Developer, Builder, Creator",
+    title: "Aryan Rakesh Sonsurkar — Developer, Builder, Creator",
     description:
       "An interactive world built by a builder. AI-powered products, real projects, and a 3D district to explore.",
     images: ["/og-image.svg"],
@@ -72,7 +72,7 @@ export default function RootLayout({
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: "Aryan Sonsurkar",
+    name: "Aryan Rakesh Sonsurkar",
     url: "https://arssystem.vercel.app",
     jobTitle: "Developer",
     description:
