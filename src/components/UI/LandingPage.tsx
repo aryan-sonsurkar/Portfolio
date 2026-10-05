@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
 import { audioManager } from "@/lib/audio";
 
 // ── Landing: clean, minimal developer portfolio.
@@ -19,6 +19,7 @@ const PROJECTS = [
     description:
       "Object tracking, boundary intrusion detection, loitering detection, evidence snapshots and incident logging.",
     tech: "YOLOv8 · ByteTrack · OpenCV · FastAPI · React/Vite · SQLite",
+    status: "Prototype",
     link: null as string | null,
     linkLabel: "Full demo on request",
     featured: true,
@@ -28,6 +29,7 @@ const PROJECTS = [
     description:
       "Python, FastAPI, Ollama local LLMs, speech recognition. Currently in Beta.",
     tech: "Python · FastAPI · Ollama · SQLite",
+    status: "Beta",
     link: "https://github.com/aryan-sonsurkar/mod-codes-ide",
     linkLabel: "GitHub",
     featured: false,
@@ -37,6 +39,7 @@ const PROJECTS = [
     description:
       "Assignments, AI assistance, focus sessions, notes, progress tracking, PDF analysis and screenshot OCR.",
     tech: "Next.js · React · AI/LLM workflows",
+    status: "Live",
     link: "https://fixly-student-assistant.vercel.app/",
     linkLabel: "Live site",
     featured: false,
@@ -46,6 +49,7 @@ const PROJECTS = [
     description:
       "Discover and purchase products from brands across the Konkan region. Product discovery, product pages, cart, customer accounts and seller onboarding.",
     tech: "E-commerce · Marketplace · Kaevron internship",
+    status: "Live",
     link: "https://www.kokanam.in/",
     linkLabel: "Live site",
     featured: false,
@@ -55,10 +59,35 @@ const PROJECTS = [
     description:
       "16-building explorable district with first-person controls, teleport flyovers, interiors and procedural audio.",
     tech: "Next.js · Three.js · React Three Fiber · Zustand",
+    status: "Live",
     link: null as string | null,
     linkLabel: "Enter 3D district",
     district: true,
     featured: false,
+  },
+];
+
+const HIGHLIGHTS = [
+  "Best Performing Intern — Kaevron Technologies",
+  "SIH-2025 Special Recognition",
+  "JioGames Hackathon 2026 participant",
+  "Industrial Hackathon 2026",
+  "100+ days of build-in-public",
+  "Client project delivered — Vishwanath Insurance",
+];
+
+const EDUCATION = [
+  {
+    school: "Vidyalankar Polytechnic",
+    degree: "Diploma in Computer Engineering",
+    period: "2025 — Present",
+    note: "Mumbai, Maharashtra · Semester 3",
+  },
+  {
+    school: "MSCIT",
+    degree: "Maharashtra State Certificate in IT",
+    period: "Completed Jan 2026",
+    note: "Government certification",
   },
 ];
 
@@ -86,10 +115,11 @@ const EXPERIENCE = [
   {
     role: "Web Developer & AI Intern",
     org: "Kaevron Technologies",
-    period: "May 2026 — Aug 2026",
+    period: "May 2026 — Present",
     points: [
       "Best Performing Intern — building automation systems, delivering projects, demonstrating ownership.",
       "Built KOKANAM — regional e-commerce marketplace with product discovery, cart, accounts and seller onboarding.",
+      "Working on web development and AI-assisted workflows: frontend, automation and UI implementation for client-oriented projects.",
     ],
   },
   {
@@ -115,8 +145,10 @@ const CONTACTS = [
 ];
 
 const NAV = [
+  ["about", "About"],
   ["work", "Work"],
   ["experience", "Experience"],
+  ["education", "Education"],
   ["skills", "Skills"],
   ["contact", "Contact"],
 ] as const;
@@ -130,6 +162,8 @@ export default function LandingPage({
 }) {
   const reduceMotion = useReducedMotion();
   const [menuOpen, setMenuOpen] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 });
 
   useEffect(() => {
     if (anchor) {
@@ -172,6 +206,12 @@ export default function LandingPage({
 
   return (
     <div className="landing-simple min-h-screen">
+      {/* Scroll progress */}
+      <motion.div
+        className="simple-progress"
+        style={{ scaleX: reduceMotion ? 1 : progress, opacity: reduceMotion ? 0 : 1 }}
+        aria-hidden
+      />
       {/* Header */}
       <header className="simple-header">
         <div className="simple-wrap simple-bar">
@@ -183,7 +223,7 @@ export default function LandingPage({
             <span className="hidden sm:inline">Aryan Rakesh Sonsurkar</span>
             <span className="sm:hidden">Aryan</span>
           </button>
-          <nav className="hidden md:flex items-center gap-8" aria-label="Primary">
+          <nav className="hidden md:flex items-center gap-6" aria-label="Primary">
             {NAV.map(([id, label]) => (
               <a
                 key={id}
@@ -233,28 +273,69 @@ export default function LandingPage({
       </header>
 
       {/* Hero */}
-      <section className="simple-wrap simple-hero">
-        <motion.h1 {...fade(0)} className="simple-name">
-          Aryan Rakesh Sonsurkar
-        </motion.h1>
-        <motion.p {...fade(0.08)} className="simple-role">
-          Computer Engineering Student · Software Developer · AI &amp; Web Development
+      <section className="simple-hero-shell">
+        <div className="simple-hero-bg" aria-hidden />
+        <div className="simple-wrap simple-hero">
+          <motion.p {...fade(0)} className="simple-avail">
+            <span className="simple-avail-dot" aria-hidden />
+            Open to internships &amp; freelance work — Mumbai
+          </motion.p>
+          <motion.h1 {...fade(0.05)} className="simple-name">
+            Aryan Rakesh Sonsurkar
+          </motion.h1>
+          <motion.p {...fade(0.11)} className="simple-role">
+            Web Developer &amp; AI Intern @ Kaevron Technologies · Python Developer · Building AI &amp;
+            automation projects
+          </motion.p>
+          <motion.p {...fade(0.17)} className="simple-intro">
+            Computer Engineering student shipping real products — AI tools, web apps and an explorable
+            3D world.
+          </motion.p>
+          <motion.div {...fade(0.23)} className="simple-cta-row">
+            <button onClick={() => scrollTo("work")} className="simple-btn-primary">
+              View My Work
+            </button>
+            <button onClick={handleEnter} className="simple-btn-secondary">
+              Enter 3D District
+            </button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* About */}
+      <section id="about" className="simple-wrap simple-section">
+        <motion.p {...reveal()} className="simple-eyebrow">
+          01 — About
         </motion.p>
-        <motion.p {...fade(0.14)} className="simple-intro">
-          I build software, AI tools and interactive experiences.
-        </motion.p>
-        <motion.div {...fade(0.2)} className="simple-cta-row">
-          <button onClick={() => scrollTo("work")} className="simple-btn-primary">
-            View My Work
-          </button>
-          <button onClick={handleEnter} className="simple-btn-secondary">
-            Enter 3D District
-          </button>
-        </motion.div>
+        <motion.h2 {...reveal()} className="simple-h2">
+          Down the rabbit hole
+        </motion.h2>
+        <div className="simple-about">
+          <motion.p {...reveal(0.05)} className="simple-about-p">
+            I want to build an AI of my own someday. Until then, I&apos;m going down the rabbit hole of
+            building real software — shipping products people actually use, from an AI student workspace
+            to a regional e-commerce marketplace.
+          </motion.p>
+          <motion.p {...reveal(0.1)} className="simple-about-p">
+            Currently a Web Developer &amp; AI Intern at Kaevron Technologies, where I work on frontend
+            development, automation workflows and AI-assisted projects. When I&apos;m not shipping, I&apos;m
+            in hackathons or logging the build in public.
+          </motion.p>
+        </div>
+        <motion.ul {...reveal(0.15)} className="simple-highlights">
+          {HIGHLIGHTS.map((h) => (
+            <li key={h} className="simple-chip">
+              {h}
+            </li>
+          ))}
+        </motion.ul>
       </section>
 
       {/* Work */}
       <section id="work" className="simple-wrap simple-section">
+        <motion.p {...reveal()} className="simple-eyebrow">
+          02 — Work
+        </motion.p>
         <motion.h2 {...reveal()} className="simple-h2">
           Selected Work
         </motion.h2>
@@ -265,7 +346,12 @@ export default function LandingPage({
               {...reveal(Math.min(i * 0.05, 0.15))}
               className={p.featured ? "simple-card simple-card-featured" : "simple-card"}
             >
-              <h3 className="simple-card-title">{p.title}</h3>
+              <div className="simple-card-top">
+                <h3 className="simple-card-title">{p.title}</h3>
+                <span className={`simple-status simple-status-${p.status.toLowerCase().replace(/\s+/g, "-")}`}>
+                  {p.status}
+                </span>
+              </div>
               <p className="simple-card-desc">{p.description}</p>
               <p className="simple-card-tech">{p.tech}</p>
               <div className="simple-card-foot">
@@ -309,6 +395,9 @@ export default function LandingPage({
 
       {/* Experience */}
       <section id="experience" className="simple-wrap simple-section">
+        <motion.p {...reveal()} className="simple-eyebrow">
+          03 — Experience
+        </motion.p>
         <motion.h2 {...reveal()} className="simple-h2">
           Experience
         </motion.h2>
@@ -334,8 +423,39 @@ export default function LandingPage({
         ))}
       </section>
 
+      {/* Education */}
+      <section id="education" className="simple-wrap simple-section">
+        <motion.p {...reveal()} className="simple-eyebrow">
+          04 — Education
+        </motion.p>
+        <motion.h2 {...reveal()} className="simple-h2">
+          Education
+        </motion.h2>
+        <div className="simple-edu-list">
+          {EDUCATION.map((e, i) => (
+            <motion.div
+              key={e.school}
+              {...reveal(i * 0.05)}
+              className={i > 0 ? "simple-job simple-job-next" : "simple-job"}
+            >
+              <div className="simple-job-head">
+                <div>
+                  <h3 className="simple-job-role">{e.school}</h3>
+                  <p className="simple-job-org">{e.degree}</p>
+                </div>
+                <p className="simple-job-period">{e.period}</p>
+              </div>
+              <p className="simple-edu-note">{e.note}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
       {/* Skills */}
       <section id="skills" className="simple-wrap simple-section">
+        <motion.p {...reveal()} className="simple-eyebrow">
+          05 — Skills
+        </motion.p>
         <motion.h2 {...reveal()} className="simple-h2">
           Skills
         </motion.h2>
@@ -351,6 +471,9 @@ export default function LandingPage({
 
       {/* Contact */}
       <section id="contact" className="simple-wrap simple-section">
+        <motion.p {...reveal()} className="simple-eyebrow">
+          06 — Contact
+        </motion.p>
         <motion.h2 {...reveal()} className="simple-h2">
           Let&apos;s build something.
         </motion.h2>
@@ -398,6 +521,145 @@ export default function LandingPage({
           font-family: ${SANS};
           background: #000;
           color: #fff;
+        }
+        .simple-progress {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 2px;
+          background: linear-gradient(90deg, #2563a8, #a8b2bd);
+          transform-origin: 0 50%;
+          z-index: 60;
+          pointer-events: none;
+        }
+        .simple-hero-shell {
+          position: relative;
+          overflow: hidden;
+        }
+        .simple-hero-bg {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          background:
+            radial-gradient(640px 340px at 12% -10%, rgba(21, 66, 106, 0.5), transparent 70%),
+            radial-gradient(520px 300px at 88% 15%, rgba(12, 34, 58, 0.55), transparent 70%),
+            linear-gradient(rgba(255, 255, 255, 0.032) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.032) 1px, transparent 1px);
+          background-size: auto, auto, 52px 52px, 52px 52px;
+          -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 100%);
+        }
+        .simple-hero-shell .simple-hero {
+          position: relative;
+          z-index: 1;
+        }
+        .simple-avail {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 13px;
+          color: #a8b2bd;
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          border-radius: 999px;
+          padding: 7px 14px;
+          margin-bottom: 22px;
+          background: rgba(255, 255, 255, 0.03);
+        }
+        .simple-avail-dot {
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background: #22c55e;
+          box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5);
+          animation: simple-pulse 2.2s ease-out infinite;
+        }
+        @keyframes simple-pulse {
+          0% {
+            box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.45);
+          }
+          70% {
+            box-shadow: 0 0 0 7px rgba(34, 197, 94, 0);
+          }
+          100% {
+            box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+          }
+        }
+        .simple-eyebrow {
+          font-family: ${MONO};
+          font-size: 12px;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: #66717c;
+          margin-bottom: 10px;
+        }
+        .simple-about {
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+          max-width: 44rem;
+        }
+        .simple-about-p {
+          font-size: 16px;
+          line-height: 1.7;
+          color: #a8b2bd;
+        }
+        .simple-highlights {
+          margin-top: 26px;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          list-style: none;
+          padding: 0;
+          max-width: 46rem;
+        }
+        .simple-chip {
+          font-family: ${MONO};
+          font-size: 12px;
+          line-height: 1.4;
+          color: #c8d2dc;
+          background: #07101c;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 999px;
+          padding: 8px 14px;
+        }
+        .simple-card-top {
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+          gap: 12px;
+        }
+        .simple-status {
+          font-family: ${MONO};
+          font-size: 10.5px;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          border-radius: 999px;
+          padding: 4px 10px;
+          border: 1px solid rgba(255, 255, 255, 0.14);
+          color: #a8b2bd;
+          white-space: nowrap;
+          flex-shrink: 0;
+        }
+        .simple-status-live {
+          color: #4ade80;
+          border-color: rgba(74, 222, 128, 0.3);
+          background: rgba(34, 197, 94, 0.08);
+        }
+        .simple-status-beta {
+          color: #fbbf24;
+          border-color: rgba(251, 191, 36, 0.3);
+          background: rgba(251, 191, 36, 0.07);
+        }
+        .simple-status-prototype {
+          color: #7db4e0;
+          border-color: rgba(125, 180, 224, 0.3);
+          background: rgba(56, 120, 180, 0.1);
+        }
+        .simple-edu-note {
+          margin-top: 8px;
+          font-size: 13.5px;
+          color: #66717c;
         }
         .simple-wrap {
           max-width: 880px;
