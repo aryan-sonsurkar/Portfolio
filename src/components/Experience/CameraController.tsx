@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
+import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import * as THREE from "three";
 import { useStore } from "@/lib/store";
 import { BUILDINGS } from "../Buildings/BuildingData";
@@ -12,7 +13,7 @@ const INTRO_DURATION_SECONDS = 9;
 
 export default function CameraController() {
   const { cameraMode, focusedBuilding, introComplete, selectedBuilding } = useStore();
-  const controlsRef = useRef<any>(null);
+  const controlsRef = useRef<OrbitControlsImpl>(null);
   const { camera } = useThree();
 
   const targetPosition = useRef(new THREE.Vector3(0, 1.6, 6));

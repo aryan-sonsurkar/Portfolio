@@ -11,6 +11,20 @@ const SKIP_DELAY_MS = 2000;
 // Reduced-motion users: brief establishing shot, no 9s cinematic
 const REDUCED_INTRO_MS = 1200;
 
+// Telemetry logs for OS boot feel
+const BOOT_MILESTONES = [
+  { threshold: 5, log: "INITIALIZING ARYAN_OS_KERNEL... [OK]" },
+  { threshold: 15, log: "SYNCHRONIZING SYSTEM TIME NODES... [OK]" },
+  { threshold: 25, log: "CONNECTING TO CITIZEN ARCHIVE DATABASE..." },
+  { threshold: 38, log: "SECURITY PROTOCOLS LOADED (LEVEL 5 AUTH)" },
+  { threshold: 48, log: "LOCATION FOUND: LAT: 19.0760° N, LON: 72.8777° E [MUMBAI]" },
+  { threshold: 60, log: "ESTABLISHING SPACESHIP HUD TELEMETRY..." },
+  { threshold: 72, log: "ATMOSPHERIC DESCENT PROFILE SHUTTLE ACTIVE" },
+  { threshold: 85, log: "ESTABLISHED WIRELESS CONNECTION PROTOCOL: SECURE" },
+  { threshold: 95, log: "BUILDER DISTRICT TARGET ACQUIRED." },
+  { threshold: 100, log: "CONNECTION HANDSHAKE COMPLETE. INITIALIZING TRANSLATION STREAM..." },
+];
+
 export default function LoadingScreen({ onViewPortfolio }: { onViewPortfolio?: () => void }) {
   const { completeLoading, completeIntro, setIntroProgress } = useStore();
   const reduceMotion = useReducedMotion();
@@ -19,20 +33,6 @@ export default function LoadingScreen({ onViewPortfolio }: { onViewPortfolio?: (
   const [progress, setProgress] = useState(0);
   const [showSkip, setShowSkip] = useState(false);
   const [logs, setLogs] = useState<string[]>([]);
-
-  // Telemetry logs for OS boot feel
-  const bootMilestones = [
-    { threshold: 5, log: "INITIALIZING ARYAN_OS_KERNEL... [OK]" },
-    { threshold: 15, log: "SYNCHRONIZING SYSTEM TIME NODES... [OK]" },
-    { threshold: 25, log: "CONNECTING TO CITIZEN ARCHIVE DATABASE..." },
-    { threshold: 38, log: "SECURITY PROTOCOLS LOADED (LEVEL 5 AUTH)" },
-    { threshold: 48, log: "LOCATION FOUND: LAT: 19.0760° N, LON: 72.8777° E [MUMBAI]" },
-    { threshold: 60, log: "ESTABLISHING SPACESHIP HUD TELEMETRY..." },
-    { threshold: 72, log: "ATMOSPHERIC DESCENT PROFILE SHUTTLE ACTIVE" },
-    { threshold: 85, log: "ESTABLISHED WIRELESS CONNECTION PROTOCOL: SECURE" },
-    { threshold: 95, log: "BUILDER DISTRICT TARGET ACQUIRED." },
-    { threshold: 100, log: "CONNECTION HANDSHAKE COMPLETE. INITIALIZING TRANSLATION STREAM..." }
-  ];
 
   const handleStartConnection = () => {
     setStartedConnection(true);
@@ -49,33 +49,35 @@ export default function LoadingScreen({ onViewPortfolio }: { onViewPortfolio?: (
   useEffect(() => {
     if (phase !== "loading") return;
 
-    const interval = window.setInterval(() => {
-      setProgress((p) => {
-        const nextProgress = p + Math.random() * 9 + 3;
-        
-        // Find which logs to append
-        bootMilestones.forEach(m => {
-          if (nextProgress >= m.threshold && !logs.includes(m.log)) {
-            setLogs(prev => [...prev, m.log]);
-          }
-        });
+    let current = 0;
+    const shown = new Set<string>();
 
-        if (nextProgress >= 100) {
-          window.clearInterval(interval);
-          window.setTimeout(() => {
-            setPhase("intro");
-            if (!isReducedMotion()) {
-              speakAI("Incoming encrypted signal. Builder District located. Construction status: Active. Objective: Explore the district and uncover the story of its architect. Welcome back, agent.");
-            }
-          }, 300);
-          return 100;
-        }
-        return nextProgress;
-      });
+    const interval = window.setInterval(() => {
+      current += Math.random() * 9 + 3;
+
+      const crossed = BOOT_MILESTONES.filter((m) => current >= m.threshold && !shown.has(m.log));
+      if (crossed.length > 0) {
+        crossed.forEach((m) => shown.add(m.log));
+        setLogs((prev) => [...prev, ...crossed.map((m) => m.log).filter((l) => !prev.includes(l))]);
+      }
+
+      if (current >= 100) {
+        current = 100;
+        setProgress(100);
+        window.clearInterval(interval);
+        window.setTimeout(() => {
+          setPhase("intro");
+          if (!isReducedMotion()) {
+            speakAI("Incoming encrypted signal. Builder District located. Construction status: Active. Objective: Explore the district and uncover the story of its architect. Welcome back, agent.");
+          }
+        }, 300);
+        return;
+      }
+      setProgress(current);
     }, 100);
 
     return () => window.clearInterval(interval);
-  }, [phase, logs]);
+  }, [phase]);
 
   useEffect(() => {
     if (phase !== "intro") return;

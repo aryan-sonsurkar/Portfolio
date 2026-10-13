@@ -5,7 +5,6 @@ export const viewport: Viewport = {
   themeColor: "#0a0612",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
 };
 
 export const metadata: Metadata = {
@@ -36,10 +35,10 @@ export const metadata: Metadata = {
       "An interactive world built by a builder. AI-powered products, real projects, and a 3D district to explore.",
     images: [
       {
-        url: "/og-image.svg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Aryan Sonsurkar — MODCODES District",
+        alt: "Aryan Sonsurkar — portfolio preview",
       },
     ],
   },
@@ -48,7 +47,7 @@ export const metadata: Metadata = {
     title: "Aryan Rakesh Sonsurkar — Developer, Builder, Creator",
     description:
       "An interactive world built by a builder. AI-powered products, real projects, and a 3D district to explore.",
-    images: ["/og-image.svg"],
+    images: ["/og-image.png"],
     creator: "@aryan_sonsurkar",
   },
   robots: {
@@ -92,7 +91,8 @@ export default function RootLayout({
     ],
     alumniOf: {
       "@type": "EducationalOrganization",
-      name: "Diploma in Computer Science",
+      name: "Vidyalankar Polytechnic",
+      description: "Diploma in Computer Engineering",
     },
     award: [
       "Best Performing Intern at Kaevron Technologies",
@@ -103,12 +103,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500;600;700;800&display=swap"
+          href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap"
           rel="stylesheet"
         />
         <link rel="icon" href="/og-image.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/og-image.svg" />
+        <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
         <link rel="canonical" href="https://arssystem.vercel.app" />
         <script
           type="application/ld+json"

@@ -6,6 +6,7 @@ import { useStore } from "@/lib/store";
 import { audioManager } from "@/lib/audio";
 import { useIsMobile } from "@/lib/useIsMobile";
 import { BUILDINGS } from "@/components/Buildings/BuildingData";
+import MuteButton from "@/components/UI/MuteButton";
 
 const BUILDING_LABELS: Record<string, string> = {
   "modcodes-hq": "MODCODES HQ — Flagship Product",
@@ -154,10 +155,10 @@ export default function HUD() {
       {/* ── Top Left — District / Room label ── */}
       {!interiorOpen && !isMobile && (
         <div className="absolute top-6 left-6">
-          <p className="text-xs tracking-widest uppercase" style={{ color: "rgba(255,215,0,0.45)" }}>
+          <p className="text-xs tracking-widest uppercase" style={{ color: "rgba(255,215,0,0.75)" }}>
             MODCODES District
           </p>
-          <p className="text-[10px] tracking-wider mt-1" style={{ color: "rgba(255,255,255,0.18)" }}>
+          <p className="text-[10px] tracking-wider mt-1" style={{ color: "rgba(255,255,255,0.55)" }}>
             {isMobile
               ? "Joystick to move · Drag to look · Tap building to enter"
               : isFPV
@@ -171,7 +172,7 @@ export default function HUD() {
           <p className="text-xs tracking-widest uppercase" style={{ color: "rgba(255,215,0,0.5)" }}>
             {BUILDING_LABELS[selectedBuilding] ?? selectedBuilding}
           </p>
-          <p className="text-[10px] tracking-wider mt-1" style={{ color: "rgba(255,255,255,0.2)" }}>
+          <p className="text-[10px] tracking-wider mt-1" style={{ color: "rgba(255,255,255,0.55)" }}>
             Click a monitor to interact · Walk to the EXIT door to leave
           </p>
         </div>
@@ -201,6 +202,7 @@ export default function HUD() {
             ⬡ BLUEPRINT MODE
           </motion.div>
         )}
+        <MuteButton variant="hud" />
         <button
           className="hud-kbtn pointer-events-auto text-[10px] tracking-wider opacity-40 hover:opacity-90"
           style={{ color: "rgba(255,215,0,0.85)", background: "none", border: "none", minHeight: 44, padding: "0 4px" }}
@@ -347,7 +349,7 @@ export default function HUD() {
             >
               {BUILDING_LABELS[hoveredBuilding] ?? hoveredBuilding}
             </p>
-            <p className="text-center text-[9px] mt-1" style={{ color: "rgba(255,255,255,0.25)" }}>
+            <p className="text-center text-[9px] mt-1" style={{ color: "rgba(255,255,255,0.6)" }}>
               Click to enter
             </p>
           </motion.div>

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
 import { audioManager } from "@/lib/audio";
+import MuteButton from "@/components/UI/MuteButton";
 
 // ── Landing: clean, minimal developer portfolio.
 // Plain black + subtle navy surfaces. Sans throughout;
@@ -212,6 +213,9 @@ export default function LandingPage({
         style={{ scaleX: reduceMotion ? 1 : progress, opacity: reduceMotion ? 0 : 1 }}
         aria-hidden
       />
+      <a href="#main" className="simple-skip">
+        Skip to content
+      </a>
       {/* Header */}
       <header className="simple-header">
         <div className="simple-wrap simple-bar">
@@ -237,18 +241,22 @@ export default function LandingPage({
                 {label}
               </a>
             ))}
+            <MuteButton />
             <button onClick={handleEnter} className="simple-district">
               3D District
             </button>
           </nav>
-          <button
-            className="md:hidden simple-menu-btn"
-            onClick={() => setMenuOpen((v) => !v)}
-            aria-expanded={menuOpen}
-            aria-label="Menu"
-          >
-            Menu
-          </button>
+          <div className="flex items-center gap-2 md:hidden">
+            <MuteButton />
+            <button
+              className="simple-menu-btn"
+              onClick={() => setMenuOpen((v) => !v)}
+              aria-expanded={menuOpen}
+              aria-label="Menu"
+            >
+              Menu
+            </button>
+          </div>
         </div>
         {menuOpen && (
           <nav className="md:hidden simple-mobile-nav" aria-label="Mobile">
@@ -272,6 +280,7 @@ export default function LandingPage({
         )}
       </header>
 
+      <main id="main">
       {/* Hero */}
       <section className="simple-hero-shell">
         <div className="simple-hero-bg" aria-hidden />
@@ -497,6 +506,8 @@ export default function LandingPage({
         </motion.div>
       </section>
 
+      </main>
+
       {/* Footer */}
       <footer className="simple-footer">
         <div className="simple-wrap simple-footer-inner">
@@ -532,6 +543,38 @@ export default function LandingPage({
           transform-origin: 0 50%;
           z-index: 60;
           pointer-events: none;
+        }
+        .simple-skip {
+          position: absolute;
+          left: -9999px;
+          top: 0;
+          z-index: 80;
+          background: #fff;
+          color: #000;
+          font-size: 14px;
+          font-weight: 600;
+          padding: 12px 18px;
+          border-radius: 0 0 8px 0;
+          text-decoration: none;
+        }
+        .simple-skip:focus {
+          left: 0;
+        }
+        .simple-sound {
+          font-family: ${SANS};
+          font-size: 13px;
+          color: #a8b2bd;
+          background: none;
+          border: 1px solid rgba(255, 255, 255, 0.14);
+          border-radius: 8px;
+          min-height: 40px;
+          padding: 0 12px;
+          cursor: pointer;
+          white-space: nowrap;
+        }
+        .simple-sound:hover {
+          color: #fff;
+          border-color: rgba(255, 255, 255, 0.3);
         }
         .simple-hero-shell {
           position: relative;
@@ -590,7 +633,7 @@ export default function LandingPage({
           font-size: 12px;
           letter-spacing: 0.14em;
           text-transform: uppercase;
-          color: #66717c;
+          color: #7d8896;
           margin-bottom: 10px;
         }
         .simple-about {
@@ -659,7 +702,7 @@ export default function LandingPage({
         .simple-edu-note {
           margin-top: 8px;
           font-size: 13.5px;
-          color: #66717c;
+          color: #7d8896;
         }
         .simple-wrap {
           max-width: 880px;
@@ -781,7 +824,7 @@ export default function LandingPage({
           margin-top: 12px;
           font-size: 16px;
           line-height: 1.6;
-          color: #66717c;
+          color: #7d8896;
           max-width: 34rem;
         }
         .simple-cta-row {
@@ -876,7 +919,7 @@ export default function LandingPage({
           font-family: ${MONO};
           font-size: 12px;
           line-height: 1.7;
-          color: #66717c;
+          color: #7d8896;
         }
         .simple-card-foot {
           margin-top: 16px;
@@ -898,7 +941,7 @@ export default function LandingPage({
         }
         .simple-muted {
           font-size: 13.5px;
-          color: #66717c;
+          color: #7d8896;
         }
         .simple-more {
           margin-top: 16px;
@@ -926,7 +969,7 @@ export default function LandingPage({
         }
         .simple-more-desc {
           font-size: 13.5px;
-          color: #66717c;
+          color: #7d8896;
         }
         .simple-job-next {
           margin-top: 36px;
@@ -957,7 +1000,7 @@ export default function LandingPage({
         }
         .simple-job-period {
           font-size: 13.5px;
-          color: #66717c;
+          color: #7d8896;
           white-space: nowrap;
         }
         .simple-job-points {
@@ -987,7 +1030,7 @@ export default function LandingPage({
           font-weight: 650;
           text-transform: uppercase;
           letter-spacing: 0.06em;
-          color: #66717c;
+          color: #7d8896;
           margin-bottom: 8px;
         }
         .simple-skill-items {
@@ -1016,14 +1059,14 @@ export default function LandingPage({
         }
         .simple-contact-value {
           font-size: 13.5px;
-          color: #66717c;
+          color: #7d8896;
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
           flex: 1;
         }
         .simple-contact-arrow {
-          color: #66717c;
+          color: #7d8896;
         }
         .simple-footer {
           border-top: 1px solid rgba(255, 255, 255, 0.07);
@@ -1037,7 +1080,7 @@ export default function LandingPage({
           gap: 12px;
           align-items: center;
           font-size: 13.5px;
-          color: #66717c;
+          color: #7d8896;
         }
         @media (min-width: 768px) {
           .simple-footer-inner {
@@ -1050,7 +1093,7 @@ export default function LandingPage({
           gap: 20px;
         }
         .simple-footer-links a {
-          color: #66717c;
+          color: #7d8896;
           text-decoration: none;
           min-height: 44px;
           display: inline-flex;

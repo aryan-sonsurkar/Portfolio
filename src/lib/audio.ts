@@ -5,18 +5,36 @@ class AudioManager {
   private ctx: AudioContext | null = null;
   private masterVolume: GainNode | null = null;
   private spaceHum: { oscA: OscillatorNode; oscB: OscillatorNode; filter: BiquadFilterNode; gain: GainNode } | null = null;
-  private rainNoise: { source: AudioWorkletNode | ScriptProcessorNode; gain: GainNode } | null = null;
-  private ambience: { source: OscillatorNode | null; lfo: OscillatorNode | null; gain: GainNode } | null = null;
+  private rainNoise: { source: AudioBufferSourceNode; gain: GainNode } | null = null;
+  private ambience: {
+    source: OscillatorNode | AudioBufferSourceNode | null;
+    lfo: OscillatorNode | null;
+    gain: GainNode;
+  } | null = null;
   private isMuted: boolean = false;
+  private hydrated: boolean = false;
+
+  private hydrate() {
+    if (this.hydrated || typeof window === "undefined") return;
+    this.hydrated = true;
+    try {
+      this.isMuted = localStorage.getItem("audio-muted") === "1";
+    } catch {
+      /* storage unavailable */
+    }
+  }
 
   private init() {
     if (this.ctx) return;
-    const AudioContextCtor = window.AudioContext || (window as any).webkitAudioContext;
+    const AudioContextCtor =
+      window.AudioContext ||
+      (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
     if (!AudioContextCtor) return;
 
+    this.hydrate();
     this.ctx = new AudioContextCtor();
     this.masterVolume = this.ctx.createGain();
-    this.masterVolume.gain.setValueAtTime(0.35, this.ctx.currentTime);
+    this.masterVolume.gain.setValueAtTime(this.isMuted ? 0 : 0.35, this.ctx.currentTime);
     this.masterVolume.connect(this.ctx.destination);
   }
 
@@ -149,7 +167,7 @@ class AudioManager {
 
     noiseNode.start();
 
-    this.rainNoise = { source: noiseNode as any, gain };
+    this.rainNoise = { source: noiseNode, gain };
   }
 
   public stopRainSound() {
@@ -163,8 +181,8 @@ class AudioManager {
 
     setTimeout(() => {
       try {
-        (source as any).stop();
-      } catch (e) {}
+        source.stop();
+      } catch {}
     }, 1200);
 
     this.rainNoise = null;
@@ -235,11 +253,26 @@ class AudioManager {
     osc.stop(now + 0.05);
   }
 
-  public toggleMute() {
-    if (!this.masterVolume || !this.ctx) return;
-    const now = this.ctx.currentTime;
+  public getMuted(): boolean {
+    this.hydrate();
+    return this.isMuted;
+  }
+
+  public toggleMute(): boolean {
+    this.hydrate();
     this.isMuted = !this.isMuted;
-    this.masterVolume.gain.linearRampToValueAtTime(this.isMuted ? 0 : 0.35, now + 0.2);
+    try {
+      localStorage.setItem("audio-muted", this.isMuted ? "1" : "0");
+    } catch {
+      /* storage unavailable */
+    }
+    if (this.ctx && this.masterVolume) {
+      const now = this.ctx.currentTime;
+      this.masterVolume.gain.linearRampToValueAtTime(this.isMuted ? 0 : 0.35, now + 0.2);
+    }
+    if (this.isMuted && typeof window !== "undefined" && window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
     return this.isMuted;
   }
 
@@ -461,14 +494,14 @@ class AudioManager {
       }
       const source = this.ctx.createBufferSource();
       source.buffer = buffer;
-      (source as any).loop = true;
+      source.loop = true;
       const filter = this.ctx.createBiquadFilter();
       filter.type = "lowpass";
       filter.frequency.setValueAtTime(300, now);
       source.connect(filter);
       filter.connect(gain);
       source.start();
-      this.ambience = { source: source as any, lfo: null, gain };
+      this.ambience = { source, lfo: null, gain };
     } else {
       // Office / apartment — gentle hum
       const osc = this.ctx.createOscillator();
@@ -490,8 +523,8 @@ class AudioManager {
     gain.gain.setValueAtTime(gain.gain.value, now);
     gain.gain.linearRampToValueAtTime(0, now + 0.8);
     setTimeout(() => {
-      try { if (source) (source as any).stop(); } catch (e) {}
-      try { if (lfo) lfo.stop(); } catch (e) {}
+      try { if (source) source.stop(); } catch {}
+      try { if (lfo) lfo.stop(); } catch {}
     }, 1000);
     this.ambience = null;
   }
@@ -526,6 +559,7 @@ export const audioManager = new AudioManager();
 // Web Speech API Voice Narrator
 export function speakAI(text: string, onStart?: () => void, onEnd?: () => void) {
   if (typeof window === "undefined" || !window.speechSynthesis) return;
+  if (audioManager.getMuted()) return;
 
   window.speechSynthesis.cancel(); // Terminate ongoing speech
 
