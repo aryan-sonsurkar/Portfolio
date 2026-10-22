@@ -310,8 +310,8 @@ export const BUILDINGS: BuildingConfig[] = [
       subtitle: "The Daily Grind",
       paragraphs: [
         "One problem a week. Every week. No exceptions.",
-        "The dojo is where consistency beats talent — weekly LeetCode sessions tracked like a training log.",
-        "Each solved problem is a rep. Each streak is a badge.",
+        "Training log so far: 12 problems solved in C and 5 in Python3 — mostly Math, Arrays, Strings, Hash Tables and Linked Lists, with early moves into Dynamic Programming and Tries.",
+        "The dojo is where consistency beats talent — weekly LeetCode sessions tracked like a training log in weekly-leetcode.",
         "Discipline here compounds into real engineering skill.",
       ],
       tags: ["LeetCode", "DSA", "Streaks", "Consistency"],
@@ -319,6 +319,11 @@ export const BUILDINGS: BuildingConfig[] = [
         {
           label: "Weekly LeetCode",
           url: "https://github.com/aryan-sonsurkar/weekly-leetcode",
+          icon: "external",
+        },
+        {
+          label: "LeetCode Profile",
+          url: "https://leetcode.com/u/aryansonsurkar_10/",
           icon: "external",
         },
       ],

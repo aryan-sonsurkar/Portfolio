@@ -154,6 +154,7 @@ const CONTACTS = [
   { label: "Email", value: "aryansonsurkar87@gmail.com", url: "mailto:aryansonsurkar87@gmail.com" },
   { label: "GitHub", value: "github.com/aryan-sonsurkar", url: "https://github.com/aryan-sonsurkar" },
   { label: "LinkedIn", value: "linkedin.com/in/aryan-sonsurkar", url: "https://linkedin.com/in/aryan-sonsurkar" },
+  { label: "LeetCode", value: "leetcode.com/u/aryansonsurkar_10", url: "https://leetcode.com/u/aryansonsurkar_10/" },
 ];
 
 const NAV = [

@@ -5,9 +5,10 @@
   <text x="36" y="40" fill="#f59e0b" font-size="15" font-family="'JetBrains Mono', monospace">DOJO</text>
   <text x="80" y="40" fill="#e8edf2" font-size="21" font-family="Arial, sans-serif" font-weight="bold">WEEKLY CADENCE</text>
   <line x1="36" y1="64" x2="924" y2="64" stroke="#f59e0b" stroke-width="1" opacity="0.35"/>
-  <text x="480" y="230" fill="#e8edf2" font-size="52" font-family="Arial, sans-serif" font-weight="bold" text-anchor="middle">one a week</text>
-  <text x="480" y="280" fill="#66717c" font-size="14" font-family="'JetBrains Mono', monospace" text-anchor="middle">NO EXCEPTIONS</text>
-  <text x="480" y="340" fill="#a8b2bd" font-size="15" font-family="Arial, sans-serif" text-anchor="middle">CONSISTENCY BEATS TALENT</text>
+  <text x="480" y="200" fill="#e8edf2" font-size="52" font-family="Arial, sans-serif" font-weight="bold" text-anchor="middle">one a week</text>
+  <text x="480" y="248" fill="#66717c" font-size="14" font-family="'JetBrains Mono', monospace" text-anchor="middle">NO EXCEPTIONS</text>
+  <text x="480" y="316" fill="#a8b2bd" font-size="16" font-family="Arial, sans-serif" text-anchor="middle">12 C solves · 5 Python solves and counting</text>
+  <text x="480" y="344" fill="#a8b2bd" font-size="15" font-family="Arial, sans-serif" text-anchor="middle">CONSISTENCY BEATS TALENT</text>
   <line x1="36" y1="492" x2="924" y2="492" stroke="#f59e0b" stroke-width="1" opacity="0.35"/>
   <text x="36" y="516" fill="#66717c" font-size="13" font-family="'JetBrains Mono', monospace">SHOW UP · SOLVE · REPEAT</text>
 </svg>
