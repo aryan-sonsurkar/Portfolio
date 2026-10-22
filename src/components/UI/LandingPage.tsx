@@ -37,9 +37,19 @@ const PROJECTS = [
     featured: false,
   },
   {
+    title: "ArsPDF",
+    description:
+      "Browser-first PDF toolkit with 30 working tools. Every file is processed locally — no uploads, no accounts, no paywalls.",
+    tech: "Next.js 15 · pdf-lib · PDF.js · TypeScript strict · Vitest",
+    status: "Live",
+    link: "https://arspdf.vercel.app",
+    linkLabel: "Live site",
+    featured: true,
+  },
+  {
     title: "Fixly",
     description:
-      "Assignments, AI assistance, focus sessions, notes, progress tracking, PDF analysis and screenshot OCR.",
+      "Assignments, AI assistance, focus sessions, notes, progress tracking, PDF analysis and screenshot OCR. A Tauri v2 desktop successor with a FastAPI + Supabase backend is in active development.",
     tech: "Next.js · React · AI/LLM workflows",
     status: "Live",
     link: "https://fixly-student-assistant.vercel.app/",

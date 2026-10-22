@@ -6,6 +6,13 @@ import { BUILDINGS } from "@/components/Buildings/BuildingData";
 import { useStore } from "@/lib/store";
 import { useIsMobile } from "@/lib/useIsMobile";
 
+const CONFETTI = Array.from({ length: 16 }, (_, i) => ({
+  left: (i * 6.25 + ((i * i) % 11)) % 96,
+  delay: (i % 8) * 0.35,
+  size: 3 + (i % 3),
+  gold: i % 3 !== 0,
+}));
+
 export default function PassportHUD({
   open,
   onClose,
@@ -72,12 +79,39 @@ export default function PassportHUD({
             }`}
             style={{
               padding: 24,
-              borderColor: "rgba(255,215,0,0.25)",
-              boxShadow:
-                "0 0 48px rgba(255,215,0,0.08), 0 24px 64px rgba(0,0,0,0.5)",
+              borderColor: complete ? "rgba(255,215,0,0.45)" : "rgba(255,215,0,0.25)",
+              boxShadow: complete
+                ? "0 0 64px rgba(255,215,0,0.22), 0 24px 64px rgba(0,0,0,0.5)"
+                : "0 0 48px rgba(255,215,0,0.08), 0 24px 64px rgba(0,0,0,0.5)",
             }}
             onClick={(e) => e.stopPropagation()}
           >
+            {complete && (
+              <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[10px]">
+                {CONFETTI.map((c, i) => (
+                  <motion.span
+                    key={i}
+                    className="absolute rounded-full"
+                    style={{
+                      left: `${c.left}%`,
+                      bottom: -4,
+                      width: c.size,
+                      height: c.size,
+                      background: c.gold ? "#ffd700" : "#fff3b0",
+                      boxShadow: "0 0 6px rgba(255,215,0,0.8)",
+                    }}
+                    animate={{ y: [0, -360], opacity: [1, 1, 0] }}
+                    transition={{
+                      duration: 2.8,
+                      delay: c.delay,
+                      repeat: Infinity,
+                      repeatDelay: 1.6,
+                      ease: "easeOut",
+                    }}
+                  />
+                ))}
+              </div>
+            )}
             <p
               className="text-center"
               style={{
@@ -93,7 +127,7 @@ export default function PassportHUD({
               className="text-center mt-1"
               style={{ color: "#ffd700", fontSize: isMobile ? 20 : 24 }}
             >
-              {complete ? "ALL BUILDINGS VISITED" : `${done} of ${total} STAMPS`}
+              {complete ? "🏆 ALL BUILDINGS VISITED" : `${done} of ${total} STAMPS`}
             </h3>
 
             <div

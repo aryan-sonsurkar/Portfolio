@@ -22,6 +22,8 @@ export const metadata: Metadata = {
     "Next.js developer",
     "Python developer",
     "open source",
+    "PDF tools",
+    "ArsPDF",
     "Mumbai developer",
   ],
   authors: [{ name: "Aryan Sonsurkar" }],

@@ -41,12 +41,18 @@ export const BUILDINGS: BuildingConfig[] = [
       subtitle: "Real Products, Shipped",
       paragraphs: [
         "Every project in this factory has been shipped, deployed, or delivered.",
-        "Fixly — an AI-powered student workspace with assignments, AI assistance, focus sessions, notes and progress tracking. Live now.",
+        "ArsPDF — a browser-first PDF toolkit with 30 working tools. Every file is processed locally in the tab: no uploads, no accounts, no paywalls. Live now.",
+        "Fixly — an AI-powered student workspace with assignments, AI assistance, focus sessions, notes and progress tracking. Live now. Fixly Desktop — the next generation: a Tauri v2 desktop app with a Python FastAPI backend, Supabase and local-first LLMs, in active development.",
         "KOKANAM — a regional e-commerce marketplace for Konkan-region brands, built during the Kaevron internship. Live now.",
         "Vishwanath Insurance Portfolio — a production website delivered to a real client. CodeShortsBot v2 — an autonomous content pipeline. These are products that exist in the real world.",
       ],
-      tags: ["Fixly", "KOKANAM", "Client Delivery", "Automation"],
+      tags: ["ArsPDF", "Fixly", "KOKANAM", "Client Delivery", "Automation"],
       links: [
+        {
+          label: "View ArsPDF",
+          url: "https://arspdf.vercel.app",
+          icon: "external",
+        },
         {
           label: "View Fixly",
           url: "https://fixly-student-assistant.vercel.app/",
