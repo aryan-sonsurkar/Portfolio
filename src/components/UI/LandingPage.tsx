@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
 import { audioManager } from "@/lib/audio";
 import MuteButton from "@/components/UI/MuteButton";
+import LifeSection from "@/components/UI/LifeSection";
 
 // ── Landing: clean, minimal developer portfolio.
 // Plain black + subtle navy surfaces. Sans throughout;
@@ -154,6 +155,8 @@ const NAV = [
   ["contact", "Contact"],
 ] as const;
 
+const NAV_MOBILE = [...NAV, ["life", "Life"]] as const;
+
 export default function LandingPage({
   onEnterDistrict,
   anchor,
@@ -260,7 +263,7 @@ export default function LandingPage({
         </div>
         {menuOpen && (
           <nav className="md:hidden simple-mobile-nav" aria-label="Mobile">
-            {NAV.map(([id, label]) => (
+            {NAV_MOBILE.map(([id, label]) => (
               <a
                 key={id}
                 href={`#${id}`}
@@ -478,10 +481,13 @@ export default function LandingPage({
         </div>
       </section>
 
+      {/* Beyond the code — passions */}
+      <LifeSection onEnterDistrict={handleEnter} />
+
       {/* Contact */}
       <section id="contact" className="simple-wrap simple-section">
         <motion.p {...reveal()} className="simple-eyebrow">
-          06 — Contact
+          07 — Contact
         </motion.p>
         <motion.h2 {...reveal()} className="simple-h2">
           Let&apos;s build something.
