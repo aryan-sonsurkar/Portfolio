@@ -5,6 +5,7 @@ import * as THREE from "three";
 import Building from "./Building";
 import { BUILDINGS } from "../Buildings/BuildingData";
 import DistrictLife from "./DistrictLife";
+import TalkNPCs from "./TalkNPCs";
 import { getEffectiveLowQuality } from "@/lib/useIsMobile";
 
 function Ground() {
@@ -44,6 +45,20 @@ function Ground() {
           <meshBasicMaterial color="#ffd700" transparent opacity={0.25} />
         </mesh>
       ))}
+
+      {/* Crosswalks */}
+      {[-4.5, 4.5].map((cx) =>
+        Array.from({ length: 5 }, (_, i) => (
+          <mesh
+            key={`cw-${cx}-${i}`}
+            position={[cx - 1.2 + i * 0.6, 0.009, 3.2]}
+            rotation={[-Math.PI / 2, 0, 0]}
+          >
+            <planeGeometry args={[0.34, 2.1]} />
+            <meshBasicMaterial color="#ffffff" transparent opacity={0.16} />
+          </mesh>
+        )),
+      )}
 
       {/* Subtle grid lines on platform */}
       {Array.from({ length: 18 }, (_, i) => (
@@ -269,6 +284,7 @@ export default function City() {
       <ConstructionSite />
       <FutureBuilding />
       <DistrictLife />
+      <TalkNPCs />
 
       {/* All main buildings */}
       {BUILDINGS.map((config) => (

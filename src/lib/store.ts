@@ -48,6 +48,8 @@ interface AppState {
   preFocusPosition: [number, number, number] | null;
   preFocusRotation: number | null;
   teleportOpen: boolean;
+  nearbyNpc: string | null;
+  dialogNpc: string | null;
   visitedBuildings: string[];
   flyoverActive: boolean;
   flyoverTarget: [number, number, number] | null;
@@ -72,6 +74,9 @@ interface AppState {
   setExitPosition: (pos: [number, number, number], rot: number) => void;
   setPreFocusPosition: (pos: [number, number, number], rot: number) => void;
   setTeleportOpen: (open: boolean) => void;
+  setNearbyNpc: (id: string | null) => void;
+  openNpcDialog: (id: string) => void;
+  closeNpcDialog: () => void;
   setFlyover: (active: boolean, target?: [number, number, number]) => void;
   teleportToBuilding: (buildingId: string) => void;
   setQualityMode: (mode: QualityMode) => void;
@@ -97,6 +102,8 @@ export const useStore = create<AppState>((set) => ({
   preFocusPosition: null,
   preFocusRotation: null,
   teleportOpen: false,
+  nearbyNpc: null,
+  dialogNpc: null,
   visitedBuildings: readIdList("district-visited"),
   flyoverActive: false,
   flyoverTarget: null,
@@ -173,6 +180,9 @@ export const useStore = create<AppState>((set) => ({
   setPreFocusPosition: (pos, rot) => set({ preFocusPosition: pos, preFocusRotation: rot }),
 
   setTeleportOpen: (open) => set({ teleportOpen: open }),
+  setNearbyNpc: (id) => set((s) => (s.nearbyNpc === id ? s : { nearbyNpc: id })),
+  openNpcDialog: (id) => set({ nearbyNpc: id, dialogNpc: id }),
+  closeNpcDialog: () => set({ dialogNpc: null }),
   setQualityMode: (mode) => {
     try {
       window.localStorage?.setItem("district-quality", mode);

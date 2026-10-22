@@ -8,6 +8,7 @@ import { useIsMobile } from "@/lib/useIsMobile";
 import { BUILDINGS } from "@/components/Buildings/BuildingData";
 import MuteButton from "@/components/UI/MuteButton";
 import PassportHUD from "@/components/UI/PassportHUD";
+import NPCDialog from "@/components/UI/NPCDialog";
 
 const BUILDING_LABELS: Record<string, string> = {
   "modcodes-hq": "MODCODES HQ — Flagship Product",
@@ -446,6 +447,7 @@ export default function HUD() {
       </div>
       )}
       <PassportHUD open={showPassport} onClose={() => setShowPassport(false)} />
+      <NPCDialog />
     </div>
   );
 }

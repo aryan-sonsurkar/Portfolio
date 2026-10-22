@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useStore, fpvState } from "@/lib/store";
 import { BUILDINGS } from "@/components/Buildings/BuildingData";
+import { NPCS } from "@/config/npcDialogs";
 import { audioManager } from "@/lib/audio";
 import { useIsMobile } from "@/lib/useIsMobile";
 
@@ -28,7 +29,7 @@ const ICONS: Record<string, string> = {
 
 export default function MobileExploreUI() {
   const isMobile = useIsMobile();
-  const { introComplete, interiorOpen, selectedBuilding, teleportToBuilding, enterBuilding, setExitPosition, visitedBuildings } = useStore();
+  const { introComplete, interiorOpen, selectedBuilding, teleportToBuilding, enterBuilding, setExitPosition, visitedBuildings, nearbyNpc, openNpcDialog } = useStore();
   const [expanded, setExpanded] = useState(false);
   const [nearby, setNearby] = useState<string | null>(null);
 
@@ -75,6 +76,41 @@ export default function MobileExploreUI() {
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-40 pointer-events-none" data-ui="explore">
+      {/* Nearby NPC talk prompt */}
+      <AnimatePresence>
+        {nearbyNpc && !interiorOpen && (() => {
+          const npc = NPCS.find((n) => n.id === nearbyNpc);
+          if (!npc) return null;
+          return (
+            <motion.button
+              key={`npc-${npc.id}`}
+              initial={{ opacity: 0, y: 16, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 16, scale: 0.95 }}
+              onClick={() => {
+                audioManager.playClickSound();
+                openNpcDialog(npc.id);
+              }}
+              className="pointer-events-auto mx-auto mb-2 flex items-center gap-2 px-5 py-3 rounded-full"
+              style={{
+                background: `${npc.accent}22`,
+                border: `1px solid ${npc.accent}55`,
+                color: npc.accent,
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: 13,
+                letterSpacing: 1,
+                backdropFilter: "blur(10px)",
+                boxShadow: `0 0 24px ${npc.accent}22`,
+                minHeight: 48,
+              }}
+            >
+              <span>💬</span>
+              Talk to {npc.name} ›
+            </motion.button>
+          );
+        })()}
+      </AnimatePresence>
+
       {/* Nearby enter prompt */}
       <AnimatePresence>
         {nearbyBuilding && !interiorOpen && (

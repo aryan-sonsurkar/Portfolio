@@ -20,7 +20,7 @@ export default function DistrictGuide() {
 
     const dismiss = () => setDismissed(true);
     const onKey = (e: KeyboardEvent) => {
-      if (["w", "a", "s", "d", "t", "W", "A", "S", "D", "T", "Escape", " "].includes(e.key)) dismiss();
+      if (["w", "a", "s", "d", "t", "e", "W", "A", "S", "D", "T", "E", "Escape", " "].includes(e.key)) dismiss();
     };
     const onTouch = () => {
       // Dismiss on look-drag (joystick writes inputBus, checked below)
@@ -51,6 +51,7 @@ export default function DistrictGuide() {
     ? [
         ["Joystick", "Move"],
         ["Drag", "Look around"],
+        ["Tap NPC", "Talk — they gossip"],
         ["Tap building", "Fly there / enter"],
         ["Explore", "Jump anywhere"],
       ]
@@ -59,6 +60,7 @@ export default function DistrictGuide() {
         ["Mouse", "Look (click canvas first)"],
         ["Click building", "Enter"],
         ["T", "Teleport"],
+        ["E", "Talk to locals"],
         ["ESC", "Exit screen"],
       ];
 
