@@ -1,9 +1,10 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Text } from "@react-three/drei";
 import * as THREE from "three";
+import { useStore } from "@/lib/store";
 
 const ARENA_CENTER: [number, number, number] = [10, 0, -6];
 
@@ -216,46 +217,96 @@ function NPCGroup() {
   );
 }
 
-function ArenaSign() {
+function JumbotronScreen() {
+  const qualityMode = useStore((s) => s.qualityMode);
+  const videoMode = qualityMode !== "performance";
+  const [texture, setTexture] = useState<THREE.VideoTexture | null>(null);
+
+  useEffect(() => {
+    if (!videoMode) return;
+    const video = document.createElement("video");
+    video.muted = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.crossOrigin = "anonymous";
+    video.src = "/life/football.mp4";
+    const onReady = () => {
+      const tex = new THREE.VideoTexture(video);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.minFilter = THREE.LinearFilter;
+      tex.magFilter = THREE.LinearFilter;
+      setTexture(tex);
+    };
+    video.addEventListener("loadeddata", onReady);
+    video.play().catch(() => {});
+    return () => {
+      video.removeEventListener("loadeddata", onReady);
+      video.pause();
+      video.src = "";
+      texture?.dispose();
+      setTexture(null);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [videoMode]);
+
   return (
-    <group position={[ARENA_CENTER[0], 4.5, ARENA_CENTER[2] - 5]}>
+    <group position={[ARENA_CENTER[0], 5.0, ARENA_CENTER[2] - 5]}>
       {/* Sign background */}
       <mesh>
-        <boxGeometry args={[6, 1.2, 0.2]} />
+        <boxGeometry args={[6, 3.6, 0.2]} />
         <meshStandardMaterial color="#0a0a14" metalness={0.8} roughness={0.2} />
       </mesh>
       {/* Border glow */}
       <mesh position={[0, 0, 0.11]}>
-        <boxGeometry args={[6.2, 1.4, 0.02]} />
+        <boxGeometry args={[6.2, 3.8, 0.02]} />
         <meshStandardMaterial
           color="#00ff88"
           emissive="#00ff88"
           emissiveIntensity={2}
           transparent
-          opacity={0.4}
+          opacity={0.35}
         />
       </mesh>
-      {/* Text */}
+      {videoMode && texture ? (
+        <mesh position={[0, 0.15, 0.12]}>
+          <planeGeometry args={[5.3, 2.98]} />
+          <meshBasicMaterial map={texture} toneMapped={false} />
+        </mesh>
+      ) : (
+        <>
+          <Text
+            position={[0, 0.15, 0.12]}
+            fontSize={0.5}
+            color="#00ff88"
+            anchorX="center"
+            anchorY="middle"
+            font="/fonts/inter-Bold.woff"
+          >
+            ARYAN ARENA
+          </Text>
+          <Text
+            position={[0, -0.3, 0.12]}
+            fontSize={0.15}
+            color="#ffffff"
+            anchorX="center"
+            anchorY="middle"
+            font="/fonts/inter-Bold.woff"
+            letterSpacing={0.2}
+          >
+            WHERE PASSION MEETS CODE
+          </Text>
+        </>
+      )}
       <Text
-        position={[0, 0.15, 0.12]}
-        fontSize={0.5}
+        position={[0, -1.55, 0.12]}
+        fontSize={0.13}
         color="#00ff88"
         anchorX="center"
         anchorY="middle"
         font="/fonts/inter-Bold.woff"
+        letterSpacing={0.35}
       >
-        ARYAN ARENA
-      </Text>
-      <Text
-        position={[0, -0.3, 0.12]}
-        fontSize={0.15}
-        color="#ffffff"
-        anchorX="center"
-        anchorY="middle"
-        font="/fonts/inter-Bold.woff"
-        letterSpacing={0.2}
-      >
-        WHERE PASSION MEETS CODE
+        ARYAN ARENA · WHERE PASSION MEETS CODE
       </Text>
       {/* Spotlight */}
       <spotLight
@@ -315,7 +366,7 @@ export default function FootballArena() {
     <group>
       <Turf />
       <Football />
-      <ArenaSign />
+      <JumbotronScreen />
       <NPCGroup />
       <FloodLights />
 

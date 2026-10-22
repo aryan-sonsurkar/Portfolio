@@ -7,6 +7,7 @@ import { audioManager } from "@/lib/audio";
 import { useIsMobile } from "@/lib/useIsMobile";
 import { BUILDINGS } from "@/components/Buildings/BuildingData";
 import MuteButton from "@/components/UI/MuteButton";
+import PassportHUD from "@/components/UI/PassportHUD";
 
 const BUILDING_LABELS: Record<string, string> = {
   "modcodes-hq": "MODCODES HQ — Flagship Product",
@@ -63,6 +64,7 @@ export default function HUD() {
 
   const [newAchievement, setNewAchievement] = useState<string | null>(null);
   const [showControls, setShowControls] = useState(false);
+  const [showPassport, setShowPassport] = useState(false);
 
   // Track visited buildings for achievements
   useEffect(() => {
@@ -203,6 +205,13 @@ export default function HUD() {
           </motion.div>
         )}
         <MuteButton variant="hud" />
+        <button
+          className="hud-kbtn pointer-events-auto text-[10px] tracking-wider opacity-40 hover:opacity-90"
+          style={{ color: "rgba(255,215,0,0.85)", background: "none", border: "none", minHeight: 44, padding: "0 4px" }}
+          onClick={() => setShowPassport(true)}
+        >
+          🎟 PASSPORT {visitedBuildings.length}/{BUILDINGS.length}
+        </button>
         <button
           className="hud-kbtn pointer-events-auto text-[10px] tracking-wider opacity-40 hover:opacity-90"
           style={{ color: "rgba(255,215,0,0.85)", background: "none", border: "none", minHeight: 44, padding: "0 4px" }}
@@ -436,6 +445,7 @@ export default function HUD() {
         </p>
       </div>
       )}
+      <PassportHUD open={showPassport} onClose={() => setShowPassport(false)} />
     </div>
   );
 }

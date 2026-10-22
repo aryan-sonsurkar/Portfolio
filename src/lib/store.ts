@@ -2,6 +2,27 @@ import { create } from "zustand";
 import type { MonitorConfig } from "@/config/monitors";
 import { BUILDINGS } from "../components/Buildings/BuildingData";
 
+const readIdList = (key: string): string[] => {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = window.localStorage?.getItem(key);
+    if (!raw) return [];
+    const parsed: unknown = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+    return parsed.filter((v): v is string => typeof v === "string").slice(0, 64);
+  } catch {
+    return [];
+  }
+};
+
+const writeIdList = (key: string, list: string[]) => {
+  try {
+    window.localStorage?.setItem(key, JSON.stringify(list));
+  } catch {
+    /* private mode */
+  }
+};
+
 export type CameraMode = "orbit" | "focused" | "intro" | "fpv" | "screen";
 export type TimeOfDay = "morning" | "golden" | "night" | "late";
 export type QualityMode = "auto" | "performance" | "high";
@@ -67,7 +88,6 @@ export const useStore = create<AppState>((set) => ({
   hoveredBuilding: null,
   weatherActive: false,
   blueprintMode: false,
-  achievements: [],
   activeScreen: null,
   activeMonitor: null,
   activeRoom: null,
@@ -77,10 +97,11 @@ export const useStore = create<AppState>((set) => ({
   preFocusPosition: null,
   preFocusRotation: null,
   teleportOpen: false,
-  visitedBuildings: [],
+  visitedBuildings: readIdList("district-visited"),
   flyoverActive: false,
   flyoverTarget: null,
   qualityMode: (typeof window !== "undefined" && (window.localStorage?.getItem("district-quality") as QualityMode | null)) || "auto",
+  achievements: readIdList("district-achievements"),
 
   setCameraMode: (mode) => set({ cameraMode: mode }),
 
@@ -124,12 +145,16 @@ export const useStore = create<AppState>((set) => ({
 
   addAchievement: (id) => set((s) => {
     if (s.achievements.includes(id)) return s;
-    return { achievements: [...s.achievements, id] };
+    const next = [...s.achievements, id];
+    writeIdList("district-achievements", next);
+    return { achievements: next };
   }),
 
   addVisitedBuilding: (id) => set((s) => {
     if (s.visitedBuildings.includes(id)) return s;
-    return { visitedBuildings: [...s.visitedBuildings, id] };
+    const next = [...s.visitedBuildings, id];
+    writeIdList("district-visited", next);
+    return { visitedBuildings: next };
   }),
 
   setActiveScreen: (id, monitor) => set((s) => {
