@@ -18,6 +18,7 @@ export default function NPCDialog() {
     dialogNpc,
     openNpcDialog,
     closeNpcDialog,
+    markNpcTalked,
   } = useStore();
 
   const npc = useMemo(() => NPCS.find((n) => n.id === dialogNpc) ?? null, [dialogNpc]);
@@ -27,8 +28,11 @@ export default function NPCDialog() {
   const typingRef = useRef(false);
 
   useEffect(() => {
+    if (!dialogNpc) return;
+    markNpcTalked(dialogNpc);
     setPage(0);
     setTyped("");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dialogNpc]);
 
   const line = npc?.lines[page]?.text ?? "";

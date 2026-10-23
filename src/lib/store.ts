@@ -50,6 +50,7 @@ interface AppState {
   teleportOpen: boolean;
   nearbyNpc: string | null;
   dialogNpc: string | null;
+  talkedNpcs: string[];
   visitedBuildings: string[];
   flyoverActive: boolean;
   flyoverTarget: [number, number, number] | null;
@@ -77,6 +78,7 @@ interface AppState {
   setNearbyNpc: (id: string | null) => void;
   openNpcDialog: (id: string) => void;
   closeNpcDialog: () => void;
+  markNpcTalked: (id: string) => void;
   setFlyover: (active: boolean, target?: [number, number, number]) => void;
   teleportToBuilding: (buildingId: string) => void;
   setQualityMode: (mode: QualityMode) => void;
@@ -104,6 +106,7 @@ export const useStore = create<AppState>((set) => ({
   teleportOpen: false,
   nearbyNpc: null,
   dialogNpc: null,
+  talkedNpcs: readIdList("district-npcs"),
   visitedBuildings: readIdList("district-visited"),
   flyoverActive: false,
   flyoverTarget: null,
@@ -183,6 +186,12 @@ export const useStore = create<AppState>((set) => ({
   setNearbyNpc: (id) => set((s) => (s.nearbyNpc === id ? s : { nearbyNpc: id })),
   openNpcDialog: (id) => set({ nearbyNpc: id, dialogNpc: id }),
   closeNpcDialog: () => set({ dialogNpc: null }),
+  markNpcTalked: (id) => set((s) => {
+    if (s.talkedNpcs.includes(id)) return s;
+    const next = [...s.talkedNpcs, id];
+    writeIdList("district-npcs", next);
+    return { talkedNpcs: next };
+  }),
   setQualityMode: (mode) => {
     try {
       window.localStorage?.setItem("district-quality", mode);

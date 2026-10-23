@@ -6,6 +6,7 @@ import { useStore } from "@/lib/store";
 import { audioManager } from "@/lib/audio";
 import { useIsMobile } from "@/lib/useIsMobile";
 import { BUILDINGS } from "@/components/Buildings/BuildingData";
+import { NPCS } from "@/config/npcDialogs";
 import MuteButton from "@/components/UI/MuteButton";
 import PassportHUD from "@/components/UI/PassportHUD";
 import NPCDialog from "@/components/UI/NPCDialog";
@@ -39,6 +40,7 @@ const ACHIEVEMENT_DEFS: Record<string, { label: string; icon: string }> = {
   "tinkerer": { label: "Tinkerer", icon: "🔧" },
   "survivor": { label: "SIH Survivor", icon: "🔥" },
   "coffee-break": { label: "Coffee Break", icon: "☕" },
+  "gossip-network": { label: "Gossip Network", icon: "🕵️" },
 };
 
 export default function HUD() {
@@ -56,6 +58,7 @@ export default function HUD() {
     setBlueprintMode,
     achievements,
     addAchievement,
+    talkedNpcs,
     activeScreen,
     visitedBuildings,
     addVisitedBuilding,
@@ -72,6 +75,15 @@ export default function HUD() {
     if (!selectedBuilding) return;
     addVisitedBuilding(selectedBuilding);
   }, [selectedBuilding, addVisitedBuilding]);
+
+  // Secret: talked to every local — Det. Kavya was listening
+  useEffect(() => {
+    if (talkedNpcs.length >= NPCS.length && !achievements.includes("gossip-network")) {
+      addAchievement("gossip-network");
+      triggerAchievement("gossip-network");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [talkedNpcs.length]);
 
   // Check achievements after visitedBuildings updates
   useEffect(() => {
