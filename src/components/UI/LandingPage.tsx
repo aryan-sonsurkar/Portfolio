@@ -190,6 +190,7 @@ export default function LandingPage({
   }, [anchor, reduceMotion]);
 
   const handleEnter = () => {
+    setMenuOpen(false);
     audioManager.playEnterDistrict();
     onEnterDistrict();
   };
@@ -724,8 +725,14 @@ export default function LandingPage({
         .simple-wrap {
           max-width: 880px;
           margin: 0 auto;
-          padding-left: 24px;
-          padding-right: 24px;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+        @media (min-width: 640px) {
+          .simple-wrap {
+            padding-left: 24px;
+            padding-right: 24px;
+          }
         }
         .simple-header {
           position: sticky;
@@ -815,8 +822,8 @@ export default function LandingPage({
           font-weight: 600;
         }
         .simple-hero {
-          padding-top: 96px;
-          padding-bottom: 96px;
+          padding-top: 68px;
+          padding-bottom: 68px;
         }
         @media (min-width: 768px) {
           .simple-hero {
@@ -860,10 +867,21 @@ export default function LandingPage({
           font-family: ${SANS};
           font-size: 15px;
           font-weight: 600;
-          min-height: 52px;
-          padding: 0 28px;
+          min-height: 50px;
+          padding: 0 24px;
           border-radius: 10px;
           cursor: pointer;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          width: 100%;
+        }
+        @media (min-width: 640px) {
+          .simple-btn-primary,
+          .simple-btn-secondary {
+            width: auto;
+          }
         }
         .simple-btn-primary {
           background: #fff;

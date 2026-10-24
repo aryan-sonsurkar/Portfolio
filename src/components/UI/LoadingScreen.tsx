@@ -1,59 +1,83 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useStore } from "@/lib/store";
 import { audioManager, speakAI } from "@/lib/audio";
 import { isReducedMotion } from "@/lib/useIsMobile";
 
-const INTRO_DURATION_MS = 9000;
-const SKIP_DELAY_MS = 2000;
-// Reduced-motion users: brief establishing shot, no 9s cinematic
-const REDUCED_INTRO_MS = 1200;
-
 // Telemetry logs for OS boot feel
 const BOOT_MILESTONES = [
-  { threshold: 5, log: "INITIALIZING ARYAN_OS_KERNEL... [OK]" },
-  { threshold: 15, log: "SYNCHRONIZING SYSTEM TIME NODES... [OK]" },
-  { threshold: 25, log: "CONNECTING TO CITIZEN ARCHIVE DATABASE..." },
-  { threshold: 38, log: "SECURITY PROTOCOLS LOADED (LEVEL 5 AUTH)" },
-  { threshold: 48, log: "LOCATION FOUND: LAT: 19.0760° N, LON: 72.8777° E [MUMBAI]" },
-  { threshold: 60, log: "ESTABLISHING SPACESHIP HUD TELEMETRY..." },
-  { threshold: 72, log: "ATMOSPHERIC DESCENT PROFILE SHUTTLE ACTIVE" },
-  { threshold: 85, log: "ESTABLISHED WIRELESS CONNECTION PROTOCOL: SECURE" },
-  { threshold: 95, log: "BUILDER DISTRICT TARGET ACQUIRED." },
-  { threshold: 100, log: "CONNECTION HANDSHAKE COMPLETE. INITIALIZING TRANSLATION STREAM..." },
+  { threshold: 6, log: "INITIALIZING ARYAN_OS_KERNEL... [OK]" },
+  { threshold: 18, log: "SYNCHRONIZING SYSTEM TIME NODES... [OK]" },
+  { threshold: 30, log: "CONNECTING TO CITIZEN ARCHIVE DATABASE... [OK]" },
+  { threshold: 44, log: "SECURITY PROTOCOLS LOADED (LEVEL 5 AUTH) [OK]" },
+  { threshold: 56, log: "LOCATION FOUND: LAT: 19.0760° N, LON: 72.8777° E [MUMBAI]" },
+  { threshold: 68, log: "ESTABLISHING SPACESHIP HUD TELEMETRY... [LINKED]" },
+  { threshold: 80, log: "ATMOSPHERIC DESCENT PROFILE ACTIVE [OK]" },
+  { threshold: 90, log: "BUILDER DISTRICT TARGET ACQUIRED." },
+  { threshold: 96, log: "CONNECTION HANDSHAKE COMPLETE. INITIALIZING TRANSLATION STREAM..." },
+  { threshold: 100, log: "ACCESS GRANTED · ENTERING MODCODES DISTRICT..." },
 ];
 
 export default function LoadingScreen({ onViewPortfolio }: { onViewPortfolio?: () => void }) {
   const { completeLoading, completeIntro, setIntroProgress } = useStore();
   const reduceMotion = useReducedMotion();
-  const [startedConnection, setStartedConnection] = useState(false);
-  const [phase, setPhase] = useState<"connect" | "loading" | "intro" | "entering">("connect");
+  const [phase, setPhase] = useState<"loading" | "entering">("loading");
   const [progress, setProgress] = useState(0);
-  const [showSkip, setShowSkip] = useState(false);
   const [logs, setLogs] = useState<string[]>([]);
+  const logContainerRef = useRef<HTMLDivElement>(null);
+  const finishedRef = useRef(false);
 
-  const handleStartConnection = () => {
-    setStartedConnection(true);
-    setPhase("loading");
+  const finishEntry = () => {
+    if (finishedRef.current) return;
+    finishedRef.current = true;
+    setIntroProgress(1);
+    completeIntro();
+    completeLoading();
+    setPhase("entering");
+    if (!isReducedMotion()) {
+      speakAI(
+        "Incoming encrypted signal. Builder District located. Objective: Explore the district and uncover the story of its architect. Welcome back, agent."
+      );
+    }
+  };
+
+  // Immediate 1-click startup: start audio and background loops immediately
+  useEffect(() => {
     audioManager.playBootSequence();
     audioManager.startSpaceHum();
 
-    // Start background loops
-    setTimeout(() => {
+    const rainTimer = window.setTimeout(() => {
       audioManager.startRainSound();
-    }, 2500);
-  };
+    }, 2000);
 
+    return () => window.clearTimeout(rainTimer);
+  }, []);
+
+  // Auto-scroll terminal log on new entries
+  useEffect(() => {
+    if (logContainerRef.current) {
+      logContainerRef.current.scrollTop = logContainerRef.current.scrollHeight;
+    }
+  }, [logs]);
+
+  // Terminal boot logs & progress runner
   useEffect(() => {
     if (phase !== "loading") return;
+
+    if (reduceMotion || isReducedMotion()) {
+      setProgress(100);
+      setLogs(BOOT_MILESTONES.map((m) => m.log));
+      const t = window.setTimeout(() => finishEntry(), 400);
+      return () => window.clearTimeout(t);
+    }
 
     let current = 0;
     const shown = new Set<string>();
 
     const interval = window.setInterval(() => {
-      current += Math.random() * 9 + 3;
+      current += Math.random() * 8 + 4;
 
       const crossed = BOOT_MILESTONES.filter((m) => current >= m.threshold && !shown.has(m.log));
       if (crossed.length > 0) {
@@ -65,60 +89,18 @@ export default function LoadingScreen({ onViewPortfolio }: { onViewPortfolio?: (
         current = 100;
         setProgress(100);
         window.clearInterval(interval);
+
+        // Terminal done: brief pause to register 100%, then enter district directly
         window.setTimeout(() => {
-          setPhase("intro");
-          if (!isReducedMotion()) {
-            speakAI("Incoming encrypted signal. Builder District located. Construction status: Active. Objective: Explore the district and uncover the story of its architect. Welcome back, agent.");
-          }
-        }, 300);
+          finishEntry();
+        }, 320);
         return;
       }
       setProgress(current);
-    }, 100);
+    }, 90);
 
     return () => window.clearInterval(interval);
-  }, [phase]);
-
-  useEffect(() => {
-    if (phase !== "intro") return;
-
-    // Reduced motion: short establishing beat, no voiceover, no 9s wait
-    const reduced = reduceMotion || isReducedMotion();
-    const duration = reduced ? REDUCED_INTRO_MS : INTRO_DURATION_MS;
-    setIntroProgress(reduced ? 1 : 0);
-    if (reduced) {
-      const t = window.setTimeout(() => finishIntro(), duration);
-      return () => window.clearTimeout(t);
-    }
-    const startedAt = performance.now();
-    const tick = () => {
-      const elapsed = performance.now() - startedAt;
-      setIntroProgress(Math.min(elapsed / INTRO_DURATION_MS, 1));
-    };
-
-    const skipTimer = window.setTimeout(() => setShowSkip(true), SKIP_DELAY_MS);
-    const completeTimer = window.setTimeout(() => {
-      finishIntro();
-    }, INTRO_DURATION_MS);
-    const progressTimer = window.setInterval(tick, 50);
-
-    return () => {
-      window.clearTimeout(skipTimer);
-      window.clearTimeout(completeTimer);
-      window.clearInterval(progressTimer);
-    };
-  }, [phase, setIntroProgress, reduceMotion]);
-
-  const finishIntro = () => {
-    setIntroProgress(1);
-    completeIntro();
-    completeLoading();
-    setPhase("entering");
-  };
-
-  const handleSkip = () => {
-    finishIntro();
-  };
+  }, [phase, reduceMotion]);
 
   return (
     <AnimatePresence>
@@ -126,209 +108,104 @@ export default function LoadingScreen({ onViewPortfolio }: { onViewPortfolio?: (
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.5, ease: "easeInOut" }}
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center select-none"
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center select-none px-3"
           style={{ background: "#020306", color: "#f8fafc" }}
         >
           {/* Subtle star particle decoration */}
-          <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.06),transparent_70%)] pointer-events-none" />
+          <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.08),transparent_70%)] pointer-events-none" />
 
-          {phase === "connect" && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8 }}
-              className="flex flex-col items-center gap-6 max-w-md px-6 text-center"
+          {/* Terminal Box */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3 }}
+            className="flex flex-col items-start w-full max-w-xl px-4 sm:px-8 py-5 sm:py-6 rounded-xl border relative z-10"
+            style={{
+              borderColor: "rgba(255,255,255,0.08)",
+              background: "rgba(6,8,12,0.88)",
+              backdropFilter: "blur(14px)",
+              WebkitBackdropFilter: "blur(14px)",
+              fontFamily: "'JetBrains Mono', monospace",
+              boxShadow: "0 20px 50px rgba(0,0,0,0.7), 0 0 30px rgba(212,175,55,0.06)",
+            }}
+          >
+            {/* Terminal Header */}
+            <div className="flex items-center justify-between w-full mb-3 sm:mb-4 border-b border-white/10 pb-2 text-[10px] uppercase text-slate-400 tracking-wider">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                <span className="text-amber-500/90 font-medium">ARYAN_OS · BOOT SEQUENCE</span>
+              </div>
+              <span className="text-slate-500 hidden sm:inline">OS_VER 0.9.2</span>
+            </div>
+
+            {/* Scrolling Boot Logs */}
+            <div
+              ref={logContainerRef}
+              className="w-full h-44 sm:h-52 overflow-y-auto space-y-1.5 scrollbar-none text-[10.5px] sm:text-[11px] text-slate-300 font-mono"
             >
-              <h1 className="text-sm font-light tracking-[0.4em] text-amber-500/80 uppercase" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
-                System Offline
-              </h1>
-              <p className="text-xs text-slate-500 tracking-widest leading-relaxed" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
-                SILENT TRANSMISSION FROM ORBIT SHUTTLE #0X42F <br />
-                AWAITING AUTHENTICATION FROM COMMAND PORTAL.
-              </p>
-              <button
-                onClick={handleStartConnection}
-                className="hud-kbtn mt-8 px-6 py-3 rounded border text-xs font-semibold tracking-[0.25em] transition-all hover:bg-amber-500/10 hover:border-amber-400 hover:shadow-[0_0_20px_rgba(212,175,55,0.15)]"
-                style={{
-                  borderColor: "rgba(212,175,55,0.3)",
-                  color: "#f0e6d8",
-                  background: "transparent",
-                  minHeight: 48,
-                }}
-              >
-                [ INITIALIZE TRANSLATION ]
-              </button>
-              {onViewPortfolio && (
-                <button
-                  onClick={onViewPortfolio}
-                  className="hud-kbtn px-6 py-3 rounded text-[11px] tracking-[0.25em] uppercase"
-                  style={{
-                    color: "rgba(56,189,248,0.85)",
-                    background: "none",
-                    border: "1px solid rgba(56,189,248,0.25)",
-                    minHeight: 48,
-                  }}
-                >
-                  View portfolio instead →
-                </button>
+              {logs.map((log, index) => (
+                <div key={index} className="flex gap-2 items-start leading-relaxed">
+                  <span className="text-amber-400/80 shrink-0 font-bold">&gt;</span>
+                  <span className="break-words">{log}</span>
+                </div>
+              ))}
+              {progress < 100 && (
+                <div className="flex gap-1.5 items-center pt-1">
+                  <span className="text-amber-400 animate-pulse">&gt;</span>
+                  <span className="w-1.5 h-3 bg-amber-400/80 animate-pulse" />
+                </div>
               )}
-            </motion.div>
-          )}
+            </div>
 
-          {phase === "loading" && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="flex flex-col items-start w-full max-w-xl px-8 py-6 rounded border"
-              style={{
-                borderColor: "rgba(255,255,255,0.05)",
-                background: "rgba(6,8,12,0.65)",
-                backdropFilter: "blur(8px)",
-                fontFamily: "'JetBrains Mono', monospace",
-              }}
-            >
-              <div className="flex items-center justify-between w-full mb-4 border-b border-white/5 pb-2 text-[10px] uppercase text-slate-500 tracking-wider">
-                <span>SYSTEM DIAGNOSTIC LOG</span>
-                <span>OS_VER 0.9.2</span>
+            {/* Progress bar */}
+            <div className="w-full mt-4 sm:mt-5 space-y-2">
+              <div className="h-[3px] w-full bg-white/10 relative rounded-full overflow-hidden">
+                <motion.div
+                  className="h-full absolute top-0 left-0 bg-gradient-to-r from-amber-600 via-amber-400 to-amber-300"
+                  style={{ width: `${progress}%` }}
+                />
               </div>
+              <div className="flex justify-between text-[9px] text-slate-400 uppercase tracking-widest font-mono">
+                <span>{progress >= 100 ? "ACCESS GRANTED · ENTERING DISTRICT" : "INITIALIZING DISTRICT TELEMETRY"}</span>
+                <span className="text-amber-400 font-semibold">{Math.floor(progress)}%</span>
+              </div>
+            </div>
 
-              {/* Scrolling Boot Logs */}
-              <div className="w-full h-48 overflow-y-auto space-y-1.5 scrollbar-none text-[11px] text-slate-400">
-                {logs.map((log, index) => (
-                  <div key={index} className="flex gap-2 items-start">
-                    <span className="text-amber-500/50">&gt;</span>
-                    <span>{log}</span>
-                  </div>
-                ))}
-                {logs.length < 10 && (
-                  <div className="flex gap-1.5 items-center">
-                    <span className="text-amber-500 animate-pulse">&gt;</span>
-                    <span className="w-1.5 h-3 bg-amber-500/80 animate-pulse" />
-                  </div>
-                )}
-              </div>
-
-              {/* Progress bar */}
-              <div className="w-full mt-6 space-y-2">
-                <div className="h-[2px] w-full bg-white/5 relative">
-                  <motion.div
-                    className="h-full absolute top-0 left-0 bg-gradient-to-r from-amber-600 to-amber-400"
-                    style={{ width: `${progress}%` }}
-                  />
-                </div>
-                <div className="flex justify-between text-[9px] text-slate-600 uppercase tracking-widest">
-                  <span>SYSTEM COMM SYNCING</span>
-                  <span>{Math.floor(progress)}%</span>
-                </div>
-              </div>
-              {onViewPortfolio && (
+            {/* Action Row */}
+            <div className="flex items-center justify-between w-full mt-3 pt-2 border-t border-white/5">
+              {onViewPortfolio ? (
                 <button
                   onClick={onViewPortfolio}
-                  className="hud-kbtn mt-4 text-[10px] uppercase tracking-[0.3em]"
+                  className="hud-kbtn text-[10px] uppercase tracking-[0.2em] text-cyan-400/80 hover:text-cyan-300 transition-colors"
                   style={{
-                    color: "rgba(56,189,248,0.65)",
                     background: "none",
                     border: "none",
-                    minHeight: 44,
+                    minHeight: 40,
+                    cursor: "pointer",
+                    padding: "0 4px",
                   }}
                 >
-                  Skip loading — view portfolio →
+                  ◂ Portfolio
                 </button>
+              ) : (
+                <div />
               )}
-            </motion.div>
-          )}
-
-          {phase === "intro" && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1.2 }}
-              className="relative flex flex-col items-center justify-center px-8 text-center max-w-xl"
-            >
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 1.0, ease: "easeOut" }}
-                className="relative z-10"
+              <button
+                onClick={finishEntry}
+                className="hud-kbtn text-[10px] uppercase tracking-[0.2em] text-amber-400/90 hover:text-amber-300 transition-colors"
+                style={{
+                  background: "none",
+                  border: "none",
+                  minHeight: 40,
+                  cursor: "pointer",
+                  padding: "0 4px",
+                }}
               >
-                <span
-                  className="mb-4 inline-block text-[10px] uppercase tracking-[0.5em] px-3 py-1 rounded border"
-                  style={{
-                    color: "rgba(255,215,0,0.65)",
-                    borderColor: "rgba(255,215,0,0.2)",
-                    background: "rgba(255,215,0,0.02)",
-                    fontFamily: "'JetBrains Mono', monospace",
-                  }}
-                >
-                  TRANSMISSION DECODED
-                </span>
-                <h1
-                  className="mb-6 text-4xl font-light tracking-[0.3em]"
-                  style={{
-                    color: "#f0e6d8",
-                    fontFamily: "'JetBrains Mono', monospace",
-                    textShadow: "0 0 40px rgba(255,215,0,0.2)",
-                  }}
-                >
-                  ARYAN OS
-                </h1>
-                <p
-                  className="mx-auto max-w-md text-sm leading-relaxed tracking-[0.18em]"
-                  style={{
-                    color: "rgba(224, 232, 255, 0.7)",
-                    fontFamily: "'JetBrains Mono', monospace",
-                  }}
-                >
-                  A vessel crosses the void. Earth turns slowly below. <br />
-                  The Builder District awaits your command.
-                </p>
-
-                <div className="mt-8 flex flex-wrap items-center justify-center gap-3 text-[9px] uppercase tracking-[0.25em] font-medium text-slate-500">
-                  <span>ORBIT TRANSIT</span>
-                  <span className="text-amber-500/45">·</span>
-                  <span>MUMBAI BOUND</span>
-                  <span className="text-amber-500/45">·</span>
-                  <span>CITIZEN AUTHENTICATED</span>
-                </div>
-              </motion.div>
-
-              <div className="absolute bottom-[-100px] flex items-center gap-6">
-                <motion.button
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: showSkip || reduceMotion ? 1 : 0 }}
-                  transition={{ duration: 0.4 }}
-                  onClick={handleSkip}
-                  className="hud-kbtn text-[11px] uppercase tracking-[0.3em] pb-1 hover:text-amber-400"
-                  style={{
-                    color: "rgba(255,255,255,0.7)",
-                    background: "rgba(255,255,255,0.06)",
-                    border: "1px solid rgba(255,255,255,0.15)",
-                    borderRadius: 8,
-                    padding: "12px 20px",
-                    minHeight: 48,
-                  }}
-                >
-                  Skip intro →
-                </motion.button>
-                {onViewPortfolio && (
-                  <button
-                    onClick={onViewPortfolio}
-                    className="hud-kbtn text-[11px] uppercase tracking-[0.3em]"
-                    style={{
-                      color: "rgba(56,189,248,0.85)",
-                      background: "none",
-                      border: "none",
-                      minHeight: 48,
-                      padding: "12px 8px",
-                    }}
-                  >
-                    View portfolio
-                  </button>
-                )}
-              </div>
-            </motion.div>
-          )}
+                Skip to District →
+              </button>
+            </div>
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>

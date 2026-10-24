@@ -202,7 +202,7 @@ export default function HUD() {
       )}
 
       {/* ── Top Right — Controls legend + Blueprint badge ── */}
-      <div className={`absolute flex flex-col items-end gap-2 ${isMobile ? "top-[68px] right-3" : "top-6 right-6"}`}>
+      <div className={`absolute flex flex-col items-end gap-2 ${isMobile ? "top-[54px] right-3" : "top-6 right-6"}`}>
         {blueprintMode && (
           <motion.div
             initial={{ opacity: 0, x: 20 }}
@@ -378,37 +378,70 @@ export default function HUD() {
         )}
       </AnimatePresence>
 
-      {/* ── Active Screen Exit hint ── */}
+      {/* ── Active Screen Exit button ── */}
       <AnimatePresence>
         {activeScreen && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 pointer-events-auto"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 pointer-events-auto z-50"
           >
             <button
               onClick={() => {
                 // Dispatch ESC event so CharacterController handles position restore
                 window.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
               }}
-              className="hud-kbtn"
+              className="hud-kbtn rounded-full px-5 py-2 flex items-center gap-2"
               style={{
-                color: "rgba(255,255,255,0.4)",
-                fontSize: "10px",
-                letterSpacing: "3px",
+                color: "#ffd700",
+                fontSize: "11px",
+                letterSpacing: "2px",
                 textTransform: "uppercase",
-                background: "none",
-                border: "none",
+                background: "rgba(4,6,18,0.9)",
+                border: "1px solid rgba(255,215,0,0.45)",
                 minHeight: 44,
-                padding: "0 8px",
+                boxShadow: "0 4px 20px rgba(0,0,0,0.6)",
+                backdropFilter: "blur(10px)",
+                cursor: "pointer",
               }}
             >
-              [ ESC ] Back to room
+              ✕ CLOSE MONITOR
             </button>
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* ── Mobile Exit Interior button ── */}
+      {interiorOpen && isMobile && !activeScreen && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed pointer-events-auto"
+          style={{ bottom: 84, right: 14, zIndex: 45 }}
+        >
+          <button
+            onClick={() => {
+              audioManager.playClickSound();
+              useStore.getState().leaveBuilding();
+            }}
+            className="px-3.5 py-2 rounded-full flex items-center gap-1.5 text-[11px] font-semibold"
+            style={{
+              background: "rgba(239, 68, 68, 0.22)",
+              border: "1px solid rgba(239, 68, 68, 0.55)",
+              color: "#fca5a5",
+              backdropFilter: "blur(8px)",
+              fontFamily: "'JetBrains Mono', monospace",
+              minHeight: 42,
+              cursor: "pointer",
+              boxShadow: "0 4px 16px rgba(0,0,0,0.5)",
+            }}
+          >
+            🚪 LEAVE ROOM
+          </button>
+        </motion.div>
+      )}
 
       {/* ── Bottom center — Teleport button — desktop only (mobile uses Explore bar) ── */}
       {isFPV && !activeScreen && !isMobile && (

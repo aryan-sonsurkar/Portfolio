@@ -6,7 +6,6 @@ import LoadingScreen from "@/components/UI/LoadingScreen";
 import HUD from "@/components/UI/HUD";
 import MonitorViewerUI from "@/components/UI/MonitorViewerUI";
 import WristTeleportHUD from "@/components/UI/WristTeleportHUD";
-import PortfolioTrailer from "@/components/UI/PortfolioTrailer";
 import MiniMap from "@/components/UI/MiniMap";
 import VirtualJoystick from "@/components/UI/VirtualJoystick";
 import MobileExploreUI from "@/components/UI/MobileExploreUI";
@@ -20,49 +19,50 @@ const Scene = dynamic(() => import("@/components/Experience/Scene"), {
 
 export default function District({ onExitToPortfolio }: { onExitToPortfolio: (anchor?: string) => void }) {
   const isMobile = useIsMobile();
-  const { cameraMode, selectedBuilding, activeScreen, interiorOpen } = useStore();
+  const { cameraMode, activeScreen } = useStore();
 
   useEffect(() => {
     document.body.classList.add("district-mode");
     return () => document.body.classList.remove("district-mode");
   }, []);
 
-  const showJoystick =
-    isMobile && cameraMode === "fpv" && !selectedBuilding && !activeScreen && !interiorOpen;
+  // Joystick active in FPV mode whenever full-screen monitor viewer is not open
+  const showJoystick = isMobile && cameraMode === "fpv" && !activeScreen;
 
   return (
-    <main className="w-screen h-screen overflow-hidden">
+    <main className="w-screen h-screen overflow-hidden relative">
       <Scene />
       <LoadingScreen onViewPortfolio={() => onExitToPortfolio("work")} />
-      <PortfolioTrailer />
       <HUD />
       <MiniMap />
       <MonitorViewerUI />
       <WristTeleportHUD />
       <MobileExploreUI />
       <DistrictGuide />
-      {/* Recruiter escape hatch — always visible, thumb-friendly */}
+      {/* Portfolio escape hatch — visible, thumb-friendly on mobile, no layout overlap */}
       <button
         onClick={() => onExitToPortfolio("work")}
         aria-label="Back to portfolio"
-        className="fixed z-50 rounded-full px-4"
+        className="fixed z-50 rounded-full px-3.5 py-1.5 transition-transform active:scale-95"
         style={{
-          left: "50%",
-          transform: "translateX(-50%)",
-          top: isMobile ? 60 : 12,
-          minHeight: 44,
-          background: "rgba(4,6,18,0.85)",
-          border: "1px solid rgba(255,215,0,0.35)",
+          left: isMobile ? 12 : "50%",
+          transform: isMobile ? "none" : "translateX(-50%)",
+          top: isMobile ? 54 : 12,
+          minHeight: isMobile ? 36 : 44,
+          background: "rgba(4,6,18,0.88)",
+          border: "1px solid rgba(255,215,0,0.4)",
           color: "#ffd700",
           fontFamily: "'JetBrains Mono', monospace",
-          fontSize: 11,
-          letterSpacing: 2,
-          backdropFilter: "blur(8px)",
+          fontSize: isMobile ? 10 : 11,
+          letterSpacing: isMobile ? 1.5 : 2,
+          backdropFilter: "blur(10px)",
+          WebkitBackdropFilter: "blur(10px)",
           cursor: "pointer",
           whiteSpace: "nowrap",
+          boxShadow: "0 4px 18px rgba(0,0,0,0.5)",
         }}
       >
-        ◂ VIEW PORTFOLIO
+        ◂ PORTFOLIO
       </button>
       {showJoystick && (
         <VirtualJoystick

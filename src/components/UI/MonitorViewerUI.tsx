@@ -179,20 +179,40 @@ export default function MonitorViewerUI() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="absolute top-0 left-0 right-0 text-center pt-6 pb-4"
+            className="absolute top-0 left-0 right-0 text-center pt-6 pb-4 pointer-events-auto"
             style={{
               background:
-                "linear-gradient(180deg, rgba(4,6,12,0.7) 0%, transparent 100%)",
+                "linear-gradient(180deg, rgba(4,6,12,0.85) 0%, transparent 100%)",
             }}
           >
+            <button
+              onClick={() =>
+                window.dispatchEvent(
+                  new KeyboardEvent("keydown", { key: "Escape" })
+                )
+              }
+              aria-label="Close monitor"
+              className="absolute right-4 top-4 p-2 rounded-full flex items-center justify-center transition-colors hover:bg-white/10"
+              style={{
+                width: 40,
+                height: 40,
+                color: "#ffd700",
+                background: "rgba(4,6,18,0.8)",
+                border: "1px solid rgba(255,215,0,0.35)",
+                cursor: "pointer",
+                fontSize: 14,
+              }}
+            >
+              ✕
+            </button>
             <p
-              className="text-[10px] tracking-[5px] uppercase mb-1"
+              className="text-[10px] tracking-[5px] uppercase mb-1 px-12 truncate"
               style={{ color: "rgba(56,189,248,0.6)" }}
             >
               {subtitle}
             </p>
             <p
-              className="text-sm tracking-[4px] uppercase"
+              className="text-sm tracking-[4px] uppercase px-12 truncate"
               style={{ color: "#ffd700" }}
             >
               {activeMonitor.label}
@@ -369,23 +389,24 @@ export default function MonitorViewerUI() {
               </div>
             )}
 
-            {/* ESC hint */}
+            {/* Close button */}
             <button
               onClick={() =>
                 window.dispatchEvent(
                   new KeyboardEvent("keydown", { key: "Escape" })
                 )
               }
-              className="text-[9px] tracking-[4px] uppercase transition-colors hover:text-[#ffd700]"
+              className="px-4 py-1.5 rounded-full text-[10px] tracking-[2px] uppercase transition-all hover:text-[#ffd700] hover:border-[#ffd700]/50"
               style={{
-                color: "rgba(255,255,255,0.2)",
-                background: "none",
-                border: "none",
+                color: "rgba(255,255,255,0.7)",
+                background: "rgba(4,6,18,0.7)",
+                border: "1px solid rgba(255,255,255,0.15)",
                 cursor: "pointer",
                 fontFamily: "'JetBrains Mono', monospace",
+                minHeight: 40,
               }}
             >
-              [ ESC ] Close
+              ✕ Close [ESC]
             </button>
           </motion.div>
         )}

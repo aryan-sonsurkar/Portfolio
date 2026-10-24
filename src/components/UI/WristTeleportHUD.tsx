@@ -100,14 +100,18 @@ export default function WristTeleportHUD() {
               </div>
               <button
                 onClick={() => setTeleportOpen(false)}
-                className="text-xs px-3 py-1 rounded-md border transition-colors hover:bg-white/5"
+                className="text-xs px-3 py-1.5 rounded-md border transition-colors hover:bg-white/10 flex items-center gap-1"
                 style={{
-                  color: "rgba(56,189,248,0.6)",
-                  borderColor: "rgba(56,189,248,0.2)",
+                  color: "#38bdf8",
+                  borderColor: "rgba(56,189,248,0.3)",
                   fontFamily: "'JetBrains Mono', monospace",
+                  minHeight: 38,
+                  minWidth: 44,
+                  justifyContent: "center",
                 }}
+                aria-label="Close teleport menu"
               >
-                ESC
+                ✕ {isMobile ? "" : "ESC"}
               </button>
             </div>
           </div>
@@ -179,8 +183,12 @@ export default function WristTeleportHUD() {
 
           {/* Footer */}
           <div className="px-6 py-3 border-t" style={{ borderColor: "rgba(56,189,248,0.1)" }}>
-            <p className="text-center text-[10px]" style={{ color: "rgba(56,189,248,0.35)" }}>
-              Press <span style={{ color: "#38bdf8" }}>T</span> or <span style={{ color: "#38bdf8" }}>ESC</span> to close
+            <p className="text-center text-[10px]" style={{ color: "rgba(56,189,248,0.4)" }}>
+              {isMobile ? (
+                <span>Tap outside or <span style={{ color: "#38bdf8" }}>✕</span> to close</span>
+              ) : (
+                <span>Press <span style={{ color: "#38bdf8" }}>T</span> or <span style={{ color: "#38bdf8" }}>ESC</span> to close</span>
+              )}
             </p>
           </div>
         </div>
