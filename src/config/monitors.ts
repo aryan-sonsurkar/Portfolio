@@ -529,6 +529,23 @@ export const monitorConfig: Record<string, BuildingMonitors> = {
     serverRacks: [[-4.2, 1.3, -1.8], [4.2, 1.3, -1.8]],
     monitors: [
       {
+        id: "modcodes-ide",
+        image: "/monitors/innovation/modcodes-ide.svg",
+        label: "MODCODES IDE · SHIPPED",
+        position: [-2, 0.8, -1.2],
+        width: 1.2,
+        height: 0.75,
+        emissiveColor: "#7c3aed",
+        info: {
+          title: "Modcodes IDE",
+          summary: "Open-source AI-powered code editor that builds and explains code with local Ollama models — your code never leaves the machine.",
+          stack: "JavaScript · Ollama · Local-first",
+          features: ["Agentic build loop: plan → generate → run → diff", "Explain + build modes", "Local models, no cloud", "Open source"],
+          link: "https://github.com/aryan-sonsurkar/mod-codes-ide",
+          linkLabel: "Source",
+        },
+      },
+      {
         id: "ai-lab",
         image: "/monitors/innovation/ai-lab.svg",
         label: "AI/ML EXPERIMENTS",
@@ -540,7 +557,7 @@ export const monitorConfig: Record<string, BuildingMonitors> = {
       {
         id: "compiler",
         image: "/monitors/innovation/compiler.svg",
-        label: "CUSTOM LANG / IDE",
+        label: "CUSTOM LANGUAGE LAB",
         position: [2, 0.8, -1.2],
         width: 1.0,
         height: 0.6,

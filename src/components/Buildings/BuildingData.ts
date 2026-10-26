@@ -114,13 +114,14 @@ export const BUILDINGS: BuildingConfig[] = [
       subtitle: "What I Am Building Next",
       paragraphs: [
         "This is where ideas get stress-tested before they become products.",
-        "Own AI IDE — not another code editor. A development environment built around how I actually think and build. Planned architecture: plugin-based, local-first, AI-native.",
-        "Custom Programming Language — designed for teaching and rapid prototyping. The language itself is the project.",
+        "MODCODES IDE — the Own AI IDE vision, shipped. An open-source AI code editor that builds and explains code with local Ollama models. Your code never leaves your machine. Live and deployed.",
+        "Custom Programming Language — designed for teaching and rapid prototyping. The language itself is the project. In the forge.",
         "Open Source tools that solve problems I have personally faced. Not theoretical. Practical, battle-tested utilities.",
       ],
-      tags: ["AI IDE", "Compiler Design", "Language Theory", "Open Source"],
+      tags: ["MODCODES IDE", "Compiler Design", "Language Theory", "Open Source"],
       links: [
-        { label: "Roadmap Coming Soon", url: "#", icon: "rocket" },
+        { label: "View MODCODES IDE", url: "https://github.com/aryan-sonsurkar/mod-codes-ide", icon: "external" },
+        { label: "Live Demo", url: "https://mod-codes-ide.vercel.app", icon: "external" },
       ],
     },
   },
