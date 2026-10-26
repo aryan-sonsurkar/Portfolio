@@ -4,6 +4,10 @@
 
 ## 🎬 The Reel
 
+![Portfolio reel preview](public/reel/reel-preview.webp)
+
+▶ **[Watch the full 30s trailer (1080×1920, with sound)](https://github.com/aryan-sonsurkar/Portfolio/releases/download/reel-v1/portfolio-reel.mp4)**
+
 > ### Why should a portfolio feel like a resume… when it can be a WORLD? 🌃
 >
 > I built my portfolio as a 3D city — 16 buildings, each one a project I shipped:
@@ -16,13 +20,6 @@
 >
 > No PDF. No scroll. Just walk in.
 > 👉 [arssystem.vercel.app](https://arssystem.vercel.app)
-
-▶ **[Watch the 30s trailer](public/reel/portfolio-reel.mp4)** — first-person gameplay, real district footage, custom soundtrack.
-
-<!--
-<video src="public/reel/portfolio-reel.mp4" controls muted autoplay loop></video>
-(If the above link doesn't play inline, open the file: public/reel/portfolio-reel.mp4)
--->
 
 ## 🚀 Enter the District
 
